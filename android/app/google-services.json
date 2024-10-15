@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1075776874962",
+    "project_id": "drivingtest-e197e",
+    "storage_bucket": "drivingtest-e197e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075776874962:android:73c93eb5ecbb015232800b",
+        "android_client_info": {
+          "package_name": "com.example.driving_lisence"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGGO0pGoUyWrMlSKbylcGYqcemb9m5LrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
