@@ -1,10 +1,10 @@
-import 'package:driving_lisence/alert1_info.dart';
-import 'package:driving_lisence/hazard1.dart';
-import 'package:driving_lisence/safety_margin1.dart';
-import 'package:driving_lisence/vehicle_safety_1.dart';
+import 'package:driving_lisence/features/hazard/pages/hazard1.dart';
+import 'package:driving_lisence/features/safety_margin/pages/safety_margin1.dart';
 import 'package:flutter/material.dart';
-import 'package:driving_lisence/attitude_practice_Question_screen.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
+
+import 'features/attitude/pages/attitude.dart';
+import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
 
 class Category extends StatefulWidget {
   @override

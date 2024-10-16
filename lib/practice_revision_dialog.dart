@@ -1,5 +1,4 @@
 import 'package:driving_lisence/category.dart';
-import 'package:driving_lisence/attitude_practice_Question_screen.dart';
 import 'package:flutter/material.dart';
 
 class PracticeRevisionDialog extends StatelessWidget {

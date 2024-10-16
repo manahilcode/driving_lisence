@@ -1,5 +1,5 @@
 import 'package:driving_lisence/Theory_test.dart';
-import 'package:driving_lisence/pass_gaurantee1.dart';
+import 'package:driving_lisence/features/pass_gaurantee/pages/pass_gaurantee1.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -71,7 +71,7 @@ class MenuScreen extends StatelessWidget {
                     label: 'Theory Test',
                     color: Colors.green,
                     icon: Icons.assignment,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -79,7 +79,7 @@ class MenuScreen extends StatelessWidget {
                     label: 'Hazard Perception',
                     color: Colors.red,
                     icon: Icons.warning,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -87,7 +87,7 @@ class MenuScreen extends StatelessWidget {
                     label: 'Highway Code',
                     color: Colors.blue,
                     icon: Icons.book,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -95,7 +95,7 @@ class MenuScreen extends StatelessWidget {
                     label: 'Road Signs',
                     color: Colors.orange,
                     icon: Icons.traffic,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -104,7 +104,7 @@ class MenuScreen extends StatelessWidget {
                     color: Colors.purple,
                     icon: Icons.directions_car,
                     badge: 'FREE TRIAL',
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                 ],
               ),

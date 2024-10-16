@@ -1,6 +1,8 @@
-import 'package:driving_lisence/choose_ride.dart';
+import 'package:driving_lisence/features/attitude/viewmodel/attitude_provider.dart';
+import 'package:driving_lisence/features/choose_ride/choose_ride.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,14 +25,19 @@ class MyApp extends StatelessWidget {
         // Check if initialization is done
         if (snapshot.connectionState == ConnectionState.done) {
           // Firebase is initialized, show the app
-          return MaterialApp(
-            home: chooseride(),
-            debugShowCheckedModeBanner: false,
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider<Attitude>(create: (_) => Attitude()),
+            ],
+            child: MaterialApp(
+              home: chooseride(),
+              debugShowCheckedModeBanner: false,
+            ),
           );
         }
 
         // Otherwise, show a loading indicator while Firebase is initializing
-        return MaterialApp(
+        return const MaterialApp(
           home: Scaffold(
             body: Center(child: CircularProgressIndicator()),
           ),

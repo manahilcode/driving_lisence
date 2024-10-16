@@ -2,7 +2,9 @@ import 'package:driving_lisence/Theory_test.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
 import 'package:flutter/material.dart';
 
-class theorytest extends StatelessWidget {
+class TheoryTest extends StatelessWidget {
+  const TheoryTest({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +13,7 @@ class theorytest extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.green,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
@@ -43,7 +45,7 @@ class theorytest extends StatelessWidget {
                     color: Colors.orange,
                     icon: Icons.verified_user,
                     badge: 'FREE',
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -51,7 +53,7 @@ class theorytest extends StatelessWidget {
                     label: 'Practice Revision Questions',
                     color: Colors.green,
                     icon: Icons.assignment,
-                    navigateTo: theorytest(),
+                    navigateTo: TheoryTest(),
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -59,7 +61,7 @@ class theorytest extends StatelessWidget {
                     label: 'Mock Test',
                     color: Colors.green,
                     icon: Icons.quiz_outlined,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -67,7 +69,7 @@ class theorytest extends StatelessWidget {
                     label: 'Search Questions',
                     color: Colors.green,
                     icon: Icons.search,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -75,7 +77,7 @@ class theorytest extends StatelessWidget {
                     label: 'Flagged Questions',
                     color: Colors.green,
                     icon: Icons.flag,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -84,7 +86,7 @@ class theorytest extends StatelessWidget {
                     color: Colors.green,
                     icon: Icons.trending_up_rounded,
 
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -92,7 +94,7 @@ class theorytest extends StatelessWidget {
                     label: 'Advice and Information',
                     color: Colors.green,
                     icon: Icons.info,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -100,7 +102,7 @@ class theorytest extends StatelessWidget {
                     label: 'Learning to Drive',
                     color: Colors.blue,
                     icon: Icons.drive_eta,
-                    navigateTo: theorytest(), // Define your screen here
+                    navigateTo: TheoryTest(), // Define your screen here
                   ),
                 ],
               ),
