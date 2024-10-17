@@ -1,5 +1,6 @@
 import 'package:driving_lisence/features/hazard/pages/hazard1.dart';
 import 'package:driving_lisence/features/safety_margin/pages/safety_margin1.dart';
+import 'package:driving_lisence/features/vulnerable_road_user/pages/introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
 
@@ -39,7 +40,7 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
         ),
         bottom: TabBar(
           controller: _tabController,
-          tabs: [
+          tabs: const [
             Tab(text: 'Category'),
             Tab(text: 'Progress'),
             Tab(text: 'Selected'),
@@ -130,7 +131,7 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   total: 24,
                   isSelected: _selectedCategories[6],
                   onTap: () => _toggleSelection(6),
-                  categoryScreen: PracticeRevisionDialog(),
+                  categoryScreen: Introduction(),
                 ),
                 CategoryItem(
                   icon: Icons.navigation,
@@ -314,11 +315,12 @@ class CategoryItem extends StatelessWidget {
       GestureDetector(
         onTap: () {
           onTap(); // Toggle category selection
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => categoryScreen, // Navigate to the selected screen
+              builder: (context) => categoryScreen,
             ),
+                (Route<dynamic> route) => false, // Removes all previous routes
           );
         },
         child: Icon(

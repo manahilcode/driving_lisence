@@ -17,7 +17,7 @@ class PracticeRevisionDialog extends StatelessWidget {
   Widget contentBox(context) {
     return Container(
 
-      padding: EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: 16),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: Colors.white,
@@ -27,8 +27,8 @@ class PracticeRevisionDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: const BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
@@ -38,7 +38,7 @@ class PracticeRevisionDialog extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Information',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
@@ -46,31 +46,31 @@ class PracticeRevisionDialog extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).pop();
                   },
-                  child: Icon(Icons.close, color: Colors.white),
+                  child: const Icon(Icons.close, color: Colors.white),
                 ),
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Category selection',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 16),
-                Text(
+                const SizedBox(height: 16),
+                const Text(
                   'In this module you can revise questions from specific categories. Simply tap one or more category names to start your revision.',
                   style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: 16),
-                Text(
+                const SizedBox(height: 16),
+                const Text(
                   'You can even filter questions within each category, giving you full control over your learning. Choose from:',
                   style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 bulletPoint('All questions'),
                 bulletPoint('Previously answered incorrectly'),
                 bulletPoint('Questions not yet seen'),
@@ -79,12 +79,11 @@ class PracticeRevisionDialog extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ElevatedButton(
-              child: Text('Continue', style: TextStyle(fontSize: 18)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                minimumSize: Size(double.infinity, 50),
+                minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -95,12 +94,13 @@ class PracticeRevisionDialog extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => Category()),
                 );
               },
+              child: const Text('Continue', style: TextStyle(fontSize: 18)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 16, left: 16, right: 16),
+            padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
             child: TextButton(
-              child: Text("Don't show again", style: TextStyle(fontSize: 16, color: Colors.green)),
+              child: const Text("Don't show again", style: TextStyle(fontSize: 16, color: Colors.green)),
               onPressed: () {
                 // Implement "Don't show again" functionality
                 Navigator.of(context).pop();
@@ -114,12 +114,12 @@ class PracticeRevisionDialog extends StatelessWidget {
 
   Widget bulletPoint(String text) {
     return Padding(
-      padding: EdgeInsets.only(left: 8, bottom: 4),
+      padding: const EdgeInsets.only(left: 8, bottom: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('• ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          Expanded(child: Text(text, style: TextStyle(fontSize: 16))),
+          const Text('• ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Expanded(child: Text(text, style: const TextStyle(fontSize: 16))),
         ],
       ),
     );
