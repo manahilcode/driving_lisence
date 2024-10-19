@@ -17,64 +17,82 @@ class _IntroductionState extends State<Introduction> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor: Colors.green,
-        title:  Text("Introduction",style: GoogleFonts.roboto(
-            color: Colors.white
-        )),
+        backgroundColor: Colors.green[700],
+        title: Text(
+          "Introduction",
+          style: GoogleFonts.roboto(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-
-              child: Image.asset("assets/L.png")),
-          const Expanded(
-            child:  Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Image.asset("assets/L.png"),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AutoSizeText(" ○ In this section, you’ll learn about"),
-                AutoSizeText(" ○ who is particularly vulnerable on the road"),
-                AutoSizeText(" ○ how to help keep other road users safe."),
+                _buildBulletPoint(
+                  "In this section, you’ll learn about",
+                  Colors.green[800]!,
+                ),
+                _buildBulletPoint(
+                  "who is particularly vulnerable on the road",
+                  Colors.blue[800]!,
+                ),
+                _buildBulletPoint(
+                  "how to help keep other road users safe.",
+                  Colors.red[800]!,
+                ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                // Navigate to the next tip or page
+                // Navigate to the next screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const VulnerableRoadUser()), // Change this
+                      builder: (context) => const VulnerableRoadUser()),
                 );
               },
-              child: Center(
-                child: Container(
-                  width: 300,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15.0,
-                    horizontal: 30.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Next",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+              child: Container(
+                width: 300,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15.0,
+                  horizontal: 30.0,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.green[700],
+                  borderRadius: BorderRadius.circular(12.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    "Next",
+                    style: GoogleFonts.roboto(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -85,4 +103,41 @@ class _IntroductionState extends State<Introduction> {
       ),
     );
   }
+
+  // Helper method to build bullet points with styling
+  Widget _buildBulletPoint(String text, Color bulletColor) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Row(
+        children: [
+          // Bullet symbol with color
+          Text(
+            "\u2022", // Unicode for bullet symbol
+            style: TextStyle(
+              fontSize: 30, // Make the bullet larger
+              color: Colors.green[700], // Customize the color
+              height: 1.2, // Adjust height to align bullet with text
+            ),
+          ),
+          const SizedBox(width: 10),
+          // Bullet text
+          Expanded(
+            child: AutoSizeText(
+              text,
+              style: GoogleFonts.roboto(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: Colors.black87,
+              ),
+              minFontSize: 14,
+              maxLines: 2,
+              textAlign: TextAlign.start,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
+

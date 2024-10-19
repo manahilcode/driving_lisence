@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
 
 import 'features/attitude/pages/attitude.dart';
+import 'features/incident/pages/incident_accident_and_emergency.dart';
 import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
 
 class Category extends StatefulWidget {
@@ -219,7 +220,7 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   total: 31,
                   isSelected: _selectedCategories[14],
                   onTap: () => _toggleSelection(14),
-                  categoryScreen: PracticeRevisionDialog(),
+                  categoryScreen: IncidentAccidentAndEmergency(),
                 ),
               ],
             ),

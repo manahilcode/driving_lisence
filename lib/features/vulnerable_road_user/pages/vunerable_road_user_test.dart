@@ -36,19 +36,123 @@ class _VunerableRoadUserTestState extends State<VunerableRoadUserTest> {
                 "What should you do when you see a vulnerable person about to cross the road ahead?",
               style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
             ),
-            ListTile(
-              title: Text(" ${bullet} Option 1"),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: Icon(Icons.check_circle_outline, color: Colors.blueAccent), // Add an icon
+              title: const Text(
+                "Option 1",
+                style: TextStyle(
+                  fontSize: 18, // Larger font size for emphasis
+                  fontWeight: FontWeight.bold, // Bold to make it stand out
+                  color: Colors.black87, // Slightly softer than pure black for a modern look
+                ),
+              ),
+              subtitle: Text(
+                'This is a detailed description of Option 1.',
+                style: TextStyle(color: Colors.grey[600]), // Softer color for the subtitle
+              ),
+              trailing: Icon(Icons.arrow_forward_ios, color: Colors.blueAccent), // Arrow to indicate it's clickable
+              tileColor: Colors.white, // Background color
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10), // Rounded corners
+                side: BorderSide(color: Colors.grey[300]!, width: 1), // Subtle border
+              ),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Spacing inside the tile
+              onTap: () {
+                // Handle tap action
+              },
             ),
-            ListTile(
-              title: Text(" ${bullet} Option 2"),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: Icon(Icons.check_circle_outline, color: Colors.blueAccent), // Add an icon
+              title: const Text(
+                "Option 1",
+                style: TextStyle(
+                  fontSize: 18, // Larger font size for emphasis
+                  fontWeight: FontWeight.bold, // Bold to make it stand out
+                  color: Colors.black87, // Slightly softer than pure black for a modern look
+                ),
+              ),
+              subtitle: Text(
+                'This is a detailed description of Option 1.',
+                style: TextStyle(color: Colors.grey[600]), // Softer color for the subtitle
+              ),
+              trailing: Icon(Icons.arrow_forward_ios, color: Colors.blueAccent), // Arrow to indicate it's clickable
+              tileColor: Colors.white, // Background color
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10), // Rounded corners
+                side: BorderSide(color: Colors.grey[300]!, width: 1), // Subtle border
+              ),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Spacing inside the tile
+              onTap: () {
+                // Handle tap action
+              },
             ),
-            ListTile(
-              title: Text(" ${bullet} Option 3"),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: Icon(Icons.check_circle_outline, color: Colors.blueAccent), // Add an icon
+              title: const Text(
+                "Option 1",
+                style: TextStyle(
+                  fontSize: 18, // Larger font size for emphasis
+                  fontWeight: FontWeight.bold, // Bold to make it stand out
+                  color: Colors.black87, // Slightly softer than pure black for a modern look
+                ),
+              ),
+              subtitle: Text(
+                'This is a detailed description of Option 1.',
+                style: TextStyle(color: Colors.grey[600]), // Softer color for the subtitle
+              ),
+              trailing: Icon(Icons.arrow_forward_ios, color: Colors.blueAccent), // Arrow to indicate it's clickable
+              tileColor: Colors.white, // Background color
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10), // Rounded corners
+                side: BorderSide(color: Colors.grey[300]!, width: 1), // Subtle border
+              ),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Spacing inside the tile
+              onTap: () {
+                // Handle tap action
+              },
             ),
-            ListTile(
-              title: Text(" ${bullet} Option 4"),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: Icon(Icons.check_circle_outline, color: Colors.blueAccent), // Add an icon
+              title: const Text(
+                "Option 1",
+                style: TextStyle(
+                  fontSize: 18, // Larger font size for emphasis
+                  fontWeight: FontWeight.bold, // Bold to make it stand out
+                  color: Colors.black87, // Slightly softer than pure black for a modern look
+                ),
+              ),
+              subtitle: Text(
+                'This is a detailed description of Option 1.',
+                style: TextStyle(color: Colors.grey[600]), // Softer color for the subtitle
+              ),
+              trailing: Icon(Icons.arrow_forward_ios, color: Colors.blueAccent), // Arrow to indicate it's clickable
+              tileColor: Colors.white, // Background color
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10), // Rounded corners
+                side: BorderSide(color: Colors.grey[300]!, width: 1), // Subtle border
+              ),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Spacing inside the tile
+              onTap: () {
+                // Handle tap action
+              },
             ),
-            const Spacer(),
+          ),
+
+          const Spacer(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(

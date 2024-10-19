@@ -16,95 +16,65 @@ class _ChildrenState extends State<Children> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text("Children",style: GoogleFonts.roboto(
-            color: Colors.white
-        )),
-        automaticallyImplyLeading: false,
+        title: Text(
+          "Children",
+          style: GoogleFonts.roboto(color: Colors.white),
+        ),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const AutoSizeText(
-                "Children are particularly vulnerable as road users because they can be unpredictable. They’re less likely than other pedestrians to look before stepping into the road."),
-            const AutoSizeText(
-              "Drive carefully near schools",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AutoSizeText(
+                "Children are particularly vulnerable as road users because they can be unpredictable. They’re less likely than other pedestrians to look before stepping into the road.",
+                style: TextStyle(fontSize: 16),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.asset(
-                  "assets/L.png",
-                  height: 50,
-                  width: 50,
+              const SizedBox(height: 12),
+              AutoSizeText(
+                "Drive carefully near schools",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.green,
                 ),
-                const Expanded(
-                  child: AutoSizeText(
-                      "Don’t wait or park on yellow zigzag lines outside a school. A clear view of the crossing area outside the school is needed by"
-                      " drivers and riders on the road"
-                      "pedestrians on the pavement"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Expanded(
-                  child: AutoSizeText(
-                      "There may be flashing amber lights under a school warning sign, to show that children are likely to be crossing the road on their way to or from school. Slow down until you’re clear of the area"),
-                ),
-                Image.asset(
-                  "assets/L.png",
-                  height: 100,
-                  width: 100,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Expanded(
-                  child: AutoSizeText(
-                      "Be prepared for a school crossing patrol to stop the traffic by stepping out into the road with a stop sign. You MUST obey the stop signal given by a school crossing patrol."),
-                ),
-                Image.asset(
-                  "assets/L.png",
-                  height: 100,
-                  width: 100,
-                ),
-              ],
-            ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  //   Navigate to the next tip or page
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const OlderDisabledPedistrains(),
-                    ),
-                        (Route<dynamic> route) => false, // Removes all previous routes
-                  );
-                },
-                child: Center(
+              ),
+              const SizedBox(height: 12),
+              buildInfoRow(
+                imagePath: "assets/L.png",
+                text:
+                "Don’t wait or park on yellow zigzag lines outside a school. A clear view of the crossing area outside the school is needed by drivers and riders on the road.",
+              ),
+              const SizedBox(height: 12),
+              buildInfoRow(
+                text:
+                "There may be flashing amber lights under a school warning sign, to show that children are likely to be crossing the road on their way to or from school. Slow down until you’re clear of the area.",
+                imagePath: "assets/L.png",
+              ),
+              const SizedBox(height: 12),
+              buildInfoRow(
+                imagePath: "assets/L.png",
+                text:
+                "Be prepared for a school crossing patrol to stop the traffic by stepping out into the road with a stop sign. You MUST obey the stop signal given by a school crossing patrol.",
+              ),
+              const SizedBox(height: 20),
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OlderDisabledPedistrains(),
+                      ),
+                          (Route<dynamic> route) => false, // Removes all previous routes
+                    );
+                  },
                   child: Container(
                     width: 300,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 15.0,
-                      horizontal: 30.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
                     decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(10.0),
@@ -130,10 +100,32 @@ class _ChildrenState extends State<Children> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget buildInfoRow({required String text, required String imagePath}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: AutoSizeText(
+              text,
+              style: TextStyle(fontSize: 14),
+            ),
+          ),
+        ),
+        Image.asset(
+          imagePath,
+          height: 130,
+          width: 130,
+        ),
+      ],
     );
   }
 }
