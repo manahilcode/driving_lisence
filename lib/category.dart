@@ -6,6 +6,8 @@ import 'package:driving_lisence/practice_revision_dialog.dart';
 
 import 'features/attitude/pages/attitude.dart';
 import 'features/incident/pages/incident_accident_and_emergency.dart';
+import 'features/vehicle_handling/pages/introduction.dart';
+import 'features/vehicle_loading/pages/introduction.dart';
 import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
 
 class Category extends StatefulWidget {
@@ -165,7 +167,7 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   total: 28,
                   isSelected: _selectedCategories[9],
                   onTap: () => _toggleSelection(9),
-                  categoryScreen: PracticeRevisionDialog(),
+                  categoryScreen: const IntroductionVehicleHandling(),
                 ),
                 CategoryItem(
                   icon: Icons.emoji_people,
