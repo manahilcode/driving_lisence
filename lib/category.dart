@@ -6,6 +6,7 @@ import 'package:driving_lisence/practice_revision_dialog.dart';
 
 import 'features/attitude/pages/attitude.dart';
 import 'features/incident/pages/incident_accident_and_emergency.dart';
+import 'features/motor_way_Driving/pages/introduction.dart';
 import 'features/vehicle_handling/pages/introduction.dart';
 import 'features/vehicle_loading/pages/introduction.dart';
 import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
@@ -149,14 +150,14 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                 ),
                 CategoryItem(
                   icon: Icons.car_crash_outlined,
-                  title: 'Road conditions and vehicle handling',
+                  title: 'Motorway driving',
                   progress: 0,
                   answered: 0,
                   correct: 0,
                   total: 27,
                   isSelected: _selectedCategories[8],
                   onTap: () => _toggleSelection(8),
-                  categoryScreen: PracticeRevisionDialog(),
+                  categoryScreen:const IntroductionHighWay(),
                 ),
                 CategoryItem(
                   icon: Icons.car_crash_outlined,

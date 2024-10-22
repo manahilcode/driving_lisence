@@ -33,6 +33,21 @@ class IntroductionController with ChangeNotifier {
 
   DrivingNightModel? get drivingNoghtModel => _drivingNightModel;
 
+  KeepControlVehicleModel? _controlVehicleModel;
+  KeepControlVehicleModel? get controlVehicleModel => _controlVehicleModel;
+
+  TrafficCalmingAndRoadSurfaces? _calmingAndRoadSurfaces;
+  TrafficCalmingAndRoadSurfaces? get calmingAndRoadSurface => _calmingAndRoadSurfaces;
+
+  MeetingStandard? _meetingStandard;
+  MeetingStandard? get meetingStandard => _meetingStandard;
+
+  ThinkAbout? _thinkAbout;
+  ThinkAbout? get thinkAbout => _thinkAbout;
+
+  PracticeWithInstructor? _practiceWithInstructor;
+  PracticeWithInstructor? get practiceWithInstructor=>_practiceWithInstructor;
+
 
 
   Future<void> fetchImageData() async {
@@ -94,6 +109,57 @@ class IntroductionController with ChangeNotifier {
     if(data != null)
     {
       _drivingNightModel = data;
+      notifyListeners();
+    }
+  }
+
+  Future<void> getKeepControlVehicle() async
+  {
+    final data = await _repository.fetchKeepControlVehicle();
+    if(data != null)
+    {
+      _controlVehicleModel = data;
+      notifyListeners();
+    }
+  }
+  Future<void> getTrafficClaimRoadSurface() async
+  {
+    final data = await _repository.getTrafficCalmingData();
+    if(data != null)
+    {
+      _calmingAndRoadSurfaces = data;
+      notifyListeners();
+    }
+  }
+
+
+  Future<void> getMeetingWithStandard() async
+  {
+    final data = await _repository.getMeetingStandardData();
+    if(data != null)
+    {
+      _meetingStandard = data;
+      notifyListeners();
+    }
+  }
+
+  Future<void> getThinkAbout() async
+  {
+    final data = await _repository.getThinkAboutData();
+    if(data != null)
+    {
+      _thinkAbout = data;
+      notifyListeners();
+    }
+  }
+
+  Future<void> getPracticeWithInstructor() async
+  {
+    final data = await _repository.getPracticeWithInstructorData();
+    if(data != null)
+    {
+      _practiceWithInstructor = data;
+      print(_practiceWithInstructor);
       notifyListeners();
     }
   }

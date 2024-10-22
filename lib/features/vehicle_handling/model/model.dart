@@ -49,7 +49,7 @@ class WeatherCondition {
     return WeatherCondition(
       question: data['Question'] as String? ?? '', // Provide a default value if null
       answers: Map<String, String>.from(data['Answers'] as Map<dynamic, dynamic>? ?? {}),
-      correctAnswer: data['correctAnswer'] as String? ?? '', // Provide a default value if null
+      correctAnswer: data['correct'] as String? ?? '', // Provide a default value if null
       imageUrl: data['image'] as String? ?? '', // Provide a default value if null
       points: List<String>.from(data['points'] as List<dynamic>? ?? []), // Provide a default empty list if null
       subtitle: data['subtitle'] as String?, // Nullable
@@ -256,6 +256,158 @@ class KeepControlVehicleModel {
     };
   }
 }
+
+class TrafficCalmingAndRoadSurfaces {
+  final String image1;
+  final String image2;
+  final String subtitle1;
+  final String subtitle2;
+  final String subtitle3;
+  final String tip;
+  final String title;
+
+  // Constructor
+  TrafficCalmingAndRoadSurfaces({
+    required this.image1,
+    required this.image2,
+    required this.subtitle1,
+    required this.subtitle2,
+    required this.subtitle3,
+    required this.tip,
+    required this.title,
+  });
+
+  // Factory method to create a model instance from Firestore data
+  factory TrafficCalmingAndRoadSurfaces.fromFirestore(Map<String, dynamic> data) {
+    return TrafficCalmingAndRoadSurfaces(
+      image1: data['image1'] ?? '',
+      image2: data['image2'] ?? '',
+      subtitle1: data['subtitle1'] ?? '',
+      subtitle2: data['subtitle2'] ?? '',
+      subtitle3: data['subtitle3'] ?? '',
+      tip: data['tip'] ?? '',
+      title: data['title'] ?? '',
+    );
+  }
+
+  // Method to convert the model to a Map, for sending back to Firestore
+  Map<String, dynamic> toMap() {
+    return {
+      'image1': image1,
+      'image2': image2,
+      'subtitle1': subtitle1,
+      'subtitle2': subtitle2,
+      'subtitle3': subtitle3,
+      'tip': tip,
+      'title': title,
+    };
+  }
+}
+
+class MeetingStandard {
+  final List<String> points1;
+  final List<String> points2;
+  final String title;
+
+  // Constructor
+  MeetingStandard({
+    required this.points1,
+    required this.points2,
+    required this.title,
+  });
+
+  // Factory method to create a model instance from Firestore data
+  factory MeetingStandard.fromFirestore(Map<String, dynamic> data) {
+    return MeetingStandard(
+      points1: List<String>.from(data['points1'] ?? []),
+      points2: List<String>.from(data['points2'] ?? []),
+      title: data['title'] ?? '',
+    );
+  }
+
+  // Method to convert the model to a Map, for sending back to Firestore
+  Map<String, dynamic> toMap() {
+    return {
+      'points1': points1,
+      'points2': points2,
+      'title': title,
+    };
+  }
+}
+
+class ThinkAbout {
+  final List<String> points;
+  final String title;
+
+  // Constructor
+  ThinkAbout({
+    required this.points,
+    required this.title,
+  });
+
+  // Factory method to create a model instance from Firestore data
+  factory ThinkAbout.fromFirestore(Map<String, dynamic> data) {
+    return ThinkAbout(
+      points: List<String>.from(data['points'] ?? []),
+      title: data['title'] ?? '',
+    );
+  }
+
+  // Method to convert the model to a Map, for sending back to Firestore
+  Map<String, dynamic> toMap() {
+    return {
+      'points': points,
+      'title': title,
+    };
+  }
+}
+
+class PracticeWithInstructor {
+  final List<String> points1;
+  final List<String> points2;
+  final String subtitle;
+  final String title;
+  final String title2;
+  final String title3;
+
+  // Constructor
+  PracticeWithInstructor({
+    required this.points1,
+    required this.points2,
+    required this.subtitle,
+    required this.title,
+    required this.title2,
+    required this.title3,
+  });
+
+  // Factory method to create a model instance from Firestore data
+  factory PracticeWithInstructor.fromFirestore(Map<String, dynamic> data) {
+    return PracticeWithInstructor(
+      points1: List<String>.from(data['points1'] ?? []),
+      points2: List<String>.from(data['points2'] ?? []),
+      subtitle: data['subtitle'] ?? '',
+      title: data['title'] ?? '',
+      title2: data['title2'] ?? '',
+      title3: data['title3'] ?? '',
+    );
+  }
+
+  // Method to convert the model to a Map, for sending back to Firestore
+  Map<String, dynamic> toMap() {
+    return {
+      'points1': points1,
+      'points2': points2,
+      'subtitle': subtitle,
+      'title': title,
+      'title2': title2,
+      'title3': title3,
+    };
+  }
+}
+
+
+
+
 
 
 

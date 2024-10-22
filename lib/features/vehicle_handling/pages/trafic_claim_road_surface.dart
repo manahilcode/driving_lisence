@@ -1,23 +1,24 @@
 import 'package:driving_lisence/core/sharedUi.dart';
-import 'package:driving_lisence/features/vehicle_handling/pages/windy_weather.dart';
 import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class VeryBadWeather extends StatefulWidget {
-  const VeryBadWeather({super.key});
+import 'meeting_with_standard.dart';
+
+class TraficClaimRoadSurface extends StatefulWidget {
+  const TraficClaimRoadSurface({super.key});
 
   @override
-  State<VeryBadWeather> createState() => _VeryBadWeatherState();
+  State<TraficClaimRoadSurface> createState() => _TraficClaimRoadSurfaceState();
 }
 
-class _VeryBadWeatherState extends State<VeryBadWeather> {
+class _TraficClaimRoadSurfaceState extends State<TraficClaimRoadSurface> {
   IntroductionController? _controller;
 
   @override
   void didChangeDependencies() async {
     _controller = Provider.of<IntroductionController>(context, listen: false);
-    await _controller?.getVeryBadWeather();
+    await _controller?.getTrafficClaimRoadSurface();
     super.didChangeDependencies();
   }
 
@@ -25,48 +26,33 @@ class _VeryBadWeatherState extends State<VeryBadWeather> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Very Bad Weather"),
+        title: const Text("Traffic Claiming Road Surface"),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: Consumer<IntroductionController>(
         builder: (BuildContext context, value, Widget? child) {
-          final data = value.badWeatherModel;
+          final data = value.calmingAndRoadSurface;
+
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  createHeadingText(data?.title ?? ""),
-                  buildImage(data?.image ?? ""),
-                  createAutoSizeText(data?.subtitle ?? ""),
-                  createAutoSizeText(data?.points[0] ?? ""),
+                  createHeadingText(data!.title),
+                  buildImage(data.image1),
+                  createAutoSizeText(data.subtitle1),
+                  buildImage(data.image2),
+                  createAutoSizeText(data.subtitle2),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.green),
-                      ),
-                      child: Column(
-                        children: [
-                          buildBulletText(data?.points[1] ?? ""),
-                          buildBulletText(data?.points[2] ?? ""),
-                        ],
-                      ),
-                    ),
+                    child: buildTipWidget(data.tip),
                   ),
-                  createAutoSizeText(data?.subtitle2 ?? ""),
-                  buildTipWidget(data?.tip ?? ""),
                   const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
                       Route newRoute = MaterialPageRoute(
-                          builder: (context) => const WindyWeather());
+                          builder: (context) => const MeetingWithStandard());
 
                       Navigator.pushAndRemoveUntil(
                         context,

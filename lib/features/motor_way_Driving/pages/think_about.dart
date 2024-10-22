@@ -1,24 +1,23 @@
 import 'package:driving_lisence/core/sharedUi.dart';
-import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.dart';
+import 'package:driving_lisence/features/motor_way_Driving/pages/things_discuss_practice_instructor.dart';
+import 'package:driving_lisence/features/motor_way_Driving/viewmodel/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'driving_night.dart';
-
-class WindyWeather extends StatefulWidget {
-  const WindyWeather({super.key});
+class ThinkAboutMotor extends StatefulWidget {
+  const ThinkAboutMotor({super.key});
 
   @override
-  State<WindyWeather> createState() => _WindyWeatherState();
+  State<ThinkAboutMotor> createState() => _ThinkAboutMotorState();
 }
 
-class _WindyWeatherState extends State<WindyWeather> {
-  IntroductionController? _controller;
+class _ThinkAboutMotorState extends State<ThinkAboutMotor> {
+  Controller? _controller;
 
   @override
-  void didChangeDependencies() async{
-     _controller = Provider.of<IntroductionController>(context, listen: false);
-    await _controller?.getWindyWeather();
+  void didChangeDependencies() {
+    _controller = Provider.of<Controller>(context, listen: false);
+    _controller?.fetchThinkAboutData();
     super.didChangeDependencies();
   }
 
@@ -26,19 +25,17 @@ class _WindyWeatherState extends State<WindyWeather> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Windy Weather"),
-        centerTitle: true,
+        title: const Text("Think About"),
         backgroundColor: Colors.green,
+        centerTitle: true,
       ),
-      body: Consumer<IntroductionController>(
+      body: Consumer<Controller>(
         builder: (BuildContext context, value, Widget? child) {
-          final data = value.windyModel;
+          final data = value.thinkAbout;
           return Column(
             children: [
-              createHeadingText(data?.title ?? ""),
-              buildImage(data?.image ?? ""),
-              createAutoSizeText(data?.subtitle ?? ""),
-              Padding(
+              createHeadingText("Think About"),
+              Container(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   padding: const EdgeInsets.all(12.0),
@@ -52,6 +49,7 @@ class _WindyWeatherState extends State<WindyWeather> {
                       buildBulletText(data?.points[0] ?? ""),
                       buildBulletText(data?.points[1] ?? ""),
                       buildBulletText(data?.points[2] ?? ""),
+                      buildBulletText(data?.points[3] ?? ""),
                     ],
                   ),
                 ),
@@ -60,13 +58,13 @@ class _WindyWeatherState extends State<WindyWeather> {
               GestureDetector(
                 onTap: () {
                   Route newRoute = MaterialPageRoute(
-                      builder: (context) => const DrivingNight());
+                      builder: (context) => const ThingsDiscussPracticeInstructorMotorWay());
 
                   Navigator.pushAndRemoveUntil(
                     context,
                     newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
+                        (Route<dynamic> route) =>
+                    false, // Removes all previous routes
                   );
                 },
                 child: Center(

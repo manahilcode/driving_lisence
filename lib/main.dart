@@ -1,5 +1,6 @@
 import 'package:driving_lisence/features/attitude/viewmodel/attitude_provider.dart';
 import 'package:driving_lisence/features/choose_ride/choose_ride.dart';
+import 'package:driving_lisence/features/motor_way_Driving/viewmodel/controller.dart';
 import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +21,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<Attitude>(create: (_) => Attitude()),
-        ChangeNotifierProvider<IntroductionController>(create:(_)=>IntroductionController() )
+        ChangeNotifierProvider<IntroductionController>(create:(_)=>IntroductionController() ),
+        ChangeNotifierProvider<Controller>(create:(_)=>Controller() )
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -17,16 +17,15 @@ class FogScreen extends StatefulWidget {
 class _FogScreenState extends State<FogScreen> {
   IntroductionController? _controller;
   @override
-  void didChangeDependencies() {
-    // _controller = Provider.of<IntroductionController>(context, listen: false);
-    // _controller?.getFogData();
+  void didChangeDependencies() async{
+    _controller = Provider.of<IntroductionController>(context, listen: false);
+    await _controller?.getFogData();
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    _controller = Provider.of<IntroductionController>(context, listen: false);
-    _controller?.getFogData();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Fog"),
@@ -34,9 +33,9 @@ class _FogScreenState extends State<FogScreen> {
         backgroundColor: Colors.green,
       ),
       body: Consumer<IntroductionController>(builder: (context, value, child) {
-        return Padding(
+        return  Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ListView.builder(
+          child:  ListView.builder(
             itemCount: _controller?.fogModels.length,
             itemBuilder: (BuildContext context, int index) {
               final data = _controller!.fogModels[index];

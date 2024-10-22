@@ -1,53 +1,79 @@
 import 'package:driving_lisence/core/sharedUi.dart';
-import 'package:driving_lisence/features/vehicle_handling/pages/trafic_claim_road_surface.dart';
-import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.dart';
+import 'package:driving_lisence/features/motor_way_Driving/pages/reducing_congestion.dart';
+import 'package:driving_lisence/features/motor_way_Driving/viewmodel/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
-class KeepControleVehicle extends StatefulWidget {
-  const KeepControleVehicle({super.key});
+class SpeedLimit extends StatefulWidget {
+  const SpeedLimit({super.key});
 
   @override
-  State<KeepControleVehicle> createState() => _KeepControleVehicleState();
+  State<SpeedLimit> createState() => _SpeedLimitState();
 }
 
-class _KeepControleVehicleState extends State<KeepControleVehicle> {
-  IntroductionController? _controller;
+class _SpeedLimitState extends State<SpeedLimit> {
+  Controller? _controller;
 
   @override
-  void didChangeDependencies() async{
-    _controller = Provider.of<IntroductionController>(context, listen: false);
-    await _controller?.getKeepControlVehicle();
+  void didChangeDependencies() {
+    _controller = Provider.of<Controller>(context, listen: false);
+    _controller?.fetchSpeedLimitData();
     super.didChangeDependencies();
   }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("Keep Control Of Vehicle "),
-        centerTitle: true,
+        title: const Text("Speed Limit"),
         backgroundColor: Colors.green,
+        centerTitle: true,
       ),
-      body: Consumer<IntroductionController>(
+      body: Consumer<Controller>(
         builder: (BuildContext context, value, Widget? child) {
-          final data = value.controlVehicleModel;
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
+          final data = value.speedLimit;
+          final ans = data?.answers;
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  createHeadingText(data?.title ?? ""),
-                  createAutoSizeText(data?.subtitle1 ?? ""),
-                  createAutoSizeText(data?.subtitle2 ?? ""),
-                  createAutoSizeText(data?.subtitle3 ?? ""),
-                  createAutoSizeText(data?.points1[0]?? ""),
+                  createHeadingText("Speed Limit"),
+                  Gap(10),
                   Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      data?.question ?? "",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  buildImage(data?.image1 ?? ""),
+                  if (ans != null)
+                    Column(
+                      children: ans.entries.map((entry) {
+                        return Card(
+                          margin: EdgeInsets.symmetric(vertical: 8.0),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              child: Text(entry.key.toString()),
+                            ),
+                            title: Text(entry.value),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  const Gap(10),
+                  const Text(
+                    "Answer",
+                    style: TextStyle(
+                        color: Colors.green, fontWeight: FontWeight.bold),
+                  ),
+                  createAutoSizeText(data?.correct ?? ""),
+                  createAutoSizeText(data?.points1[0] ?? ""),
+                  Container(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       padding: const EdgeInsets.all(12.0),
@@ -58,16 +84,20 @@ class _KeepControleVehicleState extends State<KeepControleVehicle> {
                       ),
                       child: Column(
                         children: [
-                          buildBulletText(data?.points1[1]?? ""),
-                          buildBulletText(data?.points1[2]?? ""),
-                          buildBulletText(data?.points1[3]?? ""),
-                          buildBulletText(data?.points1[4]?? ""),
+                          buildBulletText(data?.points1[1] ?? ""),
+                          buildBulletText(data?.points1[2] ?? ""),
+                          buildBulletText(data?.points1[3] ?? ""),
                         ],
                       ),
                     ),
                   ),
-                  createAutoSizeText(data?.points2[0]?? ""),
+
                   Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildTipWidget(data?.tip ?? ""),
+                  ),
+                  createAutoSizeText(data?.points2[0] ?? ""),
+                  Container(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       padding: const EdgeInsets.all(12.0),
@@ -78,8 +108,9 @@ class _KeepControleVehicleState extends State<KeepControleVehicle> {
                       ),
                       child: Column(
                         children: [
-                          buildBulletText(data?.points2[1]?? ""),
-                          buildBulletText(data?.points2[2]?? ""),
+                          buildBulletText(data?.points2[1] ?? ""),
+                          buildBulletText(data?.points2[2] ?? ""),
+
                         ],
                       ),
                     ),
@@ -87,14 +118,15 @@ class _KeepControleVehicleState extends State<KeepControleVehicle> {
                   const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      Route newRoute = MaterialPageRoute(builder: (context) => const TraficClaimRoadSurface());
-              
+                      Route newRoute = MaterialPageRoute(
+                          builder: (context) => const ReducingCongestion());
+
                       Navigator.pushAndRemoveUntil(
                         context,
                         newRoute,
-                            (Route<dynamic> route) => false, // Removes all previous routes
+                            (Route<dynamic> route) =>
+                        false, // Removes all previous routes
                       );
-              
                     },
                     child: Center(
                       child: Container(

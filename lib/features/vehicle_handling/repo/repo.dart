@@ -115,5 +115,102 @@ class Repository {
     }
   }
 
+  Future<KeepControlVehicleModel> fetchKeepControlVehicle() async {
+    try {
+      DocumentSnapshot snapshot = await _firestore
+          .collection('vehicle_handling') // Your Firestore collection
+          .doc('keeping_control_of_your_vehicle') // Your Firestore document ID
+          .get();
+
+      if (snapshot.exists) {
+        return KeepControlVehicleModel.fromFirestore(
+            snapshot.data() as Map<String, dynamic>);
+      } else {
+        throw Exception('Document does not exist');
+      }
+    } catch (e) {
+      throw Exception('Error fetching data: $e');
+    }
+  }
+
+
+  Future<TrafficCalmingAndRoadSurfaces?> getTrafficCalmingData() async {
+    try {
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('vehicle_handling') // Replace with your collection
+          .doc('Traffic_claiming')         // Replace with your document ID
+          .get();
+
+      if (doc.exists) {
+        return TrafficCalmingAndRoadSurfaces.fromFirestore(doc.data() as Map<String, dynamic>);
+      } else {
+        print("Document does not exist");
+        return null;
+      }
+    } catch (e) {
+      print("Error fetching data: $e");
+      return null;
+    }
+  }
+
+
+  Future<MeetingStandard?> getMeetingStandardData() async {
+    try {
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('vehicle_handling') // Replace with your collection name
+          .doc('meeting_the_standard')         // Replace with your document ID
+          .get();
+
+      if (doc.exists) {
+        return MeetingStandard.fromFirestore(doc.data() as Map<String, dynamic>);
+      } else {
+        print("Document does not exist");
+        return null;
+      }
+    } catch (e) {
+      print("Error fetching data: $e");
+      return null;
+    }
+  }
+
+
+  Future<ThinkAbout?> getThinkAboutData() async {
+    try {
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('vehicle_handling') // Replace with your collection name
+          .doc('Think_about')         // Replace with your document ID
+          .get();
+
+      if (doc.exists) {
+        return ThinkAbout.fromFirestore(doc.data() as Map<String, dynamic>);
+      } else {
+        print("Document does not exist");
+        return null;
+      }
+    } catch (e) {
+      print("Error fetching data: $e");
+      return null;
+    }
+  }
+
+
+  Future<PracticeWithInstructor?> getPracticeWithInstructorData() async {
+    try {
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('vehicle_handling') // Replace with your collection name
+          .doc('discuss_with_your_instructor')         // Replace with your document ID
+          .get();
+
+      if (doc.exists) {
+        return PracticeWithInstructor.fromFirestore(doc.data() as Map<String, dynamic>);
+      } else {
+        print("Document does not exist");
+        return null;
+      }
+    } catch (e) {
+      print("Error fetching data: $e");
+      return null;
+    }
+  }
 
 }
