@@ -104,6 +104,7 @@ Widget buildBulletText(String text) {
           child: Text(
             text,
             style: GoogleFonts.roboto(fontSize: 13.0),
+            textAlign: TextAlign.start,
           ),
         ),
       ),

@@ -7,6 +7,7 @@ import 'package:driving_lisence/practice_revision_dialog.dart';
 import 'features/attitude/pages/attitude.dart';
 import 'features/incident/pages/incident_accident_and_emergency.dart';
 import 'features/motor_way_Driving/pages/introduction.dart';
+import 'features/rule_of_road/pages/introduction.dart';
 import 'features/vehicle_handling/pages/introduction.dart';
 import 'features/vehicle_loading/pages/introduction.dart';
 import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
@@ -18,7 +19,7 @@ class Category extends StatefulWidget {
 
 class _CategoryState extends State<Category> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List<bool> _selectedCategories = List.generate(15, (_) => true); // 15 categories
+  List<bool> _selectedCategories = List.generate(15, (_) => false); // 15 categories
 
   @override
   void initState() {
@@ -190,7 +191,7 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   total: 54,
                   isSelected: _selectedCategories[11],
                   onTap: () => _toggleSelection(11),
-                  categoryScreen: PracticeRevisionDialog(),
+                  categoryScreen: const IntroductionRoadRule(),
                 ),
                 CategoryItem(
                   icon: Icons.local_police,
