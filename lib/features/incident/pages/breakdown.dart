@@ -2,6 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:driving_lisence/features/incident/pages/warning_other_of_breakdown_or_incident.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../viewmodel/controller.dart';
 
 class Breakdowns extends StatefulWidget {
   const Breakdowns({super.key});
@@ -11,6 +14,14 @@ class Breakdowns extends StatefulWidget {
 }
 
 class _BreakdownsState extends State<Breakdowns> {
+  IncidentController? _incidentController;
+
+  @override
+  void didChangeDependencies() {
+    _incidentController = Provider.of<IncidentController>(context,listen: false);
+    _incidentController?.fetchBreakdownIncident("Breakdowns");
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,202 +32,211 @@ class _BreakdownsState extends State<Breakdowns> {
           style: GoogleFonts.roboto(color: Colors.white),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              createHeadingText("Breakdowns"),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText(
-                  "If you’re involved in an incident on the road, such as your car breaking down or arriving first at the scene of a crash, knowing what to do can prevent a more serious situation from developing."),
-              const SizedBox(
-                height: 10,
-              ),
-              buildTipWidget(
-                  "It’s useful to carry a first aid kit, a warning triangle and a fire extinguisher in your car for use in an emergency. This equipment could help to prevent or lessen an injury. You may be able to tackle a small fire if you have a fire extinguisher, but don’t take any risks."),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText(
-                  "Knowing what to do if your car breaks down will help keep you and your passengers safe, and avoid creating problems for other road users, such as traffic jams."),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText(
-                  "If a warning light shows on the instrument panel of your vehicle, you may have a problem that affects the safety of the vehicle. If necessary, stop as soon as you can do so safely and check the problem."),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText(
-                  "If your tyre bursts or you get a puncture while you’re driving"),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                   border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText("hold the steering wheel firmly"),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    buildBulletText(
-                        "pull up slowly or roll to a stop at the side of the road."),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-               SizedBox(
-                 height: 10,
-               ),
-              buildImage("https://via.placeholder.com/400"),
-              const SizedBox(
-                height: 10,
-              ),
-              buildTipWidget(
-                  "If you smell petrol while you’re driving, stop and investigate as soon as you can do so safely. Don’t ignore it."),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText(
-                  "If you break down on the motorway, try and reach the next exit or service area. If you cannot do this, move into the left-hand lane and then steer your vehicle into an emergency area or onto the hard shoulder, as safely as possible."),
-              const SizedBox(
-                height: 10,
-              ),
-              buildImage("https://via.placeholder.com/400"),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText(
-                  "On the hard shoulder, try and stop just beyond an emergency phone and as far to the left as you can, away from the traffic. Leave enough space so that you can get out of the vehicle using the nearside door."),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText(
-                  "If you have any kind of mobility difficulty, you should stay in your vehicle and"),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText("keep your seat belt fastened"),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    buildBulletText("switch on your hazard warning lights"),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    buildBulletText(
-                        "dial 999 and ask for the police. Alternatively, if your vehicle has an SOS button, press it and ask for the police."),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-
-              createAutoSizeText("If you break down on a level crossing"),
-              const SizedBox(
-                height: 10,
-              ),
-
-              Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText(
-                        "get everyone out of the vehicle and clear of the crossing"),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    buildBulletText(
-                        "call the signal operator from the phone provided"),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    buildBulletText(
-                        "only move your vehicle if the operator tells you to do so."),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-              createAutoSizeText(
-                  "If you’re waiting at a level crossing and the red light signal continues to flash after a train has gone by, you MUST wait, as another train may be coming."),
-              const SizedBox(
-                height: 10,
-              ),
-              buildImage("https://via.placeholder.com/400"),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const WarningOtherOfBreakdownOrIncident()),
-                  );
-                },
-                child: Center(
-                  child: Container(
-                    width: 300,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 30.0),
+      body: Consumer<IncidentController>(
+        builder: (context,value,child) {
+          final data  = value.breakdownIncident;
+          if(data == null)
+            {
+              return const Center(child: CircularProgressIndicator(),);
+            }
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  createHeadingText(data.title!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(
+                      data.subtitle!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  buildTipWidget(
+                      data.tip!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(
+                      data.subtitle2!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(
+                      data.subtitle3!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(
+                      data.points![0]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
                     decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                       border: Border.all(color: Colors.green),
+                    ),
+                    child: Column(
+                      children: [
+                        buildBulletText( data.points![1]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildBulletText(
+                            data.points![2]),
+                        const SizedBox(
+                          height: 10,
                         ),
                       ],
                     ),
-                    child: const Center(
-                      child: Text(
-                        "Next",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+                  ),
+                   SizedBox(
+                     height: 10,
+                   ),
+                  buildImage(data.image2!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  buildTipWidget(
+                      data.tip!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  // createAutoSizeText(
+                  //     "If you break down on the motorway, try and reach the next exit or service area. If you cannot do this, move into the left-hand lane and then steer your vehicle into an emergency area or onto the hard shoulder, as safely as possible."),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  buildImage(data.image3!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  // createAutoSizeText(
+                      // "On the hard shoulder, try and stop just beyond an emergency phone and as far to the left as you can, away from the traffic. Leave enough space so that you can get out of the vehicle using the nearside door."),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  createAutoSizeText(
+                      data.points2![0]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.green),
+                    ),
+                    child: Column(
+                      children: [
+                        buildBulletText(data.points2![1]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildBulletText(data.points2![2]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildBulletText(
+                            data.points2![3]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  createAutoSizeText(data.points3![0]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.green),
+                    ),
+                    child: Column(
+                      children: [
+                        buildBulletText(
+                            data.points3![1]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildBulletText(
+                            data.points3![2]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildBulletText(
+                            data.points3![3]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                  createAutoSizeText(
+                      data.points3![4]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                 // buildImage("https://via.placeholder.com/400"),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const WarningOtherOfBreakdownOrIncident()),
+                      );
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 300,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15.0, horizontal: 30.0),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Next",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        }
       ),
     );
   }

@@ -419,14 +419,14 @@ class DriverSignal {
   factory DriverSignal.fromJson(Map<String, dynamic> json) {
     return DriverSignal(
       showingGivingWay: json['showingGivingWay'] ?? '',
-      answers: (json['answers'] as Map<String, dynamic>?)?.map(
+      answers: (json['Answers'] as Map<String, dynamic>?)?.map(
             (key, value) => MapEntry(key, value as String),
       ),
       aboutToTurn: json['aboutToTurn'] ?? '',
       rightOfWay: json['rightOfWay'] ?? '',
       lettingThemKnow: json['lettingThemKnow'] ?? '',
       question: json['Question'] ?? '',
-      correctAnswer: json['correctAnswer'] ?? '',
+      correctAnswer: json['correct'] ?? '',
       image1: json['image1'] ?? '',
       image2: json['image2'] ?? '',
       image3: json['image3'] ?? '',

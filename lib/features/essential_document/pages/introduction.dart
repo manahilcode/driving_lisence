@@ -3,45 +3,52 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodel/controller.dart';
-import 'SignsRoadSign.dart';
+import 'essenial_documents.dart';
 
-class IntroductionRoadSign extends StatefulWidget {
-  const IntroductionRoadSign({super.key});
+class IntroductionEDocumentt extends StatefulWidget {
+  const IntroductionEDocumentt({super.key});
 
   @override
-  State<IntroductionRoadSign> createState() => _IntroductionRoadSignState();
+  State<IntroductionEDocumentt> createState() => _IntroductionEDocumenttState();
 }
 
-class _IntroductionRoadSignState extends State<IntroductionRoadSign> {
-  RoadSignController? _roadSignController;
+class _IntroductionEDocumenttState extends State<IntroductionEDocumentt> {
+  EssentialDocumentsController? _essentialDocumentsController;
+
   @override
   void didChangeDependencies() {
-_roadSignController = Provider.of<RoadSignController>(context,listen: false);
-_roadSignController?.fetchIntroductionRoadSign("introduction");
+    _essentialDocumentsController =
+        Provider.of<EssentialDocumentsController>(context, listen: false);
+    _essentialDocumentsController?.fetchIntroductionEssential("introduction");
     super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Introduction",style: TextStyle(color: Colors.white),),
+        title: Text(
+          "Introduction",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: Consumer<RoadSignController>(
+      body: Consumer<EssentialDocumentsController>(
         builder: (BuildContext context, value, Widget? child) {
-          final data = value.introductionRoadsign;
-          if(data == null)
-            {
-              return Center(child: CircularProgressIndicator(),);
-            }
+          final data = value.introductionEssential;
+          if (data == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-
               children: [
-                createHeadingText(data.title!),
-                buildImage(data.image!),
+                createHeadingText(data.title),
+                buildImage(data.image),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -53,13 +60,10 @@ _roadSignController?.fetchIntroductionRoadSign("introduction");
                     ),
                     child: Column(
                       children: [
-                        buildBulletText(data.points![0]),
-                        buildBulletText(data.points![1]),
-                        buildBulletText(data.points![2]),
-                        buildBulletText(data.points![3]),
-                        buildBulletText(data.points![4]),
-
-
+                        buildBulletText(data.points[0]),
+                        buildBulletText(data.points[1]),
+                        buildBulletText(data.points[2]),
+                        buildBulletText(data.points[3]),
                       ],
                     ),
                   ),
@@ -67,7 +71,7 @@ _roadSignController?.fetchIntroductionRoadSign("introduction");
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    Route newRoute = MaterialPageRoute(builder: (context) => const Signsroadsign());
+                    Route newRoute = MaterialPageRoute(builder: (context) =>  const EssentialDocuments());
 
                     Navigator.pushAndRemoveUntil(
                       context,

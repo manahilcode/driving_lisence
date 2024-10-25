@@ -1,47 +1,56 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/essential_document/pages/your_driver_licence.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodel/controller.dart';
-import 'SignsRoadSign.dart';
 
-class IntroductionRoadSign extends StatefulWidget {
-  const IntroductionRoadSign({super.key});
+class RegisteringOwningCar extends StatefulWidget {
+  const RegisteringOwningCar({super.key});
 
   @override
-  State<IntroductionRoadSign> createState() => _IntroductionRoadSignState();
+  State<RegisteringOwningCar> createState() => _RegisteringOwningCarState();
 }
 
-class _IntroductionRoadSignState extends State<IntroductionRoadSign> {
-  RoadSignController? _roadSignController;
+class _RegisteringOwningCarState extends State<RegisteringOwningCar> {
+  EssentialDocumentsController? _essentialDocumentsController;
+
   @override
   void didChangeDependencies() {
-_roadSignController = Provider.of<RoadSignController>(context,listen: false);
-_roadSignController?.fetchIntroductionRoadSign("introduction");
+    _essentialDocumentsController =
+        Provider.of<EssentialDocumentsController>(context, listen: false);
+    _essentialDocumentsController
+        ?.fetchRegisteringAndOwningCar("registering_and_owningcar");
     super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Introduction",style: TextStyle(color: Colors.white),),
+        title: Text(
+          "Registering and Owning Car",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: Consumer<RoadSignController>(
+      body: Consumer<EssentialDocumentsController>(
         builder: (BuildContext context, value, Widget? child) {
-          final data = value.introductionRoadsign;
-          if(data == null)
-            {
-              return Center(child: CircularProgressIndicator(),);
-            }
+          final data = value.registeringAndOwningCar;
+          if (data == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-
               children: [
-                createHeadingText(data.title!),
-                buildImage(data.image!),
+                createHeadingText(data.title),
+                buildImage(data.image),
+                createAutoSizeText(data.points[0]),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -53,13 +62,12 @@ _roadSignController?.fetchIntroductionRoadSign("introduction");
                     ),
                     child: Column(
                       children: [
-                        buildBulletText(data.points![0]),
-                        buildBulletText(data.points![1]),
-                        buildBulletText(data.points![2]),
-                        buildBulletText(data.points![3]),
-                        buildBulletText(data.points![4]),
-
-
+                        buildBulletText(data.points[1]),
+                        buildBulletText(data.points[2]),
+                        buildBulletText(data.points[3]),
+                        buildBulletText(data.points[4]),
+                        buildBulletText(data.points[5]),
+                        buildBulletText(data.points[6]),
                       ],
                     ),
                   ),
@@ -67,7 +75,7 @@ _roadSignController?.fetchIntroductionRoadSign("introduction");
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    Route newRoute = MaterialPageRoute(builder: (context) => const Signsroadsign());
+                    Route newRoute = MaterialPageRoute(builder: (context) =>  const YourDrivingLicence());
 
                     Navigator.pushAndRemoveUntil(
                       context,

@@ -19,7 +19,7 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.green,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
@@ -50,25 +50,25 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Making progress...',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Have you booked your Theory Test?',
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildOptionButton('Yes', Icons.check_circle_outline),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildOptionButton('No', Icons.close),
             if (selectedOption == 'yes') ...[
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildDateTimeSelection(),
             ],
-            Spacer(),
+            const Spacer(),
             _buildBottomNavigation(),
           ],
         ),
@@ -97,13 +97,13 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
         ),
         child: Row(
           children: [
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Icon(
               icon,
               size: 24,
               color: isSelected ? Colors.white : Colors.black,
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Text(
               text,
               style: TextStyle(
@@ -122,16 +122,16 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Please enter your test date',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         GestureDetector(
           onTap: () => _selectDate(context),
           child: Container(
             height: 60,
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(4),
@@ -143,24 +143,24 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
                   selectedDate != null
                       ? DateFormat('dd/MM/yyyy').format(selectedDate!)
                       : 'Select a date...',
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                Icon(Icons.calendar_today),
+                const Icon(Icons.calendar_today),
               ],
             ),
           ),
         ),
-        SizedBox(height: 20),
-        Text(
+        const SizedBox(height: 20),
+        const Text(
           'Please enter your test time',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         GestureDetector(
           onTap: () => _selectTime(context),
           child: Container(
             height: 60,
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(4),
@@ -172,15 +172,15 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
                   selectedTime != null
                       ? selectedTime!.format(context)
                       : 'Select a time...',
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                Icon(Icons.access_time),
+                const Icon(Icons.access_time),
               ],
             ),
           ),
         ),
-        SizedBox(height: 40),
-       Center(
+        const SizedBox(height: 40),
+       const Center(
          child: Text("I dont know , remind me later",style: TextStyle(
            fontSize: 20,fontWeight: FontWeight.bold
          ),),
@@ -194,7 +194,7 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
       context: context,
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -217,14 +217,14 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
 
   Widget _buildBottomNavigation() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.arrow_back, size: 30),
+          const Icon(Icons.arrow_back, size: 30),
           Row(
             children: List.generate(5, (index) => Container(
-              margin: EdgeInsets.symmetric(horizontal: 2),
+              margin: const EdgeInsets.symmetric(horizontal: 2),
               width: 8,
               height: 8,
               decoration: BoxDecoration(
@@ -235,7 +235,7 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
             )),
           ),
           IconButton(
-            icon: Icon(Icons.arrow_forward, size: 30),
+            icon: const Icon(Icons.arrow_forward, size: 30),
             onPressed: () {
               Navigator.push(
                 context,

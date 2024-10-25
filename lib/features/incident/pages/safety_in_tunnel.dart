@@ -2,6 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:driving_lisence/features/incident/pages/stop_at_in_accident.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../viewmodel/controller.dart';
 
 class SafetyInTunnel extends StatefulWidget {
   const SafetyInTunnel({super.key});
@@ -11,6 +14,14 @@ class SafetyInTunnel extends StatefulWidget {
 }
 
 class _SafetyInTunnelState extends State<SafetyInTunnel> {
+  IncidentController? _incidentController;
+
+  @override
+  void didChangeDependencies() {
+    _incidentController = Provider.of<IncidentController>(context,listen: false);
+    _incidentController?.fetchSafetyInTunnel("safety_in_tunels");
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,149 +32,172 @@ class _SafetyInTunnelState extends State<SafetyInTunnel> {
           style: GoogleFonts.roboto(color: Colors.white),
         ),
     ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
+      body: Consumer<IncidentController>(
+        builder: (context,value,child) {
+          final data = value.safetyInTunnel;
+          if(data == null)
+            {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
 
-              createHeadingText("Safety in tunnels"),
-              const SizedBox(
-                height: 10,
-              ),
+                  createHeadingText(data.title!),
+                  const SizedBox(
+                    height: 10,
+                  ),
 
-              buildImage("https://via.placeholder.com/400"),
-              createAutoSizeText(
-                  "You need to take extra care when driving in a tunnel because"),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText(
-                        "when you enter the tunnel, visibility is suddenly reduced"),
-                    buildBulletText(
-                        "the confined space can make incidents difficult to deal with."),
-                  ],
-                ),
-              ),
-    createAutoSizeText("Before driving through a tunnel, remove your sunglasses if you’re wearing them and switch on dipped headlights. It’s particularly important to keep a safe distance from the vehicle in front when driving in a tunnel, even if it’s congested."),
- const SizedBox(
-   height: 10,
- ),
-              buildImage("https://via.placeholder.com/400"),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText("Look out for signs that warn of accidents or congestion"),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText("If your vehicle is involved in an incident or breaks down in a tunnel"),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText("switch off the engine"),
-                    const SizedBox(
-                      height: 10,
+                  buildImage(data.image!),
+                  createAutoSizeText(
+                      data.points![0]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Column(
+                        children: [
+                          buildBulletText(
+                              data.points![1]),
+                          buildBulletText(
+                              data.points![2]),
+                        ],
+                      ),
                     ),
-                    buildBulletText("switch on your hazard warning lights"),
-                    const SizedBox(
-                      height: 10,
+                  ),
+              createAutoSizeText(data.subtitle!),
+           const SizedBox(
+             height: 10,
+           ),
+                  buildImage(data.image!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(data.points2![0]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(data.points2![1]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Column(
+                        children: [
+                          buildBulletText(data.points2![2]),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          buildBulletText(data.points2![3]),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          buildBulletText(data.points2![4]),
+
+                        ],
+                      ),
                     ),
-                    buildBulletText("go and call for help immediately from the nearest emergency telephone point."),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(data.points2![5]),
+                  const SizedBox(height: 10,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
 
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText("If your vehicle catches fire while you’re driving through a tunnel, drive it out of the tunnel if you can do so without causing further danger. If this isn’t possible then you should"),
-              const SizedBox(height: 10,),
-              Container(
-
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText("stop"),
-                    buildBulletText("switch on your hazard warning lights"),
-                    buildBulletText("try to put out the fire – but only if it’s a small fire"),
-                    buildBulletText("call for help at the nearest emergency point."),
-                  ],
-                ),
-              ),
-                const SizedBox(
-                  height: 20,
-                ),
-              buildTipWidget("If your engine catches fire while you’re driving, pull up as quickly and safely as possible. Get yourself and any passengers out and away from the vehicle. Then call the fire brigade. Don’t open the bonnet, as this will make the fire worse."),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                        const StopAtInAccident()),
-                  );
-                },
-                child: Center(
-                  child: Container(
-                    width: 300,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 30.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Column(
+                        children: [
+                          buildBulletText(data.points2![6]),
+                          buildBulletText(data.points2![7]),
+                          buildBulletText(data.points2![8]),
+                          buildBulletText(data.points2![9]),
+                        ],
+                      ),
+                    ),
+                  ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildTipWidget(data.tip!),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const StopAtInAccident()),
+                      );
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 300,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15.0, horizontal: 30.0),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Next",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+                        child: const Center(
+                          child: Text(
+                            "Next",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
 
-            ],
-          ),
-        ),
+                ],
+              ),
+            ),
+          );
+        }
       ),
     );
   }

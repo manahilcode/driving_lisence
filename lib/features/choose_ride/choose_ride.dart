@@ -141,7 +141,7 @@ class _chooserideState extends State<chooseride> {
       },
       child: Container(
         width: 100,
-        height: 50,
+        height: 40,
         decoration: BoxDecoration(
           color: isSelected ? Colors.green : Colors.white,
           border: Border.all(color: Colors.black),

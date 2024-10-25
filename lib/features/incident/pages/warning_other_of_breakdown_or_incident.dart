@@ -2,6 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:driving_lisence/features/incident/pages/safety_in_tunnel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../viewmodel/controller.dart';
 
 class WarningOtherOfBreakdownOrIncident extends StatefulWidget {
   const WarningOtherOfBreakdownOrIncident({super.key});
@@ -13,6 +16,14 @@ class WarningOtherOfBreakdownOrIncident extends StatefulWidget {
 
 class _WarningOtherOfBreakdownOrIncidentState
     extends State<WarningOtherOfBreakdownOrIncident> {
+  IncidentController? _incidentController;
+
+  @override
+  void didChangeDependencies() {
+    _incidentController = Provider.of<IncidentController>(context,listen: false);
+    _incidentController?.fetchWarningOthersOfBreak("warning_others_of_a_breakdown");
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,90 +34,108 @@ class _WarningOtherOfBreakdownOrIncidentState
           style: GoogleFonts.roboto(color: Colors.white),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              createHeadingText("Warning others of a breakdown or incident"),
-              SizedBox(
-                height: 10,
-              ),
-              buildImage("https://via.placeholder.com/400"),
-              SizedBox(
-                height: 10,
-              ),
-              createAutoSizeText("Use your hazard warning lights"),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText(
-                        "if you need to suddenly slow down or stop on a motorway or unrestricted dual carriageway because of an incident or hazard ahead; as soon as the traffic behind you has reacted to your hazard lights, you should turn them off"),
-                    buildBulletText(
-                        "when your vehicle has broken down and is temporarily obstructing traffic."),
-                    SizedBox(
-                      height: 10,
+      body: Consumer<IncidentController>(
+        builder: (context,value,child) {
+          final data = value.warningOthersOfBreak;
+          if(data == null)
+            {
+              return const Center(child: CircularProgressIndicator(),);
+            }
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  createHeadingText(data.title!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  buildImage(data.image!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(data.subtitle!),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  createAutoSizeText(data.points![0]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Column(
+                        children: [
+                          buildBulletText(
+                              data.points![1]),
+                          buildBulletText(
+                              data.points![2]),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-              buildTipWidget(
-                  "If you’re driving on a motorway and you see something fall from another vehicle, or if anything falls from your own vehicle, stop at the next emergency telephone and report the hazard. Don’t try to retrieve it yourself."),
-              SizedBox(
-                height: 20,
-              ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildTipWidget(data.tip!),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
 
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SafetyInTunnel()),
-                  );
-                },
-                child: Center(
-                  child: Container(
-                    width: 300,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 30.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SafetyInTunnel()),
+                      );
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 300,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15.0, horizontal: 30.0),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Next",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+                        child: const Center(
+                          child: Text(
+                            "Next",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        }
       ),
     );
   }
@@ -141,35 +170,43 @@ class _WarningOtherOfBreakdownOrIncidentState
   }
 
   Widget buildTipWidget(String paragraphText) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Row containing the thumb icon and "Tip" text
-        const SizedBox(
-          height: 10,
-        ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Icon(Icons.thumb_up, size: 24.0, color: Colors.green),
-            SizedBox(width: 8.0), // Space between icon and text
-            Text(
-              'Tip',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.green.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.green),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Row containing the thumb icon and "Tip" text
+          const SizedBox(
+            height: 10,
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(Icons.thumb_up, size: 24.0, color: Colors.green),
+              SizedBox(width: 8.0), // Space between icon and text
+              Text(
+                'Tip',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 10.0), // Space between the tip and the paragraph
-        // Paragraph text
-        Text(
-          paragraphText,
-          style: GoogleFonts.roboto(fontSize: 13.0),
-        ),
-      ],
+            ],
+          ),
+          const SizedBox(height: 10.0), // Space between the tip and the paragraph
+          // Paragraph text
+          Text(
+            paragraphText,
+            style: GoogleFonts.roboto(fontSize: 13.0),
+          ),
+        ],
+      ),
     );
   }
 
@@ -186,7 +223,7 @@ class _WarningOtherOfBreakdownOrIncidentState
             color: Colors.green,
           ),
         ),
-        SizedBox(width: 8.0), // Space between bullet and text
+        const SizedBox(width: 8.0), // Space between bullet and text
         // Text next to the bullet
         Expanded(
           child: Text(
