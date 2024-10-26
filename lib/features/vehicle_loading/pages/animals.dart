@@ -1,72 +1,48 @@
 import 'package:driving_lisence/core/sharedUi.dart';
-import 'package:driving_lisence/features/vehicle_loading/pages/keep_your_stable.dart';
+import 'package:driving_lisence/features/vehicle_loading/pages/towing.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodel/controller.dart';
 
-class IntroductionVehicleLoading extends StatefulWidget {
-  const IntroductionVehicleLoading({super.key});
+class AnimalsVehicleLoading extends StatefulWidget {
+  const AnimalsVehicleLoading({super.key});
 
   @override
-  State<IntroductionVehicleLoading> createState() =>
-      _IntroductionVehicleLoadingState();
+  State<AnimalsVehicleLoading> createState() => _AnimalsVehicleLoadingState();
 }
 
-class _IntroductionVehicleLoadingState
-    extends State<IntroductionVehicleLoading> {
+class _AnimalsVehicleLoadingState extends State<AnimalsVehicleLoading> {
   VehicleLoadingProvider? _loadingProvider;
   @override
   void didChangeDependencies() {
-    _loadingProvider =
-        Provider.of<VehicleLoadingProvider>(context, listen: false);
-    _loadingProvider?.fetchIntroductionVehicleLoading();
+    _loadingProvider = Provider.of<VehicleLoadingProvider>(context,listen: false);
+    _loadingProvider?.fetchAnimal();
     super.didChangeDependencies();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Vehicle Han"),
+        title: const Text("Animals"),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
-      body: Consumer<VehicleLoadingProvider>(builder: (context, value, child) {
-        final data = value.introductionVehicleLoading;
-        if (data == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+      body: Consumer<VehicleLoadingProvider>(builder: (BuildContext context, value, Widget? child) {
+        final data = value.animal;
+        
+        if(data == null)
+          {
+            return Center(child: CircularProgressIndicator(),);
+          }
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               createHeadingText(data.title),
-              const Gap(10),
               buildImage(data.image),
-              const Gap(10),
-              createAutoSizeText(data.points[0]),
-              const Gap(10),
-              Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText(data.points[1]),
-                    buildBulletText(data.points[2]),
-                    buildBulletText(data.points[3]),
-                  ],
-                ),
-              ),
-              const Gap(10),
-              const SizedBox(
+              createAutoSizeText(data.subtitle),
+              SizedBox(
                 height: 20,
               ),
               GestureDetector(
@@ -74,7 +50,7 @@ class _IntroductionVehicleLoadingState
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const KeepYourStable()),
+                        builder: (context) => const TowingVehicle()),
                   );
                 },
                 child: Center(
@@ -90,7 +66,7 @@ class _IntroductionVehicleLoadingState
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: const Offset(0, 3),
+                          offset: Offset(0, 3),
                         ),
                       ],
                     ),
@@ -107,10 +83,12 @@ class _IntroductionVehicleLoadingState
                   ),
                 ),
               ),
+
             ],
           ),
         );
-      }),
+      },
+      ),
     );
   }
 }

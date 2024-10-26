@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'features/incident/viewmodel/controller.dart';
 import 'features/road_and_traffic_sign/viewmodel/controller.dart';
 import 'features/rule_of_road/viewmodel/controller.dart';
+import 'features/vehicle_loading/viewmodel/controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +37,8 @@ class MyApp extends StatelessWidget {
             create: (_) => EssentialDocumentsController()),
         ChangeNotifierProvider<IncidentController>(
             create: (_) => IncidentController()),
+        ChangeNotifierProvider<VehicleLoadingProvider>(
+            create: (_) => VehicleLoadingProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
