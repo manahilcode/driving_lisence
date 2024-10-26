@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AttitudeRepo
-{
-
-
-
+class AttitudeRepo {
   // Method to fetch the 'tip' field from Firestore
-  Future<Map<String,dynamic>?> fetchTip() async {
+  Future<Map<String, dynamic>?> fetchTip() async {
     final CollectionReference collectionReference =
     FirebaseFirestore.instance.collection('alert_1');
     try {
@@ -23,6 +19,6 @@ class AttitudeRepo
       return null;
     }
   }
-
-
 }
+
+

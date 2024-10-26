@@ -15,69 +15,74 @@ class _OtherDriverState extends State<OtherDriver> {
   Widget build(BuildContext context) {
     String bullet = "\u2022 ";
 
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Other Driver",
-          style: GoogleFonts.roboto(color: Colors.white),
+        title:  Text("Other Driver",style: GoogleFonts.roboto(
+          color: Colors.white
+        )
         ),
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.green,
+
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0), // Increased padding for better spacing
+        padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset("assets/L.png"),
-              const SizedBox(height: 20), // Added spacing
-              const AutoSizeText(
-                "Other drivers, especially those who are inexperienced or older, may not react as quickly as you to what’s happening on the road. Learner drivers may make mistakes, such as stalling at a junction. Be patient and be ready to slow down or stop if necessary.",
-                style: TextStyle(fontSize: 16), // Adjusted font size for readability
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 10), // Added spacing
-              Text(
-                "Tip",
-                style: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green), // Green heading
+              const AutoSizeText("Other drivers, especially those who are inexperienced or older, may not react as quickly as you to what’s happening on the road. Learner drivers may make mistakes, such as stalling at a junction. Be patient and be ready to slow down or stop if necessary."),
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 10), // Added spacing
-              const AutoSizeText(
-                "A flashing amber beacon on the top of a vehicle means it’s a slow-moving vehicle. A powered wheelchair or mobility scooter MUST have a flashing amber light when travelling on a dual carriageway with a speed limit that exceeds 50 mph.",
-                style: TextStyle(fontSize: 16),
+              AutoSizeText("Tip",style: GoogleFonts.roboto(fontSize: 20),),
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 10), // Added spacing
-              const AutoSizeText(
-                "If you find another vehicle is following you too closely in fast-moving traffic, slow down gradually to increase your distance from the vehicle in front. This gives you more room to slow down gradually or stop if necessary, and so reduces the risk of the vehicle behind crashing into you because the driver hasn’t left enough room to stop safely.",
-                style: TextStyle(fontSize: 16),
+              const AutoSizeText("A flashing amber beacon on the top of a vehicle means it’s a slow-moving vehicle. A powered wheelchair or mobility scooter MUST have a flashing amber light when travelling on a dual carriageway with a speed limit that exceeds 50 mph."),
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 20), // Added spacing
-              Text(
-                "Learner drivers and newly qualified drivers",
-                style: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green), // Green heading
+              const AutoSizeText("If you find another vehicle is following you too closely in fast-moving traffic, slow down gradually to increase your distance from the vehicle in front. This gives you more room to slow down gradually or stop if necessary, and so reduces the risk of the vehicle behind crashing into you because the driver hasn’t left enough room to stop safely."),
+              const SizedBox(
+                height: 20,
               ),
-              const SizedBox(height: 10), // Added spacing
-              Text(
-                "Anyone can teach you to drive providing they",
-                style: GoogleFonts.roboto(fontSize: 16),
+
+              AutoSizeText("Learner drivers and newly qualified drivers",style: GoogleFonts.roboto(
+                fontSize: 20,fontWeight: FontWeight.bold,
+
+              ),),
+
+
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 10), // Added spacing
-              Text("${bullet} are over 21", style: GoogleFonts.roboto(fontSize: 16)),
-              Text("${bullet} have held, and still hold, a full licence for that category of vehicle for at least 3 years", style: GoogleFonts.roboto(fontSize: 16)),
-              Text("${bullet} don’t charge – even petrol money – unless they’re an approved driving instructor (ADI).", style: GoogleFonts.roboto(fontSize: 16)),
-              const SizedBox(height: 15), // Added spacing
-              const AutoSizeText(
-                "However, you’re strongly advised to take lessons with an ADI to make sure you’re taught the correct procedures from the start.",
-                style: TextStyle(fontSize: 16),
+              AutoSizeText("Anyone can teach you to drive providing they",style: GoogleFonts.roboto(),),
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 15), // Added spacing
+              AutoSizeText("${bullet} are over 21",style: GoogleFonts.roboto(),),
+              AutoSizeText("${bullet} have held, and still hold, a full licence for that category of vehicle for at least 3 years",style: GoogleFonts.roboto(),),
+              AutoSizeText("${bullet} don’t charge – even petrol money – unless they’re an approved driving instructor (ADI).",style: GoogleFonts.roboto(),),
+
+              const SizedBox(
+                height: 15,
+              ),
+            const AutoSizeText("However, you’re strongly advised to take lessons with an ADI to make sure you’re taught the correct procedures from the start."),
+              const SizedBox(
+                height: 15,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    // Navigate to the next tip or page
+                    //   Navigate to the next tip or page
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
@@ -119,6 +124,8 @@ class _OtherDriverState extends State<OtherDriver> {
                   ),
                 ),
               ),
+
+
             ],
           ),
         ),

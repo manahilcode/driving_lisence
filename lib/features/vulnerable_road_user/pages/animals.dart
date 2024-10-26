@@ -14,55 +14,57 @@ class _AnimalsState extends State<Animals> {
   @override
   Widget build(BuildContext context) {
     String bullet = "\u2022 ";
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Animals",
-          style: GoogleFonts.roboto(color: Colors.white),
-        ),
+        title:  Text("Animals",style: GoogleFonts.roboto(
+            color: Colors.white
+        ),),
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0), // Increased padding for better spacing
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                "assets/L.png",
+              Image.asset("assets/L.png",
                 height: 200,
                 width: 200,
+
               ),
-              const SizedBox(height: 20), // Added spacing
-              const AutoSizeText(
-                "Horses and other animals can behave in unpredictable ways on the road because they get frightened by the noise and speed of vehicles. Always drive carefully if there are animals on the road.",
-                style: TextStyle(fontSize: 16), // Adjusted font size for readability
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 10), // Added spacing
-              AutoSizeText("${bullet} Stay well back.", style: TextStyle(fontSize: 16)),
-              AutoSizeText("${bullet} Don’t rev your engine or sound your horn near horses as this may startle them.", style: TextStyle(fontSize: 16)),
-              AutoSizeText("${bullet} Go very slowly and be ready to stop.", style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 20), // Added spacing
-              const AutoSizeText(
-                "When it’s safe to overtake",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.green), // Green heading
+            const AutoSizeText(" Horses and other animals can behave in unpredictable ways on the road because they get frightened by the noise and speed of vehicles. Always drive carefully if there are animals on the road."),
+              const SizedBox(
+                height: 10,
               ),
-              AutoSizeText("${bullet} drive past slowly", style: TextStyle(fontSize: 16)),
-              AutoSizeText("${bullet} leave plenty of room.", style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 20), // Added spacing
-              const AutoSizeText(
-                "Take extra care when approaching a roundabout. Horse riders, like cyclists, may keep to the left, even if they’re signalling right. Stay well back.",
-                style: TextStyle(fontSize: 16),
+              AutoSizeText("${bullet} Stay well back."),
+              AutoSizeText("${bullet} Don’t rev your engine or sound your horn near horses as this may startle them."),
+              AutoSizeText("${bullet} Go very slowly and be ready to stop."),
+          const SizedBox(
+            height: 20,
+          ),
+              const AutoSizeText("When it’s safe to overtake"),
+              AutoSizeText("${bullet} drive past slowly"),
+              AutoSizeText("${bullet} leave plenty of room."),
+
+              const SizedBox(
+                height: 20,
               ),
-              const SizedBox(height: 20), // Added spacing
+
+              const AutoSizeText("Take extra care when approaching a roundabout. Horse riders, like cyclists, may keep to the left, even if they’re signalling right. Stay well back."),
+                SizedBox(
+                  height: 10,
+                ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    // Navigate to the next tip or page
+                    //   Navigate to the next tip or page
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
@@ -104,6 +106,7 @@ class _AnimalsState extends State<Animals> {
                   ),
                 ),
               ),
+
             ],
           ),
         ),

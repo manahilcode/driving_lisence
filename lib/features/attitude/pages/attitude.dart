@@ -127,35 +127,7 @@ class _Tip_attitude_1State extends State<Tip_attitude_1> {
               const SizedBox(
                 height: 20,
               ),
-              // FutureBuilder<String?>(
-              //   future: fetchTip(),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.connectionState == ConnectionState.waiting) {
-              //       return const CircularProgressIndicator();
-              //     } else if (snapshot.hasError) {
-              //       return Text('Error: ${snapshot.error}');
-              //     } else if (!snapshot.hasData || snapshot.data == null) {
-              //       return const Text('No tip available.');
-              //     } else {
-              //       return Container(
-              //         padding: const EdgeInsets.all(16.0),
-              //         decoration: BoxDecoration(
-              //           color: Colors.green.withOpacity(0.1),
-              //           borderRadius: BorderRadius.circular(10.0),
-              //           border: Border.all(color: Colors.green),
-              //         ),
-              //         child: Text(
-              //           snapshot.data!,
-              //           style: const TextStyle(
-              //             fontSize: 18.0,
-              //             fontWeight: FontWeight.bold,
-              //             color: Colors.black,
-              //           ),
-              //         ),
-              //       );
-              //     }
-              //   },
-              // ),
+
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
