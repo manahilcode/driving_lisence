@@ -57,7 +57,7 @@ class _VunerableRoadUserTestState extends State<VunerableRoadUserTest> {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Pedestrians(),
+                      builder: (context) => const PedestriansVulnerable(),
                     ),
                         (Route<dynamic> route) => false, // Removes all previous routes
                   );

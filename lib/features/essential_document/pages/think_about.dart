@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/essential_document/pages/thing_discuss_
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class ThinkAboutEssentialDocument extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ThinkAboutEssentialDocumentState extends State<ThinkAboutEssentialDocumen
         final data = value.thinkAboutEssential;
         if(data == null)
         {
-        return Center(child: CircularProgressIndicator(),);
+          return LoadingScreen();
         }
 
         return Padding(

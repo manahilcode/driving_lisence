@@ -28,7 +28,7 @@ class _KeepYourStableState extends State<KeepYourStable> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("keep your car stable"),
+        title: const Text("keep your car stable",style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.green,
       ),
       body: Consumer<VehicleLoadingProvider>(
@@ -54,39 +54,45 @@ class _KeepYourStableState extends State<KeepYourStable> {
                   createAutoSizeText(
                       data.points[0]),
                   Gap(10),
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.green),
-                    ),
-                    child: Column(
-                      children: [
-                        buildBulletText( data.points[1]),
-                        buildBulletText( data.points[2]),
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Column(
+                        children: [
+                          buildBulletText( data.points[1]),
+                          buildBulletText( data.points[2]),
+                        ],
+                      ),
                     ),
                   ),
                   Gap(10),
                   createAutoSizeText(
                       data.points[3]),
                   Gap(10),
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.green),
-                    ),
-                    child: Column(
-                      children: [
-                        buildBulletText( data.points[4]),
-                        buildBulletText(
-                            data.points[5]),
-                        buildBulletText(
-                            data.points[6]),
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Column(
+                        children: [
+                          buildBulletText( data.points[4]),
+                          buildBulletText(
+                              data.points[5]),
+                          buildBulletText(
+                              data.points[6]),
+                        ],
+                      ),
                     ),
                   ),
                   Gap(10),
@@ -109,34 +115,37 @@ class _KeepYourStableState extends State<KeepYourStable> {
                   ),
                   createAutoSizeText(data.subtitle2),
                   Gap(10),
-                  Container(
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.green),
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: buildTipWidget(data.tip![0]),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: buildTipWidget(data.tip![1]),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: buildTipWidget(data.tip![2]),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: buildTipWidget(data.tip![2]),
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        // padding: const EdgeInsets.all(12.0),
+                        // decoration: BoxDecoration(
+                        //   color: Colors.green.withOpacity(0.1),
+                        //   borderRadius: BorderRadius.circular(10),
+                        //   border: Border.all(color: Colors.green),
+                        // ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: buildTipWidget(data.tip![0]),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: buildTipWidget(data.tip![1]),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: buildTipWidget(data.tip![2]),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: buildTipWidget(data.tip![3]),
+                            ),
 
-                        ],
-                      )),
+                          ],
+                        )),
+                  ),
                   // Container(
                   //   padding: const EdgeInsets.all(12.0),
                   //   decoration: BoxDecoration(

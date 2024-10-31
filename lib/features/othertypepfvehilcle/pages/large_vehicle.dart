@@ -1,9 +1,9 @@
-import 'package:driving_lisence/features/othertypepfvehilcle/model/intro_provider.dart';
-import 'package:driving_lisence/features/othertypepfvehilcle/model/large_vehicle_provider.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/large_vehicle2.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/motercycle.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../viewmodel/large_vehicle_provider.dart';
 
 class Othertype3 extends StatefulWidget {
   @override

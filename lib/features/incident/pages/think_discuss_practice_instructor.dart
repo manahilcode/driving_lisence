@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
+
 class ThinkDiscussPracticeInstructor extends StatefulWidget {
   const ThinkDiscussPracticeInstructor({super.key});
 
@@ -38,9 +40,7 @@ class _ThinkDiscussPracticeInstructorState
       body: Consumer<IncidentController>(builder: (context, value, child) {
         final data = value.discussWithInstructorIncident;
         if (data == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return LoadingScreen();
         }
         return SingleChildScrollView(
           child: Padding(

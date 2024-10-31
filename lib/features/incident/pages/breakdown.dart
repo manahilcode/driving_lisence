@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class Breakdowns extends StatefulWidget {
@@ -37,7 +38,7 @@ class _BreakdownsState extends State<Breakdowns> {
           final data  = value.breakdownIncident;
           if(data == null)
             {
-              return const Center(child: CircularProgressIndicator(),);
+              return LoadingScreen();
             }
           return Padding(
             padding: const EdgeInsets.all(16.0),

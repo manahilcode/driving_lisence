@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/essential_document/pages/registering_an
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class EssentialDocuments extends StatefulWidget {
@@ -33,7 +34,7 @@ class _EssentialDocumentsState extends State<EssentialDocuments> {
         final data = value.essential;
         if(data == null)
         {
-        return const Center(child: CircularProgressIndicator(),);
+          return LoadingScreen();
         }
 
         return Padding(

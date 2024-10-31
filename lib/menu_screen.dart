@@ -1,4 +1,5 @@
 import 'package:driving_lisence/Theory_test.dart';
+import 'package:driving_lisence/category.dart';
 import 'package:driving_lisence/features/pass_gaurantee/pages/pass_gaurantee1.dart';
 import 'package:flutter/material.dart';
 
@@ -24,11 +25,11 @@ class MenuScreen extends StatelessWidget {
                 ),
                 width: double.infinity, // Cover full width
                 height: 150,
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: EdgeInsets.all(15.0),
                       child: Text(
                         'Hey Jamal,',
                         style: TextStyle(
@@ -39,7 +40,7 @@ class MenuScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
+                      padding: EdgeInsets.only(left: 15.0),
                       child: Text(
                         'You are using the car driver’s question bank',
                         style: TextStyle(
@@ -59,13 +60,13 @@ class MenuScreen extends StatelessWidget {
                 children: [
                   buildMenuButton(
                     context: context,
-                    label: 'Pass Guarantee',
+                    label: 'Start Learning',
                     color: Colors.pink,
                     icon: Icons.verified_user,
                     badge: 'FREE',
-                    navigateTo:PassGuaranteeScreen(), // Define your screen here
+                    navigateTo:Category(), // Define your screen here
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   buildMenuButton(
                     context: context,
                     label: 'Theory Test',

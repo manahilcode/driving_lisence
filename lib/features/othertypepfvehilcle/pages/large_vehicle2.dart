@@ -1,10 +1,10 @@
-import 'package:driving_lisence/features/othertypepfvehilcle/model/intro_provider.dart';
-import 'package:driving_lisence/features/othertypepfvehilcle/model/large_vehicle_provider2.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/Trams.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/buses.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/motercycle.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../viewmodel/large_vehicle_provider2.dart';
 
 class Othertype4 extends StatefulWidget {
   @override

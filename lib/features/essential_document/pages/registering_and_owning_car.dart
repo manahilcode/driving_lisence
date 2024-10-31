@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/essential_document/pages/your_driver_li
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class RegisteringOwningCar extends StatefulWidget {
@@ -39,9 +40,7 @@ class _RegisteringOwningCarState extends State<RegisteringOwningCar> {
         builder: (BuildContext context, value, Widget? child) {
           final data = value.registeringAndOwningCar;
           if (data == null) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return LoadingScreen();
           }
 
           return Padding(

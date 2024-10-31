@@ -1,4 +1,5 @@
 import 'package:driving_lisence/Theory_test.dart';
+import 'package:driving_lisence/category.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -41,11 +42,11 @@ class TheoryTest extends StatelessWidget {
                 children: [
                   buildMenuButton(
                     context: context,
-                    label: 'Pass Guarantee',
+                    label: 'Start Learning',
                     color: Colors.orange,
                     icon: Icons.verified_user,
                     badge: 'FREE',
-                    navigateTo: TheoryTest(), // Define your screen here
+                    navigateTo: Category(), // Define your screen here
                   ),
                   SizedBox(height: 10),
                   buildMenuButton(
@@ -112,7 +113,7 @@ class TheoryTest extends StatelessWidget {
       ),
       // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',

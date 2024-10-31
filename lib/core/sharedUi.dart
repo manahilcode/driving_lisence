@@ -94,17 +94,19 @@ Widget buildBulletText(String text) {
         child: const Icon(
           Icons.fiber_manual_record, // Use a dot icon for the bullet
           size: 10.0,
-          color: Colors.black87,
+          color: Colors.green,
         ),
       ),
       SizedBox(width: 8.0), // Space between bullet and text
       // Text next to the bullet
       Expanded(
         child: Container(
+          padding: EdgeInsets.all(3),
           child: Text(
             text,
-            style: GoogleFonts.roboto(fontSize: 13.0),
+            style: GoogleFonts.roboto(fontSize: 15.0,fontWeight: FontWeight.bold),
             textAlign: TextAlign.start,
+
           ),
         ),
       ),

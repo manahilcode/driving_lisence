@@ -259,7 +259,7 @@ class DiscussWithInstructorVehicleLoading {
   }
 }
 class TowingVehicleLoading {
-  final Map<String, String> answers;
+  final Map<String, String>? answers;
   final String question;
   final String correct;
   final String image;
@@ -270,7 +270,7 @@ class TowingVehicleLoading {
   final String subtitle1;
   final String subtitle2;
   final String subtitle3;
-  final List<String> tips;
+  final List tips;
   final String title;
 
   TowingVehicleLoading({
@@ -291,7 +291,9 @@ class TowingVehicleLoading {
 
   factory TowingVehicleLoading.fromJson(Map<String, dynamic> json) {
     return TowingVehicleLoading(
-      answers: Map<String, String>.from(json['Answers']),
+      answers: (json['Answers'] as Map<String, dynamic>?)?.map(
+            (key, value) => MapEntry(key, value as String),
+      ),
       question: json['Question'] as String,
       correct: json['correct'] as String,
       image: json['image'] as String,
@@ -302,7 +304,7 @@ class TowingVehicleLoading {
       subtitle1: json['subtitle1'] as String,
       subtitle2: json['subtitle2'] as String,
       subtitle3: json['subtitle3'] as String,
-      tips: List<String>.from(json['tip']),
+      tips: (json['tip '] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
       title: json['title'] as String,
     );
   }

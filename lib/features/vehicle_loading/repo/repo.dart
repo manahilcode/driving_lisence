@@ -90,8 +90,11 @@ class VehicleLoadingRepository {
 
   Future<TowingVehicleLoading> getTowingVehicleLoading() async {
     DocumentSnapshot snapshot = await _firestore.collection('vehicle_loading').doc('towing').get();
+
     if (snapshot.exists) {
-      return TowingVehicleLoading.fromJson(snapshot.data() as Map<String, dynamic>);
+        final data = TowingVehicleLoading.fromJson(snapshot.data() as Map<String, dynamic>);
+        print("check : ${data.tips}");
+      return data;
     } else {
       throw Exception("Towing Vehicle Loading document does not exist");
     }

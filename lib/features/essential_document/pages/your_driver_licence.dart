@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/essential_document/pages/insurence.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class YourDrivingLicence extends StatefulWidget {
@@ -33,7 +34,7 @@ class _YourDrivingLicenceState extends State<YourDrivingLicence> {
         final data = value.drivingLicence;
         if(data == null)
         {
-        return Center(child: CircularProgressIndicator(),);
+          return LoadingScreen();
         }
 
         return SingleChildScrollView(

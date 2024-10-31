@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class ThinkAbout extends StatefulWidget {
@@ -39,9 +40,7 @@ class _ThinkAboutState extends State<ThinkAbout> {
       body: Consumer<IncidentController>(builder: (context, value, child) {
         final data = value.thinkAboutIncident;
         if (data == null) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return LoadingScreen();
         }
         return SingleChildScrollView(
           child: Padding(

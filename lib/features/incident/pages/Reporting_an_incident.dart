@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class ReportingAnIncident extends StatefulWidget {
@@ -35,9 +36,7 @@ class _ReportingAnIncidentState extends State<ReportingAnIncident> {
             final data = value.reportingIncident;
             if(data == null)
               {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return LoadingScreen();
               }
             return SingleChildScrollView(
               child: Padding(

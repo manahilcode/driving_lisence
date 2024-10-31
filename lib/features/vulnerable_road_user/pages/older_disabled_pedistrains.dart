@@ -1,7 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../viewmodel/controller.dart';
 import 'Cyclists.dart';
 
 class OlderDisabledPedistrains extends StatefulWidget {
@@ -13,6 +16,14 @@ class OlderDisabledPedistrains extends StatefulWidget {
 }
 
 class _OlderDisabledPedistrainsState extends State<OlderDisabledPedistrains> {
+  VulnerableController? _vulnerableController;
+
+  @override
+  void didChangeDependencies() {
+    _vulnerableController = Provider.of<VulnerableController>(context,listen: false);
+    _vulnerableController?.fetchOlderDisabledPedestrians();
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,85 +35,94 @@ class _OlderDisabledPedistrainsState extends State<OlderDisabledPedistrains> {
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Image.asset(
-              "assets/L.png",
-              height: 100,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const AutoSizeText(
-                "If you see older people about to cross the road ahead, be careful as they may have misjudged your speed."),
-            const AutoSizeText(
-                "If they’re crossing, be patient and allow them to cross in their own time: they may need extra time to cross the road."),
-            const SizedBox(
-              height: 20,
-            ),
-            Image.asset(
-              "assets/L.png",
-              height: 100,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const AutoSizeText(
-                "A pedestrian with hearing difficulties may have a dog with a distinctive yellow or burgundy coloured coat."),
-            const AutoSizeText(
-                "A person carrying a white stick with a red band is both deaf and blind. They may also have a guide dog with a red and white checked harness."),
-            const SizedBox(
-              height: 20,
-            ),
-            const Spacer(),
-            Padding(
+      body: Consumer<VulnerableController>(
+        builder: (context,value,child) {
+          final data = value.olderDisabledPedestrians;
+          if(data == null)
+            {
+              return Center(child: CircularProgressIndicator(),);
+            }
+          return SingleChildScrollView(
+            child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  // Navigate to the next tip or page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Cyclists()), // Change this
-                  );
-                },
-                child: Center(
-                  child: Container(
-                    width: 300,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 15.0,
-                      horizontal: 30.0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Next",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+              child: Column(
+                children: [
+                  createHeadingText(data.title),
+                  buildImage(data.image1),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: AutoSizeText(
+                      data.subtitle1
+                                       ),
+                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                 buildImage(data.image2),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: AutoSizeText(
+                        data.subtitle2),
+                   ),
+
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        // Navigate to the next tip or page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Cyclists()), // Change this
+                        );
+                      },
+                      child: Center(
+                        child: Container(
+                          width: 300,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 15.0,
+                            horizontal: 30.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Next",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
-          ],
-        ),
+          );
+        }
       ),
     );
   }

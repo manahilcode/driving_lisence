@@ -23,12 +23,12 @@ class _SavingFuelVehicleLoadingState extends State<SavingFuelVehicleLoading> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Save Fuel"),
+        title: const Text("Save Fuel",style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: Consumer<VehicleLoadingProvider>(builder: (BuildContext context, value, Widget? child) {
-        final data = value.animal;
+        final data = value.savingFuelVehicleLoading;
         if(data == null)
         {
           return Center(child: CircularProgressIndicator(),);

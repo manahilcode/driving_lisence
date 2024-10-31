@@ -1,8 +1,9 @@
 
-import 'package:driving_lisence/features/othertypepfvehilcle/model/thinkaboutprovider.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/instructor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../viewmodel/thinkaboutprovider.dart';
 
 class Othertype9 extends StatefulWidget {
   @override

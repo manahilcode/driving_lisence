@@ -24,7 +24,7 @@ class _AnimalsVehicleLoadingState extends State<AnimalsVehicleLoading> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Animals"),
+        title: const Text("Animals",style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),

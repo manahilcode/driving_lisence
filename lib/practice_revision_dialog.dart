@@ -91,7 +91,8 @@ class PracticeRevisionDialog extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Category()),
+                  MaterialPageRoute(builder: (context) => Category(label: "PracticeQuiz",)),
+
                 );
               },
               child: const Text('Continue', style: TextStyle(fontSize: 18)),

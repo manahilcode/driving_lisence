@@ -4,6 +4,12 @@ import 'package:driving_lisence/features/vulnerable_road_user/pages/introduction
 import 'package:flutter/material.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
 
+import 'features/Quiz/alertness_quiz/pages/alertnessquiz.dart';
+import 'features/Quiz/attitude_quiz/pages/attitude_quiz.dart';
+import 'features/Quiz/safety_margin_quiz/pages/safety_margin_quiz.dart';
+import 'features/Quiz/safety_vehicle_quiz/pages/safetyVehicle.dart';
+import 'features/allertness/model/model.dart';
+import 'features/allertness/pages/introduction.dart';
 import 'features/attitude/pages/attitude.dart';
 import 'features/essential_document/pages/introduction.dart';
 import 'features/incident/pages/incident_accident_and_emergency.dart';
@@ -15,18 +21,23 @@ import 'features/vehicle_loading/pages/introduction.dart';
 import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
 
 class Category extends StatefulWidget {
+  String? label;
+  Category({super.key, this.label});
   @override
   _CategoryState createState() => _CategoryState();
 }
 
-class _CategoryState extends State<Category> with SingleTickerProviderStateMixin {
+class _CategoryState extends State<Category>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List<bool> _selectedCategories = List.generate(15, (_) => false); // 15 categories
+  final List<bool> _selectedCategories =
+      List.generate(15, (_) => false); // 15 categories
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    print(widget.label ?? "");
   }
 
   @override
@@ -40,9 +51,9 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text('Practise Revision Questions'),
+        title: const Text('Practise Revision Questions'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
         bottom: TabBar(
@@ -75,16 +86,17 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   categoryScreen: PracticeRevisionDialog(),
                 ),
                 CategoryItem(
-                  icon: Icons.notifications_none,
-                  title: 'Alertness',
-                  progress: 0,
-                  answered: 1,
-                  correct: 0,
-                  total: 26,
-                  isSelected: _selectedCategories[1],
-                  onTap: () => _toggleSelection(1),
-                  categoryScreen:PracticeRevisionDialog()
-                ),
+                    icon: Icons.notifications_none,
+                    title: 'Alertness',
+                    progress: 0,
+                    answered: 1,
+                    correct: 0,
+                    total: 26,
+                    isSelected: _selectedCategories[1],
+                    onTap: () => _toggleSelection(1),
+                    categoryScreen: widget.label == "PracticeQuiz"
+                        ? const QuizScreen()
+                        : const IntroductionAlertness()),
                 CategoryItem(
                   icon: Icons.drive_eta,
                   title: 'Attitude',
@@ -94,8 +106,11 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   total: 27,
                   isSelected: _selectedCategories[2],
                   onTap: () => _toggleSelection(2),
-                  categoryScreen: Tip_attitude_1(),
+                  categoryScreen:widget.label == "PracticeQuiz"
+                      ?  const AttitudeQuizScreens()
+                      : const Tip_attitude_1(),
                 ),
+                //
                 CategoryItem(
                   icon: Icons.speed,
                   title: 'Safety and your vehicle',
@@ -105,8 +120,11 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   total: 54,
                   isSelected: _selectedCategories[3],
                   onTap: () => _toggleSelection(3),
-                  categoryScreen: Safety_1(),
+                  categoryScreen: widget.label == "PracticeQuiz"
+                      ?  const SafetyVehicleQuizScreens()
+                      : Safety_1(),
                 ),
+                //SafetyMarginQuizScreens
                 CategoryItem(
                   icon: Icons.traffic,
                   title: 'Safety margins',
@@ -116,7 +134,9 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   total: 27,
                   isSelected: _selectedCategories[4],
                   onTap: () => _toggleSelection(4),
-                  categoryScreen: safety_margin1(),
+                  categoryScreen:widget.label == "PracticeQuiz"
+                      ?  const SafetyMarginQuizScreens()
+                      : safety_margin1(),
                 ),
                 CategoryItem(
                   icon: Icons.visibility,
@@ -160,7 +180,7 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   total: 27,
                   isSelected: _selectedCategories[8],
                   onTap: () => _toggleSelection(8),
-                  categoryScreen:const IntroductionHighWay(),
+                  categoryScreen: const IntroductionHighWay(),
                 ),
                 CategoryItem(
                   icon: Icons.car_crash_outlined,
@@ -227,6 +247,17 @@ class _CategoryState extends State<Category> with SingleTickerProviderStateMixin
                   isSelected: _selectedCategories[14],
                   onTap: () => _toggleSelection(14),
                   categoryScreen: IncidentAccidentAndEmergency(),
+                ),
+                CategoryItem(
+                  icon: Icons.warning_amber_rounded,
+                  title: 'Vehicle Loading',
+                  progress: 0,
+                  answered: 0,
+                  correct: 0,
+                  total: 31,
+                  isSelected: _selectedCategories[14],
+                  onTap: () => _toggleSelection(14),
+                  categoryScreen: const IntroductionVehicleLoading(),
                 ),
               ],
             ),
@@ -309,7 +340,8 @@ class CategoryItem extends StatelessWidget {
           SizedBox(height: 4),
           Row(
             children: [
-              Text('Answered: $answered', style: TextStyle(color: Colors.orange)),
+              Text('Answered: $answered',
+                  style: TextStyle(color: Colors.orange)),
               SizedBox(width: 8),
               Text('Correct: $correct', style: TextStyle(color: Colors.green)),
               SizedBox(width: 8),
@@ -318,8 +350,7 @@ class CategoryItem extends StatelessWidget {
           ),
         ],
       ),
-      trailing:
-      GestureDetector(
+      trailing: GestureDetector(
         onTap: () {
           onTap(); // Toggle category selection
           Navigator.pushAndRemoveUntil(
@@ -327,7 +358,7 @@ class CategoryItem extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => categoryScreen,
             ),
-                (Route<dynamic> route) => false, // Removes all previous routes
+            (Route<dynamic> route) => false, // Removes all previous routes
           );
         },
         child: Icon(

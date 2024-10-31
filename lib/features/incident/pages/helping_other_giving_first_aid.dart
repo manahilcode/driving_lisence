@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class HelpingOtherGivingFirstAid extends StatefulWidget {
@@ -36,7 +37,7 @@ class _HelpingOtherGivingFirstAidState extends State<HelpingOtherGivingFirstAid>
           final data = value.helpOtherGivingAid;
           if(data == null)
             {
-              return Center(child: CircularProgressIndicator(),);
+              return LoadingScreen();
             }
           return Padding(
             padding: const EdgeInsets.all(8.0),

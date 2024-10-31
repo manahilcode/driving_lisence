@@ -1,7 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/vulnerable_road_user/pages/Meeting_the_standard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../viewmodel/controller.dart';
 
 class OtherDriver extends StatefulWidget {
   const OtherDriver({super.key});
@@ -11,125 +15,152 @@ class OtherDriver extends StatefulWidget {
 }
 
 class _OtherDriverState extends State<OtherDriver> {
+  VulnerableController? _vulnerableController;
+
+  @override
+  void didChangeDependencies() {
+    _vulnerableController =
+        Provider.of<VulnerableController>(context, listen: false);
+    _vulnerableController?.fetchOtherDriverVulnerable();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     String bullet = "\u2022 ";
 
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title:  Text("Other Driver",style: GoogleFonts.roboto(
-          color: Colors.white
-        )
-        ),
+        title: Text("Other Driver",
+            style: GoogleFonts.roboto(color: Colors.white)),
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.green,
-
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset("assets/L.png"),
-              const SizedBox(
-                height: 10,
-              ),
-              const AutoSizeText("Other drivers, especially those who are inexperienced or older, may not react as quickly as you to what’s happening on the road. Learner drivers may make mistakes, such as stalling at a junction. Be patient and be ready to slow down or stop if necessary."),
-              const SizedBox(
-                height: 10,
-              ),
-              AutoSizeText("Tip",style: GoogleFonts.roboto(fontSize: 20),),
-              const SizedBox(
-                height: 10,
-              ),
-              const AutoSizeText("A flashing amber beacon on the top of a vehicle means it’s a slow-moving vehicle. A powered wheelchair or mobility scooter MUST have a flashing amber light when travelling on a dual carriageway with a speed limit that exceeds 50 mph."),
-              const SizedBox(
-                height: 10,
-              ),
-              const AutoSizeText("If you find another vehicle is following you too closely in fast-moving traffic, slow down gradually to increase your distance from the vehicle in front. This gives you more room to slow down gradually or stop if necessary, and so reduces the risk of the vehicle behind crashing into you because the driver hasn’t left enough room to stop safely."),
-              const SizedBox(
-                height: 20,
-              ),
-
-              AutoSizeText("Learner drivers and newly qualified drivers",style: GoogleFonts.roboto(
-                fontSize: 20,fontWeight: FontWeight.bold,
-
-              ),),
-
-
-              const SizedBox(
-                height: 10,
-              ),
-              AutoSizeText("Anyone can teach you to drive providing they",style: GoogleFonts.roboto(),),
-              const SizedBox(
-                height: 10,
-              ),
-              AutoSizeText("${bullet} are over 21",style: GoogleFonts.roboto(),),
-              AutoSizeText("${bullet} have held, and still hold, a full licence for that category of vehicle for at least 3 years",style: GoogleFonts.roboto(),),
-              AutoSizeText("${bullet} don’t charge – even petrol money – unless they’re an approved driving instructor (ADI).",style: GoogleFonts.roboto(),),
-
-              const SizedBox(
-                height: 15,
-              ),
-            const AutoSizeText("However, you’re strongly advised to take lessons with an ADI to make sure you’re taught the correct procedures from the start."),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    //   Navigate to the next tip or page
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MeetingTheStandard(),
-                      ),
-                          (Route<dynamic> route) => false, // Removes all previous routes
-                    );
-                  },
-                  child: Center(
-                    child: Container(
-                      width: 300,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15.0,
-                        horizontal: 30.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+      body: Consumer<VulnerableController>(builder: (context, value, child) {
+        final data = value.otherDriverVulnerable;
+        if (data == null) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                createHeadingText(data.title),
+                buildImage(data.image),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AutoSizeText(data.subtitle),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: buildTipWidget(data.tip),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AutoSizeText(data.subtitle1),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                createHeadingText(
+                  data.title1,
+                ),
+                createAutoSizeText(data.subtitle2),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.green),
+                    ),
+                    child: Column(
+                      children: [
+                        buildBulletText(data.points[0]),
+                        buildBulletText(data.points[1]),
+                        buildBulletText(data.points[2]),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AutoSizeText(data.subtitle3),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      //   Navigate to the next tip or page
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MeetingTheStandard(),
+                        ),
+                        (Route<dynamic> route) =>
+                            false, // Removes all previous routes
+                      );
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 300,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15.0,
+                          horizontal: 30.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Next",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-
-
-            ],
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

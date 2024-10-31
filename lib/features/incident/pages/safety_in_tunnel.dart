@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class SafetyInTunnel extends StatefulWidget {
@@ -37,9 +38,7 @@ class _SafetyInTunnelState extends State<SafetyInTunnel> {
           final data = value.safetyInTunnel;
           if(data == null)
             {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return LoadingScreen();
             }
           return Padding(
             padding: const EdgeInsets.all(8.0),

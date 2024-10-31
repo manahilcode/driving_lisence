@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/essential_document/pages/mot_test.dart'
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class Insurance extends StatefulWidget {
@@ -33,7 +34,7 @@ class _InsuranceState extends State<Insurance> {
         final data = value.insuranceEssential;
         if(data == null)
         {
-        return const Center(child: CircularProgressIndicator(),);
+          return LoadingScreen();
         }
 
         return SingleChildScrollView(

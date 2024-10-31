@@ -1,11 +1,10 @@
-import 'package:driving_lisence/features/othertypepfvehilcle/model/bus_provider.dart';
-import 'package:driving_lisence/features/othertypepfvehilcle/model/disabled_people_provider.dart';
-import 'package:driving_lisence/features/othertypepfvehilcle/model/intro_provider.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/Trams.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/meeting_the_standard.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/motercycle.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../viewmodel/disabled_people_provider.dart';
 
 class Othertype7 extends StatefulWidget {
   @override

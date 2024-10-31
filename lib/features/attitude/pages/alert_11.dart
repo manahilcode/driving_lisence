@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:driving_lisence/category.dart';
 import 'package:flutter/material.dart';
 
 import 'alert_10.dart';
@@ -156,12 +157,12 @@ class _TipAttitude11State extends State<TipAttitude11> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TipAttitude10()), // Change this
+                              builder: (context) => Category()), // Change this
                         );
                       },
                       child: Container(
                         width: 300,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 15.0,
                           horizontal: 30.0,
                         ),

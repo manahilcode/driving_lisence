@@ -4,6 +4,8 @@ import 'package:driving_lisence/features/motor_way_Driving/viewmodel/controller.
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
+
 class DrivingOnMotorWay extends StatefulWidget {
   const DrivingOnMotorWay({super.key});
 
@@ -31,6 +33,10 @@ class _DrivingOnMotorWayState extends State<DrivingOnMotorWay> {
       ),
       body: Consumer<Controller>(builder: (BuildContext context, value, Widget? child) {
         final data = value.drivingOnMotorway;
+        if(data == null)
+          {
+            return LoadingScreen();
+          }
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(

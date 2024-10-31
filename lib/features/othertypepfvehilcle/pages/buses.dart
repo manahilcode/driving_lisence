@@ -1,9 +1,9 @@
-import 'package:driving_lisence/features/othertypepfvehilcle/model/bus_provider.dart';
-import 'package:driving_lisence/features/othertypepfvehilcle/model/intro_provider.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/Trams.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/motercycle.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../viewmodel/bus_provider.dart';
 
 class Othertype5 extends StatefulWidget {
   @override
@@ -43,7 +43,7 @@ class _Othertype5State extends State<Othertype5> {
       builder: (context, provider, child) {
         // Show loading indicator while initial data is being fetched
         if (isLoading) {
-          return Scaffold(
+          return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }

@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/essential_document/pages/think_about.da
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class MeetingStandardEssentailDocumnet extends StatefulWidget {
@@ -33,7 +34,7 @@ class _MeetingStandardEssentailDocumnetState extends State<MeetingStandardEssent
         final data = value.meetingStandardEssential;
         if(data == null)
         {
-        return Center(child: CircularProgressIndicator(),);
+          return LoadingScreen();
         }
 
         return SingleChildScrollView(

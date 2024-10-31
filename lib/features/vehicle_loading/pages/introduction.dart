@@ -29,7 +29,7 @@ class _IntroductionVehicleLoadingState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Vehicle Han"),
+        title: const Text("Introduction",style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
@@ -48,21 +48,25 @@ class _IntroductionVehicleLoadingState
               const Gap(10),
               buildImage(data.image),
               const Gap(10),
-              createAutoSizeText(data.points[0]),
+
               const Gap(10),
-              Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                ),
-                child: Column(
-                  children: [
-                    buildBulletText(data.points[1]),
-                    buildBulletText(data.points[2]),
-                    buildBulletText(data.points[3]),
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.green),
+                  ),
+                  child: Column(
+                    children: [
+                      buildBulletText(data.points[0]),
+                      buildBulletText(data.points[1]),
+                      buildBulletText(data.points[2]),
+                      buildBulletText(data.points[3]),
+                    ],
+                  ),
                 ),
               ),
               const Gap(10),

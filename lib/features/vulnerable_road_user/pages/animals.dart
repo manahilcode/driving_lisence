@@ -1,7 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/vulnerable_road_user/pages/other_driver.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../viewmodel/controller.dart';
 
 class Animals extends StatefulWidget {
   const Animals({super.key});
@@ -11,6 +15,14 @@ class Animals extends StatefulWidget {
 }
 
 class _AnimalsState extends State<Animals> {
+  VulnerableController? _vulnerableController;
+
+  @override
+  void didChangeDependencies() {
+    _vulnerableController = Provider.of<VulnerableController>(context,listen: false);
+    _vulnerableController?.fetchAnimalsVulnerable();
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     String bullet = "\u2022 ";
@@ -23,93 +35,127 @@ class _AnimalsState extends State<Animals> {
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset("assets/L.png",
-                height: 200,
-                width: 200,
+      body: Consumer<VulnerableController>(
+        builder: (context,value,child) {
+          final data = value.animalsVulnerable;
+          if(data == null)
+            {
+              return Center(child: CircularProgressIndicator(),);
+            }
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
 
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-            const AutoSizeText(" Horses and other animals can behave in unpredictable ways on the road because they get frightened by the noise and speed of vehicles. Always drive carefully if there are animals on the road."),
-              const SizedBox(
-                height: 10,
-              ),
-              AutoSizeText("${bullet} Stay well back."),
-              AutoSizeText("${bullet} Don’t rev your engine or sound your horn near horses as this may startle them."),
-              AutoSizeText("${bullet} Go very slowly and be ready to stop."),
-          const SizedBox(
-            height: 20,
-          ),
-              const AutoSizeText("When it’s safe to overtake"),
-              AutoSizeText("${bullet} drive past slowly"),
-              AutoSizeText("${bullet} leave plenty of room."),
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
 
-              const SizedBox(
-                height: 20,
-              ),
-
-              const AutoSizeText("Take extra care when approaching a roundabout. Horse riders, like cyclists, may keep to the left, even if they’re signalling right. Stay well back."),
-                SizedBox(
-                  height: 10,
-                ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    //   Navigate to the next tip or page
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const OtherDriver(),
-                      ),
-                          (Route<dynamic> route) => false, // Removes all previous routes
-                    );
-                  },
-                  child: Center(
+                  createHeadingText(data.title),
+                 buildImage(data.image),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: AutoSizeText(data.subtitle1),
+                 ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      width: 300,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15.0,
-                        horizontal: 30.0,
-                      ),
+                      padding: const EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: const Offset(0, 3),
-                          ),
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Column(
+                        children: [
+                          buildBulletText(data.points[0]),
+                          buildBulletText(data.points[1]),
+                          buildBulletText(data.points[2]),
+                          buildBulletText(data.points[3]),
+                          buildBulletText(data.points[4]),
                         ],
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  // AutoSizeText("${bullet} Stay well back."),
+                  // AutoSizeText("${bullet} Don’t rev your engine or sound your horn near horses as this may startle them."),
+                  // AutoSizeText("${bullet} Go very slowly and be ready to stop."),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              //     const AutoSizeText("When it’s safe to overtake"),
+              //     AutoSizeText("${bullet} drive past slowly"),
+              //     AutoSizeText("${bullet} leave plenty of room."),
+
+                  const SizedBox(
+                    height: 20,
+                  ),
+
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: AutoSizeText(data.subtitle),
+                   ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        //   Navigate to the next tip or page
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const OtherDriver(),
+                          ),
+                              (Route<dynamic> route) => false, // Removes all previous routes
+                        );
+                      },
+                      child: Center(
+                        child: Container(
+                          width: 300,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 15.0,
+                            horizontal: 30.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Next",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
 
-            ],
-          ),
-        ),
+                ],
+              ),
+            ),
+          );
+        }
       ),
     );
   }

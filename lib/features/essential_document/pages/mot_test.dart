@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/essential_document/pages/meeting_standa
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class MotTest extends StatefulWidget {
@@ -34,7 +35,7 @@ class _MotTestState extends State<MotTest> {
         final data = value.motTest;
         if(data == null)
         {
-        return Center(child: CircularProgressIndicator(),);
+          return LoadingScreen();
         }
 
         return SingleChildScrollView(

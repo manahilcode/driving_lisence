@@ -2,6 +2,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'essenial_documents.dart';
 
@@ -38,9 +39,7 @@ class _IntroductionEDocumenttState extends State<IntroductionEDocumentt> {
         builder: (BuildContext context, value, Widget? child) {
           final data = value.introductionEssential;
           if (data == null) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return LoadingScreen();
           }
 
           return Padding(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'breakdown.dart';
 
@@ -40,7 +41,7 @@ class _IncidentAccidentAndEmergencyState
           final data  = value.introductionIncident;
           if(data ==null)
             {
-              return Center(child: CircularProgressIndicator(),);
+              return LoadingScreen();
             }
           return SingleChildScrollView(
             child: Padding(

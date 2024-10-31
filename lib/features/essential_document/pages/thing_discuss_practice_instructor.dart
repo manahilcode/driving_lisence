@@ -3,6 +3,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class ThingDiscussPracticeEssentialDocument extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ThingDiscussPracticeEssentialDocumentState extends State<ThingDiscussPrac
         final data = value.discussInstructor;
         if(data == null)
         {
-        return const Center(child: CircularProgressIndicator(),);
+          return LoadingScreen();
         }
 
         return SingleChildScrollView(

@@ -1,10 +1,9 @@
-import 'package:driving_lisence/features/othertypepfvehilcle/model/Trams_provider.dart';
-import 'package:driving_lisence/features/othertypepfvehilcle/model/bus_provider.dart';
-import 'package:driving_lisence/features/othertypepfvehilcle/model/intro_provider.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/disabled_people.dart';
 import 'package:driving_lisence/features/othertypepfvehilcle/pages/motercycle.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../viewmodel/Trams_provider.dart';
 
 class Othertype6 extends StatefulWidget {
   @override
@@ -101,7 +100,6 @@ class _Othertype6State extends State<Othertype6> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 SizedBox(height: 20),
                 Text(
                   provider.alertData!['title'] ?? '',
@@ -123,24 +121,26 @@ class _Othertype6State extends State<Othertype6> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: (provider.alertData!['points'] as List<dynamic>)
                           .map((point) => Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Text(
-                          point,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ))
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  point,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ))
                           .toList(),
                     ),
                   ),
                 SizedBox(height: 10),
-                Text("In these cities there may be extra white light signals at some traffic lights, which are for tram drivers.",
-                style: TextStyle(
-                  fontSize: 20,
-                ),),
+                Text(
+                  "In these cities there may be extra white light signals at some traffic lights, which are for tram drivers.",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
                 if (provider.imageUrl != null)
                   Image.network(
                     provider.imageUrl!,
@@ -151,7 +151,7 @@ class _Othertype6State extends State<Othertype6> {
                         child: CircularProgressIndicator(
                           value: loadingProgress.expectedTotalBytes != null
                               ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
+                                  loadingProgress.expectedTotalBytes!
                               : null,
                         ),
                       );
@@ -165,8 +165,6 @@ class _Othertype6State extends State<Othertype6> {
                       );
                     },
                   ),
-
-
                 SizedBox(height: 30),
                 Center(
                   child: GestureDetector(
