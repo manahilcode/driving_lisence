@@ -5,14 +5,14 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget createAutoSizeText(String text,
-    {double fontSize = 14, Color color = Colors.black87}) {
+    {double fontSize = 16, Color color = Colors.black87}) {
   return Container(
     padding: const EdgeInsets.all(12.0),
     decoration: BoxDecoration(
-      // color: Colors.green.withOpacity(0.1),
-      // borderRadius: BorderRadius.circular(10),
-      //  border: Border.all(color: Colors.green),
-    ),
+        // color: Colors.green.withOpacity(0.1),
+        // borderRadius: BorderRadius.circular(10),
+        //  border: Border.all(color: Colors.green),
+        ),
     child: AutoSizeText(
       text,
       style: GoogleFonts.roboto(
@@ -71,8 +71,7 @@ Widget buildTipWidget(String paragraphText) {
             ),
           ],
         ),
-        const SizedBox(
-            height: 10.0), // Space between the tip and the paragraph
+        const SizedBox(height: 10.0), // Space between the tip and the paragraph
         // Paragraph text
         Text(
           paragraphText,
@@ -104,9 +103,9 @@ Widget buildBulletText(String text) {
           padding: EdgeInsets.all(3),
           child: Text(
             text,
-            style: GoogleFonts.roboto(fontSize: 15.0,fontWeight: FontWeight.bold),
+            style:
+                GoogleFonts.roboto(fontSize: 15.0, fontWeight: FontWeight.bold),
             textAlign: TextAlign.start,
-
           ),
         ),
       ),
@@ -115,8 +114,7 @@ Widget buildBulletText(String text) {
   );
 }
 
-Widget buildImage(String imagePath,
-    {double width = 100, double height = 100}) {
+Widget buildImage(String imagePath, {double width = 100, double height = 100}) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Image.network(
@@ -124,7 +122,8 @@ Widget buildImage(String imagePath,
       height: 200,
       width: double.infinity,
       fit: BoxFit.cover, // Adjust how the image fits in the box
-      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) {
           return child;
         } else {
@@ -133,7 +132,8 @@ Widget buildImage(String imagePath,
             height: height,
             color: Colors.grey.shade200, // Placeholder background color
             child: const Center(
-              child: CircularProgressIndicator(), // Loading indicator while fetching the image
+              child:
+                  CircularProgressIndicator(), // Loading indicator while fetching the image
             ),
           );
         }
@@ -145,8 +145,12 @@ Widget buildImage(String imagePath,
           height: height,
           color: Colors.grey, // Placeholder color in case of an error
           child: const Center(
-              child: Text('Image not found',
-                  style: TextStyle(color: Colors.white))),
+            child: Text(
+              'Image not found',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         );
       },
     ),

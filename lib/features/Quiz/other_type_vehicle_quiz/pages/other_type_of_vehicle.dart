@@ -1,29 +1,29 @@
-import 'package:driving_lisence/category.dart';
 import 'package:driving_lisence/core/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../category.dart';
 import '../model/model.dart';
 import '../viewmodel/controller.dart';
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+class OtherTypeVehicleQuizScreen extends StatefulWidget {
+  const OtherTypeVehicleQuizScreen({super.key});
 
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  _OtherTypeVehicleQuizScreenState createState() => _OtherTypeVehicleQuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
-  late QuizProvider quizProvider;
+class _OtherTypeVehicleQuizScreenState extends State<OtherTypeVehicleQuizScreen> {
+  late OtherTypeVehicleProvider quizProvider;
   late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider = Provider.of<QuizProvider>(context, listen: false);
+      quizProvider = Provider.of<OtherTypeVehicleProvider>(context, listen: false);
       quizProvider.fetchQuizzes();
     });
     _pageController = PageController();
@@ -40,14 +40,14 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Alertness Quiz',
+          'Other type of Vehicle Quiz',
           style: GoogleFonts.lato(
               color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
-      body: Consumer<QuizProvider>(
+      body: Consumer<OtherTypeVehicleProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
             return const Center(child: LoadingScreen());
@@ -66,7 +66,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 quiz: quiz,
                 totalQuestions: provider.quizzes.length,
                 pageController: _pageController,
-                index: index,
+                index:index,
               );
             },
           );
@@ -82,12 +82,7 @@ class QuizItem extends StatefulWidget {
   final PageController pageController;
   final int index;
 
-  const QuizItem(
-      {super.key,
-      required this.quiz,
-      required this.totalQuestions,
-      required this.pageController,
-      required this.index});
+  const QuizItem({super.key, required this.quiz, required this.totalQuestions, required this.pageController,required this.index});
 
   @override
   _QuizItemState createState() => _QuizItemState();
@@ -203,26 +198,24 @@ class _QuizItemState extends State<QuizItem> {
               ElevatedButton(
                 onPressed: selectedAnswer != null
                     ? () {
-                        // Navigate to the next question
-                        if (widget.pageController.page!.toInt() <
-                            widget.totalQuestions - 1) {
-                          widget.pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
-                        } else {
-                          Route newRoute =
-                          MaterialPageRoute(builder: (context) => Category());
+                  // Navigate to the next question
+                  if (widget.pageController.page!.toInt() < widget.totalQuestions - 1) {
+                    widget.pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                    );
+                  } else {
+                    Route newRoute =
+                    MaterialPageRoute(builder: (context) => Category());
 
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            newRoute,
-                                (Route<dynamic> route) =>
-                            false, // Removes all previous routes
-                          );
-                          // e.g., navigate to results screen
-                        }
-                      }
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      newRoute,
+                          (Route<dynamic> route) =>
+                      false, // Removes all previous routes
+                    );                    // e.g., navigate to results screen
+                  }
+                }
                     : null,
                 child: const Text('Next'),
               ),

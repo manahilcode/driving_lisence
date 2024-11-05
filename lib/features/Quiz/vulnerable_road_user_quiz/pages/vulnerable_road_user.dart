@@ -1,29 +1,32 @@
-import 'package:driving_lisence/category.dart';
-import 'package:driving_lisence/core/loader.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../category.dart';
+import '../../../../core/loader.dart';
 import '../model/model.dart';
 import '../viewmodel/controller.dart';
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+class VulnerableRoadUserQuizScreens extends StatefulWidget {
+  const VulnerableRoadUserQuizScreens({super.key}); // Changed to unnamed constructor
 
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  _VulnerableRoadUserQuizScreensState createState() =>
+      _VulnerableRoadUserQuizScreensState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
-  late QuizProvider quizProvider;
+class _VulnerableRoadUserQuizScreensState extends State<VulnerableRoadUserQuizScreens> {
+  late VulnerableRoadUserQuizProvider quizProvider;
   late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider = Provider.of<QuizProvider>(context, listen: false);
+      quizProvider =
+          Provider.of<VulnerableRoadUserQuizProvider>(context, listen: false);
       quizProvider.fetchQuizzes();
     });
     _pageController = PageController();
@@ -40,15 +43,16 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Alertness Quiz',
+          'Vulnerable Road User Quiz',
           style: GoogleFonts.lato(
               color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
-      body: Consumer<QuizProvider>(
+      body: Consumer<VulnerableRoadUserQuizProvider>(
         builder: (context, provider, child) {
+          print(provider.quizzes.length.toString());
           if (provider.isLoading) {
             return const Center(child: LoadingScreen());
           }
@@ -219,8 +223,7 @@ class _QuizItemState extends State<QuizItem> {
                             newRoute,
                                 (Route<dynamic> route) =>
                             false, // Removes all previous routes
-                          );
-                          // e.g., navigate to results screen
+                          );                          // e.g., navigate to results screen
                         }
                       }
                     : null,

@@ -4,10 +4,21 @@ import 'package:driving_lisence/features/vulnerable_road_user/pages/introduction
 import 'package:flutter/material.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
 
+import 'features/Quiz/Incident_quiz/pages/incident_quiz.dart';
+import 'features/Quiz/Rule_of_the_road/pages/rule_of_raod_quiz.dart';
 import 'features/Quiz/alertness_quiz/pages/alertnessquiz.dart';
 import 'features/Quiz/attitude_quiz/pages/attitude_quiz.dart';
+import 'features/Quiz/essential_document_quiz/pages/essential_document_quiz.dart';
+import 'features/Quiz/hazard_awareness_quiz/pages/hazard_awareness.dart';
+import 'features/Quiz/motorway_driving_quiz/pages/motorway_handling.dart';
+import 'features/Quiz/other_type_vehicle_quiz/pages/other_type_of_vehicle.dart';
+import 'features/Quiz/road_traffic_sign_quiz/pages/road_traffic_sign_quiz.dart';
 import 'features/Quiz/safety_margin_quiz/pages/safety_margin_quiz.dart';
 import 'features/Quiz/safety_vehicle_quiz/pages/safetyVehicle.dart';
+import 'features/Quiz/vehicle_handling_quiz/pages/vehicle_handling.dart';
+import 'features/Quiz/vehicle_handling_quiz/viewmodel/controller.dart';
+import 'features/Quiz/vehicle_loading_quiz/pages/vehicle_loading_quiz.dart';
+import 'features/Quiz/vulnerable_road_user_quiz/pages/vulnerable_road_user.dart';
 import 'features/allertness/model/model.dart';
 import 'features/allertness/pages/introduction.dart';
 import 'features/attitude/pages/attitude.dart';
@@ -31,7 +42,7 @@ class _CategoryState extends State<Category>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final List<bool> _selectedCategories =
-      List.generate(15, (_) => false); // 15 categories
+      List.generate(16, (_) => false); // 15 categories
 
   @override
   void initState() {
@@ -138,6 +149,7 @@ class _CategoryState extends State<Category>
                       ?  const SafetyMarginQuizScreens()
                       : safety_margin1(),
                 ),
+                //HazardAwarenessQuizScreens
                 CategoryItem(
                   icon: Icons.visibility,
                   title: 'Hazard awareness',
@@ -147,8 +159,11 @@ class _CategoryState extends State<Category>
                   total: 28,
                   isSelected: _selectedCategories[5],
                   onTap: () => _toggleSelection(5),
-                  categoryScreen: hazard1(),
+                  categoryScreen: widget.label == "PracticeQuiz"
+                      ?  const HazardAwarenessQuizScreens()
+                      :hazard1(),
                 ),
+                //SafetyMarginQuizScreens
                 CategoryItem(
                   icon: Icons.local_hospital,
                   title: 'Vulnerable road users',
@@ -158,8 +173,11 @@ class _CategoryState extends State<Category>
                   total: 24,
                   isSelected: _selectedCategories[6],
                   onTap: () => _toggleSelection(6),
-                  categoryScreen: Introduction(),
+                  categoryScreen: widget.label == "PracticeQuiz"
+                      ?  const VulnerableRoadUserQuizScreens()
+                      :const Introduction(),
                 ),
+                //OtherTypeVehicleQuizScreen
                 CategoryItem(
                   icon: Icons.navigation,
                   title: 'Other types of vehicle',
@@ -169,8 +187,11 @@ class _CategoryState extends State<Category>
                   total: 27,
                   isSelected: _selectedCategories[7],
                   onTap: () => _toggleSelection(7),
-                  categoryScreen: PracticeRevisionDialog(),
+                  categoryScreen:widget.label == "PracticeQuiz"
+                      ?  const OtherTypeVehicleQuizScreen()
+                      : PracticeRevisionDialog(),
                 ),
+ //MotowayDriverQuizScreens
                 CategoryItem(
                   icon: Icons.car_crash_outlined,
                   title: 'Motorway driving',
@@ -180,8 +201,11 @@ class _CategoryState extends State<Category>
                   total: 27,
                   isSelected: _selectedCategories[8],
                   onTap: () => _toggleSelection(8),
-                  categoryScreen: const IntroductionHighWay(),
+                  categoryScreen: widget.label == "PracticeQuiz"
+                      ?  const MotowayDriverQuizScreens()
+                      :const IntroductionHighWay(),
                 ),
+                //VehicleHandlingQuizProvider
                 CategoryItem(
                   icon: Icons.car_crash_outlined,
                   title: 'Vehicle handling',
@@ -191,19 +215,22 @@ class _CategoryState extends State<Category>
                   total: 28,
                   isSelected: _selectedCategories[9],
                   onTap: () => _toggleSelection(9),
-                  categoryScreen: const IntroductionVehicleHandling(),
+                  categoryScreen:widget.label == "PracticeQuiz"
+                      ? const VehicleHandlingQuizScreens()
+                      :  const IntroductionVehicleHandling(),
                 ),
-                CategoryItem(
-                  icon: Icons.emoji_people,
-                  title: 'Motorway rules',
-                  progress: 0,
-                  answered: 0,
-                  correct: 0,
-                  total: 26,
-                  isSelected: _selectedCategories[10],
-                  onTap: () => _toggleSelection(10),
-                  categoryScreen: PracticeRevisionDialog(),
-                ),
+                // CategoryItem(
+                //   icon: Icons.emoji_people,
+                //   title: 'Motorway rules',
+                //   progress: 0,
+                //   answered: 0,
+                //   correct: 0,
+                //   total: 26,
+                //   isSelected: _selectedCategories[10],
+                //   onTap: () => _toggleSelection(10),
+                //   categoryScreen: PracticeRevisionDialog(),
+                // ),
+                //RuleOfRoadQuizScreens
                 CategoryItem(
                   icon: Icons.lightbulb_outline,
                   title: 'Rules of the road',
@@ -213,8 +240,11 @@ class _CategoryState extends State<Category>
                   total: 54,
                   isSelected: _selectedCategories[11],
                   onTap: () => _toggleSelection(11),
-                  categoryScreen: const IntroductionRoadRule(),
+                  categoryScreen: widget.label == "PracticeQuiz"
+                      ? const RuleOfRoadQuizScreens()
+                      :  const IntroductionRoadRule(),
                 ),
+                //RoadTrafficSignQuizScreens
                 CategoryItem(
                   icon: Icons.local_police,
                   title: 'Road and traffic signs',
@@ -224,8 +254,11 @@ class _CategoryState extends State<Category>
                   total: 67,
                   isSelected: _selectedCategories[12],
                   onTap: () => _toggleSelection(12),
-                  categoryScreen: IntroductionRoadSign(),
+                  categoryScreen: widget.label == "PracticeQuiz"
+                      ? const RoadTrafficSignQuizScreens()
+                      :const IntroductionRoadSign(),
                 ),
+                //EssentialDocumentQuizScreens
                 CategoryItem(
                   icon: Icons.build,
                   title: 'Essential documents',
@@ -235,8 +268,12 @@ class _CategoryState extends State<Category>
                   total: 27,
                   isSelected: _selectedCategories[13],
                   onTap: () => _toggleSelection(13),
-                  categoryScreen: const IntroductionEDocumentt(),
+                  categoryScreen: widget.label == "PracticeQuiz"
+                      ? const EssentialDocumentQuizScreens()
+                      :
+                  const IntroductionEDocumentt(),
                 ),
+                //IncidentQuizScreens
                 CategoryItem(
                   icon: Icons.warning_amber_rounded,
                   title: 'Incidents, accidents, and emergencies',
@@ -246,8 +283,11 @@ class _CategoryState extends State<Category>
                   total: 31,
                   isSelected: _selectedCategories[14],
                   onTap: () => _toggleSelection(14),
-                  categoryScreen: IncidentAccidentAndEmergency(),
+                  categoryScreen:widget.label == "PracticeQuiz"
+                      ? const IncidentQuizScreens()
+                      :  const IncidentAccidentAndEmergency(),
                 ),
+                //VehicleLoadingQuizScreens
                 CategoryItem(
                   icon: Icons.warning_amber_rounded,
                   title: 'Vehicle Loading',
@@ -255,9 +295,11 @@ class _CategoryState extends State<Category>
                   answered: 0,
                   correct: 0,
                   total: 31,
-                  isSelected: _selectedCategories[14],
-                  onTap: () => _toggleSelection(14),
-                  categoryScreen: const IntroductionVehicleLoading(),
+                  isSelected: _selectedCategories[15],
+                  onTap: () => _toggleSelection(15),
+                  categoryScreen: widget.label == "PracticeQuiz"
+                      ? const VehicleLoadingQuizScreens()
+                      :  const IntroductionVehicleLoading(),
                 ),
               ],
             ),
@@ -272,10 +314,9 @@ class _CategoryState extends State<Category>
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
-              child: Text('CONTINUE', style: TextStyle(fontSize: 18)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                minimumSize: Size(double.infinity, 50),
+                minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -283,6 +324,7 @@ class _CategoryState extends State<Category>
               onPressed: () {
                 // Implement continue functionality
               },
+              child: const Text('CONTINUE', style: TextStyle(fontSize: 18)),
             ),
           ),
         ],
@@ -325,11 +367,11 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon, color: Colors.green, size: 30),
-      title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           LinearProgressIndicator(
             value: progress / 100,
             backgroundColor: Colors.grey[300],
@@ -337,14 +379,14 @@ class CategoryItem extends StatelessWidget {
               progress > 0 ? Colors.green : Colors.orange,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Row(
             children: [
               Text('Answered: $answered',
-                  style: TextStyle(color: Colors.orange)),
-              SizedBox(width: 8),
-              Text('Correct: $correct', style: TextStyle(color: Colors.green)),
-              SizedBox(width: 8),
+                  style: const TextStyle(color: Colors.orange)),
+              const SizedBox(width: 8),
+              Text('Correct: $correct', style: const TextStyle(color: Colors.green)),
+              const SizedBox(width: 8),
               Text('Total: $total', style: TextStyle(color: Colors.grey[600])),
             ],
           ),

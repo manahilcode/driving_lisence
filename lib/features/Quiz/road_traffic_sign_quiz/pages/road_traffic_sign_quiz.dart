@@ -1,29 +1,33 @@
-import 'package:driving_lisence/category.dart';
-import 'package:driving_lisence/core/loader.dart';
+
+
+import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../category.dart';
+import '../../../../core/loader.dart';
 import '../model/model.dart';
 import '../viewmodel/controller.dart';
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+class RoadTrafficSignQuizScreens extends StatefulWidget {
+  const RoadTrafficSignQuizScreens({super.key}); // Changed to unnamed constructor
 
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  _RoadTrafficSignQuizScreensState createState() => _RoadTrafficSignQuizScreensState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
-  late QuizProvider quizProvider;
+class _RoadTrafficSignQuizScreensState extends State<RoadTrafficSignQuizScreens> {
+  late RoadTrafficSignQuizProvider quizProvider;
   late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider = Provider.of<QuizProvider>(context, listen: false);
+      quizProvider = Provider.of<RoadTrafficSignQuizProvider>(context, listen: false);
       quizProvider.fetchQuizzes();
     });
     _pageController = PageController();
@@ -37,18 +41,20 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Alertness Quiz',
+          'Road And Traffic Sign Quiz',
           style: GoogleFonts.lato(
               color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
-      body: Consumer<QuizProvider>(
+      body: Consumer<RoadTrafficSignQuizProvider>(
         builder: (context, provider, child) {
+          print(provider.quizzes.length.toString());
           if (provider.isLoading) {
             return const Center(child: LoadingScreen());
           }
@@ -66,7 +72,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 quiz: quiz,
                 totalQuestions: provider.quizzes.length,
                 pageController: _pageController,
-                index: index,
+                index:index,
               );
             },
           );
@@ -82,12 +88,7 @@ class QuizItem extends StatefulWidget {
   final PageController pageController;
   final int index;
 
-  const QuizItem(
-      {super.key,
-      required this.quiz,
-      required this.totalQuestions,
-      required this.pageController,
-      required this.index});
+  const QuizItem({super.key, required this.quiz, required this.totalQuestions, required this.pageController,required this.index});
 
   @override
   _QuizItemState createState() => _QuizItemState();
@@ -136,6 +137,8 @@ class _QuizItemState extends State<QuizItem> {
                 ),
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 20),
+              widget.quiz.image == null ? const SizedBox.shrink(): buildImage(widget.quiz.image!),
               const SizedBox(height: 20),
               ...List.generate(widget.quiz.answers.length, (index) {
                 final isCorrect = index.toString() == widget.quiz.correct;
@@ -203,26 +206,24 @@ class _QuizItemState extends State<QuizItem> {
               ElevatedButton(
                 onPressed: selectedAnswer != null
                     ? () {
-                        // Navigate to the next question
-                        if (widget.pageController.page!.toInt() <
-                            widget.totalQuestions - 1) {
-                          widget.pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
-                        } else {
-                          Route newRoute =
-                          MaterialPageRoute(builder: (context) => Category());
+                  // Navigate to the next question
+                  if (widget.pageController.page!.toInt() < widget.totalQuestions - 1) {
+                    widget.pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                    );
+                  } else {
+                    Route newRoute =
+                    MaterialPageRoute(builder: (context) => Category());
 
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            newRoute,
-                                (Route<dynamic> route) =>
-                            false, // Removes all previous routes
-                          );
-                          // e.g., navigate to results screen
-                        }
-                      }
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      newRoute,
+                          (Route<dynamic> route) =>
+                      false, // Removes all previous routes
+                    );                    // e.g., navigate to results screen
+                  }
+                }
                     : null,
                 child: const Text('Next'),
               ),

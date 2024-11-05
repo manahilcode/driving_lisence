@@ -8,10 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
+import 'features/Quiz/Incident_quiz/viewmodel/controller.dart';
+import 'features/Quiz/Rule_of_the_road/viewmodel/controller.dart';
 import 'features/Quiz/alertness_quiz/viewmodel/controller.dart';
 import 'features/Quiz/attitude_quiz/viewmodel/controller.dart';
+import 'features/Quiz/essential_document_quiz/viewmodel/controller.dart';
+import 'features/Quiz/hazard_awareness_quiz/viewmodel/controller.dart';
+import 'features/Quiz/motorway_driving_quiz/viewmodel/controller.dart';
+import 'features/Quiz/other_type_vehicle_quiz/viewmodel/controller.dart';
+import 'features/Quiz/road_traffic_sign_quiz/viewmodel/controller.dart';
 import 'features/Quiz/safety_margin_quiz/viewmodel/controller.dart';
 import 'features/Quiz/safety_vehicle_quiz/viewmodel/controller.dart';
+import 'features/Quiz/vehicle_handling_quiz/viewmodel/controller.dart';
+import 'features/Quiz/vehicle_loading_quiz/viewmodel/controller.dart';
+import 'features/Quiz/vulnerable_road_user_quiz/viewmodel/controller.dart';
 import 'features/incident/viewmodel/controller.dart';
 import 'features/othertypepfvehilcle/viewmodel/Trams_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/bus_provider.dart';
@@ -84,11 +94,30 @@ class MyApp extends StatelessWidget {
             create: (_) => AttitudeQuizProvider()),
         ChangeNotifierProvider<SafetyVehicleQuizProvider>(
             create: (_) => SafetyVehicleQuizProvider()),
-
         ChangeNotifierProvider<SafetyMarginQuizProvider>(
             create: (_) => SafetyMarginQuizProvider()),
+        ChangeNotifierProvider<HazardAwarenessQuizProvider>(
+            create: (_) => HazardAwarenessQuizProvider()),
+        ChangeNotifierProvider<VulnerableRoadUserQuizProvider>(
+            create: (_) => VulnerableRoadUserQuizProvider()),
+        ChangeNotifierProvider<OtherTypeVehicleProvider>(
+            create: (_) => OtherTypeVehicleProvider()),
+        ChangeNotifierProvider<VehicleHandlingQuizProvider>(
+            create: (_) => VehicleHandlingQuizProvider()),
+        ChangeNotifierProvider<MotoWayDrivingQuizProvider>(
+            create: (_) => MotoWayDrivingQuizProvider()),
+        ChangeNotifierProvider<RuleOfRoadQuizProvider>(
+            create: (_) => RuleOfRoadQuizProvider()),
+        ChangeNotifierProvider<VehicleLoadingQuizProvider>(
+            create: (_) => VehicleLoadingQuizProvider()),
+        ChangeNotifierProvider<IncidentQuizProvider>(
+            create: (_) => IncidentQuizProvider()),
+        ChangeNotifierProvider<EssentialDocumentQuizProvider>(
+            create: (_) => EssentialDocumentQuizProvider()),
+        ChangeNotifierProvider<RoadTrafficSignQuizProvider>(
+            create: (_) => RoadTrafficSignQuizProvider()),
 
-        //SafetyMarginQuizProvider
+        //RoadTrafficSignQuizProvider
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

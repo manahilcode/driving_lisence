@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../category.dart';
 import '../model/model.dart';
 import '../viewmodel/controller.dart';
 
@@ -204,8 +205,15 @@ class _QuizItemState extends State<QuizItem> {
                       curve: Curves.easeIn,
                     );
                   } else {
-                    // Optionally, handle the end of the quiz here
-                    // e.g., navigate to results screen
+                    Route newRoute =
+                    MaterialPageRoute(builder: (context) => Category());
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      newRoute,
+                          (Route<dynamic> route) =>
+                      false, // Removes all previous routes
+                    );                    // e.g., navigate to results screen
                   }
                 }
                     : null,
