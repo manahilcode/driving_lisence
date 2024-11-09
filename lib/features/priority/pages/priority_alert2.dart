@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/priority/pages/priority_alert.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
 import '../../attitude/pages/alert_6.dart';
 
 class TipAttitude5 extends StatefulWidget {
@@ -100,7 +101,7 @@ class _TipAttitude5State extends State<TipAttitude5> {
                 future: fetchImages(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -125,12 +126,12 @@ class _TipAttitude5State extends State<TipAttitude5> {
                               loadingBuilder: (context, child, loadingProgress) {
                                 if (loadingProgress == null) return child;
                                 return Center(
-                                  child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                        ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                        : null,
+                                  child: LoadingScreen(
+                                    // value: loadingProgress.expectedTotalBytes !=
+                                    //     null
+                                    //     ? loadingProgress.cumulativeBytesLoaded /
+                                    //     loadingProgress.expectedTotalBytes!
+                                    //     : null,
                                   ),
                                 );
                               },
@@ -165,7 +166,7 @@ class _TipAttitude5State extends State<TipAttitude5> {
                 future: fetchTip(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data == null) {

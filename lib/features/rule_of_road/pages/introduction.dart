@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/rule_of_road/pages/speed_limit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class IntroductionRoadRule extends StatefulWidget {
@@ -32,7 +33,7 @@ class _IntroductionRoadRuleState extends State<IntroductionRoadRule> {
           final data  = value.introductionRuleRoadValue;
           if (data == null) {
             return Center(
-                child: CircularProgressIndicator()); // or any placeholder
+                child: LoadingScreen()); // or any placeholder
           }
       return Padding(
         padding: const EdgeInsets.all(8.0),

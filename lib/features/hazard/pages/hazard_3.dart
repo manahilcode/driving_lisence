@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:driving_lisence/core/loader.dart';
 import 'package:flutter/material.dart';
 
 import 'hazard_4.dart';
@@ -49,7 +50,8 @@ class _hazard_3State extends State<hazard_3> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {

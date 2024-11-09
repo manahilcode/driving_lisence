@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/hazard/pages/hazard9.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 
 class hazard8 extends StatefulWidget {
   @override
@@ -46,7 +48,8 @@ class _hazard8State extends State<hazard8> {
         future: fetchData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {

@@ -4,6 +4,7 @@ import 'package:driving_lisence/features/othertypepfvehilcle/pages/motercycle.da
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/meeting_the_standard_provider.dart';
 
 class Othertype8 extends StatefulWidget {
@@ -45,7 +46,7 @@ class _Othertype8State extends State<Othertype8> {
         // Show loading indicator while initial data is being fetched
         if (isLoading) {
           return Scaffold(
-            body: Center(child: CircularProgressIndicator()),
+            body: Center(child: LoadingScreen()),
           );
         }
 

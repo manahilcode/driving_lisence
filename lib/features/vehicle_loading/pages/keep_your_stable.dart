@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class KeepYourStable extends StatefulWidget {
@@ -36,7 +37,7 @@ class _KeepYourStableState extends State<KeepYourStable> {
           final data  = value.vehicleKeepStable;
           if(data == null)
             {
-              return Center(child: CircularProgressIndicator(),);
+              return Center(child: LoadingScreen(),);
             }
           return SingleChildScrollView(
             child: Padding(

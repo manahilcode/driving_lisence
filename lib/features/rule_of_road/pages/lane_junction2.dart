@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/rule_of_road/pages/overtaking.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class LaneJunction2 extends StatefulWidget {
@@ -38,7 +39,7 @@ class _LaneJunction2State extends State<LaneJunction2> {
             final data = value.laneAndJunction2Value;
             if (data == null) {
               return const Center(
-                  child: CircularProgressIndicator()); // or any placeholder
+                  child: LoadingScreen()); // or any placeholder
             }
 
             return SingleChildScrollView(

@@ -3,6 +3,8 @@ import 'package:driving_lisence/features/safety_margin/pages/safety_margin13.dar
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_6.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class Safety_margin12 extends StatefulWidget {
   @override
   _Safety_margin12State createState() => _Safety_margin12State();
@@ -50,11 +52,12 @@ class _Safety_margin12State extends State<Safety_margin12> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
-            return Center(child: Text('No data available.'));
+            return const Center(child: Text('No data available.'));
           } else {
             final data = snapshot.data!;
             final title = data['title'];

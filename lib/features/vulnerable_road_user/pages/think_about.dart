@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 class ThinkAbout extends StatefulWidget {
   const ThinkAbout({super.key});
@@ -39,7 +40,7 @@ class _ThinkAboutState extends State<ThinkAbout> {
           final data  = value.thinkAboutVulnerable;
           if(data == null)
             {
-              return Center(child: CircularProgressIndicator(),);
+              return Center(child: LoadingScreen(),);
             }
           return Padding(
             padding: const EdgeInsets.all(8.0),

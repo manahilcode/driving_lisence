@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_15.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
 import 'hazard_3.dart';
 
 class hazard_2 extends StatefulWidget {
@@ -47,7 +48,7 @@ class _hazard_2State extends State<hazard_2> {
         future: fetchData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: LoadingScreen());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {

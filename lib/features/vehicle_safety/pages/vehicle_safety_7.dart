@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_8.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class safety7 extends StatefulWidget {
   @override
   _safety7State createState() => _safety7State();
@@ -48,7 +50,8 @@ class _safety7State extends State<safety7> {
         future: fetchQuestion(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           }
 
           Map<String, dynamic> data = snapshot.data!;

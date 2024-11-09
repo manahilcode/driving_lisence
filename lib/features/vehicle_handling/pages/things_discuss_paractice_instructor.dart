@@ -3,6 +3,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class ThingsDiscussParacticeInstructor extends StatefulWidget {
@@ -28,13 +29,17 @@ class _ThingsDiscussParacticeInstructorState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Things Discuss Practice Instructor"),
+        title: const Text("Things Discuss Practice Instructor",style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: Consumer<IntroductionController>(
         builder: (BuildContext context, value, Widget? child) {
           final data = value.practiceWithInstructor;
+          if(data == null)
+          {
+            return const LoadingScreen();
+          }
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(

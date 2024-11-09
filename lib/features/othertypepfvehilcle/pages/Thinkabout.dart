@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/othertypepfvehilcle/pages/instructor.da
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/thinkaboutprovider.dart';
 
 class Othertype9 extends StatefulWidget {
@@ -40,7 +41,7 @@ class _Othertype9State extends State<Othertype9> {
         // Show loading indicator while initial data is being fetched
         if (isLoading) {
           return Scaffold(
-            body: Center(child: CircularProgressIndicator()),
+            body: Center(child: LoadingScreen()),
           );
         }
         if (provider.alertData == null ) {

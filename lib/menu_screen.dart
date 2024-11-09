@@ -2,8 +2,28 @@ import 'package:driving_lisence/Theory_test.dart';
 import 'package:driving_lisence/category.dart';
 import 'package:driving_lisence/features/pass_gaurantee/pages/pass_gaurantee1.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 
-class MenuScreen extends StatelessWidget {
+import 'features/auth/repo/auth_repo.dart';
+import 'features/auth/viewmodel/controller.dart';
+
+class MenuScreen extends StatefulWidget {
+  const MenuScreen({super.key});
+
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((time){
+      final auth = Provider.of<AuthController>(context,listen: false);
+      auth.fetchAndDisplayUserProfile();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,103 +34,114 @@ class MenuScreen extends StatelessWidget {
         toolbarHeight: 0, // No app bar height
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: Colors.green.withOpacity(0.70),
-                ),
-                width: double.infinity, // Cover full width
-                height: 150,
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: Text(
-                        'Hey Jamal,',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black, // Black text for contrast
-                        ),
-                      ),
+        child: Consumer<AuthController>(
+          builder: (context,value,child) {
+
+           final userName = value.name;
+            return Column(
+              children: [
+
+                // ElevatedButton(onPressed: ()async{
+                //   final _auth = AuthRepository();
+                //   await _auth.signOut();
+                // }, child: Text("Logoout")),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.0),
+                      color: Colors.green.withOpacity(0.70),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 15.0),
-                      child: Text(
-                        'You are using the car driver’s question bank',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white, // White text for contrast
+                    width: double.infinity, // Cover full width
+                    height: 150,
+                    child:  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Text(
+                            "$userName," ?? "",
+                            style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black, // Black text for contrast
+                            ),
+                          ),
                         ),
-                      ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 15.0),
+                          child: Text(
+                            'You are using the car driver’s question bank',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white, // White text for contrast
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  buildMenuButton(
-                    context: context,
-                    label: 'Start Learning',
-                    color: Colors.pink,
-                    icon: Icons.verified_user,
-                    badge: 'FREE',
-                    navigateTo:Category(), // Define your screen here
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      buildMenuButton(
+                        context: context,
+                        label: 'Start Learning',
+                        color: Colors.pink,
+                        icon: Icons.verified_user,
+                        badge: 'FREE',
+                        navigateTo:Category(), // Define your screen here
+                      ),
+                      const SizedBox(height: 10),
+                      buildMenuButton(
+                        context: context,
+                        label: 'Theory Test',
+                        color: Colors.green,
+                        icon: Icons.assignment,
+                        navigateTo: TheoryTest(), // Define your screen here
+                      ),
+                      SizedBox(height: 10),
+                      buildMenuButton(
+                        context: context,
+                        label: 'Hazard Perception',
+                        color: Colors.red,
+                        icon: Icons.warning,
+                        navigateTo: TheoryTest(), // Define your screen here
+                      ),
+                      SizedBox(height: 10),
+                      buildMenuButton(
+                        context: context,
+                        label: 'Highway Code',
+                        color: Colors.blue,
+                        icon: Icons.book,
+                        navigateTo: TheoryTest(), // Define your screen here
+                      ),
+                      SizedBox(height: 10),
+                      buildMenuButton(
+                        context: context,
+                        label: 'Road Signs',
+                        color: Colors.orange,
+                        icon: Icons.traffic,
+                        navigateTo: TheoryTest(), // Define your screen here
+                      ),
+                      SizedBox(height: 10),
+                      buildMenuButton(
+                        context: context,
+                        label: 'Learn to Drive',
+                        color: Colors.purple,
+                        icon: Icons.directions_car,
+                        badge: 'FREE TRIAL',
+                        navigateTo: TheoryTest(), // Define your screen here
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 10),
-                  buildMenuButton(
-                    context: context,
-                    label: 'Theory Test',
-                    color: Colors.green,
-                    icon: Icons.assignment,
-                    navigateTo: TheoryTest(), // Define your screen here
-                  ),
-                  SizedBox(height: 10),
-                  buildMenuButton(
-                    context: context,
-                    label: 'Hazard Perception',
-                    color: Colors.red,
-                    icon: Icons.warning,
-                    navigateTo: TheoryTest(), // Define your screen here
-                  ),
-                  SizedBox(height: 10),
-                  buildMenuButton(
-                    context: context,
-                    label: 'Highway Code',
-                    color: Colors.blue,
-                    icon: Icons.book,
-                    navigateTo: TheoryTest(), // Define your screen here
-                  ),
-                  SizedBox(height: 10),
-                  buildMenuButton(
-                    context: context,
-                    label: 'Road Signs',
-                    color: Colors.orange,
-                    icon: Icons.traffic,
-                    navigateTo: TheoryTest(), // Define your screen here
-                  ),
-                  SizedBox(height: 10),
-                  buildMenuButton(
-                    context: context,
-                    label: 'Learn to Drive',
-                    color: Colors.purple,
-                    icon: Icons.directions_car,
-                    badge: 'FREE TRIAL',
-                    navigateTo: TheoryTest(), // Define your screen here
-                  ),
-                ],
-              ),
-            ),
-          ],
+                ),
+              ],
+            );
+          }
         ),
       ),
       // Bottom Navigation Bar

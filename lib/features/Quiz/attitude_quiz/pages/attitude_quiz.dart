@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:driving_lisence/core/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -5,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../category.dart';
+import '../../result/pages/result.dart';
 import '../model/model.dart';
 import '../viewmodel/controller.dart';
 
@@ -18,6 +20,9 @@ class AttitudeQuizScreens extends StatefulWidget {
 class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
   late AttitudeQuizProvider quizProvider;
   late PageController _pageController;
+  int correctAnswersCount = 0;
+  List<String> correctQuestions = [];
+  List<String> wrongQuestions = [];
 
   @override
   void initState() {
@@ -34,6 +39,8 @@ class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
     _pageController.dispose();
     super.dispose();
   }
+
+  final String? category = "Attitude_Quiz";
 
   @override
   Widget build(BuildContext context) {
@@ -52,23 +59,60 @@ class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
           if (provider.isLoading) {
             return const Center(child: LoadingScreen());
           }
-
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
-
-          return PageView.builder(
-            controller: _pageController,
-            itemCount: provider.quizzes.length,
-            itemBuilder: (context, index) {
-              final quiz = provider.quizzes[index];
-              return QuizItem(
-                quiz: quiz,
-                totalQuestions: provider.quizzes.length,
-                pageController: _pageController,
-                index:index,
-              );
-            },
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AutoSizeText(
+                  'Correct Answers: $correctAnswersCount',
+                  style: GoogleFonts.lato(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green),
+                ),
+              ),
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: provider.quizzes.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final quiz = provider.quizzes[index];
+                    return QuizItem(
+                      quiz: quiz,
+                      totalQuestions: provider.quizzes.length,
+                      pageController: _pageController,
+                      index: index,
+                      onCorrectAnswer: () {
+                        setState(() {
+                          correctAnswersCount++;
+                          if (!correctQuestions.contains(quiz.question)) {
+                            correctQuestions.add(quiz
+                                .question); // Add to correct list only if it's not already added
+                          }
+                        });
+                        print(correctAnswersCount.toString());
+                      },
+                      onWrongAnswer: () {
+                        setState(() {
+                          if (!wrongQuestions.contains(quiz.question)) {
+                            wrongQuestions.add(quiz
+                                .question); // Add to wrong list only if it's not already added
+                          } // Add to wrong list
+                        });
+                      },
+                      category: "$category",
+                      correctAnswersCount: correctAnswersCount,
+                      correctQuestions: correctQuestions,
+                      wrongQuestions: wrongQuestions,
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         },
       ),
@@ -77,12 +121,29 @@ class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
 }
 
 class QuizItem extends StatefulWidget {
+  String? category;
   final QuizModel quiz;
   final int totalQuestions;
   final PageController pageController;
   final int index;
+  final VoidCallback onCorrectAnswer; // Callback for correct answer
+  final VoidCallback onWrongAnswer; // Callback for wrong answer
+  final int correctAnswersCount; // Add correctAnswersCount parameter
+  final List<String> correctQuestions; // Pass correct questions
+  final List<String> wrongQuestions; // Pass wrong questions
 
-  const QuizItem({super.key, required this.quiz, required this.totalQuestions, required this.pageController,required this.index});
+  QuizItem(
+      {super.key,
+      required this.quiz,
+      this.category,
+      required this.totalQuestions,
+      required this.pageController,
+      required this.index,
+      required this.onCorrectAnswer,
+      required this.onWrongAnswer,
+      required this.correctAnswersCount,
+      required this.correctQuestions,
+      required this.wrongQuestions});
 
   @override
   _QuizItemState createState() => _QuizItemState();
@@ -91,11 +152,23 @@ class QuizItem extends StatefulWidget {
 class _QuizItemState extends State<QuizItem> {
   int? selectedAnswer;
   bool showInfo = false;
+  String feedbackMessage = '';
 
   void handleAnswerSelection(int index) {
     setState(() {
       selectedAnswer = index;
       showInfo = true;
+
+      // Check if the selected answer is correct
+      final isCorrect = index.toString() == widget.quiz.correct;
+      feedbackMessage = isCorrect ? 'Correct!' : 'Incorrect!';
+
+      // Call the appropriate callback based on correctness
+      if (isCorrect) {
+        widget.onCorrectAnswer();
+      } else {
+        widget.onWrongAnswer();
+      }
     });
   }
 
@@ -166,14 +239,14 @@ class _QuizItemState extends State<QuizItem> {
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(
+                              child: AutoSizeText(
                                 widget.quiz.answers[index],
                                 style: GoogleFonts.lato(
                                   color: Colors.black,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
                                 ),
-                                textAlign: TextAlign.center,
+                                textAlign: TextAlign.left,
                               ),
                             ),
                           ),
@@ -185,37 +258,61 @@ class _QuizItemState extends State<QuizItem> {
               }),
               Gap(10),
               if (showInfo)
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text(
-                    widget.quiz.info,
+                if (showInfo) const Gap(10),
+              Column(
+                children: [
+                  Text(
+                    feedbackMessage,
                     style: GoogleFonts.lato(
-                        fontSize: 14, fontStyle: FontStyle.italic),
+                        fontSize: 18,
+                        fontStyle: FontStyle.italic,
+                        color: feedbackMessage == "Correct!"
+                            ? Colors.green
+                            : Colors.red),
                     textAlign: TextAlign.center,
                   ),
-                ),
+                  const Gap(10),
+                  if (showInfo)
+                    Text(
+                      widget.quiz.info, // Display additional info if needed
+                      style: GoogleFonts.lato(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                ],
+              ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: selectedAnswer != null
                     ? () {
-                  // Navigate to the next question
-                  if (widget.pageController.page!.toInt() < widget.totalQuestions - 1) {
-                    widget.pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeIn,
-                    );
-                  } else {
-                    Route newRoute =
-                    MaterialPageRoute(builder: (context) => Category());
+                        // Navigate to the next question
+                        if (widget.pageController.page!.toInt() <
+                            widget.totalQuestions - 1) {
+                          widget.pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        } else {
+                          Route newRoute = MaterialPageRoute(
+                              builder: (context) => ResultScreen(
+                                correctAnswer:
+                                widget.correctAnswersCount.toString(),
+                                wrongAnswers: widget
+                                    .wrongQuestions, // Pass the list of wrong questions
+                                correctQuestions: widget.correctQuestions,
+                                catType: widget.category,
+                                totalQuestion:
+                                widget.totalQuestions.toString(),
+                              ));
 
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      newRoute,
-                          (Route<dynamic> route) =>
-                      false, // Removes all previous routes
-                    );                    // e.g., navigate to results screen
-                  }
-                }
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            newRoute,
+                                (Route<dynamic> route) =>
+                            false, // Removes all previous routes
+                          );
+                        }
+                      }
                     : null,
                 child: const Text('Next'),
               ),

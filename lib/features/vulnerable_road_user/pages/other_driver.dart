@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class OtherDriver extends StatefulWidget {
@@ -41,7 +42,7 @@ class _OtherDriverState extends State<OtherDriver> {
         final data = value.otherDriverVulnerable;
         if (data == null) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: LoadingScreen(),
           );
         }
         return Padding(

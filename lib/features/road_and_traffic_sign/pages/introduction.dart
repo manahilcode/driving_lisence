@@ -2,6 +2,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'SignsRoadSign.dart';
 
@@ -33,7 +34,7 @@ _roadSignController?.fetchIntroductionRoadSign("introduction");
           final data = value.introductionRoadsign;
           if(data == null)
             {
-              return Center(child: CircularProgressIndicator(),);
+              return Center(child: LoadingScreen(),);
             }
           return Padding(
             padding: const EdgeInsets.all(8.0),

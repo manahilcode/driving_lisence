@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
 import 'alert_11.dart';
 
 class TipAttitude10 extends StatefulWidget {
@@ -39,7 +40,7 @@ class _TipAttitude10State extends State<TipAttitude10> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.green,
-        title: Text(
+        title: const Text(
           'Pro Tip',
           style: TextStyle(
             fontSize: 20,
@@ -52,11 +53,11 @@ class _TipAttitude10State extends State<TipAttitude10> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: LoadingScreen());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
-            return Center(child: Text('No data available.'));
+            return const Center(child: Text('No data available.'));
           } else {
             final data = snapshot.data!;
             final title = data['Title'];
@@ -72,18 +73,18 @@ class _TipAttitude10State extends State<TipAttitude10> {
                 crossAxisAlignment: CrossAxisAlignment.center,
 
                 children: [
-                  SizedBox(height: 50,),
+                  const SizedBox(height: 50,),
                   // Display the first title and points
                   if (title != null)
                     Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.green,
                       ),
                     ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   if (points.isNotEmpty)
                     Container(
@@ -99,7 +100,7 @@ class _TipAttitude10State extends State<TipAttitude10> {
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Text(
                               point,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -109,10 +110,10 @@ class _TipAttitude10State extends State<TipAttitude10> {
                         }).toList(),
                       ),
                     ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   // Navigation Button
                   Center(
@@ -122,12 +123,12 @@ class _TipAttitude10State extends State<TipAttitude10> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TipAttitude11()), // Change this
+                              builder: (context) => const TipAttitude11()), // Change this
                         );
                       },
                       child: Container(
                         width: 300,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 15.0,
                           horizontal: 30.0,
                         ),
@@ -139,11 +140,11 @@ class _TipAttitude10State extends State<TipAttitude10> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 2,
                               blurRadius: 5,
-                              offset: Offset(0, 3),
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "Next",
                             style: TextStyle(

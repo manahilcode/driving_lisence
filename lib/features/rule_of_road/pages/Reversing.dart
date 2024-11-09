@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class Reversing extends StatefulWidget {
@@ -45,7 +46,7 @@ class _ReversingState extends State<Reversing> {
 
         if (data == null) {
           return Center(
-              child: CircularProgressIndicator()); // or any placeholder
+              child: LoadingScreen()); // or any placeholder
         }
         final ans = data.answers;
 

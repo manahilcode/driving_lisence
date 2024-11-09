@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/loader.dart';
 import '../../viewmodel/controller.dart';
 
 class MeetingTheStandardIncident extends StatefulWidget {
@@ -42,7 +43,7 @@ class _MeetingTheStandardIncidentState
         final data = value.meetingStandardIncident;
         if (data == null) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingScreen(),
           );
         }
         return SingleChildScrollView(

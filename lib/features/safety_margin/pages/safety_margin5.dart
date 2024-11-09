@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/safety_margin/pages/safety_margin6.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class SafetyMargin5 extends StatefulWidget {
   @override
   _SafetyMargin5State createState() => _SafetyMargin5State();
@@ -47,7 +49,8 @@ class _SafetyMargin5State extends State<SafetyMargin5> {
         future: fetchQuestion(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           }
 
           Map<String, dynamic> data = snapshot.data!;

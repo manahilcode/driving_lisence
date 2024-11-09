@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/vehicle_loading/pages/towing.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class AnimalsVehicleLoading extends StatefulWidget {
@@ -33,7 +34,7 @@ class _AnimalsVehicleLoadingState extends State<AnimalsVehicleLoading> {
         
         if(data == null)
           {
-            return Center(child: CircularProgressIndicator(),);
+            return const Center(child: LoadingScreen(),);
           }
         return Padding(
           padding: const EdgeInsets.all(8.0),

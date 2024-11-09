@@ -1,6 +1,9 @@
 import 'package:driving_lisence/features/auth/pages/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../auth/viewmodel/controller.dart';
 
 class YourTheoryTestScreen extends StatefulWidget {
   @override
@@ -180,11 +183,12 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
           ),
         ),
         const SizedBox(height: 40),
-       const Center(
-         child: Text("I dont know , remind me later",style: TextStyle(
-           fontSize: 20,fontWeight: FontWeight.bold
-         ),),
-       )
+        const Center(
+          child: Text(
+            "I dont know , remind me later",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        )
       ],
     );
   }
@@ -223,29 +227,77 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
         children: [
           const Icon(Icons.arrow_back, size: 30),
           Row(
-            children: List.generate(5, (index) => Container(
-              margin: const EdgeInsets.symmetric(horizontal: 2),
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: index == 1 ? Colors.green :
-                index == 2 ? Colors.red : Colors.grey,
-              ),
-            )),
+            children: List.generate(
+                5,
+                (index) => Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: index == 1
+                            ? Colors.green
+                            : index == 2
+                                ? Colors.red
+                                : Colors.grey,
+                      ),
+                    )),
           ),
           IconButton(
             icon: const Icon(Icons.arrow_forward, size: 30),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SignupScreen()),
-              );
+              if (selectedOption == 'yes' &&
+                  selectedTime != null &&
+                  selectedDate != null) {
+
+                final time = formatTimeOfDay(selectedTime!);
+                final auth =
+                    Provider.of<AuthController>(context, listen: false);
+                auth.setUsrData({
+                  "testApply": true,
+                  "selectDate": selectedDate.toString(),
+                  "selectTime": time,
+                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignupScreen()),
+                );
+              } else {
+                if (selectedOption != "no") {
+                  ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                    const SnackBar(
+                      content: Text("Please Select Data and Time First"),
+                    ),
+                  );
+                }
+              }
+
+              if (selectedOption == "no") {
+                final auth =
+                Provider.of<AuthController>(context, listen: false);
+                auth.setUsrData({
+                  "testApply": false,
+                  "selectDate": null,
+                  "selectTime": null,
+                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignupScreen()),
+                );
+              }
             },
           ),
-
         ],
       ),
     );
+  }
+
+  String formatTimeOfDay(TimeOfDay timeOfDay) {
+    final DateTime now = DateTime.now();
+    final DateTime dateTime = DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+
+    // Format to "hh:mm a" for 12-hour format with AM/PM
+    final DateFormat timeFormat = DateFormat('hh:mm a');
+    return timeFormat.format(dateTime); // Returns "12:45 PM" or "09:30 AM"
   }
 }

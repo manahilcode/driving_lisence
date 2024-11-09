@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/safety_margin/pages/safety_margin10.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class Safety_margin9 extends StatefulWidget {
   @override
   _Safety_margin9State createState() => _Safety_margin9State();
@@ -82,7 +84,8 @@ class _Safety_margin9State extends State<Safety_margin9> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
@@ -122,7 +125,7 @@ class _Safety_margin9State extends State<Safety_margin9> {
                     future: fetchImage(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return LoadingScreen();
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
@@ -135,11 +138,11 @@ class _Safety_margin9State extends State<Safety_margin9> {
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                    : null,
+                              child: LoadingScreen(
+                                // value: loadingProgress.expectedTotalBytes != null
+                                //     ? loadingProgress.cumulativeBytesLoaded /
+                                //     loadingProgress.expectedTotalBytes!
+                                //     : null,
                               ),
                             );
                           },
@@ -210,7 +213,7 @@ class _Safety_margin9State extends State<Safety_margin9> {
                     future: fetchImage2(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return LoadingScreen();
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
@@ -223,11 +226,11 @@ class _Safety_margin9State extends State<Safety_margin9> {
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                    : null,
+                              child: LoadingScreen(
+                               // value: loadingProgress.expectedTotalBytes != null
+                                    // ? loadingProgress.cumulativeBytesLoaded /
+                                    // loadingProgress.expectedTotalBytes!
+                                    // : null,
                               ),
                             );
                           },

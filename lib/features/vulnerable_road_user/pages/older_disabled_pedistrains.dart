@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'Cyclists.dart';
 
@@ -40,7 +41,7 @@ class _OlderDisabledPedistrainsState extends State<OlderDisabledPedistrains> {
           final data = value.olderDisabledPedestrians;
           if(data == null)
             {
-              return Center(child: CircularProgressIndicator(),);
+              return Center(child: LoadingScreen(),);
             }
           return SingleChildScrollView(
             child: Padding(

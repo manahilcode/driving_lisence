@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/road_and_traffic_sign/model/model.dart'
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'meeting_the_standard.dart';
 
@@ -36,7 +37,7 @@ class _RoadLanesState extends State<RoadLanes> {
           final data = value.roadLaneRoadSign;
           if (data == null) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: LoadingScreen(),
             );
           }
           return SingleChildScrollView(

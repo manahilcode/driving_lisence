@@ -1,13 +1,53 @@
+import 'package:driving_lisence/features/auth/viewmodel/controller.dart';
 import 'package:driving_lisence/features/book_theory/booked_theory_test.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
+
+import '../../menu_screen.dart';
+import '../auth/repo/auth_repo.dart';
+import '../../../../category.dart' as cat;
+
 
 class chooseride extends StatefulWidget {
+  const chooseride({super.key});
+
   @override
   _chooserideState createState() => _chooserideState();
 }
 
 class _chooserideState extends State<chooseride> {
   String selectedRegion = '';
+  String selectedCategory = '';
+
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((t){
+      AuthRepository _auth = AuthRepository();
+      _auth.authStateChanges.listen((user) {
+        if (user != null) {
+          if(mounted)
+            {
+              Route newRoute = MaterialPageRoute(builder: (context) => MenuScreen());
+
+              Navigator.pushAndRemoveUntil(
+                context,
+                newRoute,
+                    (Route<dynamic> route) =>
+                false, // Removes all previous routes
+              );
+            }
+
+          print('User is signed in: ${user.uid}');
+        } else {
+          print('User is not signed in');
+        }
+      });
+    }
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +84,6 @@ class _chooserideState extends State<chooseride> {
             ],
           ),
         ),
-
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -64,7 +103,8 @@ class _chooserideState extends State<chooseride> {
               const SizedBox(height: 16),
               _buildCategoryOption(Icons.directions_car, "Car"),
               _buildCategoryOption(Icons.motorcycle, "Motorcycle"),
-              _buildCategoryOption(Icons.assignment, "Trainee ADI (Instructor)"),
+              _buildCategoryOption(
+                  Icons.assignment, "Trainee ADI (Instructor)"),
               _buildCategoryOption(Icons.local_shipping, "LGV (Lorry)"),
               _buildCategoryOption(Icons.directions_bus, "PCV (Bus)"),
               const SizedBox(height: 25),
@@ -98,11 +138,23 @@ class _chooserideState extends State<chooseride> {
             ),
             IconButton(
               icon: const Icon(Icons.arrow_forward, size: 30),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => YourTheoryTestScreen()),
-                );
+              onPressed: () async {
+                if (selectedCategory.isEmpty) {
+                  ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                      const SnackBar(content: Text("select any category")));
+                } else {
+                  final auth = Provider.of<AuthController>(context,listen: false);
+                   auth.setUsrData(
+                    selectedCategory
+                   );
+
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => YourTheoryTestScreen()),
+                  );
+                }
               },
             ),
           ],
@@ -112,18 +164,25 @@ class _chooserideState extends State<chooseride> {
   }
 
   Widget _buildCategoryOption(IconData icon, String category) {
+    bool isSelected = selectedCategory == category;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
+          color: isSelected ? Colors.green.withOpacity(0.1) : Colors.white,
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(8),
         ),
         child: ListTile(
           leading: Icon(icon, size: 32),
           title: Text(category),
+          trailing:
+              isSelected ? const Icon(Icons.check, color: Colors.green) : null,
           onTap: () {
-            // Handle tap event
+            setState(() {
+              selectedCategory = category;
+
+            });
           },
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
 import 'alert_9.dart';
 
 class TipAttitude8 extends StatefulWidget {
@@ -59,7 +60,7 @@ class _TipAttitude8State extends State<TipAttitude8> {
             future: fetchData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return LoadingScreen();
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else if (!snapshot.hasData || snapshot.data == null) {
@@ -80,11 +81,11 @@ class _TipAttitude8State extends State<TipAttitude8> {
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
                           return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                                  : null,
+                            child: LoadingScreen(
+                              // value: loadingProgress.expectedTotalBytes != null
+                              //     ? loadingProgress.cumulativeBytesLoaded /
+                              //     loadingProgress.expectedTotalBytes!
+                              //     : null,
                             ),
                           );
                         },
@@ -121,11 +122,11 @@ class _TipAttitude8State extends State<TipAttitude8> {
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
                           return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                                  : null,
+                            child: LoadingScreen(
+                              // value: loadingProgress.expectedTotalBytes != null
+                              //     ? loadingProgress.cumulativeBytesLoaded /
+                              //     loadingProgress.expectedTotalBytes!
+                              //     : null,
                             ),
                           );
                         },

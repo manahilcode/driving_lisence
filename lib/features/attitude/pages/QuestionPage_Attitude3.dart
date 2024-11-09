@@ -3,6 +3,8 @@ import 'package:driving_lisence/features/priority/pages/priority_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../../../core/loader.dart';
+
 class QuestionPage_Attitude3 extends StatefulWidget {
   @override
   _QuestionPage_Attitude3State createState() => _QuestionPage_Attitude3State();
@@ -49,7 +51,8 @@ class _QuestionPage_Attitude3State extends State<QuestionPage_Attitude3> {
         future: fetchQuestion(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           }
 
           Map<String, dynamic> data = snapshot.data!;

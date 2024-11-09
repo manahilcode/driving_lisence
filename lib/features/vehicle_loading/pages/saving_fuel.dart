@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/vehicle_loading/pages/meeting_the_stand
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 class SavingFuelVehicleLoading extends StatefulWidget {
   const SavingFuelVehicleLoading({super.key});
@@ -31,7 +32,7 @@ class _SavingFuelVehicleLoadingState extends State<SavingFuelVehicleLoading> {
         final data = value.savingFuelVehicleLoading;
         if(data == null)
         {
-          return Center(child: CircularProgressIndicator(),);
+          return Center(child: LoadingScreen(),);
         }
         return Padding(
           padding: const EdgeInsets.all(8.0),

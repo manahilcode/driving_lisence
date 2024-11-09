@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety12.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
 import 'Safety_18.dart';
 
 class Safety_17 extends StatefulWidget {
@@ -35,7 +36,7 @@ class _Safety_17State extends State<Safety_17> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.green,
-        title: Text(
+        title: const Text(
           'Pro tip',
           style: TextStyle(
             fontSize: 20,
@@ -48,7 +49,8 @@ class _Safety_17State extends State<Safety_17> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {

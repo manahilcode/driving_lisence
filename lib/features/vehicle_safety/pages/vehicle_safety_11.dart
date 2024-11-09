@@ -4,6 +4,8 @@ import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety12.d
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_6.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class Safety_11  extends StatefulWidget {
   @override
   _Safety_11State createState() => _Safety_11State();
@@ -67,7 +69,8 @@ class _Safety_11State extends State<Safety_11> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
@@ -88,7 +91,8 @@ class _Safety_11State extends State<Safety_11> {
                     future: fetchImage(),
                     builder: (context, imageSnapshot) {
                       if (imageSnapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                       return const LoadingScreen();
+
                       } else if (imageSnapshot.hasError) {
                         return Center(child: Text('Error loading image: ${imageSnapshot.error}'));
                       } else if (!imageSnapshot.hasData || imageSnapshot.data == null) {

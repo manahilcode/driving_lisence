@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class LaneJunctions extends StatefulWidget {
@@ -40,7 +41,7 @@ class _LaneJunctionsState extends State<LaneJunctions> {
           final data = value.lanesAndJunctionsValue;
           if (data == null) {
             return Center(
-                child: CircularProgressIndicator()); // or any placeholder
+                child: LoadingScreen()); // or any placeholder
           }
           final ans = data.answers;
 

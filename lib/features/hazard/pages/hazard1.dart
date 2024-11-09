@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/hazard/pages/hazard2.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class hazard1 extends StatefulWidget {
   @override
   _hazard1State createState() => _hazard1State();
@@ -64,7 +66,8 @@ class _hazard1State extends State<hazard1> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
@@ -130,7 +133,7 @@ class _hazard1State extends State<hazard1> {
                     future: fetchImage(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return LoadingScreen();
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
@@ -142,11 +145,11 @@ class _hazard1State extends State<hazard1> {
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                    : null,
+                              child: LoadingScreen(
+                                // value: loadingProgress.expectedTotalBytes != null
+                                //     ? loadingProgress.cumulativeBytesLoaded /
+                                //     loadingProgress.expectedTotalBytes!
+                                //     : null,
                               ),
                             );
                           },

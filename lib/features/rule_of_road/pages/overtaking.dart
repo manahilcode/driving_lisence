@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/rule_of_road/pages/Reversing.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class Overtaking extends StatefulWidget {
@@ -39,7 +40,7 @@ class _OvertakingState extends State<Overtaking> {
 
           if (data == null) {
             return Center(
-                child: CircularProgressIndicator()); // or any placeholder
+                child: LoadingScreen()); // or any placeholder
           }
 
           return Padding(

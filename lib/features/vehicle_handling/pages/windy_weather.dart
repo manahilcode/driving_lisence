@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.d
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import 'driving_night.dart';
 
 class WindyWeather extends StatefulWidget {
@@ -26,13 +27,17 @@ class _WindyWeatherState extends State<WindyWeather> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Windy Weather"),
+        title: const Text("Windy Weather",style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: Consumer<IntroductionController>(
         builder: (BuildContext context, value, Widget? child) {
           final data = value.windyModel;
+          if(data == null)
+          {
+            return const LoadingScreen();
+          }
           return Column(
             children: [
               createHeadingText(data?.title ?? ""),

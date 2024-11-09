@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/road_and_traffic_sign/pages/traffic_lig
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class Roadmarkings extends StatefulWidget {
@@ -34,7 +35,7 @@ class _RoadmarkingsState extends State<Roadmarkings> {
           final data = value.roadMarkingRoadSign;
           if(data == null)
           {
-            return const Center(child: CircularProgressIndicator(),);
+            return const Center(child: LoadingScreen(),);
           }
           return SingleChildScrollView(
             child: Padding(

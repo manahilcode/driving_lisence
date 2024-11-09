@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/safety_margin/pages/safety_margin9.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class Safety_margin8 extends StatefulWidget {
   @override
   _Safety_margin8State createState() => _Safety_margin8State();
@@ -64,7 +66,8 @@ class _Safety_margin8State extends State<Safety_margin8> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
@@ -148,7 +151,7 @@ class _Safety_margin8State extends State<Safety_margin8> {
                     future: fetchImage(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return LoadingScreen();
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {

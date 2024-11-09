@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../../vehicle_handling/pages/things_discuss_paractice_instructor.dart';
 import '../viewmodel/controller.dart';
 
@@ -37,7 +38,7 @@ class _ThinkAboutRuleRoadState extends State<ThinkAboutRuleRoad> {
           final  data  = value.thinkAbout;
           if (data == null) {
             return Center(
-                child: CircularProgressIndicator()); // or any placeholder
+                child: LoadingScreen()); // or any placeholder
           }
 
 

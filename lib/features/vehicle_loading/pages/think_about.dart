@@ -2,6 +2,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/vehicle_loading/pages/meeting_the_standard.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _ThinkAboutVehicleLoadingState extends State<ThinkAboutVehicleLoading> {
         final data = value.thinkAboutVehicleLoading;
         if(data == null)
         {
-          return Center(child: CircularProgressIndicator(),);
+          return Center(child: LoadingScreen(),);
         }
         return Padding(
           padding: const EdgeInsets.all(8.0),

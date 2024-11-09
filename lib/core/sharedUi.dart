@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'loader.dart';
+
 Widget createAutoSizeText(String text,
     {double fontSize = 16, Color color = Colors.black87}) {
   return Container(
@@ -75,7 +77,7 @@ Widget buildTipWidget(String paragraphText) {
         // Paragraph text
         Text(
           paragraphText,
-          style: GoogleFonts.roboto(fontSize: 13.0),
+          style: GoogleFonts.roboto(fontSize: 14.0),
         ),
       ],
     ),
@@ -133,7 +135,7 @@ Widget buildImage(String imagePath, {double width = 100, double height = 100}) {
             color: Colors.grey.shade200, // Placeholder background color
             child: const Center(
               child:
-                  CircularProgressIndicator(), // Loading indicator while fetching the image
+                  LoadingScreen(), // Loading indicator while fetching the image
             ),
           );
         }

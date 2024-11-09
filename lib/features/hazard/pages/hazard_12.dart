@@ -5,6 +5,8 @@ import 'package:driving_lisence/features/vehicle_safety/pages/safety_17.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class hazard12  extends StatefulWidget {
   @override
   _hazard12State createState() => _hazard12State();
@@ -51,7 +53,8 @@ class _hazard12State extends State<hazard12> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {

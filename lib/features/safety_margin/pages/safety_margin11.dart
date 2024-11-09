@@ -3,6 +3,8 @@ import 'package:driving_lisence/features/safety_margin/pages/safety_margin12.dar
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_6.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class Safety_margin11 extends StatefulWidget {
   @override
   _Safety_margin11State createState() => _Safety_margin11State();
@@ -66,7 +68,8 @@ class _Safety_margin11State extends State<Safety_margin11> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
@@ -87,7 +90,8 @@ class _Safety_margin11State extends State<Safety_margin11> {
                     future: fetchImage(),
                     builder: (context, imageSnapshot) {
                       if (imageSnapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                       return const LoadingScreen();
+
                       } else if (imageSnapshot.hasError) {
                         return Center(child: Text('Error loading image: ${imageSnapshot.error}'));
                       } else if (!imageSnapshot.hasData || imageSnapshot.data == null) {
@@ -99,11 +103,11 @@ class _Safety_margin11State extends State<Safety_margin11> {
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                    : null,
+                              child: LoadingScreen(
+                                // value: loadingProgress.expectedTotalBytes != null
+                                //     ? loadingProgress.cumulativeBytesLoaded /
+                                //     loadingProgress.expectedTotalBytes!
+                                //     : null,
                               ),
                             );
                           },

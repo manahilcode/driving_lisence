@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class VulnerableRoadUser extends StatefulWidget {
@@ -41,7 +42,7 @@ class _VulnerableRoadUserState extends State<VulnerableRoadUser> {
         final data = value.vulnerableRoadUser;
         if (data == null) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingScreen(),
           );
         }
         final ans = data.answers;

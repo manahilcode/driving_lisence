@@ -16,12 +16,15 @@ import 'features/Quiz/essential_document_quiz/viewmodel/controller.dart';
 import 'features/Quiz/hazard_awareness_quiz/viewmodel/controller.dart';
 import 'features/Quiz/motorway_driving_quiz/viewmodel/controller.dart';
 import 'features/Quiz/other_type_vehicle_quiz/viewmodel/controller.dart';
+import 'features/Quiz/result/pages/result.dart';
+import 'features/Quiz/result/viewmodel/resultController.dart';
 import 'features/Quiz/road_traffic_sign_quiz/viewmodel/controller.dart';
 import 'features/Quiz/safety_margin_quiz/viewmodel/controller.dart';
 import 'features/Quiz/safety_vehicle_quiz/viewmodel/controller.dart';
 import 'features/Quiz/vehicle_handling_quiz/viewmodel/controller.dart';
 import 'features/Quiz/vehicle_loading_quiz/viewmodel/controller.dart';
 import 'features/Quiz/vulnerable_road_user_quiz/viewmodel/controller.dart';
+import 'features/auth/viewmodel/controller.dart';
 import 'features/incident/viewmodel/controller.dart';
 import 'features/othertypepfvehilcle/viewmodel/Trams_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/bus_provider.dart';
@@ -116,12 +119,17 @@ class MyApp extends StatelessWidget {
             create: (_) => EssentialDocumentQuizProvider()),
         ChangeNotifierProvider<RoadTrafficSignQuizProvider>(
             create: (_) => RoadTrafficSignQuizProvider()),
+        ChangeNotifierProvider<AuthController>(
+            create: (_) => AuthController()),
+        ChangeNotifierProvider<ResultController>(
+            create: (_) => ResultController()),
 
-        //RoadTrafficSignQuizProvider
+        //ResultController
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: chooseride(),
+       // home: ResultScreen(),
       ),
     );
   }

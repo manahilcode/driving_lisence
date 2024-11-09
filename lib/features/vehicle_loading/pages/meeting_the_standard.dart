@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'discuss_paractice_instructor.dart';
 class MeetingstandardVehicleloading extends StatefulWidget {
@@ -34,7 +35,7 @@ class _MeetingstandardVehicleloadingState extends State<MeetingstandardVehiclelo
 
         if(data == null)
         {
-          return Center(child: CircularProgressIndicator(),);
+          return Center(child: LoadingScreen(),);
         }
         return SingleChildScrollView(
           child: Padding(

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/safety_margin/pages/safety_margin14.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class SafetyMargin13 extends StatefulWidget {
   @override
   _SafetyMargin13State createState() => _SafetyMargin13State();
@@ -36,7 +38,8 @@ class _SafetyMargin13State extends State<SafetyMargin13> {
         builder: (context, snapshot) {
           // Handle loading state
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           }
 
           // Handle error state

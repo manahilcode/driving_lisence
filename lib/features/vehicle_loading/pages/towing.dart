@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class TowingVehicle extends StatefulWidget {
@@ -43,8 +44,8 @@ class _TowingVehicleState extends State<TowingVehicle> {
           final data = value.towingVehicleLoading;
           print(data);
           if (data == null) {
-            return Center(
-              child: CircularProgressIndicator(),
+            return const Center(
+              child: LoadingScreen(),
             );
           }
 

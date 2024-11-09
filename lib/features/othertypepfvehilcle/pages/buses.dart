@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/othertypepfvehilcle/pages/motercycle.da
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/bus_provider.dart';
 
 class Othertype5 extends StatefulWidget {
@@ -44,7 +45,7 @@ class _Othertype5State extends State<Othertype5> {
         // Show loading indicator while initial data is being fetched
         if (isLoading) {
           return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
+            body: Center(child: LoadingScreen()),
           );
         }
 
@@ -107,11 +108,11 @@ class _Othertype5State extends State<Othertype5> {
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
                       return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                              : null,
+                        child: LoadingScreen(
+                          // value: loadingProgress.expectedTotalBytes != null
+                          //     ? loadingProgress.cumulativeBytesLoaded /
+                          //     loadingProgress.expectedTotalBytes!
+                          //     : null,
                         ),
                       );
                     },

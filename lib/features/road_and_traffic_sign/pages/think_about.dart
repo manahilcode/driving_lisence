@@ -2,6 +2,7 @@ import 'package:driving_lisence/features/road_and_traffic_sign/pages/things_disc
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../../../core/sharedUi.dart';
 import '../viewmodel/controller.dart';
 class ThinkAboutRoadTrafficSign extends StatefulWidget {
@@ -32,7 +33,7 @@ class _ThinkAboutRoadTrafficSignState extends State<ThinkAboutRoadTrafficSign> {
           final data = value.introductionRoadsign;
           if(data == null)
           {
-            return Center(child: CircularProgressIndicator(),);
+            return Center(child: LoadingScreen(),);
           }
           return Padding(
             padding: const EdgeInsets.all(8.0),

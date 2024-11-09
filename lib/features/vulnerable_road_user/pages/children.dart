@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'older_disabled_pedistrains.dart';
 
@@ -38,7 +39,7 @@ class _ChildrenState extends State<Children> {
         final data = value.pedestrianVulnerableRoad;
         if (data == null) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: LoadingScreen(),
           );
         }
         return Padding(

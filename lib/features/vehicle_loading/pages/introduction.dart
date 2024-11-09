@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class IntroductionVehicleLoading extends StatefulWidget {
@@ -37,7 +38,7 @@ class _IntroductionVehicleLoadingState
         final data = value.introductionVehicleLoading;
         if (data == null) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingScreen(),
           );
         }
         return Padding(

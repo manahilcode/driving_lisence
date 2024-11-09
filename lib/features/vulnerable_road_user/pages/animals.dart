@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class Animals extends StatefulWidget {
@@ -40,7 +41,7 @@ class _AnimalsState extends State<Animals> {
           final data = value.animalsVulnerable;
           if(data == null)
             {
-              return Center(child: CircularProgressIndicator(),);
+              return const Center(child: LoadingScreen(),);
             }
           return SingleChildScrollView(
             child: Padding(

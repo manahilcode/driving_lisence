@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
 import 'alert_7.dart';
 
 class TipAttitude6 extends StatefulWidget {
@@ -44,7 +45,7 @@ class _TipAttitude6State extends State<TipAttitude6> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: LoadingScreen());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
@@ -77,11 +78,11 @@ class _TipAttitude6State extends State<TipAttitude6> {
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                                : null,
+                          child: LoadingScreen(
+                            // value: loadingProgress.expectedTotalBytes != null
+                            //     ? loadingProgress.cumulativeBytesLoaded /
+                            //     loadingProgress.expectedTotalBytes!
+                            //     : null,
                           ),
                         );
                       },

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
+
 class Introduction extends StatefulWidget {
   const Introduction({super.key});
 
@@ -39,7 +41,7 @@ class _IntroductionState extends State<Introduction> {
           final data  = value.vulnerableRoadIntroduction;
           if(data == null)
             {
-              return Center(child: CircularProgressIndicator(),);
+              return Center(child: LoadingScreen(),);
             }
           return Padding(
             padding: const EdgeInsets.all(8.0),

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/priority/pages/priority_alert2.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class Tip_attitude_4 extends StatefulWidget {
   @override
   _Tip_attitude_4State createState() => _Tip_attitude_4State();
@@ -92,7 +94,7 @@ class _Tip_attitude_4State extends State<Tip_attitude_4> {
                 future: fetchImage(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data == null) {
@@ -104,11 +106,11 @@ class _Tip_attitude_4State extends State<Tip_attitude_4> {
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                                : null,
+                          child: LoadingScreen(
+                            // value: loadingProgress.expectedTotalBytes != null
+                            //     ? loadingProgress.cumulativeBytesLoaded /
+                            //     loadingProgress.expectedTotalBytes!
+                            //     : null,
                           ),
                         );
                       },
@@ -130,7 +132,7 @@ class _Tip_attitude_4State extends State<Tip_attitude_4> {
                 future: fetchTip(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data == null) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'animals.dart';
 
@@ -43,7 +44,7 @@ class _MotorcycleState extends State<Motorcycle> {
           if(data == null)
             {
               return Center(
-                child: CircularProgressIndicator(),
+                child: LoadingScreen(),
               );
             }
           return Padding(

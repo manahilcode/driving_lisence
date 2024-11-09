@@ -4,6 +4,7 @@ import 'package:driving_lisence/features/road_and_traffic_sign/pages/road_lanes.
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class SignalGivenByPoliceDrivers extends StatefulWidget {
@@ -42,7 +43,7 @@ class _SignalGivenByPoliceDriversState
 
           if (data == null) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: LoadingScreen(),
             );
           }
           final ans = data.answers;

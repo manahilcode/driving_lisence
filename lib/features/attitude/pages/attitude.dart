@@ -6,6 +6,7 @@ import 'package:driving_lisence/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import 'attitude_practice_Question_screen.dart';
 
 class Tip_attitude_1 extends StatefulWidget {
@@ -66,7 +67,7 @@ class _Tip_attitude_1State extends State<Tip_attitude_1> {
                 builder: (context, snapshot) {
                   final data = snapshot.data;
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
+                    return const LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data == null) {
@@ -80,12 +81,12 @@ class _Tip_attitude_1State extends State<Tip_attitude_1> {
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
+                              child: LoadingScreen(
+                                // value: loadingProgress.expectedTotalBytes !=
+                                //         null
+                                //     ? loadingProgress.cumulativeBytesLoaded /
+                                //         loadingProgress.expectedTotalBytes!
+                                //     : null,
                               ),
                             );
                           },

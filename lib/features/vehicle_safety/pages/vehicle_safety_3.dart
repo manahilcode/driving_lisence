@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_4.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class safety_3 extends StatefulWidget {
   @override
   _safety_3State createState() => _safety_3State();
@@ -91,7 +93,7 @@ class _safety_3State extends State<safety_3> {
                 future: fetchImage(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data == null) {
@@ -129,7 +131,7 @@ class _safety_3State extends State<safety_3> {
                 future: fetchTip(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data == null) {

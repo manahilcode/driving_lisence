@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Add this package for date formatting
+import 'package:intl/intl.dart';
+
+import '../../../core/loader.dart'; // Add this package for date formatting
 
 class PassGuaranteeScreen extends StatefulWidget {
   @override
@@ -136,7 +138,7 @@ class _PassGuaranteeScreenState extends State<PassGuaranteeScreen> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
+              const Expanded(
                 flex: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -146,11 +148,11 @@ class _PassGuaranteeScreenState extends State<PassGuaranteeScreen> {
                       height: 80,
                       child: Stack(
                         children: [
-                          CircularProgressIndicator(
-                            value: 0,
-                            backgroundColor: Colors.white.withOpacity(0.3),
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            strokeWidth: 8,
+                          LoadingScreen(
+                            // value: 0,
+                            // backgroundColor: Colors.white.withOpacity(0.3),
+                            // valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            // strokeWidth: 8,
                           ),
                           Center(
                             child: Text(

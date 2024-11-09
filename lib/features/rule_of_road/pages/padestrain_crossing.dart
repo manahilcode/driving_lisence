@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/rule_of_road/pages/level_crossing.dart'
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class PadestrainCrossingRule extends StatefulWidget {
@@ -39,7 +40,7 @@ class _PadestrainCrossingRuleState extends State<PadestrainCrossingRule> {
 
         if (data == null) {
           return Center(
-              child: CircularProgressIndicator()); // or any placeholder
+              child: LoadingScreen()); // or any placeholder
         }
 
         return SingleChildScrollView(

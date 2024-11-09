@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/road_and_traffic_sign/pages/signal_give
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class TrafficLightWarningLight extends StatefulWidget {
@@ -40,7 +41,7 @@ class _TrafficLightWarningLightState extends State<TrafficLightWarningLight> {
           final data = value.trafficLightAndWarning;
           if (data == null) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: LoadingScreen(),
             );
           }
           return SingleChildScrollView(

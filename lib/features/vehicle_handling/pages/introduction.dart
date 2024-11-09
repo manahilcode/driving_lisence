@@ -7,6 +7,8 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../../core/loader.dart';
+
 class IntroductionVehicleHandling extends StatefulWidget {
   const IntroductionVehicleHandling({super.key});
 
@@ -39,7 +41,7 @@ class _IntroductionVehicleHandlingState extends State<IntroductionVehicleHandlin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Road conditions and vehicle handling"),
+        title: const Text("Road conditions and vehicle handling",style: TextStyle(color: Colors.white),),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
@@ -50,7 +52,8 @@ class _IntroductionVehicleHandlingState extends State<IntroductionVehicleHandlin
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               // Show a loading indicator while data is being fetched
-              return Center(child: CircularProgressIndicator());
+             return const LoadingScreen();
+
             } else if (snapshot.hasError) {
               // Handle errors
               return Center(child: Text('Error fetching data: ${snapshot.error}'));
@@ -68,20 +71,23 @@ class _IntroductionVehicleHandlingState extends State<IntroductionVehicleHandlin
                   const Gap(10),
                   buildImage(value.introductionModel?.imageUrl ?? ""),
                   const Gap(10),
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.green),
-                    ),
-                    child: Column(
-                      children: [
-                        buildBulletText(value.introductionModel?.points[0] ?? ""),
-                        buildBulletText(value.introductionModel?.points[1] ?? ""),
-                        buildBulletText(value.introductionModel?.points[2] ?? ""),
-                        buildBulletText(value.introductionModel?.points[3] ?? ""),
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Column(
+                        children: [
+                          buildBulletText(value.introductionModel?.points[0] ?? ""),
+                          buildBulletText(value.introductionModel?.points[1] ?? ""),
+                          buildBulletText(value.introductionModel?.points[2] ?? ""),
+                          buildBulletText(value.introductionModel?.points[3] ?? ""),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),

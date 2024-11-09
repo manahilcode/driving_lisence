@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/hazard/pages/hazard6.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class hazard_5 extends StatefulWidget {
   @override
   _hazard_5State createState() => _hazard_5State();
@@ -70,7 +72,7 @@ class _hazard_5State extends State<hazard_5> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.green,
-        title: Text(
+        title: const Text(
           'Pro tip',
           style: TextStyle(
             fontSize: 20,
@@ -83,7 +85,8 @@ class _hazard_5State extends State<hazard_5> {
         future: fetchAlertData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
@@ -109,7 +112,7 @@ class _hazard_5State extends State<hazard_5> {
                     future: fetchImage(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return LoadingScreen();
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
@@ -121,11 +124,11 @@ class _hazard_5State extends State<hazard_5> {
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                    : null,
+                              child: LoadingScreen(
+                                // value: loadingProgress.expectedTotalBytes != null
+                                //     ? loadingProgress.cumulativeBytesLoaded /
+                                //     loadingProgress.expectedTotalBytes!
+                                //     : null,
                               ),
                             );
                           },
@@ -165,7 +168,7 @@ class _hazard_5State extends State<hazard_5> {
                     future: fetchImage2(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return LoadingScreen();
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
@@ -177,11 +180,11 @@ class _hazard_5State extends State<hazard_5> {
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                    : null,
+                              child: LoadingScreen(
+                                // value: loadingProgress.expectedTotalBytes != null
+                                //     ? loadingProgress.cumulativeBytesLoaded /
+                                //     loadingProgress.expectedTotalBytes!
+                                //     : null,
                               ),
                             );
                           },

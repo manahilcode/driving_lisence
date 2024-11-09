@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
 import 'QuestionPage_Attitude3.dart';
 
 class Tip_attitude_3 extends StatefulWidget {
@@ -96,7 +97,7 @@ class _Tip_attitude_3State extends State<Tip_attitude_3> {
                 future: fetchImage(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data == null) {
@@ -108,11 +109,11 @@ class _Tip_attitude_3State extends State<Tip_attitude_3> {
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                                : null,
+                          child: LoadingScreen(
+                            // value: loadingProgress.expectedTotalBytes != null
+                            //     ? loadingProgress.cumulativeBytesLoaded /
+                            //     loadingProgress.expectedTotalBytes!
+                            //     : null,
                           ),
                         );
                       },
@@ -134,7 +135,7 @@ class _Tip_attitude_3State extends State<Tip_attitude_3> {
                 future: fetchTips(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return LoadingScreen();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data == null || snapshot.data!.isEmpty) {

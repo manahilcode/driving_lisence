@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
 import 'alert3_info.dart';
 
 class QuestionPage_Attitude2 extends StatefulWidget {
@@ -51,7 +52,7 @@ class _QuestionPage_Attitude2State extends State<QuestionPage_Attitude2> {
         future: fetchQuestion(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: LoadingScreen());
           }
 
           Map<String, dynamic> data = snapshot.data!;

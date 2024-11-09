@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../category.dart';
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class ThingDiscussPracticeInstructor extends StatefulWidget {
@@ -42,7 +43,7 @@ class _ThingDiscussPracticeInstructorState
         final data = value.discussInstructorVulnerable;
         if (data == null) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingScreen(),
           );
         }
         return SingleChildScrollView(

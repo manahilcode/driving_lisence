@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.d
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import 'keep_controle_vehicle.dart';
 
 class DrivingNight extends StatefulWidget {
@@ -26,13 +27,17 @@ class _DrivingNightState extends State<DrivingNight> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Driving Night"),
+        title: const Text("Driving Night",style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: Consumer<IntroductionController>(
         builder: (BuildContext context, value, Widget? child) {
           final data = value.drivingNoghtModel;
+          if(data == null)
+          {
+            return const LoadingScreen();
+          }
           return  SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),

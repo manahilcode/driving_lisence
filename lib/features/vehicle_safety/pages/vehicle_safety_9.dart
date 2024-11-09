@@ -3,6 +3,8 @@ import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety10.d
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_8.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/loader.dart';
+
 class safety9 extends StatefulWidget {
   @override
   _safety9State createState() => _safety9State();
@@ -49,7 +51,8 @@ class _safety9State extends State<safety9> {
         future: fetchQuestion(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+           return const LoadingScreen();
+
           }
 
           Map<String, dynamic> data = snapshot.data!;

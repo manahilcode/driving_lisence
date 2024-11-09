@@ -4,6 +4,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class ThingsDiscussParacticeInstructorRuleRoad extends StatefulWidget {
@@ -38,7 +39,7 @@ class _ThingsDiscussParacticeInstructorRuleRoadState
           final data = value.thingsToDiscussPractice;
           if (data == null) {
             return Center(
-                child: CircularProgressIndicator()); // or any placeholder
+                child: LoadingScreen()); // or any placeholder
           }
           return SingleChildScrollView(
             child: Padding(

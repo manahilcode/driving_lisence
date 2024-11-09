@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/vehicle_handling/pages/fog.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class WeatherCondition extends StatefulWidget {
@@ -27,20 +29,31 @@ var futureData;
     super.didChangeDependencies();
   }
 
+int? selectedAnswerIndex;
+bool isCorrect = false;
+bool isSelect = false;
+
   @override
   Widget build(BuildContext context) {
 
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Weather Condition"),
+        title: const Text("Weather Condition",style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: Consumer<IntroductionController>(
         builder: (context, value, child) {
+
           if (value.weatherCondition != null) {
             final data = value.weatherCondition;
+            final ans = data?.answers;
+            final correctAnswer = data?.correctAnswer;
+            if(data == null)
+              {
+                return const LoadingScreen();
+              }
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -54,34 +67,58 @@ var futureData;
                     createAutoSizeText(data.question),
                     const Gap(10),
                     Column(
-                      children: data.answers.entries.map((entry) {
-                        // `entry.key` gives you the key (e.g., "1", "2", ...)
-                        // `entry.value` gives you the answer (e.g., "Flash your headlights as a warning")
-                        return Container(
-                          child: ListTile(
-                            horizontalTitleGap: 0,
-                            leading: Text(
-                              entry.key, // Display the key
-                              style: TextStyle(),
-                            ),
-                            title: Container(
-                              padding: EdgeInsets.only(
-                                  top: 08, bottom: 08, left: 08, right: 08),
-                              decoration: BoxDecoration(
-                                  color: Colors.white, // Background color
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  border: Border.all(color: Colors.grey)),
-                              child: Text(
-                                entry.value, // Display the answer
-                                style: TextStyle(fontSize: 16),
+                      children: ans!.entries.map((entry) {
+                        String answerKey = entry.key; // Key is a string
+                        String answerText = entry.value;
+                        int answerIndex = int.tryParse(answerKey) ?? 0;
+
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 70,
+                            decoration: BoxDecoration(
+                              //    color: isCorrect ? Colors.green.withOpacity(0.3) : Colors.red.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.black, // Border color
+                                width: 1.0, // Border width
                               ),
+                            ),
+                            child: ListTile(
+                              tileColor: selectedAnswerIndex != null
+                                  ? answerText == correctAnswer
+                                  ? Colors.green.withOpacity(0.7)
+                                  : selectedAnswerIndex == answerIndex
+                                  ? Colors.red.withOpacity(0.7)
+                                  : null
+                                  : null,
+                              leading: Text(answerKey),
+                              title: Text(answerText),
+                              trailing: selectedAnswerIndex != null
+                                  ? answerText == correctAnswer
+                                  ? const Icon(Icons.check, color: Colors.green)
+                                  : selectedAnswerIndex == answerIndex
+                                  ? const Icon(Icons.close, color: Colors.red)
+                                  : null
+                                  : null,
+                              onTap: selectedAnswerIndex == null
+                                  ? () {
+                                setState(() {
+                                  selectedAnswerIndex = answerIndex;
+                                  isCorrect = answerText == correctAnswer;
+                                  isSelect = true;
+                                });
+                              }
+                                  : null,
                             ),
                           ),
                         );
                       }).toList(),
                     ),
-
-                    createAutoSizeText(data.correctAnswer),
+                      createHeadingText("Answer"),
+                    Opacity(
+                        opacity: isSelect ? 1 : 0,
+                        child: AutoSizeText(data.correctAnswer)),
 
                     buildImage(data.imageUrl),
 
@@ -158,7 +195,7 @@ var futureData;
           } else {
             return Column(
               children: [
-                const Center(child: CircularProgressIndicator()),
+                const Center(child: LoadingScreen()),
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {

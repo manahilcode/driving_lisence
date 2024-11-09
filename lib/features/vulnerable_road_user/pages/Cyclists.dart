@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 import 'motorcycle.dart';
 
@@ -44,7 +45,7 @@ class _CyclistsState extends State<Cyclists> {
             {
               return  Center(child: Column(
                 children: [
-                  CircularProgressIndicator(),
+                  LoadingScreen(),
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),

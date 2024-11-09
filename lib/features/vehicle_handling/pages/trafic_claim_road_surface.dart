@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.d
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import 'meeting_with_standard.dart';
 
 class TraficClaimRoadSurface extends StatefulWidget {
@@ -26,13 +27,17 @@ class _TraficClaimRoadSurfaceState extends State<TraficClaimRoadSurface> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Traffic Claiming Road Surface"),
+        title: const Text("Traffic Claiming Road Surface",style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: Consumer<IntroductionController>(
         builder: (BuildContext context, value, Widget? child) {
           final data = value.calmingAndRoadSurface;
+          if(data == null)
+          {
+            return const LoadingScreen();
+          }
 
           return SingleChildScrollView(
             child: Padding(

@@ -3,6 +3,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 class DiscussParacticeInstructorVehicleLoading extends StatefulWidget {
   const DiscussParacticeInstructorVehicleLoading({super.key});
@@ -31,7 +32,7 @@ class _DiscussParacticeInstructorVehicleLoadingState extends State<DiscussParact
         final data = value.discussWithInstructorVehicleLoading;
         if(data == null)
         {
-          return Center(child: CircularProgressIndicator(),);
+          return const Center(child: LoadingScreen(),);
         }
         return Padding(
           padding: const EdgeInsets.all(8.0),

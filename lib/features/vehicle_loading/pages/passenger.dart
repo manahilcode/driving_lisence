@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/vehicle_loading/pages/animals.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../viewmodel/controller.dart';
 
 class PassengerVehicleLoading extends StatefulWidget {
@@ -36,7 +37,7 @@ class _PassengerVehicleLoadingState extends State<PassengerVehicleLoading> {
           final data = value.passengerVehicleLoader;
           if (data == null) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: LoadingScreen(),
             );
           }
           return SingleChildScrollView(

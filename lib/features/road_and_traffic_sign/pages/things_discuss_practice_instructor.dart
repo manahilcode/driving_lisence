@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
 import '../../../core/sharedUi.dart';
 import '../viewmodel/controller.dart';
 class ThingsDiscussPracticeInstructorTrafficSign extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ThingsDiscussPracticeInstructorTrafficSignState extends State<ThingsDiscu
           final data = value.discussInstructorRoadSign;
           if(data == null)
           {
-            return Center(child: CircularProgressIndicator(),);
+            return Center(child: LoadingScreen(),);
           }
           return SingleChildScrollView(
             child: Padding(

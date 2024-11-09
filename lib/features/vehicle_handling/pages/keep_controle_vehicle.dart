@@ -4,6 +4,8 @@ import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.d
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
+
 class KeepControleVehicle extends StatefulWidget {
   const KeepControleVehicle({super.key});
 
@@ -30,13 +32,17 @@ class _KeepControleVehicleState extends State<KeepControleVehicle> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Keep Control Of Vehicle "),
+        title: Text("Keep Control Of Vehicle ",style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: Consumer<IntroductionController>(
         builder: (BuildContext context, value, Widget? child) {
           final data = value.controlVehicleModel;
+          if(data == null)
+          {
+            return const LoadingScreen();
+          }
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(

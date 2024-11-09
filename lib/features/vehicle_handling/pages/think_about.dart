@@ -4,6 +4,8 @@ import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.d
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/loader.dart';
+
 class ThinkAbout extends StatefulWidget {
   const ThinkAbout({super.key});
 
@@ -23,32 +25,45 @@ class _ThinkAboutState extends State<ThinkAbout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Think About"),
+        title: const Text("Think About",style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: Consumer<IntroductionController>(
         builder: (BuildContext context, value, Widget? child) {
           final data  = value.thinkAbout;
+
           return value.thinkAbout == null ?const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingScreen(),
           ): Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 createHeadingText(data?.title ?? ""),
-                Container(
-                  child: Column(
-                    children: [
-                      buildBulletText(data!.points[0]),
-                      buildBulletText(data.points[1]),
-                      buildBulletText(data.points[2]),
-                      buildBulletText(data.points[3]),
-                      buildBulletText(data.points[4]),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green),
+                      ),
+                    child: Column(
+                      children: [
+                        buildBulletText(data!.points[0]),
+                        buildBulletText(data.points[1]),
+                        buildBulletText(data.points[2]),
+                        buildBulletText(data.points[3]),
+                        buildBulletText(data.points[4]),
+                      ],
+                    ),
+                  ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 GestureDetector(
