@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'features/Quiz/Incident_quiz/viewmodel/controller.dart';
 import 'features/Quiz/Rule_of_the_road/viewmodel/controller.dart';
 import 'features/Quiz/alertness_quiz/viewmodel/controller.dart';
+import 'features/Quiz/all_categories_quiz/viewmodel/controller.dart';
 import 'features/Quiz/attitude_quiz/viewmodel/controller.dart';
 import 'features/Quiz/essential_document_quiz/viewmodel/controller.dart';
 import 'features/Quiz/hazard_awareness_quiz/viewmodel/controller.dart';
@@ -123,8 +124,10 @@ class MyApp extends StatelessWidget {
             create: (_) => AuthController()),
         ChangeNotifierProvider<ResultController>(
             create: (_) => ResultController()),
+        ChangeNotifierProvider<AllCategoriesQuizProvider>(
+            create: (_) => AllCategoriesQuizProvider()),
 
-        //ResultController
+        //AllCategoriesQuizProvider
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

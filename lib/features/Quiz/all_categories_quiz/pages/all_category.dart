@@ -6,19 +6,20 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../all_categories_quiz/model/model.dart';
 import '../../result/pages/result.dart';
-import '../model/model.dart';
 import '../viewmodel/controller.dart';
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+class AllCategoriesQuizScreen extends StatefulWidget {
+  const AllCategoriesQuizScreen({super.key});
 
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  _AllCategoriesQuizScreenState createState() =>
+      _AllCategoriesQuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
-  late QuizProvider quizProvider;
+class _AllCategoriesQuizScreenState extends State<AllCategoriesQuizScreen> {
+  late AllCategoriesQuizProvider quizProvider;
   late PageController _pageController;
   int correctAnswersCount = 0; // To keep track of correct answers
   List<String> correctQuestions = []; // Store correct questions
@@ -28,7 +29,8 @@ class _QuizScreenState extends State<QuizScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider = Provider.of<QuizProvider>(context, listen: false);
+      quizProvider =
+          Provider.of<AllCategoriesQuizProvider>(context, listen: false);
       quizProvider.fetchQuizzes();
     });
     _pageController = PageController();
@@ -40,21 +42,21 @@ class _QuizScreenState extends State<QuizScreen> {
     super.dispose();
   }
 
-  final String? category = "Alertness_Quiz";
+  final String? category = "all_categories";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '$category',
+          'All Categories',
           style: GoogleFonts.lato(
               color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
-      body: Consumer<QuizProvider>(
+      body: Consumer<AllCategoriesQuizProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
             return const Center(child: LoadingScreen());

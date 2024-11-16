@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'features/Quiz/Incident_quiz/pages/incident_quiz.dart';
 import 'features/Quiz/Rule_of_the_road/pages/rule_of_raod_quiz.dart';
 import 'features/Quiz/alertness_quiz/pages/alertnessquiz.dart';
+import 'features/Quiz/all_categories_quiz/pages/all_category.dart';
 import 'features/Quiz/attitude_quiz/pages/attitude_quiz.dart';
 import 'features/Quiz/essential_document_quiz/pages/essential_document_quiz.dart';
 import 'features/Quiz/hazard_awareness_quiz/pages/hazard_awareness.dart';
@@ -51,30 +52,27 @@ class _CategoryState extends State<Category>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    //  _tabController = TabController(length: 1, vsync: this);
     print(widget.label ?? "");
   }
 
   @override
-  void didChangeDependencies() async{
-   final result = Provider.of<ResultController>(context,listen: false);
-   await result.getAlertnessResult("Alertness_Quiz");
-   await result.getAttitudeResult("Attitude_Quiz");
-   await result.getSafetyVehicleResult("Safety_Vehicle_Quiz");
-   await result.getSafetyMarginResult("Safety_Margin_Quiz");
-   await result.getHazardAwarenessResult("Hazard_Awareness_Quiz");
-   await result.getVulnerableRoadUserResult("Vulnerable_Road_User_Quiz");
-   await result.getOtherTypeVehicleResult("Other_type_of_Vehicle_Quiz");
-   await result.getMotorWayDrivingResult("MotorWay_Driver_Quiz");
-   await result.getVehicleHandlingResult("Vehicle_Handling_Quiz");
-   await result.getRuleOfRoadResult("Rule_of_Road_Quiz");
-   await result.getRoadTrafficSignResult("Road_And_Traffic_Sign_Quiz");
-   await result.getEssentialDocumentResult("Essential_Document_Quiz");
-   await result.getIncidentResult("Incident_Emergency_Quiz");
-   await result.getVehicleLoadingResult("vehicle_Loading_Quiz");
-
-
-
+  void didChangeDependencies() async {
+    final result = Provider.of<ResultController>(context, listen: false);
+    await result.getAlertnessResult("Alertness_Quiz");
+    await result.getAttitudeResult("Attitude_Quiz");
+    await result.getSafetyVehicleResult("Safety_Vehicle_Quiz");
+    await result.getSafetyMarginResult("Safety_Margin_Quiz");
+    await result.getHazardAwarenessResult("Hazard_Awareness_Quiz");
+    await result.getVulnerableRoadUserResult("Vulnerable_Road_User_Quiz");
+    await result.getOtherTypeVehicleResult("Other_type_of_Vehicle_Quiz");
+    await result.getMotorWayDrivingResult("MotorWay_Driver_Quiz");
+    await result.getVehicleHandlingResult("Vehicle_Handling_Quiz");
+    await result.getRuleOfRoadResult("Rule_of_Road_Quiz");
+    await result.getRoadTrafficSignResult("Road_And_Traffic_Sign_Quiz");
+    await result.getEssentialDocumentResult("Essential_Document_Quiz");
+    await result.getIncidentResult("Incident_Emergency_Quiz");
+    await result.getVehicleLoadingResult("vehicle_Loading_Quiz");
 
     super.didChangeDependencies();
   }
@@ -90,7 +88,7 @@ class _CategoryState extends State<Category>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: const Text('Practise Revision Questions'),
+        title: const Text('Category'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -98,39 +96,47 @@ class _CategoryState extends State<Category>
             Navigator.of(context).pop();
           },
         ),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(text: 'Category'),
-            Tab(text: 'Progress'),
-            Tab(text: 'Selected'),
-          ],
-          labelColor: Colors.white,
-          unselectedLabelColor: Colors.white70,
-          indicatorColor: Colors.white,
-        ),
+        // bottom: TabBar(
+        //   controller: _tabController,
+        //   tabs: const [
+        //     Tab(text: 'Category',),
+        //     // Tab(text: 'Progress'),
+        //     // Tab(text: 'Selected'),
+        //   ],
+        //   labelColor: Colors.white,
+        //   unselectedLabelColor: Colors.white70,
+        //   indicatorColor: Colors.white,
+        //   labelStyle: const TextStyle(fontWeight: FontWeight.bold,
+        //     color: Colors.black
+        //
+        //   ),
+        // ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                // Adding all category items here
-                CategoryItem(
-                  icon: Icons.list,
-                  title: 'All categories',
-                  progress: 0,
-                  answered: 19,
-                  correct: 6,
-                  total: 774,
-                  isSelected: _selectedCategories[0],
-                  onTap: () => _toggleSelection(0),
-                  categoryScreen: PracticeRevisionDialog(),
-                ),
-                Consumer<ResultController>(
-                  builder: (context,value,child) {
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                children: [
+                  // Adding all category items here
+                  //AllCategoriesQuizScreen
+                  CategoryItem(
+                      icon: Icons.list,
+                      title: 'All categories',
+                      progress: 0,
+                      answered: 19,
+                      correct: 6,
+                      total: 774,
+                      isSelected: _selectedCategories[0],
+                      onTap: () => _toggleSelection(0),
+                      categoryScreen: widget.label == "PracticeQuiz"
+                          ? const AllCategoriesQuizScreen()
+                          : const IntroductionAlertness()),
+                  Consumer<ResultController>(builder: (context, value, child) {
                     final data = value.alertness;
-                    final answered = int.tryParse(data?["correctQuestion"] ?? "");
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
                     final total = int.tryParse(data?["totalQuestion"] ?? "");
                     final category = data?["category"] ?? "";
                     // Calculate progress as a percentage of answered vs total
@@ -145,19 +151,18 @@ class _CategoryState extends State<Category>
                         title: 'Alertness',
                         progress: progress.toInt(),
                         answered: 0,
-                        correct: answered ??0,
+                        correct: answered ?? 0,
                         total: total ?? 0,
                         isSelected: _selectedCategories[1],
                         onTap: () => _toggleSelection(1),
                         categoryScreen: widget.label == "PracticeQuiz"
                             ? const QuizScreen()
                             : const IntroductionAlertness());
-                  }
-                ),
-                Consumer<ResultController>(
-                  builder: (context,value,child) {
+                  }),
+                  Consumer<ResultController>(builder: (context, value, child) {
                     final data = value.attitude;
-                    final answered = int.tryParse(data?["correctQuestion"] ?? "");
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
                     final total = int.tryParse(data?["totalQuestion"] ?? "");
                     final category = data?["category"] ?? "";
                     double progress = 0.0;
@@ -170,7 +175,7 @@ class _CategoryState extends State<Category>
                       title: 'Attitude',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[2],
                       onTap: () => _toggleSelection(2),
@@ -178,27 +183,26 @@ class _CategoryState extends State<Category>
                           ? const AttitudeQuizScreens()
                           : const Tip_attitude_1(),
                     );
-                  }
-                ),
-                //
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.safetyVehicle;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.safetyVehicle;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
 
                     return CategoryItem(
                       icon: Icons.speed,
                       title: 'Safety and your vehicle',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[3],
                       onTap: () => _toggleSelection(3),
@@ -206,26 +210,25 @@ class _CategoryState extends State<Category>
                           ? const SafetyVehicleQuizScreens()
                           : Safety_1(),
                     );
-                  }
-                ),
-                //SafetyMarginQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.safetyMargin;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //SafetyMarginQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.safetyMargin;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.traffic,
                       title: 'Safety margins',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[4],
                       onTap: () => _toggleSelection(4),
@@ -233,26 +236,25 @@ class _CategoryState extends State<Category>
                           ? const SafetyMarginQuizScreens()
                           : safety_margin1(),
                     );
-                  }
-                ),
-                //HazardAwarenessQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.hazardAwareness;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //HazardAwarenessQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.hazardAwareness;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.visibility,
                       title: 'Hazard awareness',
-                      progress:progress.toInt() ?? 0,
+                      progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[5],
                       onTap: () => _toggleSelection(5),
@@ -260,26 +262,25 @@ class _CategoryState extends State<Category>
                           ? const HazardAwarenessQuizScreens()
                           : hazard1(),
                     );
-                  }
-                ),
-                //SafetyMarginQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.vulnerableRoadUser;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //SafetyMarginQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.vulnerableRoadUser;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.local_hospital,
                       title: 'Vulnerable road users',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[6],
                       onTap: () => _toggleSelection(6),
@@ -287,26 +288,25 @@ class _CategoryState extends State<Category>
                           ? const VulnerableRoadUserQuizScreens()
                           : const Introduction(),
                     );
-                  }
-                ),
-                //OtherTypeVehicleQuizScreen
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.otherTypeVehicle;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //OtherTypeVehicleQuizScreen
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.otherTypeVehicle;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.navigation,
                       title: 'Other types of vehicle',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[7],
                       onTap: () => _toggleSelection(7),
@@ -314,26 +314,25 @@ class _CategoryState extends State<Category>
                           ? const OtherTypeVehicleQuizScreen()
                           : PracticeRevisionDialog(),
                     );
-                  }
-                ),
-                //MotowayDriverQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.motorWayDriving;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //MotowayDriverQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.motorWayDriving;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.car_crash_outlined,
                       title: 'Motorway driving',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[8],
                       onTap: () => _toggleSelection(8),
@@ -341,26 +340,25 @@ class _CategoryState extends State<Category>
                           ? const MotowayDriverQuizScreens()
                           : const IntroductionHighWay(),
                     );
-                  }
-                ),
-                //VehicleHandlingQuizProvider
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.vehicleHandling;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //VehicleHandlingQuizProvider
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.vehicleHandling;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.car_crash_outlined,
                       title: 'Vehicle handling',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[9],
                       onTap: () => _toggleSelection(9),
@@ -368,26 +366,25 @@ class _CategoryState extends State<Category>
                           ? const VehicleHandlingQuizScreens()
                           : const IntroductionVehicleHandling(),
                     );
-                  }
-                ),
-                //RuleOfRoadQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.ruleOfRoad;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //RuleOfRoadQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.ruleOfRoad;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.lightbulb_outline,
                       title: 'Rules of the road',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[10],
                       onTap: () => _toggleSelection(10),
@@ -395,26 +392,25 @@ class _CategoryState extends State<Category>
                           ? const RuleOfRoadQuizScreens()
                           : const IntroductionRoadRule(),
                     );
-                  }
-                ),
-                //RoadTrafficSignQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.roadTrafficSign;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //RoadTrafficSignQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.roadTrafficSign;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.local_police,
                       title: 'Road and traffic signs',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[11],
                       onTap: () => _toggleSelection(11),
@@ -422,26 +418,25 @@ class _CategoryState extends State<Category>
                           ? const RoadTrafficSignQuizScreens()
                           : const IntroductionRoadSign(),
                     );
-                  }
-                ),
-                //EssentialDocumentQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.essentialDocument;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //EssentialDocumentQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.essentialDocument;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.build,
                       title: 'Essential documents',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[12],
                       onTap: () => _toggleSelection(12),
@@ -449,26 +444,25 @@ class _CategoryState extends State<Category>
                           ? const EssentialDocumentQuizScreens()
                           : const IntroductionEDocumentt(),
                     );
-                  }
-                ),
-                //IncidentQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.incident;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //IncidentQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.incident;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.warning_amber_rounded,
                       title: 'Incidents, accidents, and emergencies',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[13],
                       onTap: () => _toggleSelection(13),
@@ -476,26 +470,25 @@ class _CategoryState extends State<Category>
                           ? const IncidentQuizScreens()
                           : const IncidentAccidentAndEmergency(),
                     );
-                  }
-                ),
-                //VehicleLoadingQuizScreens
-                Consumer<ResultController>(
-                    builder: (context,value,child) {
-                      final data = value.vehicleLoading;
-                      final answered = int.tryParse(data?["correctQuestion"] ?? "");
-                      final total = int.tryParse(data?["totalQuestion"] ?? "");
-                      final category = data?["category"] ?? "";
-                      double progress = 0.0;
+                  }),
+                  //VehicleLoadingQuizScreens
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.vehicleLoading;
+                    final answered =
+                        int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
 
-                      if (answered != null && total != null && total > 0) {
-                        progress = (answered / total) * 100;
-                      }
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
                     return CategoryItem(
                       icon: Icons.warning_amber_rounded,
                       title: 'Vehicle Loading',
                       progress: progress.toInt() ?? 0,
                       answered: 0,
-                      correct: answered ??0,
+                      correct: answered ?? 0,
                       total: total ?? 0,
                       isSelected: _selectedCategories[14],
                       onTap: () => _toggleSelection(14),
@@ -503,39 +496,40 @@ class _CategoryState extends State<Category>
                           ? const VehicleLoadingQuizScreens()
                           : const IntroductionVehicleLoading(),
                     );
-                  }
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Select one or more categories to revise',
-              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                  }),
+                ],
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => _getCategoryScreen(selectedIndex)),
-                );
-              },
-              child: const Text('CONTINUE', style: TextStyle(fontSize: 18)),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Select one or more categories to revise',
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            _getCategoryScreen(selectedIndex)),
+                  );
+                },
+                child: const Text('CONTINUE', style: TextStyle(fontSize: 18)),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -558,7 +552,9 @@ class _CategoryState extends State<Category>
   Widget _getCategoryScreen(int index) {
     switch (index) {
       case 0:
-        return PracticeRevisionDialog();
+        return widget.label == "PracticeQuiz"
+            ? const AllCategoriesQuizScreen()
+            : PracticeRevisionDialog();
       case 1:
         return widget.label == "PracticeQuiz"
             ? const QuizScreen()
