@@ -14,6 +14,7 @@ class ResultScreen extends StatefulWidget {
   final String? totalQuestion;
   final List<String> correctQuestions; // Store correct questions
   final List<String> wrongAnswers; // Store wrong questions
+  final int currentQuestionIndex;
 
   ResultScreen({
     super.key,
@@ -22,6 +23,7 @@ class ResultScreen extends StatefulWidget {
     this.totalQuestion,
     required this.correctQuestions,
     required this.wrongAnswers,
+    required this.currentQuestionIndex,
   });
 
   @override
@@ -245,7 +247,7 @@ class _ResultScreenState extends State<ResultScreen> {
               const Gap(20),
               GestureDetector(
                 onTap: () async {
-                  final user = FirebaseAuth.instance.currentUser?.uid;
+                  final user =  FirebaseAuth.instance.currentUser?.uid;
                   await FirebaseFirestore.instance
                       .collection("result")
                       .doc(widget.catType)
@@ -253,7 +255,8 @@ class _ResultScreenState extends State<ResultScreen> {
                     "category": widget.catType,
                     "totalQuestion": widget.totalQuestion,
                     "correctQuestion": widget.correctAnswer,
-                    "userId": user
+                    "userId": user,
+                    "currentIndex":widget.currentQuestionIndex,
                   });
                   Route newRoute = MaterialPageRoute(
                       builder: (context) => CorrectWrongQuestion(

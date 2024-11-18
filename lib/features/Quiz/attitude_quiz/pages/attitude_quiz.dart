@@ -27,15 +27,49 @@ class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       quizProvider = Provider.of<AttitudeQuizProvider>(context, listen: false);
       quizProvider.fetchQuizzes();
+      await quizProvider.loadLastQuestionIndex(category!);
+      final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+
+      if (currentIndex > 0) {
+        _showResumeDialog();
+      }
     });
     _pageController = PageController();
   }
 
+  void _showResumeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Resume Quiz'),
+        content: const Text(
+            'Do you want to resume from where you left off or start over?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _pageController.jumpToPage(quizProvider.getCurrentQuestionIndex(category!));
+            },
+            child: const Text('Resume'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _pageController.jumpToPage(0);
+            },
+            child: const Text('Start Over'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void dispose() {
+    quizProvider.saveLastQuestionIndex(category!);
     _pageController.dispose();
     super.dispose();
   }
@@ -62,6 +96,8 @@ class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
+          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+
           return Column(
             children: [
               Padding(
@@ -79,6 +115,9 @@ class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
                   controller: _pageController,
                   itemCount: provider.quizzes.length,
                   physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (index) {
+                    quizProvider.updateQuestionIndex(category!,index);
+                  },
                   itemBuilder: (context, index) {
                     final quiz = provider.quizzes[index];
                     return QuizItem(
@@ -108,6 +147,7 @@ class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
                       correctAnswersCount: correctAnswersCount,
                       correctQuestions: correctQuestions,
                       wrongQuestions: wrongQuestions,
+                      currentIndex: currentIndex,
                     );
                   },
                 ),
@@ -131,6 +171,8 @@ class QuizItem extends StatefulWidget {
   final int correctAnswersCount; // Add correctAnswersCount parameter
   final List<String> correctQuestions; // Pass correct questions
   final List<String> wrongQuestions; // Pass wrong questions
+  final int currentIndex;
+
 
   QuizItem(
       {super.key,
@@ -143,7 +185,9 @@ class QuizItem extends StatefulWidget {
       required this.onWrongAnswer,
       required this.correctAnswersCount,
       required this.correctQuestions,
-      required this.wrongQuestions});
+      required this.wrongQuestions,
+        required this.currentIndex
+      });
 
   @override
   _QuizItemState createState() => _QuizItemState();
@@ -295,21 +339,22 @@ class _QuizItemState extends State<QuizItem> {
                         } else {
                           Route newRoute = MaterialPageRoute(
                               builder: (context) => ResultScreen(
-                                correctAnswer:
-                                widget.correctAnswersCount.toString(),
-                                wrongAnswers: widget
-                                    .wrongQuestions, // Pass the list of wrong questions
-                                correctQuestions: widget.correctQuestions,
-                                catType: widget.category,
-                                totalQuestion:
-                                widget.totalQuestions.toString(),
-                              ));
+                                    correctAnswer:
+                                        widget.correctAnswersCount.toString(),
+                                    wrongAnswers: widget
+                                        .wrongQuestions, // Pass the list of wrong questions
+                                    correctQuestions: widget.correctQuestions,
+                                    catType: widget.category,
+                                    totalQuestion:
+                                        widget.totalQuestions.toString(),
+                                    currentQuestionIndex: widget.currentIndex,
+                                  ));
 
                           Navigator.pushAndRemoveUntil(
                             context,
                             newRoute,
-                                (Route<dynamic> route) =>
-                            false, // Removes all previous routes
+                            (Route<dynamic> route) =>
+                                false, // Removes all previous routes
                           );
                         }
                       }

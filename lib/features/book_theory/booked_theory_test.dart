@@ -53,25 +53,25 @@ class _YourTheoryTestScreenState extends State<YourTheoryTestScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             const Text(
               'Making progress...',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             const Text(
               'Have you booked your Theory Test?',
               style: TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             _buildOptionButton('Yes', Icons.check_circle_outline),
             const SizedBox(height: 10),
             _buildOptionButton('No', Icons.close),
             if (selectedOption == 'yes') ...[
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               _buildDateTimeSelection(),
             ],
-            const Spacer(),
+
             _buildBottomNavigation(),
           ],
         ),

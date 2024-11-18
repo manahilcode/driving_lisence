@@ -30,15 +30,49 @@ class _SafetyVehicleQuizScreensState extends State<SafetyVehicleQuizScreens> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_)async {
       quizProvider = Provider.of<SafetyVehicleQuizProvider>(context, listen: false);
       quizProvider.fetchQuizzes();
+      await quizProvider.loadLastQuestionIndex(category!);
+      final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+
+      if (currentIndex > 0) {
+        _showResumeDialog();
+      }
     });
     _pageController = PageController();
   }
 
+  void _showResumeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Resume Quiz'),
+        content: const Text(
+            'Do you want to resume from where you left off or start over?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _pageController.jumpToPage(quizProvider.getCurrentQuestionIndex(category!));
+            },
+            child: const Text('Resume'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _pageController.jumpToPage(0);
+            },
+            child: const Text('Start Over'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void dispose() {
+    quizProvider.saveLastQuestionIndex(category!);
     _pageController.dispose();
     super.dispose();
   }
@@ -66,6 +100,7 @@ class _SafetyVehicleQuizScreensState extends State<SafetyVehicleQuizScreens> {
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
+          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
 
           return Column(
             children: [
@@ -84,6 +119,9 @@ class _SafetyVehicleQuizScreensState extends State<SafetyVehicleQuizScreens> {
                   controller: _pageController,
                   itemCount: provider.quizzes.length,
                   physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (index) {
+                    quizProvider.updateQuestionIndex(category!, index);
+                  },
                   itemBuilder: (context, index) {
                     final quiz = provider.quizzes[index];
                     return QuizItem(
@@ -111,6 +149,7 @@ class _SafetyVehicleQuizScreensState extends State<SafetyVehicleQuizScreens> {
                       correctAnswersCount: correctAnswersCount,
                       correctQuestions: correctQuestions,
                       wrongQuestions: wrongQuestions,
+                      currentIndex: currentIndex,
                     );
                   },
                 ),
@@ -134,6 +173,7 @@ class QuizItem extends StatefulWidget {
   final int correctAnswersCount; // Add correctAnswersCount parameter
   final List<String> correctQuestions; // Pass correct questions
   final List<String> wrongQuestions; // Pass wrong questions
+  final int currentIndex;
 
   QuizItem({
     super.key,
@@ -147,6 +187,9 @@ class QuizItem extends StatefulWidget {
     required this.correctAnswersCount,
     required this.correctQuestions,
     required this.wrongQuestions,
+    required this.currentIndex,
+
+
   });
 
   @override
@@ -306,6 +349,7 @@ class _QuizItemState extends State<QuizItem> {
                           catType: widget.category,
                           totalQuestion:
                           widget.totalQuestions.toString(),
+                          currentQuestionIndex: widget.currentIndex,
                         ));
 
                     Navigator.pushAndRemoveUntil(

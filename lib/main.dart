@@ -7,6 +7,7 @@ import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.d
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'features/Quiz/Incident_quiz/viewmodel/controller.dart';
 import 'features/Quiz/Rule_of_the_road/viewmodel/controller.dart';
@@ -120,19 +121,80 @@ class MyApp extends StatelessWidget {
             create: (_) => EssentialDocumentQuizProvider()),
         ChangeNotifierProvider<RoadTrafficSignQuizProvider>(
             create: (_) => RoadTrafficSignQuizProvider()),
-        ChangeNotifierProvider<AuthController>(
-            create: (_) => AuthController()),
+        ChangeNotifierProvider<AuthController>(create: (_) => AuthController()),
         ChangeNotifierProvider<ResultController>(
             create: (_) => ResultController()),
         ChangeNotifierProvider<AllCategoriesQuizProvider>(
             create: (_) => AllCategoriesQuizProvider()),
-
-        //AllCategoriesQuizProvider
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: chooseride(),
-       // home: ResultScreen(),
+        builder: (context, child) {
+          return ConnectivityWrapper(
+            child: child ?? const SizedBox.shrink(),
+          );
+        },
+        home: const chooseride(),
+      ),
+    );
+  }
+}
+
+class ConnectivityWrapper extends StatelessWidget {
+  final Widget child;
+
+  const ConnectivityWrapper({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          child,
+          StreamBuilder<List<ConnectivityResult>>(  // Changed to List<ConnectivityResult>
+            stream: Connectivity().onConnectivityChanged,
+            builder: (context, snapshot) {
+              // Check if we have no data or if the connection is none
+              final hasNoConnection = !snapshot.hasData ||
+                  snapshot.data?.isEmpty == true ||
+                  snapshot.data?.contains(ConnectivityResult.none) == true;
+
+              if (hasNoConnection) {
+                return Positioned.fill(
+                  child: Container(
+                    color: Colors.black87,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.wifi_off,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(height: 20),
+                        const Text(
+                          'No Internet Connection',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () async {
+                            final result = await Connectivity().checkConnectivity();
+                            if (result != ConnectivityResult.none) {
+                              // Optional: Add any refresh logic here
+                            }
+                          },
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ],
       ),
     );
   }

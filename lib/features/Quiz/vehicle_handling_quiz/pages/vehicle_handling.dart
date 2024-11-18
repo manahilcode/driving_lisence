@@ -1,5 +1,3 @@
-
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +12,16 @@ import '../model/model.dart';
 import '../viewmodel/controller.dart';
 
 class VehicleHandlingQuizScreens extends StatefulWidget {
-  const VehicleHandlingQuizScreens({super.key}); // Changed to unnamed constructor
+  const VehicleHandlingQuizScreens(
+      {super.key}); // Changed to unnamed constructor
 
   @override
-  _VehicleHandlingQuizScreensState createState() => _VehicleHandlingQuizScreensState();
+  _VehicleHandlingQuizScreensState createState() =>
+      _VehicleHandlingQuizScreensState();
 }
 
-class _VehicleHandlingQuizScreensState extends State<VehicleHandlingQuizScreens> {
+class _VehicleHandlingQuizScreensState
+    extends State<VehicleHandlingQuizScreens> {
   late VehicleHandlingQuizProvider quizProvider;
   late PageController _pageController;
   int correctAnswersCount = 0; // To keep track of correct answers
@@ -30,22 +31,57 @@ class _VehicleHandlingQuizScreensState extends State<VehicleHandlingQuizScreens>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider = Provider.of<VehicleHandlingQuizProvider>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      quizProvider =
+          Provider.of<VehicleHandlingQuizProvider>(context, listen: false);
       quizProvider.fetchQuizzes();
+      await quizProvider.loadLastQuestionIndex(category!);
+      final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+
+      if (currentIndex > 0) {
+        _showResumeDialog();
+      }
     });
     _pageController = PageController();
   }
 
+  void _showResumeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Resume Quiz'),
+        content: const Text(
+            'Do you want to resume from where you left off or start over?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _pageController.jumpToPage(quizProvider.getCurrentQuestionIndex(category!));
+            },
+            child: const Text('Resume'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _pageController.jumpToPage(0);
+            },
+            child: const Text('Start Over'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void dispose() {
+    quizProvider.saveLastQuestionIndex(category!);
     _pageController.dispose();
     super.dispose();
   }
+
   final String? category = "Vehicle_Handling_Quiz";
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -66,6 +102,7 @@ class _VehicleHandlingQuizScreensState extends State<VehicleHandlingQuizScreens>
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
+          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
 
           return Column(
             children: [
@@ -84,6 +121,9 @@ class _VehicleHandlingQuizScreensState extends State<VehicleHandlingQuizScreens>
                   controller: _pageController,
                   itemCount: provider.quizzes.length,
                   physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (index) {
+                    quizProvider.updateQuestionIndex(category!, index);
+                  },
                   itemBuilder: (context, index) {
                     final quiz = provider.quizzes[index];
                     return QuizItem(
@@ -95,22 +135,24 @@ class _VehicleHandlingQuizScreensState extends State<VehicleHandlingQuizScreens>
                         setState(() {
                           correctAnswersCount++;
                           if (!correctQuestions.contains(quiz.question)) {
-                            correctQuestions.add(quiz.question); // Add to correct list only if it's not already added
+                            correctQuestions.add(quiz
+                                .question); // Add to correct list only if it's not already added
                           }
-
                         });
                       },
                       onWrongAnswer: () {
                         setState(() {
                           if (!wrongQuestions.contains(quiz.question)) {
-                            wrongQuestions.add(quiz.question); // Add to wrong list only if it's not already added
-                          }// Add to wrong list
+                            wrongQuestions.add(quiz
+                                .question); // Add to wrong list only if it's not already added
+                          } // Add to wrong list
                         });
                       },
                       category: "$category",
                       correctAnswersCount: correctAnswersCount,
                       correctQuestions: correctQuestions,
                       wrongQuestions: wrongQuestions,
+                      currentIndex: currentIndex,
                     );
                   },
                 ),
@@ -134,6 +176,7 @@ class QuizItem extends StatefulWidget {
   final int correctAnswersCount; // Add correctAnswersCount parameter
   final List<String> correctQuestions; // Pass correct questions
   final List<String> wrongQuestions; // Pass wrong questions
+  final int currentIndex;
 
   QuizItem({
     super.key,
@@ -147,6 +190,7 @@ class QuizItem extends StatefulWidget {
     required this.correctAnswersCount,
     required this.correctQuestions,
     required this.wrongQuestions,
+    required this.currentIndex,
   });
 
   @override
@@ -287,35 +331,36 @@ class _QuizItemState extends State<QuizItem> {
               ElevatedButton(
                 onPressed: selectedAnswer != null
                     ? () {
-                  // Navigate to the next question
-                  if (widget.pageController.page!.toInt() <
-                      widget.totalQuestions - 1) {
-                    widget.pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeIn,
-                    );
-                  } else {
-                    // Navigate to results screen
-                    Route newRoute = MaterialPageRoute(
-                        builder: (context) => ResultScreen(
-                          correctAnswer:
-                          widget.correctAnswersCount.toString(),
-                          wrongAnswers: widget
-                              .wrongQuestions, // Pass the list of wrong questions
-                          correctQuestions: widget.correctQuestions,
-                          catType: widget.category,
-                          totalQuestion:
-                          widget.totalQuestions.toString(),
-                        ));
+                        // Navigate to the next question
+                        if (widget.pageController.page!.toInt() <
+                            widget.totalQuestions - 1) {
+                          widget.pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        } else {
+                          // Navigate to results screen
+                          Route newRoute = MaterialPageRoute(
+                              builder: (context) => ResultScreen(
+                                    correctAnswer:
+                                        widget.correctAnswersCount.toString(),
+                                    wrongAnswers: widget
+                                        .wrongQuestions, // Pass the list of wrong questions
+                                    correctQuestions: widget.correctQuestions,
+                                    catType: widget.category,
+                                    totalQuestion:
+                                        widget.totalQuestions.toString(),
+                                    currentQuestionIndex: widget.currentIndex,
+                                  ));
 
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      newRoute,
-                          (Route<dynamic> route) =>
-                      false, // Removes all previous routes
-                    );
-                  }
-                }
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            newRoute,
+                            (Route<dynamic> route) =>
+                                false, // Removes all previous routes
+                          );
+                        }
+                      }
                     : null,
                 child: const Text('Next'),
               ),

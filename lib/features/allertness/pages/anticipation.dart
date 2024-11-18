@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
+
 import 'package:driving_lisence/core/loader.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/allertness/pages/stay_focus.dart';
 import 'package:driving_lisence/features/allertness/viewmodel/controller.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
 
 class AnticipationAlert extends StatefulWidget {
   const AnticipationAlert({super.key});

@@ -22,12 +22,20 @@ class _RegistorScreenState extends State<RegistorScreen> {
 
   bool _obscureTextPassword = true;
   bool _obscureTextConfirmPassword = true;
+  bool _isLoading = false; // Loading state
+
 
   // Function to handle signup logic
   void _handleSignup() {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true; // Start loading
+      });
       final auth = Provider.of<AuthController>(context, listen: false);
       auth.SignUpWithEmailAndPassword(context, _name, _email, _password);
+      setState(() {
+        _isLoading = false; // Stop loading
+      });
       print("Name: $_name");
       print("Email: $_email");
       print("Password: $_password");
@@ -261,7 +269,9 @@ class _RegistorScreenState extends State<RegistorScreen> {
               const SizedBox(height: 20),
 
               // Signup Button
-              ElevatedButton(
+              _isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ElevatedButton(
                 onPressed: _handleSignup,
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
