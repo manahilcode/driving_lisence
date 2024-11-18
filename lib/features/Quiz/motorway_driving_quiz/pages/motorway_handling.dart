@@ -29,6 +29,7 @@ class _MotowayDriverQuizScreensState extends State<MotowayDriverQuizScreens> {
 
   @override
   void initState() {
+    _pageController = PageController();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
       quizProvider = Provider.of<MotoWayDrivingQuizProvider>(context, listen: false);
@@ -40,7 +41,6 @@ class _MotowayDriverQuizScreensState extends State<MotowayDriverQuizScreens> {
         _showResumeDialog();
       }
     });
-    _pageController = PageController();
   }
 
   void _showResumeDialog() {
@@ -101,7 +101,7 @@ class _MotowayDriverQuizScreensState extends State<MotowayDriverQuizScreens> {
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
-          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+          final currentIndex = provider.getCurrentQuestionIndex(category!);
 
           return Column(
             children: [

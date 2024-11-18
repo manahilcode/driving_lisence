@@ -31,6 +31,7 @@ class _RoadTrafficSignQuizScreensState
 
   @override
   void initState() {
+    _pageController = PageController();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_)async {
       quizProvider =
@@ -43,7 +44,6 @@ class _RoadTrafficSignQuizScreensState
         _showResumeDialog();
       }
     });
-    _pageController = PageController();
   }
 
   void _showResumeDialog() {
@@ -103,7 +103,7 @@ class _RoadTrafficSignQuizScreensState
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
-          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+          final currentIndex = provider.getCurrentQuestionIndex(category!);
 
           return Column(
             children: [

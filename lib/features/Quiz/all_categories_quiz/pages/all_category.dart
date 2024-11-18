@@ -101,7 +101,7 @@ class _AllCategoriesQuizScreenState extends State<AllCategoriesQuizScreen> {
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
-          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+          final currentIndex = provider.getCurrentQuestionIndex(category!);
 
           return Column(
             children: [

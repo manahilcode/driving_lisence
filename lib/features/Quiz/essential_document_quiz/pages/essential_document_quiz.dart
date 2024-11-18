@@ -30,6 +30,7 @@ class _EssentialDocumentQuizScreensState
 
   @override
   void initState() {
+
     _pageController = PageController();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
@@ -104,7 +105,7 @@ class _EssentialDocumentQuizScreensState
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
-          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+          final currentIndex = provider.getCurrentQuestionIndex(category!);
 
           return Column(
             children: [

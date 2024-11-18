@@ -29,6 +29,7 @@ class _IncidentQuizScreensState extends State<IncidentQuizScreens> {
 
   @override
   void initState() {
+    _pageController = PageController();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
       quizProvider = Provider.of<IncidentQuizProvider>(context, listen: false);
@@ -40,7 +41,6 @@ class _IncidentQuizScreensState extends State<IncidentQuizScreens> {
         _showResumeDialog();
       }
     });
-    _pageController = PageController();
   }
 
   void _showResumeDialog() {
@@ -101,7 +101,7 @@ class _IncidentQuizScreensState extends State<IncidentQuizScreens> {
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
-          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+          final currentIndex = provider.getCurrentQuestionIndex(category!);
           return Column(
             children: [
               Padding(

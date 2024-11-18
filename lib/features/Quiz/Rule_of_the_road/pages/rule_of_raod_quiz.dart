@@ -29,6 +29,7 @@ class _RuleOfRoadQuizScreensState extends State<RuleOfRoadQuizScreens> {
 
   @override
   void initState() {
+    _pageController = PageController();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
       quizProvider = Provider.of<RuleOfRoadQuizProvider>(context, listen: false);
@@ -40,7 +41,6 @@ class _RuleOfRoadQuizScreensState extends State<RuleOfRoadQuizScreens> {
         _showResumeDialog();
       }
     });
-    _pageController = PageController();
   }
 
   void _showResumeDialog() {
@@ -100,7 +100,7 @@ class _RuleOfRoadQuizScreensState extends State<RuleOfRoadQuizScreens> {
           if (provider.quizzes.isEmpty) {
             return const Center(child: Text('No quizzes available'));
           }
-          final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
+          final currentIndex = provider.getCurrentQuestionIndex(category!);
 
           return Column(
             children: [
