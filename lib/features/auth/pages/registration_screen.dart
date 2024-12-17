@@ -201,15 +201,15 @@ class _SignupScreenState extends State<SignupScreen> {
                 GestureDetector(
                   onTap: isAllChecked
                       ? () {
-                    final auth = Provider.of<AuthController>(context,
-                        listen: false);
-                    auth.setUsrData({"agreement": true});
-                    auth.SignInWithGoogle(context);
-                    // Navigator.pushAndRemoveUntil(context,
-                    //     MaterialPageRoute(
-                    //         builder: (BuildContext context) {
-                    //           return const RegistorScreen();
-                    //         }), (route) => false);
+                          final auth = Provider.of<AuthController>(context,
+                              listen: false);
+                          auth.setUsrData({"agreement": true});
+                          auth.SignInWithGoogle(context);
+                          // Navigator.pushAndRemoveUntil(context,
+                          //     MaterialPageRoute(
+                          //         builder: (BuildContext context) {
+                          //           return const RegistorScreen();
+                          //         }), (route) => false);
                         }
                       : () {
                           ScaffoldMessenger.maybeOf(context)?.showSnackBar(

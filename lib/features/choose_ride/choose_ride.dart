@@ -9,7 +9,6 @@ import '../../menu_screen.dart';
 import '../auth/repo/auth_repo.dart';
 import '../../../../category.dart' as cat;
 
-
 class chooseride extends StatefulWidget {
   const chooseride({super.key});
 
@@ -23,29 +22,27 @@ class _chooserideState extends State<chooseride> {
 
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((t){
+    SchedulerBinding.instance.addPostFrameCallback((t) {
       AuthRepository _auth = AuthRepository();
       _auth.authStateChanges.listen((user) {
         if (user != null) {
-          if(mounted)
-            {
-              Route newRoute = MaterialPageRoute(builder: (context) => MenuScreen());
+          if (mounted) {
+            Route newRoute =
+                MaterialPageRoute(builder: (context) => MenuScreen());
 
-              Navigator.pushAndRemoveUntil(
-                context,
-                newRoute,
-                    (Route<dynamic> route) =>
-                false, // Removes all previous routes
-              );
-            }
+            Navigator.pushAndRemoveUntil(
+              context,
+              newRoute,
+              (Route<dynamic> route) => false, // Removes all previous routes
+            );
+          }
 
           print('User is signed in: ${user.uid}');
         } else {
           print('User is not signed in');
         }
       });
-    }
-    );
+    });
     super.initState();
   }
 
@@ -142,19 +139,30 @@ class _chooserideState extends State<chooseride> {
                 if (selectedCategory.isEmpty) {
                   ScaffoldMessenger.maybeOf(context)?.showSnackBar(
                       const SnackBar(content: Text("select any category")));
-                } else {
-                  final auth = Provider.of<AuthController>(context,listen: false);
-                   auth.setUsrData(
-                    selectedCategory
-                   );
-
-
+                } else if (selectedCategory == "Car") {
+                  final auth =
+                      Provider.of<AuthController>(context, listen: false);
+                  auth.setUsrData(selectedCategory);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => YourTheoryTestScreen()),
+                        builder: (context) => YourTheoryTestScreen(
+                          selectedCategory: selectedCategory ,
+                        )),
                   );
-                }
+                }else if(selectedCategory ==  "Motorcycle")
+                  {
+                    final auth =
+                    Provider.of<AuthController>(context, listen: false);
+                    auth.setUsrData(selectedCategory);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => YourTheoryTestScreen(
+                            selectedCategory: selectedCategory ,
+                          )),
+                    );
+                  }
               },
             ),
           ],
@@ -181,7 +189,6 @@ class _chooserideState extends State<chooseride> {
           onTap: () {
             setState(() {
               selectedCategory = category;
-
             });
           },
         ),

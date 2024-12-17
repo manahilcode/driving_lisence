@@ -6,6 +6,9 @@ import 'package:provider/provider.dart';
 import '../auth/viewmodel/controller.dart';
 
 class YourTheoryTestScreen extends StatefulWidget {
+  final selectedCategory ;
+   const YourTheoryTestScreen({super.key, required this.selectedCategory});
+
   @override
   _YourTheoryTestScreenState createState() => _YourTheoryTestScreenState();
 }

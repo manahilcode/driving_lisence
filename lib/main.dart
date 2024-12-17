@@ -28,6 +28,18 @@ import 'features/Quiz/vehicle_loading_quiz/viewmodel/controller.dart';
 import 'features/Quiz/vulnerable_road_user_quiz/viewmodel/controller.dart';
 import 'features/auth/viewmodel/controller.dart';
 import 'features/incident/viewmodel/controller.dart';
+import 'features/motorcycle/hazard/viewmodel/clue_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/factor_effecting_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/hazard_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/learning_see_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/looking_seeing_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/road_weather_condition_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/scanning_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/seeing_hazard_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/static_hazard_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/understanding_hazard_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/what_if_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/your_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/Trams_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/bus_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/disabled_people_provider.dart';
@@ -72,7 +84,6 @@ class MyApp extends StatelessWidget {
             create: (_) => VehicleLoadingProvider()),
         ChangeNotifierProvider<VulnerableController>(
             create: (_) => VulnerableController()),
-        ///////////////////////////////////////////
         ChangeNotifierProvider<BusProvider>(create: (_) => BusProvider()),
         ChangeNotifierProvider<disabledProvider>(
             create: (_) => disabledProvider()),
@@ -126,6 +137,30 @@ class MyApp extends StatelessWidget {
             create: (_) => ResultController()),
         ChangeNotifierProvider<AllCategoriesQuizProvider>(
             create: (_) => AllCategoriesQuizProvider()),
+        ChangeNotifierProvider<CluesProvider>(
+            create: (_) => CluesProvider()),
+        ChangeNotifierProvider<FactorEffectingProvider>(
+            create: (_) => FactorEffectingProvider()),
+        ChangeNotifierProvider<MotorcycleHazardProvider>(
+            create: (_) => MotorcycleHazardProvider()),
+        ChangeNotifierProvider<LearningSeeProvider>(
+            create: (_) => LearningSeeProvider()),
+        ChangeNotifierProvider<LookingButNotSeeingProvider>(
+            create: (_) => LookingButNotSeeingProvider()),
+        ChangeNotifierProvider<MotorcycleRoadWeatherConditionsProvider>(
+            create: (_) => MotorcycleRoadWeatherConditionsProvider()),
+        ChangeNotifierProvider<ScanningProvider>(
+            create: (_) => ScanningProvider()),
+        ChangeNotifierProvider<SeeingHazardProvider>(
+            create: (_) => SeeingHazardProvider()),
+        ChangeNotifierProvider<MotorcycleStaticHazardProvider>(
+            create: (_) => MotorcycleStaticHazardProvider()),
+        ChangeNotifierProvider<UnderstandingHazardsProvider>(
+            create: (_) => UnderstandingHazardsProvider()),
+        ChangeNotifierProvider<WhatIfProvider>(
+            create: (_) => WhatIfProvider()),
+        ChangeNotifierProvider<MotorcycleYourProvider>(
+            create: (_) => MotorcycleYourProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
