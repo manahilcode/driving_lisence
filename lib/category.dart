@@ -1,9 +1,12 @@
+import 'package:driving_lisence/Theory_test.dart';
 import 'package:driving_lisence/features/Quiz/result/viewmodel/resultController.dart';
 import 'package:driving_lisence/features/hazard/pages/hazard1.dart';
 import 'package:driving_lisence/features/safety_margin/pages/safety_margin1.dart';
 import 'package:driving_lisence/features/vulnerable_road_user/pages/introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
+import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'features/Quiz/Incident_quiz/pages/incident_quiz.dart';
@@ -33,6 +36,7 @@ import 'features/rule_of_road/pages/introduction.dart';
 import 'features/vehicle_handling/pages/introduction.dart';
 import 'features/vehicle_loading/pages/introduction.dart';
 import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
+import 'menu_screen.dart';
 
 class Category extends StatefulWidget {
   String? label;
@@ -43,7 +47,7 @@ class Category extends StatefulWidget {
 
 class _CategoryState extends State<Category>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+   TabController? _tabController;
   final List<bool> _selectedCategories =
       List.generate(16, (_) => false); // 15 categories
 
@@ -79,7 +83,7 @@ class _CategoryState extends State<Category>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController?.dispose();
     super.dispose();
   }
 
@@ -92,8 +96,12 @@ class _CategoryState extends State<Category>
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) {
+                return MenuScreen(); // Replace with your actual screen widget
+              }),
+            );
           },
         ),
         // bottom: TabBar(
@@ -659,14 +667,17 @@ class CategoryItem extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Answered: $answered',
-                  style: const TextStyle(color: Colors.orange)),
-              const SizedBox(width: 8),
+              Text('Answered:  $answered',
+                  style:  GoogleFonts.roboto(color: Colors.orange,fontSize: 12),
+              ),
               Text('Correct: $correct',
-                  style: const TextStyle(color: Colors.green)),
-              const SizedBox(width: 8),
-              Text('Total: $total', style: TextStyle(color: Colors.grey[600])),
+                style:  GoogleFonts.roboto(color: Colors.green,fontSize: 12),
+              ),
+            
+              Text('Total: $total',
+                  style:  GoogleFonts.roboto(color: Colors.grey[600],fontSize: 12),),
             ],
           ),
         ],

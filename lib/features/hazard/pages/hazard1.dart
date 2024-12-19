@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import '../../../core/loader.dart';
 
 class hazard1 extends StatefulWidget {
+  const hazard1({super.key});
+
   @override
   _hazard1State createState() => _hazard1State();
 }

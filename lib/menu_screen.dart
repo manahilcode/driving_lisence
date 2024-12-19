@@ -1,12 +1,18 @@
+import 'dart:developer';
+
 import 'package:driving_lisence/Theory_test.dart';
 import 'package:driving_lisence/category.dart';
 import 'package:driving_lisence/features/pass_gaurantee/pages/pass_gaurantee1.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import 'features/auth/repo/auth_repo.dart';
 import 'features/auth/viewmodel/controller.dart';
+import 'features/auth/viewmodel/user_provider.dart';
+import 'features/car_hazard_perception_screen.dart';
+import 'features/motorcycle_hazard_perception_screen.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -19,7 +25,10 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((time){
-      final auth = Provider.of<AuthController>(context,listen: false);
+       final user = Provider.of<UserProvider>(context,listen: false);
+       final auth = Provider.of<AuthController>(context,listen: false);
+       final uid = FirebaseAuth.instance.currentUser?.uid;
+      user.fetchUserData(uid!);
       auth.fetchAndDisplayUserProfile();
     });
     super.initState();
@@ -104,12 +113,18 @@ class _MenuScreenState extends State<MenuScreen> {
                         navigateTo: TheoryTest(), // Define your screen here
                       ),
                       SizedBox(height: 10),
-                      buildMenuButton(
-                        context: context,
-                        label: 'Hazard Perception',
-                        color: Colors.red,
-                        icon: Icons.warning,
-                        navigateTo: TheoryTest(), // Define your screen here
+                      Consumer<UserProvider>(
+                        builder: (context, provider,child) {
+                          final users = provider.user;
+                          log(users?.category.toString() ?? "");
+                          return buildMenuButton(
+                            context: context,
+                            label: 'Hazard Perception',
+                            color: Colors.red,
+                            icon: Icons.warning,
+                            navigateTo:users?.category == "Car" ? CarHazardPerceptionScreen():MotorcycleHazardPerceptionScreen(), // Define your screen here
+                          );
+                        }
                       ),
                       SizedBox(height: 10),
                       buildMenuButton(

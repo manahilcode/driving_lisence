@@ -14,6 +14,8 @@ class RespondingToHazards {
   final String video;
   final String video1;
   final String video2;
+  final String info;
+  final String info1;
 
   RespondingToHazards({
     required this.title,
@@ -31,6 +33,8 @@ class RespondingToHazards {
     required this.video,
     required this.video1,
     required this.video2,
+    required this.info,
+    required this.info1,
   });
 
   // Convert to a map for easy JSON serialization
@@ -72,6 +76,8 @@ class RespondingToHazards {
       video: map['video'] ?? '',
       video1: map['video1'] ?? '',
       video2: map['video2'] ?? '',
+      info: map['info'] ?? '',
+      info1: map['info1'] ?? '',
     );
   }
 }

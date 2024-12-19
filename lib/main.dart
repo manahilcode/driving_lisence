@@ -27,6 +27,7 @@ import 'features/Quiz/vehicle_handling_quiz/viewmodel/controller.dart';
 import 'features/Quiz/vehicle_loading_quiz/viewmodel/controller.dart';
 import 'features/Quiz/vulnerable_road_user_quiz/viewmodel/controller.dart';
 import 'features/auth/viewmodel/controller.dart';
+import 'features/auth/viewmodel/user_provider.dart';
 import 'features/incident/viewmodel/controller.dart';
 import 'features/motorcycle/hazard/viewmodel/clue_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/factor_effecting_provider.dart';
@@ -161,6 +162,11 @@ class MyApp extends StatelessWidget {
             create: (_) => WhatIfProvider()),
         ChangeNotifierProvider<MotorcycleYourProvider>(
             create: (_) => MotorcycleYourProvider()),
+        ChangeNotifierProvider<UserProvider>(
+            create: (_) => UserProvider()),
+
+
+        //
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

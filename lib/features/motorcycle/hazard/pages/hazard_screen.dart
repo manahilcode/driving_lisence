@@ -6,14 +6,21 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/hazard_provider.dart';
 
-class HazardScreen extends StatefulWidget {
-  const HazardScreen({super.key});
+class MotorCycleHazardScreen extends StatefulWidget {
+  const MotorCycleHazardScreen({super.key});
 
   @override
-  State<HazardScreen> createState() => _HazardScreenState();
+  State<MotorCycleHazardScreen> createState() => _MotorCycleHazardScreenState();
 }
 
-class _HazardScreenState extends State<HazardScreen> {
+class _MotorCycleHazardScreenState extends State<MotorCycleHazardScreen> {
+  
+  @override
+  void initState() {
+  final controller =  Provider.of<MotorcycleHazardProvider>(context,listen: false);
+  controller.fetchMotorcycleHazard("motorcycle_hazard", "introduction");
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -26,7 +33,7 @@ class _HazardScreenState extends State<HazardScreen> {
       body: Consumer<MotorcycleHazardProvider>(
         builder: (context,provider,child) {
           final data = provider.motorcycleHazard;
-          print(data);
+
           if (data == null) {
             return const Center(
               child: LoadingScreen(),
