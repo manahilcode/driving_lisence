@@ -8,7 +8,7 @@ class ReviewingYourDrivingRepository {
   // Method to fetch a single ReviewingYourDriving document by its ID
   Future<ReviewingYourDriving?> fetchReviewingYourDriving(String documentId) async {
     try {
-      DocumentSnapshot snapshot = await _firestore.collection('reviewingYourDriving').doc(documentId).get();
+      DocumentSnapshot snapshot = await _firestore.collection('motorcycle_responding_hazard').doc(documentId).get();
       if (snapshot.exists) {
         return ReviewingYourDriving.fromMap(snapshot.data() as Map<String, dynamic>);
       } else {

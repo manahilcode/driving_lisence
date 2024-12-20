@@ -138,8 +138,7 @@ class MyApp extends StatelessWidget {
             create: (_) => ResultController()),
         ChangeNotifierProvider<AllCategoriesQuizProvider>(
             create: (_) => AllCategoriesQuizProvider()),
-        ChangeNotifierProvider<CluesProvider>(
-            create: (_) => CluesProvider()),
+        ChangeNotifierProvider<CluesProvider>(create: (_) => CluesProvider()),
         ChangeNotifierProvider<FactorEffectingProvider>(
             create: (_) => FactorEffectingProvider()),
         ChangeNotifierProvider<MotorcycleHazardProvider>(
@@ -158,13 +157,28 @@ class MyApp extends StatelessWidget {
             create: (_) => MotorcycleStaticHazardProvider()),
         ChangeNotifierProvider<UnderstandingHazardsProvider>(
             create: (_) => UnderstandingHazardsProvider()),
-        ChangeNotifierProvider<WhatIfProvider>(
-            create: (_) => WhatIfProvider()),
+        ChangeNotifierProvider<WhatIfProvider>(create: (_) => WhatIfProvider()),
         ChangeNotifierProvider<MotorcycleYourProvider>(
             create: (_) => MotorcycleYourProvider()),
-        ChangeNotifierProvider<UserProvider>(
-            create: (_) => UserProvider()),
+        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
+        ChangeNotifierProvider<FactorEffectingProvider>(
+            create: (_) => FactorEffectingProvider()),
 
+        // CluesProvider
+        // FactorEffectingProvider
+        // HazardManagementProvider
+        // MotorcycleHazardProvider
+        // LearningSeeProvider
+        // LookingButNotSeeingProvider
+        // RespondingToHazardsProvider
+        // ReviewingYourDrivingProvider
+        // MotorcycleRoadWeatherConditionsProvider
+        // ScanningProvider
+        // SeeingHazardProvider
+        // MotorcycleStaticHazardProvider
+        // UnderstandingHazardsProvider
+        // WhatIfProvider
+        // MotorcycleYourProvider
 
         //
       ],
@@ -192,7 +206,8 @@ class ConnectivityWrapper extends StatelessWidget {
       body: Stack(
         children: [
           child,
-          StreamBuilder<List<ConnectivityResult>>(  // Changed to List<ConnectivityResult>
+          StreamBuilder<List<ConnectivityResult>>(
+            // Changed to List<ConnectivityResult>
             stream: Connectivity().onConnectivityChanged,
             builder: (context, snapshot) {
               // Check if we have no data or if the connection is none
@@ -220,7 +235,8 @@ class ConnectivityWrapper extends StatelessWidget {
                         const SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () async {
-                            final result = await Connectivity().checkConnectivity();
+                            final result =
+                                await Connectivity().checkConnectivity();
                             if (result != ConnectivityResult.none) {
                               // Optional: Add any refresh logic here
                             }

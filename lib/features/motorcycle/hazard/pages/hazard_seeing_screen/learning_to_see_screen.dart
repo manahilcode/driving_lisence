@@ -6,16 +6,18 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/loader.dart';
+import '../../../../motorcycle_hazard_perception_screen.dart';
+import '../../viewmodel/learning_see_provider.dart';
 import '../../viewmodel/scanning_provider.dart';
 
-class ScanningScreen extends StatefulWidget {
-  const ScanningScreen({super.key});
+class LearningToSeeHazard extends StatefulWidget {
+  const LearningToSeeHazard({super.key});
 
   @override
-  State<ScanningScreen> createState() => _ScanningScreenState();
+  State<LearningToSeeHazard> createState() => _LearningToSeeHazardState();
 }
 
-class _ScanningScreenState extends State<ScanningScreen> {
+class _LearningToSeeHazardState extends State<LearningToSeeHazard> {
   int? selectedAnswerIndex;
   bool isCorrect = false;
   bool isSelect = false;
@@ -29,10 +31,12 @@ class _ScanningScreenState extends State<ScanningScreen> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      final provider = Provider.of<ScanningProvider>(context, listen: false);
-      if (provider.scanningModel != null) {
-        final videoUrl1 = provider.scanningModel!.video;
-        final videoUrl2 = provider.scanningModel!.video2;
+      final provider = Provider.of<LearningSeeProvider>(context, listen: false);
+      provider.fetchModel("motorcycle_seeing_hazard","Learning_to_see_hazards");
+
+      if (provider.hazardModels != null) {
+        final videoUrl1 = provider.hazardModels!.video;
+        final videoUrl2 = provider.hazardModels!.video1;
 
         if (videoUrl1.isNotEmpty) {
           _videoPlayerController1 = VideoPlayerController.network(videoUrl1)
@@ -68,105 +72,32 @@ class _ScanningScreenState extends State<ScanningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: "Scanning",
+          title: "Learning to see hazard",
           leadingIcon: Icons.arrow_back,
-          onLeadingIconPressed: () {}),
-      body: Consumer<ScanningProvider>(builder: (context, provider, child) {
-        final data = provider.scanningModel;
+          onLeadingIconPressed: () {
+            Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+            Navigator.pushAndRemoveUntil(
+              context,
+              newRoute,
+                  (Route<dynamic> route) => false, // Removes all previous routes
+            );
+          }),
+      body: Consumer<LearningSeeProvider>(builder: (context, provider, child) {
+        final data = provider.hazardModels;
         if (data == null) {
           return const Center(
             child: LoadingScreen(),
           );
         }
-        final ans = data.answers;
-        final correctAnswer = data.correct;
-
         return SingleChildScrollView(
           child: Column(
             children: [
               createHeadingText(data.title),
               createAutoSizeText(data.subtitle),
-              createHeadingText(data.subtitle1),
-              createAutoSizeText(data.subtitle2),
-              Gap(10),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: const EdgeInsets.all(12.0),
-                  decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.green),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: data.points
-                        .map((point) => buildBulletText(point))
-                        .toList(),
-                  ),
-                ),
-              ),
-              Gap(10),
-              createAutoSizeText(data.text),
-              Gap(10),
-              createAutoSizeText(data.question),
-              Gap(10),
-              Column(
-                children: ans.asMap().entries.map((entry) {
-                  int answerIndex = entry.key;
-                  String answerText = entry.value;
 
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 1.0,
-                        ),
-                      ),
-                      child: ListTile(
-                        tileColor: selectedAnswerIndex != null
-                            ? answerText == correctAnswer
-                                ? Colors.green.withOpacity(0.7)
-                                : selectedAnswerIndex == answerIndex
-                                    ? Colors.red.withOpacity(0.7)
-                                    : null
-                            : null,
-                        leading: Text((answerIndex + 1).toString()),
-                        title: Text(answerText),
-                        trailing: selectedAnswerIndex != null
-                            ? answerText == correctAnswer
-                                ? Icon(Icons.check, color: Colors.green)
-                                : selectedAnswerIndex == answerIndex
-                                    ? Icon(Icons.close, color: Colors.red)
-                                    : null
-                            : null,
-                        onTap: selectedAnswerIndex == null
-                            ? () {
-                                setState(() {
-                                  selectedAnswerIndex = answerIndex;
-                                  isCorrect = answerText == correctAnswer;
-                                  isSelect = true;
-                                });
-                              }
-                            : null,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
               Gap(10),
-              createAutoSizeText(data.info),
-              Column(
-                children: [
-                  buildImage(data.image1),
-                  buildImage(data.image2),
-                  buildImage(data.image3),
-                ],
-              ),
+
               Gap(10),
               if (_isVideo1Initialized)
                 AspectRatio(

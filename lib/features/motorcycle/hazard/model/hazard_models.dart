@@ -62,19 +62,28 @@ class MotorcycleStaticHazard {
   // Create a MotorcycleStaticHazard instance from a Map
   factory MotorcycleStaticHazard.fromMap(Map<String, dynamic> map) {
     return MotorcycleStaticHazard(
-      answer: List<String>.from(map['answer']),
-      answer1: List<String>.from(map['answer1']),
-      answer2: List<String>.from(map['answer2']),
-      correct1: map['correct1'],
-      correct2: map['correct2'],
-      images: List<ImageMap>.from(map['images'].map((x) => ImageMap.fromMap(x))),
-      question2: Question.fromMap(map['question2']),
-      question: Question.fromMap(map['question']),
-      question1: Question.fromMap(map['question1']),
-      subtitle: map['subtitle'],
-      title: map['title'],
-      info1: map['info1'],
-      info2: map['info2'],
+      answer: List<String>.from(map['answer'] ?? []),
+      answer1: List<String>.from(map['answer1'] ?? []),
+      answer2: List<String>.from(map['answer2'] ?? []),
+      correct1: map['correct1'] ?? '',
+      correct2: map['correct2'] ?? '',
+      images: (map['images'] as List<dynamic>?)
+          ?.map((x) => ImageMap.fromMap(x as Map<String, dynamic>))
+          .toList() ??
+          [],
+      question2: map['question2'] != null
+          ? Question.fromMap(map['question2'] as Map<String, dynamic>)
+          : Question(image: '', text: ''), // Default Question
+      question: map['question'] != null
+          ? Question.fromMap(map['question'] as Map<String, dynamic>)
+          : Question(image: '', text: ''), // Default Question
+      question1: map['question1'] != null
+          ? Question.fromMap(map['question1'] as Map<String, dynamic>)
+          : Question(image: '', text: ''), // Default Question
+      subtitle: map['subtitle'] ?? '',
+      title: map['title'] ?? '',
+      info1: map['info1'] ?? '',
+      info2: map['info2'] ?? '',
     );
   }
 }

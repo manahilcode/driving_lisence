@@ -5,7 +5,9 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/loader.dart';
+import '../../../../motorcycle_hazard_perception_screen.dart';
 import '../../viewmodel/factor_effecting_provider.dart';
+import 'looking_but_no_seeing_screen.dart';
 
 class FactorEffecting extends StatefulWidget {
   const FactorEffecting({super.key});
@@ -18,13 +20,33 @@ class _FactorEffectingState extends State<FactorEffecting> {
   int? selectedAnswerIndex;
   bool isCorrect = false;
   bool isSelect = false;
+
+  @override
+  void initState() {
+    Future.microtask(() {
+      final controller =
+          Provider.of<FactorEffectingProvider>(context, listen: false);
+      controller.fetchFactorEffecting(
+          "motorcycle_seeing_hazard", "Factors_affecting_your_ability_to_see");
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
           title: "Factor-Effecting-Ability-See",
           leadingIcon: Icons.arrow_back,
-          onLeadingIconPressed: () {}),
+          onLeadingIconPressed: () {
+            Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+            Navigator.pushAndRemoveUntil(
+              context,
+              newRoute,
+                  (Route<dynamic> route) => false, // Removes all previous routes
+            );
+          }),
       body: Consumer<FactorEffectingProvider>(
           builder: (context, provider, child) {
         final data = provider.factor;
@@ -56,7 +78,10 @@ class _FactorEffectingState extends State<FactorEffecting> {
               ],
             ),
             Gap(10),
+            createAutoSizeText("Question :"),
             createAutoSizeText(data.question),
+            Gap(10),
+            createAutoSizeText("Option :"),
             Gap(10),
             Column(
               children: ans.asMap().entries.map((entry) {
@@ -110,6 +135,49 @@ class _FactorEffectingState extends State<FactorEffecting> {
             ),
             Gap(10),
             createAutoSizeText(data.info),
+            Gap(10),
+            GestureDetector(
+              onTap: () {
+                Route newRoute = MaterialPageRoute(
+                    builder: (context) => const LookingButNoSeeingScreen());
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  newRoute,
+                  (Route<dynamic> route) =>
+                      false, // Removes all previous routes
+                );
+              },
+              child: Center(
+                child: Container(
+                  width: 300,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 15.0, horizontal: 30.0),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Next",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         );
       }),

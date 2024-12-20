@@ -10,7 +10,7 @@ class FactorEffectingRepository {
     try {
       // Get the document from Firestore
       DocumentSnapshot docSnapshot = await _firestore.collection(collectionName).doc(docName).get();
-
+      print('Fetching document from collection: $collectionName, ID: $docName');
       // Check if the document exists
       if (docSnapshot.exists) {
         // Map the document data to the FactorEffectingModel
@@ -26,6 +26,9 @@ class FactorEffectingRepository {
       return null; // Return null or rethrow the exception
     }
   }
+
+
+
 
   /// Fetch all FactorEffectingModel documents from a collection.
   Future<List<FactorEffectingModel>> fetchAllFactors(String collectionName) async {

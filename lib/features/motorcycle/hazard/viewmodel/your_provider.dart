@@ -5,10 +5,10 @@ import '../repo/your_model.dart';
 
 class MotorcycleYourProvider with ChangeNotifier {
   final MotorcycleYourRepository _repository = MotorcycleYourRepository();
-  List<MotorcycleAnswerModel> _motorcycleAnswers = [];
+  MotorcycleAnswerModel? _motorcycleAnswers;
   bool _isLoading = false;
 
-  List<MotorcycleAnswerModel> get motorcycleAnswers => _motorcycleAnswers;
+  MotorcycleAnswerModel get motorcycleAnswers => _motorcycleAnswers!;
   bool get isLoading => _isLoading;
 
   /// Fetch a single `MotorcycleAnswerModel` by document ID.
@@ -19,43 +19,44 @@ class MotorcycleYourProvider with ChangeNotifier {
     final model = await _repository.fetchModel(collectionName, docId);
 
     if (model != null) {
-      _motorcycleAnswers = [model]; // Replace the current list with the single model
+
+      _motorcycleAnswers = model; // Replace the current list with the single model
     } else {
-      _motorcycleAnswers = []; // Clear the list if no model is found
+      _motorcycleAnswers = model; // Clear the list if no model is found
     }
 
     _isLoading = false;
     notifyListeners();
   }
 
-  /// Fetch all documents from the collection as `MotorcycleAnswerModel`.
-  Future<void> fetchAllModels(String collectionName) async {
-    _isLoading = true;
-    notifyListeners();
-
-    final models = await _repository.fetchAllModels(collectionName);
-
-    _motorcycleAnswers = models;
-
-    _isLoading = false;
-    notifyListeners();
-  }
+  // /// Fetch all documents from the collection as `MotorcycleAnswerModel`.
+  // Future<void> fetchAllModels(String collectionName) async {
+  //   _isLoading = true;
+  //   notifyListeners();
+  //
+  //   final models = await _repository.fetchAllModels(collectionName);
+  //
+  //   _motorcycleAnswers = models;
+  //
+  //   _isLoading = false;
+  //   notifyListeners();
+  // }
 
   /// Add a new `MotorcycleAnswerModel` document to Firestore.
-  Future<void> addModel(String collectionName, MotorcycleAnswerModel model) async {
-    _isLoading = true;
-    notifyListeners();
-
-    final success = await _repository.addModel(collectionName, model);
-
-    if (success) {
-      // Optionally add the new model to the list if needed
-      _motorcycleAnswers.add(model);
-    }
-
-    _isLoading = false;
-    notifyListeners();
-  }
+  // Future<void> addModel(String collectionName, MotorcycleAnswerModel model) async {
+  //   _isLoading = true;
+  //   notifyListeners();
+  //
+  //   final success = await _repository.addModel(collectionName, model);
+  //
+  //   if (success) {
+  //     // Optionally add the new model to the list if needed
+  //     _motorcycleAnswers.add(model);
+  //   }
+  //
+  //   _isLoading = false;
+  //   notifyListeners();
+  // }
 
   // /// Update an existing document in Firestore.
   // Future<void> updateModel(String collectionName, String docId, MotorcycleAnswerModel model) async {

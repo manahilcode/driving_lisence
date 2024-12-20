@@ -23,6 +23,8 @@ class _ClueScreenState extends State<ClueScreen> {
     super.initState();
     Future.microtask(() {
       final provider = Provider.of<CluesProvider>(context, listen: false);
+      provider.fetchClue("motorcycle_seeing_hazard", "Clues");
+
       if (provider.clue != null) {
         final videoUrl1 = provider.clue!.video;
 

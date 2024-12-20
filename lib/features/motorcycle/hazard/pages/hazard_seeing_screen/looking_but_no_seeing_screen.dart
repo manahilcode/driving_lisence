@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/loader.dart';
+import '../../../../motorcycle_hazard_perception_screen.dart';
 import '../../viewmodel/looking_seeing_provider.dart';
 
 class LookingButNoSeeingScreen extends StatefulWidget {
@@ -16,9 +17,28 @@ class LookingButNoSeeingScreen extends StatefulWidget {
 
 class _LookingButNoSeeingScreenState extends State<LookingButNoSeeingScreen> {
   @override
+  void initState() {
+    Future.microtask(() {
+      final controller = Provider.of<LookingButNotSeeingProvider>(
+          context,
+          listen: false);
+      controller.fetchLookingButNotSeeing(
+          "motorcycle_seeing_hazard", "Looking_but_not_seeing");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "Looking But not seeing ", leadingIcon: Icons.arrow_back, onLeadingIconPressed: (){}),
+      appBar: CustomAppBar(title: "Looking But not seeing ", leadingIcon: Icons.arrow_back, onLeadingIconPressed: (){
+        Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          newRoute,
+              (Route<dynamic> route) => false, // Removes all previous routes
+        );
+      }),
       body:Consumer<LookingButNotSeeingProvider>(
         builder: (context,provider,child) {
           final data = provider.lookingModels;

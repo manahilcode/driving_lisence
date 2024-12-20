@@ -37,19 +37,19 @@ class LookingButNotSeeingProvider with ChangeNotifier {
   }
 
   /// Fetch all LookingButNotSeeingModel documents from the collection
-  Future<void> fetchAllLookingButNotSeeing(String collectionName) async {
-    _isLoading = true;
-    _errorMessage = '';  // Clear any previous errors
-    notifyListeners();
-
-    try {
-      final models = await _repository.fetchAllLookingButNotSeeing(collectionName);
-      _lookingModels = models;
-    } catch (e) {
-      _errorMessage = 'Error fetching all models: $e';
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
+  // Future<void> fetchAllLookingButNotSeeing(String collectionName) async {
+  //   _isLoading = true;
+  //   _errorMessage = '';  // Clear any previous errors
+  //   notifyListeners();
+  //
+  //   try {
+  //     final models = await _repository.fetchAllLookingButNotSeeing(collectionName);
+  //     _lookingModels = models;
+  //   } catch (e) {
+  //     _errorMessage = 'Error fetching all models: $e';
+  //   } finally {
+  //     _isLoading = false;
+  //     notifyListeners();
+  //   }
+  // }
 }

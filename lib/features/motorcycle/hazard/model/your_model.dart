@@ -21,6 +21,9 @@ class MotorcycleAnswerModel {
   final String title3;
   final String title4;
   final String title5;
+  final String info;
+  final String info1;
+  final String info2;
 
   MotorcycleAnswerModel({
     required this.answer,
@@ -45,32 +48,38 @@ class MotorcycleAnswerModel {
     required this.title3,
     required this.title4,
     required this.title5,
+    required this.info,
+    required this.info1,
+    required this.info2,
   });
 
   factory MotorcycleAnswerModel.fromJson(Map<String, dynamic> json) {
     return MotorcycleAnswerModel(
-      answer: List<String>.from(json['answer']),
-      answer2: List<String>.from(json['answer2']),
-      correct: json['correct'],
-      correct2: json['correct2'],
-      correct3: json['correct3'],
-      points: List<String>.from(json['points']),
-      question: json['question'],
-      question2: json['question2'],
-      question3: json['question3'],
-      subtitle: json['subtitle'],
-      subtitle1: json['subtitle1'],
-      subtitle2: List<String>.from(json['subtitle2']),
-      subtitle3: List<String>.from(json['subtitle3']),
-      subtitle4: json['subtitle4'],
-      subtitle5: json['subtitle5'],
-      tip: List<String>.from(json['tip']),
-      title: json['title'],
-      title1: json['title1'],
-      title2: json['title2'],
-      title3: json['title3'],
-      title4: json['title4'],
-      title5: json['title5'],
+      answer: List<String>.from(json['answer'] ?? []),
+      answer2: List<String>.from(json['answer2'] ?? []),
+      correct: json['correct'] ?? '',
+      correct2: json['correct1'] ?? '',
+      correct3: json['correct3'] ?? '',
+      points: List<String>.from(json['points'] ?? []),
+      question: json['question'] ?? '',
+      question2: json['question2'] ?? '',
+      question3: json['question3'] ?? '',
+      subtitle: json['subtitle'] ?? '',
+      subtitle1: json['subtitle1'] ?? '',
+      subtitle2: List<String>.from(json['subtitle2'] ?? []),
+      subtitle3: List<String>.from(json['subtitle3'] ?? []),
+      subtitle4: json['subtitle4'] ?? '',
+      subtitle5: json['subtitle5'] ?? '',
+      tip: List<String>.from(json['tip'] ?? []),
+      title: json['title'] ?? '',
+      title1: json['title1'] ?? '',
+      title2: json['title2'] ?? '',
+      title3: json['title3'] ?? '',
+      title4: json['title4'] ?? '',
+      title5: json['title5'] ?? '',
+      info: json['info'] ?? '',
+      info1: json['info1'] ?? '',
+      info2: json['info3'] ?? '',
     );
   }
 
@@ -98,6 +107,9 @@ class MotorcycleAnswerModel {
       'title3': title3,
       'title4': title4,
       'title5': title5,
+      'info': info,
+      'info1': info1,
+      'info2': info2,
     };
   }
 }

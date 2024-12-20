@@ -25,6 +25,7 @@ class _WhatIfScreenState extends State<WhatIfScreen> {
     super.initState();
     Future.microtask(() {
       final provider = Provider.of<WhatIfProvider>(context, listen: false);
+      provider.fetchModel("motorcycle_seeing_hazard", "What_if");
       if (provider.whatIfModels != null) {
         final videoUrl1 = provider.whatIfModels[0].video;
         final videoUrl2 = provider.whatIfModels[0].video1;

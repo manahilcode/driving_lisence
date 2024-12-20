@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/loader.dart';
+import '../../../../motorcycle_hazard_perception_screen.dart';
 import '../../viewmodel/responding_hazard_provider.dart';
 
 class RespondingToHazard extends StatefulWidget {
@@ -33,6 +34,7 @@ class _RespondingToHazardState extends State<RespondingToHazard> {
     Future.microtask(() {
       final provider =
           Provider.of<RespondingToHazardsProvider>(context, listen: false);
+         provider.fetchRespondingToHazards("Responding_to_hazards");
       final url1 = provider.respondingToHazards?.video ?? "";
       final url2 = provider.respondingToHazards?.video1 ?? "";
       final url3 = provider.respondingToHazards?.video2 ?? "";
@@ -69,7 +71,15 @@ class _RespondingToHazardState extends State<RespondingToHazard> {
       appBar: CustomAppBar(
           title: "Responding to hazard",
           leadingIcon: Icons.arrow_back,
-          onLeadingIconPressed: () {}),
+          onLeadingIconPressed: () {
+            Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+            Navigator.pushAndRemoveUntil(
+              context,
+              newRoute,
+                  (Route<dynamic> route) => false, // Removes all previous routes
+            );
+          }),
       body: Consumer<RespondingToHazardsProvider>(
           builder: (context, provider, child) {
         final data = provider.respondingToHazards;

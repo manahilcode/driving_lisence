@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../motorcycle_hazard_perception_screen.dart';
 import '../model/video_clip_model.dart';
 import '../viewmodel/video_clip_provider.dart'; // Import video player package
 
@@ -28,6 +29,15 @@ class _VideoPageViewState extends State<VideoPageView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Video Player'),
+        leading: IconButton(onPressed: (){
+          Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+          Navigator.pushAndRemoveUntil(
+            context,
+            newRoute,
+                (Route<dynamic> route) => false, // Removes all previous routes
+          );
+        }, icon: Icon(Icons.arrow_back)),
       ),
       body: Consumer<VideoProvider>(
         builder: (context, provider, child) {

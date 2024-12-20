@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../motorcycle_hazard_perception_screen.dart';
 import '../model/hazard_quiz.dart'; // Adjust the import based on your file structure
 import '../../../../../core/loader.dart';
 import '../viewmodel/hazard_question_provider.dart'; // Adjust the import based on your file structure
@@ -28,6 +29,15 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Hazard Quiz'),
+        leading: IconButton(onPressed: (){
+          Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+          Navigator.pushAndRemoveUntil(
+            context,
+            newRoute,
+                (Route<dynamic> route) => false, // Removes all previous routes
+          );
+        }, icon: Icon(Icons.arrow_back)),
       ),
       body: Consumer<HazardQuizProvider>(
         builder: (context, provider, child) {

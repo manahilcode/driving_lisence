@@ -12,7 +12,7 @@ class ImageWithTextCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
+      elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -21,39 +21,42 @@ class ImageWithTextCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                imageUrl,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  // If loadingProgress is null, it means the image is loaded.
-                  if (loadingProgress == null) {
-                    return child;
-                  } else {
-                    // Display a circular progress indicator while the image is loading
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  imageUrl,
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    // If loadingProgress is null, it means the image is loaded.
+                    if (loadingProgress == null) {
+                      return child;
+                    } else {
+                      // Display a circular progress indicator while the image is loading
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                              (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
+                        ),
+                      );
+                    }
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    // If the image fails to load, display an error icon or message.
                     return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                            (loadingProgress.expectedTotalBytes ?? 1)
-                            : null,
+                      child: Icon(
+                        Icons.error,
+                        color: Colors.red,
+                        size: 50,
                       ),
                     );
-                  }
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  // If the image fails to load, display an error icon or message.
-                  return Center(
-                    child: Icon(
-                      Icons.error,
-                      color: Colors.red,
-                      size: 50,
-                    ),
-                  );
-                },
+                  },
+                ),
               ),
             ),
             SizedBox(height: 12),

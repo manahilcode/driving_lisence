@@ -17,6 +17,17 @@ class UnderstandingHazardScreen extends StatefulWidget {
 
 class _UnderstandingHazardScreenState extends State<UnderstandingHazardScreen> {
   @override
+  void initState() {
+    Future.microtask(() {
+      final controller = Provider.of<UnderstandingHazardsProvider>(
+          context,
+          listen: false);
+      controller.fetchUnderstandingHazard(
+          "motorcycle_seeing_hazard", "Understanding_hazards");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(

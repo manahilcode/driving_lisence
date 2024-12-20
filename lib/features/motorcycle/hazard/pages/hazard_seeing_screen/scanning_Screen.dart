@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/loader.dart';
+import '../../../../motorcycle_hazard_perception_screen.dart';
 import '../../viewmodel/scanning_provider.dart';
 
 class ScanningScreen extends StatefulWidget {
@@ -25,22 +26,33 @@ class _ScanningScreenState extends State<ScanningScreen> {
   @override
   void initState() {
     super.initState();
-    final provider = Provider.of<ScanningProvider>(context, listen: false);
-    _videoController1 = VideoPlayerController.network(
-      'https://www.example.com/video1.mp4', // Replace with your video URL
-    )..initialize().then((_) {
-      setState(() {}); // Refresh when video is ready
+    Future.microtask(() {
+      final controller = Provider.of<ScanningProvider>(
+          context,
+          listen: false);
+      controller.fetchScanningModel(
+          "motorcycle_seeing_hazard", "Scanning");
+
+      final url1 = controller.scanningModel?.video;
+      final url2 = controller.scanningModel?.video2;
+
+      _videoController1 = VideoPlayerController.network(
+        '$url1', // Replace with your video URL
+      )..initialize().then((_) {
+        setState(() {}); // Refresh when video is ready
+      });
+
+      _videoController2 = VideoPlayerController.network(
+        '$url2', // Replace with your video URL
+      )..initialize().then((_) {
+        setState(() {}); // Refresh when video is ready
+      });
     });
 
-    _videoController2 = VideoPlayerController.network(
-      'https://www.example.com/video2.mp4', // Replace with your video URL
-    )..initialize().then((_) {
-      setState(() {}); // Refresh when video is ready
-    });
   }
   @override
   void dispose() {
-    // Dispose video controllers
+
     _videoController1.dispose();
     _videoController2.dispose();
     super.dispose();
@@ -51,7 +63,15 @@ class _ScanningScreenState extends State<ScanningScreen> {
       appBar: CustomAppBar(
           title: "Scanning",
           leadingIcon: Icons.arrow_back,
-          onLeadingIconPressed: () {}),
+          onLeadingIconPressed: () {
+            Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+            Navigator.pushAndRemoveUntil(
+              context,
+              newRoute,
+                  (Route<dynamic> route) => false, // Removes all previous routes
+            );
+          }),
       body: Consumer<ScanningProvider>(builder: (context, provider, child) {
         final data = provider.scanningModel;
         if (data == null) {

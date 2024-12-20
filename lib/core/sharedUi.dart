@@ -24,6 +24,7 @@ Widget createAutoSizeText(String text,
       // Set the maximum number of lines
       minFontSize: 8, // Set the minimum font size
       overflow: TextOverflow.clip, // Handle overflow with ellipsis
+      textAlign: TextAlign.justify,
     ),
   );
 }
@@ -32,7 +33,7 @@ AutoSizeText createHeadingText(String heading,
     {double fontSize = 24, Color color = Colors.green}) {
   return AutoSizeText(
     heading,
-    style: TextStyle(
+    style: GoogleFonts.roboto(
       fontSize: fontSize,
       fontWeight: FontWeight.bold, // Make the heading bold
       color: color,
@@ -40,6 +41,7 @@ AutoSizeText createHeadingText(String heading,
     maxLines: 1, // Typically, headings are one line
     minFontSize: 16, // Set a minimum font size
     overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
+    textAlign: TextAlign.left,
   );
 }
 
@@ -119,42 +121,52 @@ Widget buildBulletText(String text) {
 Widget buildImage(String imagePath, {double width = 100, double height = 100}) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
-    child: Image.network(
-      imagePath,
-      height: 200,
-      width: double.infinity,
-      fit: BoxFit.cover, // Adjust how the image fits in the box
-      loadingBuilder: (BuildContext context, Widget child,
-          ImageChunkEvent? loadingProgress) {
-        if (loadingProgress == null) {
-          return child;
-        } else {
-          return Container(
-            width: width,
-            height: height,
-            color: Colors.grey.shade200, // Placeholder background color
-            child: const Center(
-              child:
-                  LoadingScreen(), // Loading indicator while fetching the image
-            ),
-          );
-        }
-      },
-      errorBuilder:
-          (BuildContext context, Object error, StackTrace? stackTrace) {
-        return Container(
-          width: width,
-          height: height,
-          color: Colors.grey, // Placeholder color in case of an error
-          child: const Center(
-            child: Text(
-              'Image not found',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        );
-      },
+    child: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+
+
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: Image.network(
+          imagePath,
+          height: 200,
+          width: double.infinity,
+          fit: BoxFit.cover, // Adjust how the image fits in the box
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            } else {
+              return Container(
+                width: width,
+                height: height,
+                color: Colors.grey.shade200, // Placeholder background color
+                child: const Center(
+                  child:
+                      LoadingScreen(), // Loading indicator while fetching the image
+                ),
+              );
+            }
+          },
+          errorBuilder:
+              (BuildContext context, Object error, StackTrace? stackTrace) {
+            return Container(
+              width: width,
+              height: height,
+              color: Colors.grey, // Placeholder color in case of an error
+              child: const Center(
+                child: Text(
+                  'Image not found',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     ),
   );
 }

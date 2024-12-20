@@ -1,11 +1,9 @@
-import 'package:driving_lisence/Theory_test.dart';
 import 'package:driving_lisence/features/Quiz/result/viewmodel/resultController.dart';
 import 'package:driving_lisence/features/hazard/pages/hazard1.dart';
 import 'package:driving_lisence/features/safety_margin/pages/safety_margin1.dart';
 import 'package:driving_lisence/features/vulnerable_road_user/pages/introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
-import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +20,8 @@ import 'features/Quiz/road_traffic_sign_quiz/pages/road_traffic_sign_quiz.dart';
 import 'features/Quiz/safety_margin_quiz/pages/safety_margin_quiz.dart';
 import 'features/Quiz/safety_vehicle_quiz/pages/safetyVehicle.dart';
 import 'features/Quiz/vehicle_handling_quiz/pages/vehicle_handling.dart';
-import 'features/Quiz/vehicle_handling_quiz/viewmodel/controller.dart';
 import 'features/Quiz/vehicle_loading_quiz/pages/vehicle_loading_quiz.dart';
 import 'features/Quiz/vulnerable_road_user_quiz/pages/vulnerable_road_user.dart';
-import 'features/allertness/model/model.dart';
 import 'features/allertness/pages/introduction.dart';
 import 'features/attitude/pages/attitude.dart';
 import 'features/essential_document/pages/introduction.dart';
@@ -701,3 +697,4 @@ class CategoryItem extends StatelessWidget {
     );
   }
 }
+
