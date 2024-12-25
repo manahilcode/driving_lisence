@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/think_about.dart';
 import '../repo/think_about_repo.dart';
 
-class SpeedLimitNotifierWithSubtitle extends ChangeNotifier {
+class ThinkRule extends ChangeNotifier {
   final ThinkAboutRepoRule _repository;
   ThinkAboutRule? _data;
   bool _isLoading = false;
@@ -11,7 +11,7 @@ class SpeedLimitNotifierWithSubtitle extends ChangeNotifier {
   ThinkAboutRule? get data => _data;
   bool get isLoading => _isLoading;
 
-  SpeedLimitNotifierWithSubtitle(this._repository);
+  ThinkRule(this._repository);
 
   Future<void> fetchData() async {
     _isLoading = true;

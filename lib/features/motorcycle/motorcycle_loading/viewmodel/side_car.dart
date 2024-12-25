@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/side_car.dart';
 import '../repo/side_car.dart';
 
-class PillionPassengerNotifier extends ChangeNotifier {
+class PillionPasSideCarsengerNotifier extends ChangeNotifier {
   final PillionPassengerRepository repository;
 
   PillionPassengerModel? _pillionPassenger;
@@ -14,7 +14,7 @@ class PillionPassengerNotifier extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  PillionPassengerNotifier({required this.repository});
+  PillionPasSideCarsengerNotifier({required this.repository});
 
   Future<void> loadPillionPassenger(String documentId) async {
     _isLoading = true;

@@ -1,5 +1,4 @@
 class RoadSigns {
-  final String id;                  // Document ID
   final String title;               // Main title
   final String subtitle;            // Subtitle for road signs
   final String subtitle1;           // Subtitle related to parked vehicles
@@ -11,7 +10,7 @@ class RoadSigns {
   final List<String> points;        // List of points describing hazards
 
   RoadSigns({
-    required this.id,
+
     required this.title,
     required this.subtitle,
     required this.subtitle1,
@@ -24,9 +23,8 @@ class RoadSigns {
   });
 
   // Factory method to create a model from Firestore data
-  factory RoadSigns.fromFirestore(String id, Map<String, dynamic> data) {
+  factory RoadSigns.fromFirestore( Map<String, dynamic> data) {
     return RoadSigns(
-      id: id,
       title: data['title'] ?? '',
       subtitle: data['subtitle'] ?? '',
       subtitle1: data['subtitle1'] ?? '',

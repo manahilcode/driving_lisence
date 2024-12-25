@@ -2,9 +2,11 @@
 class SpeedLimitsModel {
   final List<String> answers;
   final String correctAnswer;
-  final List<ImageInfo> images;
+  final String image1;
   final List<ImageInfo> image2;
   final List<ImageInfo> image3;
+  final List<ImageInfo> image;
+
   final String info;
   final List<String> points;
   final String question;
@@ -20,9 +22,10 @@ class SpeedLimitsModel {
   SpeedLimitsModel({
     required this.answers,
     required this.correctAnswer,
-    required this.images,
+    required this.image1,
     required this.image2,
     required this.image3,
+    required this.image,
     required this.info,
     required this.points,
     required this.question,
@@ -40,11 +43,12 @@ class SpeedLimitsModel {
     return SpeedLimitsModel(
       answers: List<String>.from(json['answers'] ?? []),
       correctAnswer: json['correct'] ?? '',
-      images: (json['image'] as List<dynamic>?)
+    image1: json['image1'] ,
+      image2: (json['image2'] as List<dynamic>?)
           ?.map((item) => ImageInfo.fromJson(item))
           .toList() ??
           [],
-      image2: (json['image2'] as List<dynamic>?)
+      image: (json['image'] as List<dynamic>?)
           ?.map((item) => ImageInfo.fromJson(item))
           .toList() ??
           [],
@@ -63,6 +67,7 @@ class SpeedLimitsModel {
       tip2: json['tip2'] ?? '',
       tip3: json['tip3'] ?? '',
       title: json['title'] ?? '',
+
     );
   }
 }

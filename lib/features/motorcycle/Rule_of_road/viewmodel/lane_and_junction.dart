@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../model/lane_and_junction.dart';
 import '../repo/lane_and_junction.dart';
 
-class QuestionProvider extends ChangeNotifier {
+class LaneAndJunctionProvider extends ChangeNotifier {
   final QuestionRepositoryLane _repository = QuestionRepositoryLane();
   LaneAndJunction? _questions;
   bool _isLoading = false;
