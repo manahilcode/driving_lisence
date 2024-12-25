@@ -5,12 +5,12 @@ import '../repo/moving_hazard_repo.dart';
 
 class MovingHazardsProvider extends ChangeNotifier {
   final MovingHazardsRepository repository;
-  List<MovingHazards> _items = [];
+   MovingHazards? _items;
   bool _isLoading = false;
 
   MovingHazardsProvider(this.repository);
 
-  List<MovingHazards> get items => _items;
+  MovingHazards get items => _items!;
   bool get isLoading => _isLoading;
 
   Future<void> loadMovingHazards() async {
@@ -20,7 +20,7 @@ class MovingHazardsProvider extends ChangeNotifier {
     try {
       _items = await repository.fetchMovingHazards();
     } catch (e) {
-      _items = [];
+      _items = _items;
       debugPrint('Error loading moving hazards: $e');
     } finally {
       _isLoading = false;

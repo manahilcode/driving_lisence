@@ -1,5 +1,4 @@
 class MovingHazards {
-  final String id; // Document ID
   final String title; // Main title
   final String title1; // Cyclists title
   final String title2; // Horse riders title
@@ -14,7 +13,7 @@ class MovingHazards {
   final String subtitle3; // Drivers of large vehicles subtitle
 
   MovingHazards({
-    required this.id,
+
     required this.title,
     required this.title1,
     required this.title2,
@@ -30,9 +29,9 @@ class MovingHazards {
   });
 
   // Factory method to create a model from Firestore data
-  factory MovingHazards.fromFirestore(String id, Map<String, dynamic> data) {
+  factory MovingHazards.fromFirestore( Map<String, dynamic> data) {
     return MovingHazards(
-      id: id,
+
       title: data['title'] ?? '',
       title1: data['title1'] ?? '',
       title2: data['title2'] ?? '',

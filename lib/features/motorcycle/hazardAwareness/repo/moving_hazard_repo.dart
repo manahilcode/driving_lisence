@@ -5,13 +5,12 @@ class MovingHazardsRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String collectionPath = 'moving_hazards';
 
-  Future<List<MovingHazards>> fetchMovingHazards() async {
+  Future<MovingHazards> fetchMovingHazards() async {
     try {
-      final snapshot = await _firestore.collection(collectionPath).get();
-      return snapshot.docs.map((doc) {
-        return MovingHazards.fromFirestore(
-            doc.id, doc.data() as Map<String, dynamic>);
-      }).toList();
+      final snapshot = await _firestore.collection(collectionPath).doc().get();
+      final data = snapshot.data() as Map<String, dynamic>;
+      final model = MovingHazards.fromFirestore(data);
+      return model;
     } catch (e) {
       throw Exception('Error fetching moving hazards: $e');
     }

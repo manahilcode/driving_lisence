@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import '../model/anticipation_model.dart';
 import '../repo/anticipation_repo.dart';
 
-class RoadAwarenessNotifier extends ChangeNotifier {
+class AnticipationProvider extends ChangeNotifier {
   final RoadAwarenessRepository _repository;
   AnticipationModel? _data;
   bool _isLoading = false;
   String? _error;
 
-  RoadAwarenessNotifier(this._repository);
+  AnticipationProvider(this._repository);
 
   AnticipationModel? get data => _data;
   bool get isLoading => _isLoading;

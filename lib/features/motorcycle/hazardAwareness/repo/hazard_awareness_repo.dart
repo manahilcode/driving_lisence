@@ -6,12 +6,12 @@ class MotorCycleHazardAwarenessRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String collectionPath = 'hazard_awareness';
 
-  Future<List<MotorcycleHazardAwareness>> fetchHazards() async {
+  Future<MotorcycleHazardAwareness> fetchHazards() async {
     try {
-      final snapshot = await _firestore.collection(collectionPath).get();
-      return snapshot.docs.map((doc) {
-        return MotorcycleHazardAwareness.fromFirestore(doc.id, doc.data() as Map<String, dynamic>);
-      }).toList();
+      final snapshot = await _firestore.collection(collectionPath).doc().get();
+      final data = snapshot.data() as Map<String, dynamic>;
+      final motorcycle  = MotorcycleHazardAwareness.fromFirestore(data);
+      return motorcycle;
     } catch (e) {
       throw Exception('Error fetching hazards: $e');
     }

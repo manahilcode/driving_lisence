@@ -7,6 +7,8 @@ import '../../../core/loader.dart';
 import '../viewmodel/bus_provider.dart';
 
 class Othertype5 extends StatefulWidget {
+  const Othertype5({super.key});
+
   @override
   _Othertype5State createState() => _Othertype5State();
 }

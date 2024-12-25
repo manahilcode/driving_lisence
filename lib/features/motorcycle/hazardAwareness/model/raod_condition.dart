@@ -1,5 +1,4 @@
-class RoadConditionHazardAwareness {
-  final String id;                // Document ID
+class RoadConditionHazardAwareness {// Document ID
   final String title;             // Main title
   final String subtitle;          // Primary subtitle
   final String subtitle2;         // Secondary subtitle
@@ -9,7 +8,7 @@ class RoadConditionHazardAwareness {
   final ImageData image3;         // Third additional image
 
   RoadConditionHazardAwareness({
-    required this.id,
+
     required this.title,
     required this.subtitle,
     required this.subtitle2,
@@ -20,9 +19,9 @@ class RoadConditionHazardAwareness {
   });
 
   // Factory method to create a model from Firestore data
-  factory RoadConditionHazardAwareness.fromFirestore(String id, Map<String, dynamic> data) {
+  factory RoadConditionHazardAwareness.fromFirestore(Map<String, dynamic> data) {
     return RoadConditionHazardAwareness(
-      id: id,
+
       title: data['title'] ?? '',
       subtitle: data['subtitle'] ?? '',
       subtitle2: data['subtitle2'] ?? '',

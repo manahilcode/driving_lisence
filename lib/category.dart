@@ -33,27 +33,44 @@ import 'features/vehicle_handling/pages/introduction.dart';
 import 'features/vehicle_loading/pages/introduction.dart';
 import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
 import 'menu_screen.dart';
+import 'package:flutter/foundation.dart';
+import 'features/auth/viewmodel/user_provider.dart';
+import 'features/motorcycle/allertness/pages/allertness.dart'; // Add this line
 
+// ignore: must_be_immutable
 class Category extends StatefulWidget {
   String? label;
   Category({super.key, this.label});
   @override
+  // ignore: library_private_types_in_public_api
   _CategoryState createState() => _CategoryState();
 }
 
 class _CategoryState extends State<Category>
     with SingleTickerProviderStateMixin {
-   TabController? _tabController;
+  TabController? _tabController;
   final List<bool> _selectedCategories =
       List.generate(16, (_) => false); // 15 categories
 
   int selectedIndex = 0;
+  String selectedCategory = "";
 
   @override
   void initState() {
     super.initState();
     //  _tabController = TabController(length: 1, vsync: this);
-    print(widget.label ?? "");
+    checkSelectedCategory();
+    if (kDebugMode) {
+      print(widget.label ?? "");
+    }
+  }
+
+
+  checkSelectedCategory()async{
+    final user = Provider.of<UserProvider>(context, listen: false);
+    selectedCategory = user.user?.category ?? "";
+    debugPrint("check category");
+    debugPrint(selectedCategory);
   }
 
   @override
@@ -142,7 +159,7 @@ class _CategoryState extends State<Category>
                     final answered =
                         int.tryParse(data?["correctQuestion"] ?? "");
                     final total = int.tryParse(data?["totalQuestion"] ?? "");
-                    final category = data?["category"] ?? "";
+                    //   final category = data?["category"] ?? "";
                     // Calculate progress as a percentage of answered vs total
                     double progress = 0.0;
 
@@ -159,9 +176,11 @@ class _CategoryState extends State<Category>
                         total: total ?? 0,
                         isSelected: _selectedCategories[1],
                         onTap: () => _toggleSelection(1),
-                        categoryScreen: widget.label == "PracticeQuiz"
-                            ? const QuizScreen()
-                            : const IntroductionAlertness());
+                        categoryScreen: selectedCategory == "Motorcycle"
+                            ? MotorcycleAlertness()
+                            : widget.label == "PracticeQuiz"
+                                ? const QuizScreen()
+                                : const IntroductionAlertness());
                   }),
                   Consumer<ResultController>(builder: (context, value, child) {
                     final data = value.attitude;
@@ -665,15 +684,19 @@ class CategoryItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Answered:  $answered',
-                  style:  GoogleFonts.roboto(color: Colors.orange,fontSize: 12),
+              Text(
+                'Answered:  $answered',
+                style: GoogleFonts.roboto(color: Colors.orange, fontSize: 12),
               ),
-              Text('Correct: $correct',
-                style:  GoogleFonts.roboto(color: Colors.green,fontSize: 12),
+              Text(
+                'Correct: $correct',
+                style: GoogleFonts.roboto(color: Colors.green, fontSize: 12),
               ),
-            
-              Text('Total: $total',
-                  style:  GoogleFonts.roboto(color: Colors.grey[600],fontSize: 12),),
+              Text(
+                'Total: $total',
+                style:
+                    GoogleFonts.roboto(color: Colors.grey[600], fontSize: 12),
+              ),
             ],
           ),
         ],
@@ -697,4 +720,3 @@ class CategoryItem extends StatelessWidget {
     );
   }
 }
-

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/think_About.dart';
 import '../repo/think_About.dart';
 
-class TaxingMotorcycleInfoProvider with ChangeNotifier {
+class ThinkAboutMotorcycleInfoProvider with ChangeNotifier {
   final ThinkAboutRepositoryDocument _repository = ThinkAboutRepositoryDocument();
 
   ThinkAboutDocument? _taxingMotorcycleInfo;

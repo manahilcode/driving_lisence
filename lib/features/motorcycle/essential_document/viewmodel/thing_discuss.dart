@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/things_discuss.dart';
 import '../repo/things_discuss.dart';
 
-class DriverInfoProvider with ChangeNotifier {
+class ThingDiscussProvider with ChangeNotifier {
   final DriverInfoRepositoryDocument _repository = DriverInfoRepositoryDocument();
 
   ThingsDiscussDocument? _driverInfo;

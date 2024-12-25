@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/yourself.dart';
 import '../repo/yourself_Repo.dart';
 
-class AwarenessHazardProvider with ChangeNotifier {
+class YourselfProvider with ChangeNotifier {
   final AwarenessHazardRepository _repository;
   AwarenessHazardYourself? _data;
   bool _isLoading = false;
@@ -13,7 +13,7 @@ class AwarenessHazardProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  AwarenessHazardProvider(this._repository);
+  YourselfProvider(this._repository);
 
   // Fetch data from the repository
   Future<void> fetchAwarenessHazardData(String documentId) async {

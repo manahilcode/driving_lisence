@@ -4,12 +4,12 @@ import '../repo/road_condition_hazard_Awareness.dart';
 
 class RoadConditionProvider extends ChangeNotifier {
   final RoadConditionRepository repository;
-  List<RoadConditionHazardAwareness> _items = [];
+  RoadConditionHazardAwareness? _items;
   bool _isLoading = false;
 
   RoadConditionProvider(this.repository);
 
-  List<RoadConditionHazardAwareness> get items => _items;
+  RoadConditionHazardAwareness get items => _items!;
   bool get isLoading => _isLoading;
 
   Future<void> loadRoadConditions() async {
@@ -19,7 +19,7 @@ class RoadConditionProvider extends ChangeNotifier {
     try {
       _items = await repository.fetchRoadConditions();
     } catch (e) {
-      _items = [];
+      _items = _items;
       debugPrint('Error loading road conditions: $e');
     } finally {
       _isLoading = false;

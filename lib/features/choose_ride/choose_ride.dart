@@ -1,13 +1,11 @@
 import 'package:driving_lisence/features/auth/viewmodel/controller.dart';
 import 'package:driving_lisence/features/book_theory/booked_theory_test.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../menu_screen.dart';
 import '../auth/repo/auth_repo.dart';
-import '../../../../category.dart' as cat;
 
 class chooseride extends StatefulWidget {
   const chooseride({super.key});

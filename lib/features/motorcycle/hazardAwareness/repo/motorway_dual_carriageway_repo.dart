@@ -5,13 +5,12 @@ class MotorwaysAndDualCarriagewaysRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String collectionPath = 'motorways_and_dual_carriageways';
 
-  Future<List<MotorwaysAndDualCarriageways>> fetchMotorwaysAndDualCarriageways() async {
+  Future<MotorwaysAndDualCarriageways> fetchMotorwaysAndDualCarriageways() async {
     try {
-      final snapshot = await _firestore.collection(collectionPath).get();
-      return snapshot.docs.map((doc) {
-        return MotorwaysAndDualCarriageways.fromFirestore(
-            doc.id, doc.data() as Map<String, dynamic>);
-      }).toList();
+      final snapshot = await _firestore.collection(collectionPath).doc().get();
+      final data  = snapshot.data() as Map<String, dynamic>;
+      final model =  MotorwaysAndDualCarriageways.fromFirestore(data);
+      return model;
     } catch (e) {
       throw Exception('Error fetching motorways and dual carriageways: $e');
     }

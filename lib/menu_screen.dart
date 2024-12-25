@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
+import 'category1.dart';
 import 'features/auth/repo/auth_repo.dart';
 import 'features/auth/viewmodel/controller.dart';
 import 'features/auth/viewmodel/user_provider.dart';
@@ -22,6 +23,7 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+  String selectedCategory= "";
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((time){
@@ -32,6 +34,11 @@ class _MenuScreenState extends State<MenuScreen> {
       auth.fetchAndDisplayUserProfile();
     });
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
   @override
   Widget build(BuildContext context) {
@@ -45,7 +52,6 @@ class _MenuScreenState extends State<MenuScreen> {
       body: SingleChildScrollView(
         child: Consumer<AuthController>(
           builder: (context,value,child) {
-
            final userName = value.name;
             return Column(
               children: [
@@ -69,7 +75,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         Padding(
                           padding: EdgeInsets.all(15.0),
                           child: Text(
-                            "$userName," ?? "",
+                            " $userName " ?? "",
                             style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -92,67 +98,72 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    children: [
-                      buildMenuButton(
-                        context: context,
-                        label: 'Start Learning',
-                        color: Colors.pink,
-                        icon: Icons.verified_user,
-                        badge: 'FREE',
-                        navigateTo:Category(), // Define your screen here
-                      ),
-                      const SizedBox(height: 10),
-                      buildMenuButton(
-                        context: context,
-                        label: 'Theory Test',
-                        color: Colors.green,
-                        icon: Icons.assignment,
-                        navigateTo: TheoryTest(), // Define your screen here
-                      ),
-                      SizedBox(height: 10),
-                      Consumer<UserProvider>(
-                        builder: (context, provider,child) {
-                          final users = provider.user;
-                          log(users?.category.toString() ?? "");
-                          return buildMenuButton(
+                Consumer<UserProvider>(
+                  builder: (context,provider ,child) {
+                    final users = provider.user;
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          buildMenuButton(
                             context: context,
-                            label: 'Hazard Perception',
-                            color: Colors.red,
-                            icon: Icons.warning,
-                            navigateTo:users?.category == "Car" ? CarHazardPerceptionScreen():MotorcycleHazardPerceptionScreen(), // Define your screen here
-                          );
-                        }
+                            label: 'Start Learning',
+                            color: Colors.pink,
+                            icon: Icons.verified_user,
+                            badge: 'FREE',
+                            navigateTo:users?.category == "Motorcycle" ?  Category1():Category(), // Define your screen here
+                          ),
+                          const SizedBox(height: 10),
+                          buildMenuButton(
+                            context: context,
+                            label: 'Theory Test',
+                            color: Colors.green,
+                            icon: Icons.assignment,
+                            navigateTo: TheoryTest(), // Define your screen here
+                          ),
+                          SizedBox(height: 10),
+                          Consumer<UserProvider>(
+                            builder: (context, provider,child) {
+                              final users = provider.user;
+                              log(users?.category.toString() ?? "");
+                              return buildMenuButton(
+                                context: context,
+                                label: 'Hazard Perception',
+                                color: Colors.red,
+                                icon: Icons.warning,
+                                navigateTo:users?.category == "Car" ? CarHazardPerceptionScreen():MotorcycleHazardPerceptionScreen(), // Define your screen here
+                              );
+                            }
+                          ),
+                          SizedBox(height: 10),
+                          buildMenuButton(
+                            context: context,
+                            label: 'Highway Code',
+                            color: Colors.blue,
+                            icon: Icons.book,
+                            navigateTo: TheoryTest(), // Define your screen here
+                          ),
+                          SizedBox(height: 10),
+                          buildMenuButton(
+                            context: context,
+                            label: 'Road Signs',
+                            color: Colors.orange,
+                            icon: Icons.traffic,
+                            navigateTo: TheoryTest(), // Define your screen here
+                          ),
+                          SizedBox(height: 10),
+                          buildMenuButton(
+                            context: context,
+                            label: 'Learn to Drive',
+                            color: Colors.purple,
+                            icon: Icons.directions_car,
+                            badge: 'FREE TRIAL',
+                            navigateTo: TheoryTest(), // Define your screen here
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 10),
-                      buildMenuButton(
-                        context: context,
-                        label: 'Highway Code',
-                        color: Colors.blue,
-                        icon: Icons.book,
-                        navigateTo: TheoryTest(), // Define your screen here
-                      ),
-                      SizedBox(height: 10),
-                      buildMenuButton(
-                        context: context,
-                        label: 'Road Signs',
-                        color: Colors.orange,
-                        icon: Icons.traffic,
-                        navigateTo: TheoryTest(), // Define your screen here
-                      ),
-                      SizedBox(height: 10),
-                      buildMenuButton(
-                        context: context,
-                        label: 'Learn to Drive',
-                        color: Colors.purple,
-                        icon: Icons.directions_car,
-                        badge: 'FREE TRIAL',
-                        navigateTo: TheoryTest(), // Define your screen here
-                      ),
-                    ],
-                  ),
+                    );
+                  }
                 ),
               ],
             );
