@@ -1,6 +1,7 @@
 import 'package:driving_lisence/core/imagewithtext.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -15,6 +16,14 @@ class RoadConditionScreen extends StatefulWidget {
 }
 
 class _RoadConditionScreenState extends State<RoadConditionScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<RoadConditionProvider>(context, listen: false);
+      provider.loadRoadConditions();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

@@ -15,6 +15,14 @@ class StopingAnIncidentScreen extends StatefulWidget {
 
 class _StopingAnIncidentScreenState extends State<StopingAnIncidentScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<MotorcycleHazardProvider>(context, listen: false);
+      provider.fetchMotorcycleHazard("motorcycle_attitude", "Animals_on_the_road");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(

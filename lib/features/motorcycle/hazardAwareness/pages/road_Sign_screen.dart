@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -14,6 +15,14 @@ class RoadSignScreen extends StatefulWidget {
 }
 
 class _RoadSignScreenState extends State<RoadSignScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<RoadSignsProvider>(context, listen: false);
+      provider.loadRoadSignsData("motorcycle_attitude", "Animals_on_the_road");
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

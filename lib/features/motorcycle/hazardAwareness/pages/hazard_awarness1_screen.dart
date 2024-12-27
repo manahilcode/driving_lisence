@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -14,6 +15,14 @@ class HazardAwarness1Screen extends StatefulWidget {
 }
 
 class _HazardAwarness1ScreenState extends State<HazardAwarness1Screen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<MotorcycleHazardProvider>(context, listen: false);
+      provider.fetchMotorcycleHazard("motorcycle_attitude", "Animals_on_the_road");
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

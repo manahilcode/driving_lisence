@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../repo/attitude_repo.dart';
 import '../model/attitude_model.dart';
 
-class AttitudeProvider extends ChangeNotifier {
+class AttitudeProviderAttitude extends ChangeNotifier {
   final AttitudeRepository _repository = AttitudeRepository();
 
   AttitudeModel? _data;

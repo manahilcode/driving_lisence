@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/giving_priority_other.dart';
 import '../repo/giving_priority_other_repo.dart';
 
-class GivingPriorityToOthersProvider extends ChangeNotifier {
+class GivingPriorityToOthersProviderAttitude extends ChangeNotifier {
   final GivingPriorityToOthersRepository _repository = GivingPriorityToOthersRepository();
 
   GivingPriorityToOthersModel? _data;

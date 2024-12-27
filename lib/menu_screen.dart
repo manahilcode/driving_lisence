@@ -23,15 +23,14 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  String selectedCategory= "";
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((time){
+    SchedulerBinding.instance.addPostFrameCallback((time)async{
        final user = Provider.of<UserProvider>(context,listen: false);
        final auth = Provider.of<AuthController>(context,listen: false);
        final uid = FirebaseAuth.instance.currentUser?.uid;
-      user.fetchUserData(uid!);
-      auth.fetchAndDisplayUserProfile();
+     await user.fetchUserData(uid!);
+     await auth.fetchAndDisplayUserProfile();
     });
     super.initState();
   }
@@ -49,7 +48,7 @@ class _MenuScreenState extends State<MenuScreen> {
         elevation: 0,
         toolbarHeight: 0, // No app bar height
       ),
-      body: SingleChildScrollView(
+      body:  SingleChildScrollView(
         child: Consumer<AuthController>(
           builder: (context,value,child) {
            final userName = value.name;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/periority_for_Bus.dart';
 import '../repo/priority_for_bus_repo.dart';
 
-class CrossingInfoProvider extends ChangeNotifier {
+class CrossingInfoProviderAttitude extends ChangeNotifier {
   final CrossingInfoRepository _repository = CrossingInfoRepository();
 
   CrossingInfoModel? _data;

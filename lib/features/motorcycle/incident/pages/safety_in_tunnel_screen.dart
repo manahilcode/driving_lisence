@@ -14,6 +14,14 @@ class SafetyInTunnelScreen extends StatefulWidget {
 }
 
 class _SafetyInTunnelScreenState extends State<SafetyInTunnelScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<MotorcycleHazardProvider>(context, listen: false);
+      provider.fetchMotorcycleHazard("motorcycle_attitude", "Animals_on_the_road");
+    });
+    super.initState();
+  }
   int? selectedAnswerIndex;
   bool isCorrect = false;
   bool isSelect = false;

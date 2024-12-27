@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../model/helping_other_road_model.dart';
 import '../repo/helping_other_road_repo.dart';
 
-class DazzleProvider extends ChangeNotifier {
+class DazzleProviderAttitude extends ChangeNotifier {
   final HelpingOtherRoadRepo _repository = HelpingOtherRoadRepo();
 
   HelpingOtherRoadModel? _data;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/good_manner_on_road_model.dart';
 import '../repo/good_manner_road_repo.dart';
 
-class GoodMannersProvider extends ChangeNotifier {
+class GoodMannersProviderAttitude extends ChangeNotifier {
   final GoodMannersRepository _repository = GoodMannersRepository();
 
   GoodMannersModel? _data;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/animal_on_road_model.dart';
 import '../repo/animal_on_road_repo.dart';
 
-class AnimalsOnTheRoadProvider extends ChangeNotifier {
+class AnimalsOnTheRoadProviderAttitude extends ChangeNotifier {
   final AnimalsOnTheRoadRepository _repository = AnimalsOnTheRoadRepository();
 
   AnimalsOnTheRoadModel? _data;

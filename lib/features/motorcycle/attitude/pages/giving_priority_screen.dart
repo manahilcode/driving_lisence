@@ -1,10 +1,12 @@
 import 'package:driving_lisence/core/imagewithtext.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
+import '../viewmodel/following_safety_provider.dart';
 import '../viewmodel/giving_priority_other_provider.dart';
 
 class GivingPriorityScreen extends StatefulWidget {
@@ -16,13 +18,21 @@ class GivingPriorityScreen extends StatefulWidget {
 
 class _GivingPriorityScreenState extends State<GivingPriorityScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<GivingPriorityToOthersProviderAttitude>(context, listen: false);
+      provider.fetchGivingPriorityToOthersData("motorcycle_attitude", "Giving_priority_to_others");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Giving priority",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<GivingPriorityToOthersProvider>(
+      body: Consumer<GivingPriorityToOthersProviderAttitude>(
           builder: (context,provider,child) {
             final data = provider.data;
             if (data == null) {
@@ -36,7 +46,6 @@ class _GivingPriorityScreenState extends State<GivingPriorityScreen> {
                createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
                 buildImage(data.image),
-                createHeadingText(data.title1),
                 createAutoSizeText(data.subtitle1),
                 Column(
                   children: [

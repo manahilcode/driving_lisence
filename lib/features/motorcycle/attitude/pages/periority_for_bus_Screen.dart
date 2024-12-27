@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -15,13 +16,21 @@ class PeriorityForBusScreen extends StatefulWidget {
 
 class _PeriorityForBusScreenState extends State<PeriorityForBusScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<CrossingInfoProviderAttitude>(context, listen: false);
+      provider.fetchCrossingInfo("motorcycle_attitude", "Priority_for_buses");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "priority for bus",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<CrossingInfoProvider>(
+      body: Consumer<CrossingInfoProviderAttitude>(
           builder: (context,provider,child) {
             final data = provider.data;
             if (data == null) {

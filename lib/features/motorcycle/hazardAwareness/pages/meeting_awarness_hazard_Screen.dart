@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -14,6 +15,14 @@ class MeetingAwarnessHazardScreen extends StatefulWidget {
 }
 
 class _MeetingAwarnessHazardScreenState extends State<MeetingAwarnessHazardScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<HazardAwarenessMeetingStandardProvider>(context, listen: false);
+      provider.loadHazardAwarenessMeetingStandard();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import '../model/meeting_standard.dart';
 import '../repo/meeting_standard.dart';
 
-class StandardsProvider with ChangeNotifier {
+class StandardsProviderRoadTraffic with ChangeNotifier {
   final StandardsRepositorySign repository;
 
-  StandardsProvider({required this.repository});
+  StandardsProviderRoadTraffic({required this.repository});
 
   MeetingStandardSign? _standardsData;
   MeetingStandardSign? get standardsData => _standardsData;

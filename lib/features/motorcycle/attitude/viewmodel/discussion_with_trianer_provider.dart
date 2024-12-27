@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/discusstion_with_trainer.dart';
 import '../repo/discusstion_with_trainer_repo.dart';
 
-class TrainerDiscussionProvider extends ChangeNotifier {
+class TrainerDiscussionProviderAttitude extends ChangeNotifier {
   final TrainerDiscussionRepository _repository = TrainerDiscussionRepository();
 
   TrainerDiscussionModel? _data;

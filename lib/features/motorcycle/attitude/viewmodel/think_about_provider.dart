@@ -4,7 +4,7 @@ import '../../allertness/model/think_about.dart';
 import '../../allertness/repo/think_repo.dart';
 import '../repo/think_about_repo.dart';
 
-class ThinkAboutProvider extends ChangeNotifier {
+class ThinkAboutProviderAttitude extends ChangeNotifier {
   final AttitudeThinkAboutRepository _repository = AttitudeThinkAboutRepository();
 
   ThinkAboutModel? _data;

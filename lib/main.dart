@@ -43,6 +43,17 @@ import 'features/motorcycle/allertness/viewmodel/observation_awareness_provider.
 import 'features/motorcycle/allertness/viewmodel/stay_focus_provider.dart';
 import 'features/motorcycle/allertness/viewmodel/things_discusstion_practice_trainer_provider.dart';
 import 'features/motorcycle/allertness/viewmodel/think_about_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/animal_on_road_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/attitude_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/discussion_with_trianer_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/following_safety_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/giving_priority_other_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/good_manner_on_road_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/helping_other_road_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/meeting_standard_repo.dart';
+import 'features/motorcycle/attitude/viewmodel/pedestrain_crossing_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/priority_for_bus_provider.dart';
+import 'features/motorcycle/attitude/viewmodel/think_about_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/clue_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/factor_effecting_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/hazard_provider.dart';
@@ -195,6 +206,20 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ThinkAboutProviderAllert()),
 
         // m attitude
+
+        ChangeNotifierProvider(create: (_) => AnimalsOnTheRoadProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => AttitudeProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => TrainerDiscussionProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => FollowingSafelyProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => GivingPriorityToOthersProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => GoodMannersProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => DazzleProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => StandardsProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => CrossingProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => CrossingInfoProviderAttitude()),
+        ChangeNotifierProvider(create: (_) => ThinkAboutProviderAttitude()),
+
+
 
 
 

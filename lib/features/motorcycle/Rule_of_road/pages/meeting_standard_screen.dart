@@ -16,6 +16,14 @@ class MeetingStandardScreen extends StatefulWidget {
 
 class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),

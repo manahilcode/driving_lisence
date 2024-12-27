@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -16,6 +17,14 @@ class MotorwayDualCarriageScreen extends StatefulWidget {
 
 class _MotorwayDualCarriageScreenState
     extends State<MotorwayDualCarriageScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<MotorwaysAndDualCarriagewaysProvider>(context, listen: false);
+      provider.loadMotorwaysAndDualCarriageways();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

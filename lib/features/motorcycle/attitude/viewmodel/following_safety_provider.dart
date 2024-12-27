@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/following_safety_model.dart';
 import '../repo/follwing_safety_repo.dart';
 
-class FollowingSafelyProvider extends ChangeNotifier {
+class FollowingSafelyProviderAttitude extends ChangeNotifier {
   final FollowingSafelyRepository _repository = FollowingSafelyRepository();
 
   FollowingSafelyModel? _data;

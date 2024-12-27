@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -15,13 +16,21 @@ class AttitudeScreen extends StatefulWidget {
 
 class _AttitudeScreenState extends State<AttitudeScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<AttitudeProviderAttitude>(context, listen: false);
+      provider.fetchAttitudeData("motorcycle_attitude", "Attitude");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Attitude",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<AttitudeProvider>(
+      body: Consumer<AttitudeProviderAttitude>(
           builder: (context,provider,child) {
             final data = provider.data;
             if (data == null) {

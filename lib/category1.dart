@@ -27,6 +27,7 @@ import 'features/attitude/pages/attitude.dart';
 import 'features/essential_document/pages/introduction.dart';
 import 'features/incident/pages/incident_accident_and_emergency.dart';
 import 'features/motor_way_Driving/pages/introduction.dart';
+import 'features/motorcycle/attitude/pages/attitude_screen.dart';
 import 'features/road_and_traffic_sign/pages/introduction.dart';
 import 'features/rule_of_road/pages/introduction.dart';
 import 'features/vehicle_handling/pages/introduction.dart';
@@ -53,7 +54,6 @@ class _Category1State extends State<Category1>
   List.generate(16, (_) => false); // 15 categories
 
   int selectedIndex = 0;
-  String selectedCategory = "";
 
   @override
   void initState() {
@@ -157,36 +157,35 @@ class _Category1State extends State<Category1>
                         total: total ?? 0,
                         isSelected: _selectedCategories[1],
                         onTap: () => _toggleSelection(1),
-                        categoryScreen: selectedCategory == "Motorcycle"
-                            ? MotorcycleAlertness() :
-                        SizedBox.shrink());
+                        categoryScreen:
+                             MotorcycleAlertness()
+
+                    );
 
                   }),
-            //       Consumer<ResultController>(builder: (context, value, child) {
-            //         final data = value.attitude;
-            //         final answered =
-            //         int.tryParse(data?["correctQuestion"] ?? "");
-            //         final total = int.tryParse(data?["totalQuestion"] ?? "");
-            //         final category = data?["category"] ?? "";
-            //         double progress = 0.0;
-            //
-            //         if (answered != null && total != null && total > 0) {
-            //           progress = (answered / total) * 100;
-            //         }
-            //         return CategoryItem(
-            //           icon: Icons.drive_eta,
-            //           title: 'Attitude',
-            //           progress: progress.toInt() ?? 0,
-            //           answered: 0,
-            //           correct: answered ?? 0,
-            //           total: total ?? 0,
-            //           isSelected: _selectedCategories[2],
-            //           onTap: () => _toggleSelection(2),
-            //           categoryScreen: widget.label == "PracticeQuiz"
-            //               ? const AttitudeQuizScreens()
-            //               : const Tip_attitude_1(),
-            //         );
-            //       }),
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.attitude;
+                    final answered =
+                    int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                  //  final category = data?["category"] ?? "";
+                    double progress = 0.0;
+
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
+                    return CategoryItem(
+                      icon: Icons.drive_eta,
+                      title: 'Attitude',
+                      progress: progress.toInt() ?? 0,
+                      answered: 0,
+                      correct: answered ?? 0,
+                      total: total ?? 0,
+                      isSelected: _selectedCategories[2],
+                      onTap: () => _toggleSelection(2),
+                      categoryScreen: AttitudeScreen()
+                    );
+                  }),
             //       //
             //       Consumer<ResultController>(builder: (context, value, child) {
             //         final data = value.safetyVehicle;

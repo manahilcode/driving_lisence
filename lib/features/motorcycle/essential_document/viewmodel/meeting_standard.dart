@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../model/meeting_the_standard.dart';
 import '../repo/meeting_standard.dart';
 
-class MeetingStandard with ChangeNotifier {
+class MeetingStandardDocument with ChangeNotifier {
   final DrivingInfoRepositoryEss _repository = DrivingInfoRepositoryEss();
 
   MeetingTheStandardDocument? _drivingInfo;

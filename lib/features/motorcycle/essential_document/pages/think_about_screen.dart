@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -14,6 +15,14 @@ class ThinkAboutScreen extends StatefulWidget {
 }
 
 class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<ThinkAboutMotorcycleInfoProvider>(context, listen: false);
+      provider.fetchTaxingMotorcycleInfo();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

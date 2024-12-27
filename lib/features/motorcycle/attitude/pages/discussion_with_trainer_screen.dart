@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -15,13 +16,21 @@ class DiscussionWithTrainerScreen extends StatefulWidget {
 
 class _DiscussionWithTrainerScreenState extends State<DiscussionWithTrainerScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<TrainerDiscussionProviderAttitude>(context, listen: false);
+      provider.fetchTrainerDiscussionInfo("motorcycle_attitude", "Things_to_discuss_and_practise_with_your_trainer");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Discussion with trainer ",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<TrainerDiscussionProvider>(
+      body: Consumer<TrainerDiscussionProviderAttitude>(
           builder: (context,provider,child) {
             final data = provider.data;
             if (data == null) {

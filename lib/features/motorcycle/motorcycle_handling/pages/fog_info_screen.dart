@@ -17,6 +17,14 @@ class _FogInfoScreenState extends State<FogInfoScreen> {
   int? selectedAnswerIndex;
   bool isCorrect  = false;
   bool isSelect = false;
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
 
 
   @override

@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -18,6 +19,15 @@ class _EssentailDocument1ScreenState extends State<EssentailDocument1Screen> {
   int? selectedAnswerIndex;
   bool isCorrect = false;
   bool isSelect = false;
+
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<EssentialDocumentsDetailsNotifier>(context, listen: false);
+      provider.fetchEssentialDocumentsDetails("motorcycle_attitude", "Animals_on_the_road");
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

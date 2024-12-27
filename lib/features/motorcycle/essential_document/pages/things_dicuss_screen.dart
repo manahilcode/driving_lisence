@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -15,6 +16,14 @@ class ThingsDicussScreen extends StatefulWidget {
 
 class _ThingsDicussScreenState extends State<ThingsDicussScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<ThingDiscussProviderDocument>(context, listen: false);
+      provider.fetchDriverInfo();
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
@@ -22,7 +31,7 @@ class _ThingsDicussScreenState extends State<ThingsDicussScreen> {
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 
-      body: Consumer<ThingDiscussProvider>(
+      body: Consumer<ThingDiscussProviderDocument>(
           builder: (context,provider,child) {
             final data = provider.driverInfo;
             if (data == null) {

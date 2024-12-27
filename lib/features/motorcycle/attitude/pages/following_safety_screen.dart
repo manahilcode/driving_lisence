@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -14,6 +15,14 @@ class FollowingSafetyScreen extends StatefulWidget {
 }
 
 class _FollowingSafetyScreenState extends State<FollowingSafetyScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<FollowingSafelyProviderAttitude>(context, listen: false);
+      provider.fetchFollowingSafelyData("motorcycle_attitude", "Following_safely");
+    });
+    super.initState();
+  }
   int? selectedAnswerIndex;
   bool isCorrect = false;
   bool isSelect = false;
@@ -21,10 +30,10 @@ class _FollowingSafetyScreenState extends State<FollowingSafetyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Following safety",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<FollowingSafelyProvider>(
+      body: Consumer<FollowingSafelyProviderAttitude>(
           builder: (context, provider, child) {
         final data = provider.data;
         if (data == null) {

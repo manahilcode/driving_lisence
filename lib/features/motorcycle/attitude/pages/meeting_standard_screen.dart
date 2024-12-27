@@ -1,10 +1,12 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../road_and_traffic_sign/viewmodel/meeting_standard.dart';
+import '../viewmodel/meeting_standard_repo.dart';
 
 class MeetingStandardScreen extends StatefulWidget {
   const MeetingStandardScreen({super.key});
@@ -15,14 +17,22 @@ class MeetingStandardScreen extends StatefulWidget {
 
 class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<StandardsProviderAttitude>(context, listen: false);
+      provider.fetchStandardsData("motorcycle_attitude", "Meeting_the_standards");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Meeting standard",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<StandardsProvider>(builder: (context, provider, child) {
-        final data = provider.standardsData;
+      body: Consumer<StandardsProviderAttitude>(builder: (context, provider, child) {
+        final data = provider.data;
         if (data == null) {
           return const Center(
             child: LoadingScreen(),

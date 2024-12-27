@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -14,6 +15,14 @@ class MotTestScreen extends StatefulWidget {
 }
 
 class _MotTestScreenState extends State<MotTestScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<MotTestDetailsNotifier>(context, listen: false);
+      provider.fetchMotTestDetails("motorcycle_attitude", "Animals_on_the_road");
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

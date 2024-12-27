@@ -15,6 +15,14 @@ class SideCarScreen extends StatefulWidget {
 
 class _SideCarScreenState extends State<SideCarScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(

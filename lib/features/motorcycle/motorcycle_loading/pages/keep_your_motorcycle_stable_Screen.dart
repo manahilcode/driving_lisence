@@ -17,6 +17,14 @@ class KeepYourMotorcycleStableScreen extends StatefulWidget {
 class _KeepYourMotorcycleStableScreenState
     extends State<KeepYourMotorcycleStableScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(

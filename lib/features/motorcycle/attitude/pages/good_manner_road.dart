@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -14,6 +15,14 @@ class GoodMannerRoadscreen extends StatefulWidget {
 }
 
 class _GoodMannerRoadscreenState extends State<GoodMannerRoadscreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<GoodMannersProviderAttitude>(context, listen: false);
+      provider.fetchGoodMannersData("motorcycle_attitude", "Good_manners_on_the_road");
+    });
+    super.initState();
+  }
   int? selectedAnswerIndex;
   bool isCorrect = false;
   bool isSelect = false;
@@ -21,10 +30,10 @@ class _GoodMannerRoadscreenState extends State<GoodMannerRoadscreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Good manner",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<GoodMannersProvider>(
+      body: Consumer<GoodMannersProviderAttitude>(
           builder: (context,provider,child) {
             final data = provider.data;
             if (data == null) {

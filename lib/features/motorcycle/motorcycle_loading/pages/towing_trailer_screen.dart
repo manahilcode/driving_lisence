@@ -14,6 +14,14 @@ class TowingTrailerScreen extends StatefulWidget {
 }
 
 class _TowingTrailerScreenState extends State<TowingTrailerScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
   int? selectedAnswerIndex;
   bool isCorrect = false;
   bool isSelect = false;

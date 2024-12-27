@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/pedistrain_crossing_model.dart';
 import '../repo/pedistrain_crossing_repo.dart';
 
-class CrossingProvider extends ChangeNotifier {
+class CrossingProviderAttitude extends ChangeNotifier {
   final CrossingRepository _repository = CrossingRepository();
 
   CrossingModel? _data;

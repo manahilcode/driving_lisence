@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/meeting_Standard_model.dart';
 import '../repo/meeting_standard_repo.dart';
 
-class StandardsProvider extends ChangeNotifier {
+class StandardsProviderAttitude extends ChangeNotifier {
   final StandardsRepository _repository = StandardsRepository();
 
   StandardsModel? _data;

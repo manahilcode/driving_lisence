@@ -13,7 +13,16 @@ class OlderDisabledScreen extends StatefulWidget {
   State<OlderDisabledScreen> createState() => _OlderDisabledScreenState();
 }
 
+
 class _OlderDisabledScreenState extends State<OlderDisabledScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
   int? selectedAnswerIndex;
   bool isSelect = false;
   bool isCorrect = false;

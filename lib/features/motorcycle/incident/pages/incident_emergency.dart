@@ -15,6 +15,14 @@ class IncidentEmergencyScreen extends StatefulWidget {
 
 class _IncidentEmergencyScreenState extends State<IncidentEmergencyScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<MotorcycleHazardProvider>(context, listen: false);
+      provider.fetchMotorcycleHazard("motorcycle_attitude", "Animals_on_the_road");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(

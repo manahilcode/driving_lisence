@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../attitude/viewmodel/meeting_standard_repo.dart';
+import '../viewmodel/meeting_standard.dart';
 
 class MeetingStandardScreen extends StatefulWidget {
   const MeetingStandardScreen({super.key});
@@ -15,12 +16,20 @@ class MeetingStandardScreen extends StatefulWidget {
 
 class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-    body: Consumer<StandardsProvider>(
+    body: Consumer<StandardsProviderRoadTraffic>(
       builder: (context,provider,child) {
-        final data = provider!.data;
+        final data = provider!.standardsData;
         if (data == null) {
           return const Center(
             child: LoadingScreen(),
@@ -35,7 +44,7 @@ class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
             ),
             createAutoSizeText(data.title2),
             Column(
-              children: data.points1.map((e)=>buildBulletText(e.toString())).toList(),
+              children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
             ),
             Center(
               child: GestureDetector(

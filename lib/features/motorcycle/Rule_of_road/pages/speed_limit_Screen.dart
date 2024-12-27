@@ -14,6 +14,14 @@ class SpeedLimitScreen extends StatefulWidget {
 }
 
 class _SpeedLimitScreenState extends State<SpeedLimitScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
   int? selectedAnswerIndex;
   bool isCorrect =false;
   bool isSelect = false;

@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -15,6 +16,14 @@ class MeetingStandardScreen extends StatefulWidget {
 
 class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<MeetingStandardDocument>(context, listen: false);
+      provider.fetchDrivingInfo();
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
@@ -22,7 +31,7 @@ class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 
-      body: Consumer<MeetingStandard>(
+      body: Consumer<MeetingStandardDocument>(
           builder: (context,provider,child) {
             final data = provider.drivingInfo;
             if (data == null) {

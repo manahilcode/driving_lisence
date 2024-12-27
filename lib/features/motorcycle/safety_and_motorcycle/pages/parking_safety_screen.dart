@@ -14,6 +14,14 @@ class ParkingSafetyScreen extends StatefulWidget {
 }
 
 class _ParkingSafetyScreenState extends State<ParkingSafetyScreen> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<BreakdownProvider>(context, listen: false);
+      provider.fetchBreakdown("Animals_on_the_road");
+    });
+    super.initState();
+  }
   int? selectedAnswerIndex;
   bool isSelect = false;
   bool isCorrect = false;
