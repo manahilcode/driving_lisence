@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../allertness/viewmodel/think_about_provider.dart';
+import '../../motorway_Riding/viewmodel/think_about_provider.dart';
 
 class ThinkAboutScreen extends StatefulWidget {
   const ThinkAboutScreen({super.key});
@@ -22,7 +23,7 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
       body: Consumer<ThinkAboutProvider>(builder: (context, provider, child) {
-        final data = provider.data;
+        final data = provider.thinkAboutData;
         if (data == null) {
           return const Center(
             child: LoadingScreen(),

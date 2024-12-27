@@ -4,16 +4,16 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/parking_safetly_provider.dart';
+import '../viewmodel/older_disabled_provider.dart';
 
-class ParkingSafetyScreen extends StatefulWidget {
-  const ParkingSafetyScreen({super.key});
+class OlderDisabledScreen extends StatefulWidget {
+  const OlderDisabledScreen({super.key});
 
   @override
-  State<ParkingSafetyScreen> createState() => _ParkingSafetyScreenState();
+  State<OlderDisabledScreen> createState() => _OlderDisabledScreenState();
 }
 
-class _ParkingSafetyScreenState extends State<ParkingSafetyScreen> {
+class _OlderDisabledScreenState extends State<OlderDisabledScreen> {
   int? selectedAnswerIndex;
   bool isSelect = false;
   bool isCorrect = false;
@@ -22,27 +22,21 @@ class _ParkingSafetyScreenState extends State<ParkingSafetyScreen> {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
-      body: Consumer<ParkingSafelyNotifier>(
+      body: Consumer<OlderAndDisabledPedestriansProvider>(
           builder: (context,provider,child) {
-            final data = provider.parkingSafelyData;
+            final data = provider.data;
             if(data == null)
             {
               return LoadingScreen();
             }
+
             final ans = data.answer;
             final correctAnswer = data.correct;
             return Column(
               children: [
-                createHeadingText(data.title),
+                 createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
-                buildImage(data.image),
                 createAutoSizeText(data.subtitle1),
-                Column(
-                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
-                ),
-                Column(
-                  children: data.points1.map((e)=>buildBulletText(e.toString())).toList(),
-                ),
                 createAutoSizeText(data.question),
                 Column(
                   children: ans!.asMap().entries.map((entry) {
@@ -137,11 +131,11 @@ class _ParkingSafetyScreenState extends State<ParkingSafetyScreen> {
                     ),
                   ),
                 ),
+
               ],
             );
           }
       ),
-
     );
   }
 }

@@ -1,38 +1,80 @@
+import 'package:driving_lisence/core/appbar.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_7.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/weather_condition_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class WeatherConditionScreen extends StatefulWidget {
+  const WeatherConditionScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<WeatherConditionScreen> createState() => _WeatherConditionScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _WeatherConditionScreenState extends State<WeatherConditionScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<WeatherConditionNotifier>(
           builder: (context,provider,child) {
-            final data = provider.data;
+            final data = provider.weatherConditionData;
             if(data == null)
             {
               return LoadingScreen();
             }
+
             return Column(
               children: [
                 createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
-                buildImage(data.image),
+                createAutoSizeText(data.ford),
+                createAutoSizeText(data.tip),
+                createAutoSizeText(data.reflection),
+                
                 Column(
-                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
+                  children: [
+                    createAutoSizeText(data.image.text),
+                    buildImage(data.image.image),
+                  ],
+                ),
+
+                Column(
+                  children: [
+                    createAutoSizeText(data.image1.text),
+                    buildImage(data.image1.image),
+                  ],
+                ),
+
+                Column(
+                  children: [
+                    createAutoSizeText(data.image2.text),
+                    buildImage(data.image2.image),
+                  ],
+                ),
+
+                Column(
+                  children: [
+                    createAutoSizeText(data.image3.text),
+                    buildImage(data.image3.image),
+                  ],
+                ),
+
+                Column(
+                  children: [
+                    createAutoSizeText(data.image4.text),
+                    buildImage(data.image4.image),
+                  ],
+                ),
+
+                Column(
+                  children: [
+                    createAutoSizeText(data.image5.text),
+                    buildImage(data.image5.image),
+                  ],
                 ),
                 Center(
                   child: GestureDetector(

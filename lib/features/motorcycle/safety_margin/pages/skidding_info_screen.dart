@@ -4,31 +4,31 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/parking_safetly_provider.dart';
+import '../viewmodel/skidding_info_provider.dart';
 
-class ParkingSafetyScreen extends StatefulWidget {
-  const ParkingSafetyScreen({super.key});
+class SkiddingInfoScreen extends StatefulWidget {
+  const SkiddingInfoScreen({super.key});
 
   @override
-  State<ParkingSafetyScreen> createState() => _ParkingSafetyScreenState();
+  State<SkiddingInfoScreen> createState() => _SkiddingInfoScreenState();
 }
 
-class _ParkingSafetyScreenState extends State<ParkingSafetyScreen> {
+class _SkiddingInfoScreenState extends State<SkiddingInfoScreen> {
   int? selectedAnswerIndex;
-  bool isSelect = false;
+  bool isSelect  = false;
   bool isCorrect = false;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-
-      body: Consumer<ParkingSafelyNotifier>(
+      body: Consumer<SkiddingInfoNotifier>(
           builder: (context,provider,child) {
-            final data = provider.parkingSafelyData;
+            final data = provider.data;
             if(data == null)
             {
               return LoadingScreen();
             }
+
             final ans = data.answer;
             final correctAnswer = data.correct;
             return Column(
@@ -36,7 +36,6 @@ class _ParkingSafetyScreenState extends State<ParkingSafetyScreen> {
                 createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
                 buildImage(data.image),
-                createAutoSizeText(data.subtitle1),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),

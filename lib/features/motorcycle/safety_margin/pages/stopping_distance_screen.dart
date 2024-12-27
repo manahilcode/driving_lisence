@@ -4,33 +4,36 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/stopping_distance_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class StoppingDistanceScreen extends StatefulWidget {
+  const StoppingDistanceScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<StoppingDistanceScreen> createState() => _StoppingDistanceScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _StoppingDistanceScreenState extends State<StoppingDistanceScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<StoppingDistanceNotifier>(
           builder: (context,provider,child) {
-            final data = provider.data;
+            final data = provider.stoppingDistanceData;
             if(data == null)
             {
               return LoadingScreen();
             }
+
             return Column(
               children: [
                 createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
                 buildImage(data.image),
+                createAutoSizeText(data.subtitle1),
+                buildTipWidget(data.reflection),
+                 buildTipWidget(data.tip),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
@@ -76,6 +79,7 @@ class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
                     ),
                   ),
                 ),
+
               ],
             );
           }

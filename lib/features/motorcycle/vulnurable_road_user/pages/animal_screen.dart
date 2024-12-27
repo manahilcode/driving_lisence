@@ -1,51 +1,39 @@
-import 'package:driving_lisence/core/loader.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
-import '../repo/avoiding_congession_repo.dart';
-import '../viewmodel/avoid_congession_provider.dart';
+import '../../../../core/loader.dart';
+import '../viewmodel/animals_provider.dart';
 
-class AvoidCongessionScreen extends StatefulWidget {
-  const AvoidCongessionScreen({super.key});
+class AnimalScreen extends StatefulWidget {
+  const AnimalScreen({super.key});
 
   @override
-  State<AvoidCongessionScreen> createState() => _AvoidCongessionScreenState();
+  State<AnimalScreen> createState() => _AnimalScreenState();
 }
 
-class _AvoidCongessionScreenState extends State<AvoidCongessionScreen> {
+class _AnimalScreenState extends State<AnimalScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
-      body: Consumer<AvoidingCongestionNotifier>(
+      body: Consumer<AnimalVulnerableUserProvider>(
         builder: (context,provider,child) {
           final data = provider.data;
           if(data == null)
-            {
-              return LoadingScreen();
-            }
-
+          {
+            return LoadingScreen();
+          }
           return Column(
             children: [
-              createHeadingText(data.title),
+               createHeadingText(data.title),
               createAutoSizeText(data.subtitle),
               buildImage(data.image),
-              createAutoSizeText(data.subtitle1),
-              buildTipWidget(data.tip),
-              buildTipWidget(data.tip1),
               Column(
                 children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
               ),
-              Column(
-                children: data.points1.map((e)=>buildBulletText(e.toString())).toList(),
-              ),
-              Column(
-                children: data.points2.map((e)=>buildBulletText(e.toString())).toList(),
-              ),
-
               Center(
                 child: GestureDetector(
                   onTap: () {
@@ -92,7 +80,6 @@ class _AvoidCongessionScreenState extends State<AvoidCongessionScreen> {
           );
         }
       ),
-
     );
   }
 }

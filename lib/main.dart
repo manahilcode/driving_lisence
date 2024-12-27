@@ -29,6 +29,20 @@ import 'features/Quiz/vulnerable_road_user_quiz/viewmodel/controller.dart';
 import 'features/auth/viewmodel/controller.dart';
 import 'features/auth/viewmodel/user_provider.dart';
 import 'features/incident/viewmodel/controller.dart';
+import 'features/motorcycle/allertness/repo/allertness_repo.dart';
+import 'features/motorcycle/allertness/repo/anticipation_repo.dart';
+import 'features/motorcycle/allertness/repo/observation_awareness_repo.dart';
+import 'features/motorcycle/allertness/viewmodel/alertness_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/anticipation_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/avoid_tiredness_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/being_seen_by_other_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/distraction_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/keep_warm_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/meeting_standard_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/observation_awareness_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/stay_focus_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/things_discusstion_practice_trainer_provider.dart';
+import 'features/motorcycle/allertness/viewmodel/think_about_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/clue_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/factor_effecting_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/hazard_provider.dart';
@@ -163,24 +177,28 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
         ChangeNotifierProvider<FactorEffectingProvider>(
             create: (_) => FactorEffectingProvider()),
+        //add
+        ChangeNotifierProvider<AlertnessNotifier>(
+            create: (_) => AlertnessNotifier(
+                AlertnessRepository()
+            )),
+        // m allert
+        ChangeNotifierProvider<AnticipationProvider>(create: (_) => AnticipationProvider(RoadAwarenessRepository())),
+        ChangeNotifierProvider(create: (_) => AvoidingTirednessProvider()),
+        ChangeNotifierProvider(create: (_) => BeingSeenProvider()),
+        ChangeNotifierProvider(create: (_) => DistractionProvider()),
+        ChangeNotifierProvider(create: (_) => KeepingWarmProvider()),
+        ChangeNotifierProvider(create: (_) => MeetingTheStandardsProviderMotorcycleAllert()),
+        ChangeNotifierProvider(create: (_) => ObservationAwarenessNotifier(ObservationAwarenessRepository())),
+        ChangeNotifierProvider(create: (_) => StayFocusProvider()),
+        ChangeNotifierProvider(create: (_) => ThingsToDiscussProviderAllert()),
+        ChangeNotifierProvider(create: (_) => ThinkAboutProviderAllert()),
 
-        // CluesProvider
-        // FactorEffectingProvider
-        // HazardManagementProvider
-        // MotorcycleHazardProvider
-        // LearningSeeProvider
-        // LookingButNotSeeingProvider
-        // RespondingToHazardsProvider
-        // ReviewingYourDrivingProvider
-        // MotorcycleRoadWeatherConditionsProvider
-        // ScanningProvider
-        // SeeingHazardProvider
-        // MotorcycleStaticHazardProvider
-        // UnderstandingHazardsProvider
-        // WhatIfProvider
-        // MotorcycleYourProvider
+        // m attitude
 
-        //
+
+
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,22 +1,34 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/allertness/pages/things_discussion.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../attitude/viewmodel/think_about_provider.dart';
+import '../../motorway_Riding/viewmodel/think_about_provider.dart';
+import '../viewmodel/think_about_provider.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenAllert extends StatefulWidget {
+  const ThinkAboutScreenAllert({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenAllert> createState() => _ThinkAboutScreenAllertState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenAllertState extends State<ThinkAboutScreenAllert> {
   @override
   void initState() {
     // TODO: implement initState
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<ThinkAboutProviderAllert>(context,listen: false);
+      provider.fetchThinkAboutData("motorcycle_alertness","Think_about");
+
+
+
+    });
     super.initState();
   }
 
@@ -24,10 +36,10 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Think About",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<ThinkAboutProvider>(builder: (context, provider, child) {
+      body: Consumer<ThinkAboutProviderAllert>(builder: (context, provider, child) {
         final data = provider.data;
 
         if (data == null) {
@@ -45,16 +57,18 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
                   .toList(),
             ),
 
+            Gap(10),
+
             Center(
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ThingsDiscussionScreenAllert(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

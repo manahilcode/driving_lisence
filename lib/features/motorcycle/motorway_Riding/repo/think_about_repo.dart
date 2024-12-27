@@ -8,7 +8,7 @@ class ThinkAboutRepositoryRiding {
   // Fetch "Think About" data from Firestore
   Future<ThinkAboutModelRiding> getThinkAboutData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('motorcycle_Motorway_Think_About').doc('Think_About_Document').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_alertness').doc('Think_about').get();
       if (doc.exists) {
         return ThinkAboutModelRiding.fromMap(doc.data() as Map<String, dynamic>);
       } else {

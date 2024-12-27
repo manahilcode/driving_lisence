@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../model/things_discuss_practice_trainer.dart';
 import '../repo/things_discuss_practice_trainer_repo.dart';
 
-class ThingsToDiscussProvider extends ChangeNotifier {
+class ThingsToDiscussProviderAllert extends ChangeNotifier {
   final ThingsToDiscussRepository _repository = ThingsToDiscussRepository();
 
   ThingsToDiscussModel? _data;

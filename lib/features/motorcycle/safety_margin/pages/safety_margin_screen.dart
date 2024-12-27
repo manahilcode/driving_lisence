@@ -4,33 +4,31 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/safety_margin_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class SafetyMarginScreen extends StatefulWidget {
+  const SafetyMarginScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<SafetyMarginScreen> createState() => _SafetyMarginScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _SafetyMarginScreenState extends State<SafetyMarginScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<SafetyMarginNotifier>(
           builder: (context,provider,child) {
             final data = provider.data;
             if(data == null)
             {
               return LoadingScreen();
             }
+
             return Column(
               children: [
                 createHeadingText(data.title),
-                createAutoSizeText(data.subtitle),
-                buildImage(data.image),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),

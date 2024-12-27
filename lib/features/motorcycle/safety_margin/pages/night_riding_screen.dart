@@ -4,33 +4,32 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/night_riding_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class NightRidingScreen extends StatefulWidget {
+  const NightRidingScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<NightRidingScreen> createState() => _NightRidingScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _NightRidingScreenState extends State<NightRidingScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<NightRidingNotifier>(
           builder: (context,provider,child) {
             final data = provider.data;
             if(data == null)
             {
               return LoadingScreen();
             }
+
             return Column(
               children: [
                 createHeadingText(data.title),
-                createAutoSizeText(data.subtitle),
-                buildImage(data.image),
+                createAutoSizeText(data.reflection),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),

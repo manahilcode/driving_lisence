@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../model/anticipation_model.dart';
 import '../repo/anticipation_repo.dart';
@@ -26,6 +27,24 @@ class AnticipationProvider extends ChangeNotifier {
     } finally {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  Future<void> fetchAllDocuments(String collectionName) async {
+    try {
+      // Reference the collection
+      CollectionReference collection = FirebaseFirestore.instance.collection(collectionName);
+
+      // Get all documents in the collection
+      QuerySnapshot querySnapshot = await collection.get();
+
+      // Iterate over the documents
+      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+        print('Document ID: ${doc.id}');
+        print('Data: ${doc.data()}');
+      }
+    } catch (e) {
+      print('Error fetching documents: $e');
     }
   }
 }

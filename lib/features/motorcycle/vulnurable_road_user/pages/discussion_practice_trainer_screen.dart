@@ -4,22 +4,22 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/discusstion_practice_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class DiscussionPracticeTrainerScreen extends StatefulWidget {
+  const DiscussionPracticeTrainerScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<DiscussionPracticeTrainerScreen> createState() => _DiscussionPracticeTrainerScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _DiscussionPracticeTrainerScreenState extends State<DiscussionPracticeTrainerScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<DiscussionPracticeProvider>(
           builder: (context,provider,child) {
             final data = provider.data;
             if(data == null)
@@ -28,11 +28,15 @@ class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
             }
             return Column(
               children: [
-                createHeadingText(data.title),
+            createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
-                buildImage(data.image),
+                createAutoSizeText(data.title1),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
+                ),
+                createAutoSizeText(data.title2),
+                Column(
+                  children: data.points1.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
                 Center(
                   child: GestureDetector(
@@ -80,7 +84,6 @@ class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
             );
           }
       ),
-
     );
   }
 }

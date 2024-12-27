@@ -4,22 +4,22 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/cyclist_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class CyclistScreen extends StatefulWidget {
+  const CyclistScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<CyclistScreen> createState() => _CyclistScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _CyclistScreenState extends State<CyclistScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<CyclistProvider>(
           builder: (context,provider,child) {
             final data = provider.data;
             if(data == null)
@@ -31,9 +31,15 @@ class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
                 createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
                 buildImage(data.image),
-                Column(
-                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
-                ),
+                createAutoSizeText(data.title1),
+                createAutoSizeText(data.subtitle1),
+                buildImage(data.image1),
+                createAutoSizeText(data.title2),
+                createAutoSizeText(data.subtitle2),
+                buildImage(data.image2),
+                createAutoSizeText(data.title3),
+                createAutoSizeText(data.subtitle3),
+                buildImage(data.image2),
                 Center(
                   child: GestureDetector(
                     onTap: () {
@@ -76,11 +82,11 @@ class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
                     ),
                   ),
                 ),
+
               ],
             );
           }
       ),
-
     );
   }
 }

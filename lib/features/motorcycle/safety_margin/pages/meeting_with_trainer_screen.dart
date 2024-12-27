@@ -4,35 +4,38 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/meeting_with_standard_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class MeetingWithTrainerScreen extends StatefulWidget {
+  const MeetingWithTrainerScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<MeetingWithTrainerScreen> createState() => _MeetingWithTrainerScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _MeetingWithTrainerScreenState extends State<MeetingWithTrainerScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<MeetingTheStandardsNotifier>(
           builder: (context,provider,child) {
             final data = provider.data;
             if(data == null)
             {
               return LoadingScreen();
             }
+
             return Column(
               children: [
                 createHeadingText(data.title),
-                createAutoSizeText(data.subtitle),
-                buildImage(data.image),
+                createAutoSizeText(data.title1),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
+                ),
+                createAutoSizeText(data.title2),
+                Column(
+                  children: data.points1.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
                 Center(
                   child: GestureDetector(
@@ -76,6 +79,8 @@ class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
                     ),
                   ),
                 ),
+
+
               ],
             );
           }

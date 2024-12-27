@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../model/think_about.dart';
 import '../repo/think_repo.dart';
 
-class ThinkAboutProvider extends ChangeNotifier {
+class ThinkAboutProviderAllert extends ChangeNotifier {
   final MotorcycleThinkAboutRepository _repository = MotorcycleThinkAboutRepository();
 
   ThinkAboutModel? _data;

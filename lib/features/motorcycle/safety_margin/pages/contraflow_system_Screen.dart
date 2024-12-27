@@ -4,32 +4,32 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/contraflow_system_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class ContraflowSystemScreen extends StatefulWidget {
+  const ContraflowSystemScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<ContraflowSystemScreen> createState() => _ContraflowSystemScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _ContraflowSystemScreenState extends State<ContraflowSystemScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<ContraflowSystemNotifier>(
           builder: (context,provider,child) {
             final data = provider.data;
             if(data == null)
             {
               return LoadingScreen();
             }
+
             return Column(
               children: [
                 createHeadingText(data.title),
-                createAutoSizeText(data.subtitle),
+                buildTipWidget(data.tip),
                 buildImage(data.image),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),

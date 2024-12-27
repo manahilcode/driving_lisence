@@ -4,22 +4,22 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
-import '../viewmodel/carry_passenger_load_provider.dart';
+import '../viewmodel/pedestrain_provider.dart';
 
-class CarryPassengerLoadScreen extends StatefulWidget {
-  const CarryPassengerLoadScreen({super.key});
+class PedestrainScreen extends StatefulWidget {
+  const PedestrainScreen({super.key});
 
   @override
-  State<CarryPassengerLoadScreen> createState() => _CarryPassengerLoadScreenState();
+  State<PedestrainScreen> createState() => _PedestrainScreenState();
 }
 
-class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
+class _PedestrainScreenState extends State<PedestrainScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
-      body: Consumer<CarryingPassengersAndLoadsProvider>(
+      body: Consumer<PedestrianProvider>(
           builder: (context,provider,child) {
             final data = provider.data;
             if(data == null)
@@ -28,12 +28,12 @@ class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
             }
             return Column(
               children: [
-                createHeadingText(data.title),
+createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
                 buildImage(data.image),
-                Column(
-                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
-                ),
+                createAutoSizeText(data.subtitle1),
+                buildImage(data.image1),
+                buildTipWidget(data.tip),
                 Center(
                   child: GestureDetector(
                     onTap: () {
@@ -80,7 +80,6 @@ class _CarryPassengerLoadScreenState extends State<CarryPassengerLoadScreen> {
             );
           }
       ),
-
     );
   }
 }
