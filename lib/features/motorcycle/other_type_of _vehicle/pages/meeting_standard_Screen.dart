@@ -1,10 +1,12 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../Rule_of_road/viewmodel/meeting_standard.dart';
+import '../viewmodel/meeting_standard_provider.dart';
 
 class MeetingStandardScreen extends StatefulWidget {
   const MeetingStandardScreen({super.key});
@@ -17,18 +19,18 @@ class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<MeetingStandardsNotifierType>(context, listen: false);
+      provider.loadMeetingStandardsInfo("","Animals_on_the_road");
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-      body: Consumer<MeetingStandardsNotifier>(
+      appBar: CustomAppBar(title: "Meeting with standard", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      body: Consumer<MeetingStandardsNotifierType>(
           builder: (context,provider,child) {
-            final data = provider.data;
+            final data = provider.info;
             if (data == null) {
               return const Center(
                 child: LoadingScreen(),
@@ -37,13 +39,13 @@ class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
             return Column(
               children: [
                 createHeadingText(data.title),
-                createAutoSizeText(data.subtitle2),
-                createHeadingText(data.title1),
+                createAutoSizeText(data.title1),
+                createHeadingText(data.title2),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
                 Column(
-                  children: data.points1.map((e)=>buildBulletText(e.toString())).toList(),
+                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
                 Center(
                   child: GestureDetector(

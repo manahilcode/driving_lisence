@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -17,8 +18,8 @@ class _ThingsDiscussScreenState extends State<ThingsDiscussScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<MotorcycleHazardProvider>(context, listen: false);
-      provider.fetchMotorcycleHazard("motorcycle_attitude", "Animals_on_the_road");
+      final provider = Provider.of<TrainerPracticeNotifierIncident>(context, listen: false);
+      provider.loadTrainerPractice("Animals_on_the_road");
     });
     super.initState();
   }
@@ -30,7 +31,7 @@ class _ThingsDiscussScreenState extends State<ThingsDiscussScreen> {
         leadingIcon: Icons.arrow_back,
         onLeadingIconPressed: () {},
       ),
-        body: Consumer<TrainerPracticeNotifier>(
+        body: Consumer<TrainerPracticeNotifierIncident>(
             builder: (context,provider ,child) {
               final data = provider.trainerPractice;
               if (data == null) {

@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../model/think_about_model.dart';
 import '../repo/think_About_repo.dart';
 
-class SafetyMarginNotifier extends ChangeNotifier {
+class ThinkAboutProviderMargin extends ChangeNotifier {
   SafetyMarginThinkAboutModel? _safetyMarginData;
   bool _isLoading = false;
   String _errorMessage = '';
@@ -14,7 +14,7 @@ class SafetyMarginNotifier extends ChangeNotifier {
 
   final SafetyMarginThinkAboutRepository _repository;
 
-  SafetyMarginNotifier(this._repository);
+  ThinkAboutProviderMargin(this._repository);
 
   // Fetch data and notify listeners
   Future<void> fetchSafetyMarginData() async {

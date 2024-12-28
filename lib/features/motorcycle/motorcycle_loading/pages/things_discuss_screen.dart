@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../safety_and_motorcycle/viewmodel/discuss_with_trainer_provider.dart';
+import '../viewmodel/things_discuss.dart';
 
 class ThingsDiscussScreen extends StatefulWidget {
   const ThingsDiscussScreen({super.key});
@@ -19,8 +21,8 @@ class _ThingsDiscussScreenState extends State<ThingsDiscussScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<TrainerDiscussionNotifierLoading>(context, listen: false);
+      provider.loadTrainerDiscussion("Animals_on_the_road");
     });
     super.initState();
   }
@@ -28,13 +30,13 @@ class _ThingsDiscussScreenState extends State<ThingsDiscussScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Thing to discuss",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 
-      body: Consumer<TrainerDiscussionNotifier>(
+      body: Consumer<TrainerDiscussionNotifierLoading>(
           builder: (context,provider,child) {
-            final data = provider.data;
+            final data = provider.trainerDiscussion;
             if (data == null) {
               return const Center(
                 child: LoadingScreen(),

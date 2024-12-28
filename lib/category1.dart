@@ -28,6 +28,7 @@ import 'features/essential_document/pages/introduction.dart';
 import 'features/incident/pages/incident_accident_and_emergency.dart';
 import 'features/motor_way_Driving/pages/introduction.dart';
 import 'features/motorcycle/attitude/pages/attitude_screen.dart';
+import 'features/motorcycle/safety_and_motorcycle/pages/safety_your_motorcycle_screen.dart';
 import 'features/road_and_traffic_sign/pages/introduction.dart';
 import 'features/rule_of_road/pages/introduction.dart';
 import 'features/vehicle_handling/pages/introduction.dart';
@@ -183,36 +184,34 @@ class _Category1State extends State<Category1>
                       total: total ?? 0,
                       isSelected: _selectedCategories[2],
                       onTap: () => _toggleSelection(2),
-                      categoryScreen: AttitudeScreen()
+                      categoryScreen: AttitudeScreenMotorcycle(),
                     );
                   }),
             //       //
-            //       Consumer<ResultController>(builder: (context, value, child) {
-            //         final data = value.safetyVehicle;
-            //         final answered =
-            //         int.tryParse(data?["correctQuestion"] ?? "");
-            //         final total = int.tryParse(data?["totalQuestion"] ?? "");
-            //         final category = data?["category"] ?? "";
-            //         double progress = 0.0;
-            //
-            //         if (answered != null && total != null && total > 0) {
-            //           progress = (answered / total) * 100;
-            //         }
-            //
-            //         return CategoryItem(
-            //           icon: Icons.speed,
-            //           title: 'Safety and your vehicle',
-            //           progress: progress.toInt() ?? 0,
-            //           answered: 0,
-            //           correct: answered ?? 0,
-            //           total: total ?? 0,
-            //           isSelected: _selectedCategories[3],
-            //           onTap: () => _toggleSelection(3),
-            //           categoryScreen: widget.label == "PracticeQuiz"
-            //               ? const SafetyVehicleQuizScreens()
-            //               : Safety_1(),
-            //         );
-            //       }),
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.safetyVehicle;
+                    final answered =
+                    int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
+
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
+
+                    return CategoryItem(
+                      icon: Icons.speed,
+                      title: 'Safety and your Motorcycle',
+                      progress: progress.toInt() ?? 0,
+                      answered: 0,
+                      correct: answered ?? 0,
+                      total: total ?? 0,
+                      isSelected: _selectedCategories[3],
+                      onTap: () => _toggleSelection(3),
+                      categoryScreen: SafetyYourMotorcycleScreen(),
+                    );
+                  }),
             //       //SafetyMarginQuizScreens
             //       Consumer<ResultController>(builder: (context, value, child) {
             //         final data = value.safetyMargin;
@@ -567,11 +566,11 @@ class _Category1State extends State<Category1>
       case 2:
         return widget.label == "PracticeQuiz"
             ? const AttitudeQuizScreens()
-            : const Tip_attitude_1();
+            : const AttitudeScreenMotorcycle();
       case 3:
         return widget.label == "PracticeQuiz"
             ? const SafetyVehicleQuizScreens()
-            : Safety_1();
+            : SafetyYourMotorcycleScreen();
       case 4:
         return widget.label == "PracticeQuiz"
             ? const SafetyMarginQuizScreens()
@@ -620,6 +619,9 @@ class _Category1State extends State<Category1>
         return const Center(child: Text("Unknown Category"));
     }
   }
+}
+
+class _AttitudeScreenMotorcyleState {
 }
 
 class CategoryItem extends StatelessWidget {

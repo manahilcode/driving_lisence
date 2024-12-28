@@ -1,35 +1,39 @@
+import 'package:driving_lisence/category1.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../motorcycle_loading/viewmodel/things_discuss.dart';
+import '../viewmodel/discuss_with_trainer_provider.dart';
 
-class DiscussWithTrainerScreen extends StatefulWidget {
-  const DiscussWithTrainerScreen({super.key});
+class DiscussWithTrainerScreenSafety extends StatefulWidget {
+  const DiscussWithTrainerScreenSafety({super.key});
 
   @override
-  State<DiscussWithTrainerScreen> createState() => _DiscussWithTrainerScreenState();
+  State<DiscussWithTrainerScreenSafety> createState() => _DiscussWithTrainerScreenSafetyState();
 }
 
-class _DiscussWithTrainerScreenState extends State<DiscussWithTrainerScreen> {
+class _DiscussWithTrainerScreenSafetyState extends State<DiscussWithTrainerScreenSafety> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<TrainerDiscussionNotifierSafety>(context, listen: false);
+      provider.fetchData();
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "discuss with trainer", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
-      body: Consumer<TrainerDiscussionNotifier>(
+      body: Consumer<TrainerDiscussionNotifierSafety>(
           builder: (context,provider,child) {
-            final data = provider.trainerDiscussion;
+            final data = provider.data;
             if(data == null)
             {
               return LoadingScreen();
@@ -45,16 +49,17 @@ class _DiscussWithTrainerScreenState extends State<DiscussWithTrainerScreen> {
                 Column(
                   children: data.points1.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
+                Gap(20),
                 Center(
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Category1(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

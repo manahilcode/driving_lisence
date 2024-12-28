@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/discusstion_practice_model.dart';
 import '../repo/discuss_practice_repo.dart'; // Replace with the correct path
 
-class DiscussionPracticeProvider with ChangeNotifier {
+class DiscussionPracticeProviderVulnerable with ChangeNotifier {
   final DiscussionPracticeRepositoryVal _repository;
   DiscussionPracticeVal? _data;
   bool _isLoading = false;
@@ -13,7 +13,7 @@ class DiscussionPracticeProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  DiscussionPracticeProvider(this._repository);
+  DiscussionPracticeProviderVulnerable(this._repository);
 
   // Fetch data from the repository
   Future<void> fetchDiscussionPracticeData(String documentId) async {

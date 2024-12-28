@@ -2,6 +2,7 @@ import 'package:driving_lisence/core/appbar.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/vehicle_safety/pages/vehicle_safety_7.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/loader.dart';
@@ -18,8 +19,8 @@ class _WeatherConditionScreenState extends State<WeatherConditionScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<WeatherConditionNotifier>(context, listen: false);
+      provider.fetchWeatherConditionData();
     });
     super.initState();
   }

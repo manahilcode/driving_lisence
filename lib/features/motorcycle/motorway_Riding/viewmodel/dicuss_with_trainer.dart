@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/dicuss_with_trainer.dart';
 import '../repo/discuss_with_trainer.dart';
 
-class TrainerPracticeProvider extends ChangeNotifier {
+class TrainerPracticeProviderRiding extends ChangeNotifier {
   TrainerPracticeModelRiding? _trainerPracticeData;
   final TrainerPracticeRepositoryRiding _repository = TrainerPracticeRepositoryRiding();
 

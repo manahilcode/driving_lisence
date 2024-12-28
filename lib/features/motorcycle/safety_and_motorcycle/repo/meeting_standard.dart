@@ -10,7 +10,7 @@ class MeetingStandardRepo {
   Future<MotorCycleMeetingStandard> getMotorcycleSafetyData() async {
     try {
       // Fetch data from the 'motorcycle_safety' collection and 'safety_data' document
-      DocumentSnapshot doc = await _firestore.collection('motorcycle_safety').doc('safety_data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Safety_and_your_motorcycle').doc('Meeting_the_standards').get();
 
       if (doc.exists) {
         // Convert Firestore document data to MotorcycleSafety model

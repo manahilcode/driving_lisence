@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/meeting_with_standard.dart';
 import '../repo/meeting_with_standard.dart';
 
-class MeetingTheStandardsNotifier extends ChangeNotifier {
+class MeetingTheStandardsNotifierSafety extends ChangeNotifier {
   MeetingTheStandards_Safety_Margin? _data;
 
   MeetingTheStandards_Safety_Margin? get data => _data;

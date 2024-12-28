@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import '../model/meeting_standard_model.dart';
 import '../repo/meeting_standard_repo.dart';
 
-class MeetingStandardsNotifier extends ChangeNotifier {
+class MeetingStandardsNotifierRule extends ChangeNotifier {
   final MeetingStandardsRepository repository;
   MeetingStandardsRule? _data;
   bool _isLoading = false;
   String? _error;
 
-  MeetingStandardsNotifier({required this.repository});
+  MeetingStandardsNotifierRule({required this.repository});
 
   MeetingStandardsRule? get data => _data;
   bool get isLoading => _isLoading;

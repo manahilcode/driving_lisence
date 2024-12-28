@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/things_discuss.dart';
 import '../repo/things_discuss.dart';
 
-class TrainerDiscussionNotifier extends ChangeNotifier {
+class TrainerDiscussionNotifierLoading extends ChangeNotifier {
   final TrainerDiscussionRepositoryLoading repository;
 
   TrainerDiscussionModelLoading? _trainerDiscussion;
@@ -14,7 +14,7 @@ class TrainerDiscussionNotifier extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  TrainerDiscussionNotifier({required this.repository});
+  TrainerDiscussionNotifierLoading({required this.repository});
 
   Future<void> loadTrainerDiscussion(String documentId) async {
     _isLoading = true;

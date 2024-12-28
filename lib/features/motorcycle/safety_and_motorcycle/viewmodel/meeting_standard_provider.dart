@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/meeting_standard.dart';
 import '../repo/meeting_standard.dart';
 
-class MotorcycleSafetyNotifier extends ChangeNotifier {
+class MotorcycleSafetyNotifierSafety extends ChangeNotifier {
   MotorCycleMeetingStandard? _safetyData;
 
   MotorCycleMeetingStandard? get safetyData => _safetyData;

@@ -1,11 +1,13 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/animal_on_road_provider.dart';
+import 'following_safety_screen.dart';
 
 class AnimalOnRoadScreen extends StatefulWidget {
   const AnimalOnRoadScreen({super.key});
@@ -49,16 +51,17 @@ class _AnimalOnRoadScreenState extends State<AnimalOnRoadScreen> {
                   .map((e) => buildBulletText(e.toString()))
                   .toList(),
             ),
+            Gap(10),
             Center(
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FollowingSafetyScreen(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

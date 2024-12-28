@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/think_about.dart';
 import '../repo/think_About_Repo.dart';
 
-class ThinkAboutInfoNotifier extends ChangeNotifier {
+class ThinkAboutInfoNotifierType extends ChangeNotifier {
   ThinkAboutInfoOtherType? _info;
   bool _isLoading = false;
 

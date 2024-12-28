@@ -1,6 +1,7 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -8,15 +9,16 @@ import '../../../../core/loader.dart';
 import '../../allertness/viewmodel/think_about_provider.dart';
 import '../../motorway_Riding/viewmodel/think_about_provider.dart';
 import '../viewmodel/think_about_provider.dart';
+import 'discussion_with_trainer_screen.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenAttitude extends StatefulWidget {
+  const ThinkAboutScreenAttitude({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenAttitude> createState() => _ThinkAboutScreenAttitudeState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenAttitudeState extends State<ThinkAboutScreenAttitude> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -48,17 +50,17 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
                   .map((e) => buildBulletText(e.toString()))
                   .toList(),
             ),
-
+Gap(10),
             Center(
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DiscussionWithTrainerScreenAttitude(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

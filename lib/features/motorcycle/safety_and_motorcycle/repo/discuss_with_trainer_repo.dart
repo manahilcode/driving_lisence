@@ -8,7 +8,7 @@ class MotorCycleTrainerDiscussionRepository {
   // Fetch Trainer Discussion data from Firestore
   Future<TrainerDiscussion> getTrainerDiscussionData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('trainer_discussion').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Safety_and_your_motorcycle').doc('Things_to_discuss_and_practise_with_your_trainer').get();
 
       if (doc.exists) {
         return TrainerDiscussion.fromJson(doc.data() as Map<String, dynamic>);

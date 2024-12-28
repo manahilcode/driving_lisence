@@ -66,6 +66,21 @@ import 'features/motorcycle/hazard/viewmodel/static_hazard_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/understanding_hazard_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/what_if_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/your_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/repo/avoiding_congession_repo.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/avoid_congession_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/being_aware_of_enviroment_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/carry_passenger_load_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/cloth_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/dealing_with_fault_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/discuss_with_trainer_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/fuel_efficient_riding_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/looking_after_motorcycle_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/meeting_standard_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/parking_safetly_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/safetly_your_motorcycle_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/security_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/seeing_is_being_seen_provider.dart';
+import 'features/motorcycle/safety_and_motorcycle/viewmodel/think_about.dart';
 import 'features/othertypepfvehilcle/viewmodel/Trams_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/bus_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/disabled_people_provider.dart';
@@ -215,9 +230,27 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => GoodMannersProviderAttitude()),
         ChangeNotifierProvider(create: (_) => DazzleProviderAttitude()),
         ChangeNotifierProvider(create: (_) => StandardsProviderAttitude()),
-        ChangeNotifierProvider(create: (_) => CrossingProviderAttitude()),
+        ChangeNotifierProvider<CrossingProviderAttitudeMotorcycle>(create: (_) => CrossingProviderAttitudeMotorcycle()),
         ChangeNotifierProvider(create: (_) => CrossingInfoProviderAttitude()),
         ChangeNotifierProvider(create: (_) => ThinkAboutProviderAttitude()),
+
+        // s safety
+        ChangeNotifierProvider(create: (_) => AvoidingCongestionNotifier(AvoidingCongestionRepository())),
+        ChangeNotifierProvider(create: (_) => BeingAwareOfTheEnvironmentProvider()),
+        ChangeNotifierProvider(create: (_) => CarryingPassengersAndLoadsProvider()),
+        ChangeNotifierProvider(create: (_) => ClothNotifier()),
+        ChangeNotifierProvider(create: (_) => WheelBalancingProvider()),
+        ChangeNotifierProvider(create: (_) => TrainerDiscussionNotifierSafety()),
+        ChangeNotifierProvider(create: (_) => NoisePollutionProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleMaintenanceNotifier()),
+        ChangeNotifierProvider(create: (_) => MotorcycleSafetyNotifierSafety()),
+        ChangeNotifierProvider(create: (_) => ParkingSafelyNotifier()),
+        ChangeNotifierProvider(create: (_) => SafetyYourMotorcycleNotifier()),
+        ChangeNotifierProvider(create: (_) => SecurityNotifier()),
+        ChangeNotifierProvider(create: (_) => SeeingAndBeingSeenNotifier()),
+        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierSafety()),
+
+        //
 
 
 

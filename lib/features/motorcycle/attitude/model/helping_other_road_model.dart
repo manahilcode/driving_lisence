@@ -1,5 +1,5 @@
 class HelpingOtherRoadModel {
-  final String definition;
+  final Map definition;
   final String subtitle;
   final String title;
   final ImageText image;
@@ -25,7 +25,7 @@ class HelpingOtherRoadModel {
 
   factory HelpingOtherRoadModel.fromFirestore(Map<String, dynamic> data) {
     return HelpingOtherRoadModel(
-      definition: data['definition'] as String,
+      definition: data['defination'] as Map,
       subtitle: data['subtitle'] as String,
       title: data['title'] as String,
       image: ImageText.fromMap(data['image']),

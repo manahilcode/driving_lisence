@@ -1,6 +1,8 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/attitude/pages/think_about_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -8,14 +10,14 @@ import '../../../../core/loader.dart';
 import '../../road_and_traffic_sign/viewmodel/meeting_standard.dart';
 import '../viewmodel/meeting_standard_repo.dart';
 
-class MeetingStandardScreen extends StatefulWidget {
-  const MeetingStandardScreen({super.key});
+class MeetingStandardScreenAttitude extends StatefulWidget {
+  const MeetingStandardScreenAttitude({super.key});
 
   @override
-  State<MeetingStandardScreen> createState() => _MeetingStandardScreenState();
+  State<MeetingStandardScreenAttitude> createState() => _MeetingStandardScreenAttitudeState();
 }
 
-class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
+class _MeetingStandardScreenAttitudeState extends State<MeetingStandardScreenAttitude> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -50,17 +52,20 @@ class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
                   .toList(),
             ),
 
+            Gap(10),
+
             Center(
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ThinkAboutScreenAttitude(), // Replace with your next screen
+                    ),
+                  );
                 },
+
                 child: Container(
                   width: 300,
                   padding: EdgeInsets.symmetric(

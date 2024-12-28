@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/meeting_standard.dart';
 import '../repo/meeting_standar_repo.dart';
 
-class MeetingStandardsNotifier extends ChangeNotifier {
+class MeetingStandardsNotifierType extends ChangeNotifier {
   MeetingStandardsInfoOtherVehicle? _info;
   bool _isLoading = false;
 

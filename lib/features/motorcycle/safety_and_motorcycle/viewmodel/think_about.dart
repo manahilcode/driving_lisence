@@ -4,7 +4,7 @@ import '../../allertness/repo/think_repo.dart';
 import '../model/think_about.dart';
 import '../repo/think_About_repo.dart';
 
-class ThinkAboutNotifier extends ChangeNotifier {
+class ThinkAboutNotifierSafety extends ChangeNotifier {
   MotorcycleThinkAbout? _data;
 
   MotorcycleThinkAbout? get data => _data;

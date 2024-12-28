@@ -8,7 +8,7 @@ class SafetyYourMotorcycleRepository {
   Future<SafetyYourMotorcycle> getSafetyYourMotorcycleData() async {
     try {
       // Fetch data from the Firestore collection 'safety_motorcycle' and document 'safety_motorcycle_data'
-      DocumentSnapshot doc = await _firestore.collection('safety_motorcycle').doc('safety_motorcycle_data').get();
+      DocumentSnapshot doc = await _firestore.collection("motorcycle_Safety_and_your_motorcycle").doc('Safety_and_your_motorcycle').get();
 
       if (doc.exists) {
         // Convert Firestore document data to SafetyYourMotorcycle model

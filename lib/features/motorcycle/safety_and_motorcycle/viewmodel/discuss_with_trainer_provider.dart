@@ -4,7 +4,7 @@ import '../../attitude/repo/discusstion_with_trainer_repo.dart';
 import '../model/discuss_with_trainee_model.dart';
 import '../repo/discuss_with_trainer_repo.dart';
 
-class TrainerDiscussionNotifier extends ChangeNotifier {
+class TrainerDiscussionNotifierSafety extends ChangeNotifier {
   TrainerDiscussion? _data;
 
   TrainerDiscussion? get data => _data;

@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -17,8 +18,8 @@ class _TowingTrailerScreenState extends State<TowingTrailerScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<TowingTrailerNotifier>(context, listen: false);
+      provider.loadTowingTrailer("Animals_on_the_road");
     });
     super.initState();
   }
@@ -29,7 +30,7 @@ class _TowingTrailerScreenState extends State<TowingTrailerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "towing trailer",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
       body:

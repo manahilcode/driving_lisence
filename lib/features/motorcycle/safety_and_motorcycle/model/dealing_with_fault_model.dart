@@ -29,7 +29,7 @@ class DealingWithFaultModel {
 
   factory DealingWithFaultModel.fromFirestore(Map<String, dynamic> data) {
     return DealingWithFaultModel(
-      wheelBalancing: data['wheel_balancing'] as String,
+      wheelBalancing: data['Wheel_balancing'] as String,
       answer: List<String>.from(data['answer'] ?? []),
       correct: data['correct'] as String,
       image: data['image'] as String,

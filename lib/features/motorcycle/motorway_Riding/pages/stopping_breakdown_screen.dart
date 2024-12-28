@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -17,8 +18,8 @@ class _StoppingBreakdownScreenState extends State<StoppingBreakdownScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<EmergencyTelephonePositioningProvider>(context, listen: false);
+      provider.fetchEmergencyTelephonePositioningData();
     });
     super.initState();
   }
@@ -29,7 +30,7 @@ class _StoppingBreakdownScreenState extends State<StoppingBreakdownScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Stopping break down", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<EmergencyTelephonePositioningProvider>(
           builder: (context,provider,child) {
             final data = provider.emergencyTelephonePositioningData;

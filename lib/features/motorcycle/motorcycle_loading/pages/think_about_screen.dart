@@ -1,10 +1,12 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../incident/viewmodel/think_about.dart';
+import '../viewmodel/think_About.dart';
 
 class ThinkAboutScreen extends StatefulWidget {
   const ThinkAboutScreen({super.key});
@@ -17,8 +19,8 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<ThinkAboutNotifierLoading>(context, listen: false);
+      provider.loadThinkAbout("Animals_on_the_road");
     });
     super.initState();
   }
@@ -26,11 +28,11 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Think about",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 
-      body: Consumer<ThinkAboutNotifier>(
+      body: Consumer<ThinkAboutNotifierLoading>(
           builder: (context,provider,child) {
             final data = provider.thinkAbout;
             if (data == null) {
@@ -42,7 +44,7 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
               children: [
                 createHeadingText(data.title),
                 Column(
-                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
+                  children: data.subtitle.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
                 Center(
                   child: GestureDetector(

@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -20,8 +21,8 @@ class _FogInfoScreenState extends State<FogInfoScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<FogInfoNotifier>(context, listen: false);
+      provider.loadFogInfo("","Animals_on_the_road");
     });
     super.initState();
   }
@@ -31,7 +32,7 @@ class _FogInfoScreenState extends State<FogInfoScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-        title: "Alertness",
+        title: "Fog Info",
         leadingIcon: Icons.arrow_back,
         onLeadingIconPressed: () {},
       ),

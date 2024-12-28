@@ -13,7 +13,7 @@ class BeingAwareOfTheEnvironmentModel {
 
   factory BeingAwareOfTheEnvironmentModel.fromFirestore(Map<String, dynamic> data) {
     return BeingAwareOfTheEnvironmentModel(
-      reduce: data['reduce'] as String,
+      reduce: data['Reduce'] as String,
       points: List<String>.from(data['points'] ?? []),
       subtitle: data['subtitle'] as String,
       title: data['title'] as String,

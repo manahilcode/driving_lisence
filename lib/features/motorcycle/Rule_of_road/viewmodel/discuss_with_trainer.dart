@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/discuss_with_trainer.dart';
 import '../repo/discuss_with_trainer.dart';
 
-class SpeedLimitNotifier extends ChangeNotifier {
+class SpeedLimitNotifierRule extends ChangeNotifier {
   final DiscussWithTrainerRuleRepo _repository;
   DiscussWithTrainerRule? _data;
   bool _isLoading = false;
@@ -11,7 +11,7 @@ class SpeedLimitNotifier extends ChangeNotifier {
   DiscussWithTrainerRule? get data => _data;
   bool get isLoading => _isLoading;
 
-  SpeedLimitNotifier(this._repository);
+  SpeedLimitNotifierRule(this._repository);
 
   Future<void> fetchData() async {
     _isLoading = true;

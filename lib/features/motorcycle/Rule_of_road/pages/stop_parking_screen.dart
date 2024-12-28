@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -17,18 +18,18 @@ class _StopParkingScreenState extends State<StopParkingScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<StoppingAndParkingNotifier>(context, listen: false);
+      provider.loadStoppingAndParking("","Animals_on_the_road");
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Stop parking", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<StoppingAndParkingNotifier>(
           builder: (context,provider,child) {
-            final data = provider!.stoppingAndParking;
+            final data = provider.stoppingAndParking;
             if (data == null) {
               return const Center(
                 child: LoadingScreen(),

@@ -8,7 +8,7 @@ class SecurityRepository {
   // Fetch Security data from Firestore
   Future<Security> getSecurityData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('security').doc('security_data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Safety_and_your_motorcycle').doc('Security').get();
 
       if (doc.exists) {
         return Security.fromJson(doc.data() as Map<String, dynamic>);

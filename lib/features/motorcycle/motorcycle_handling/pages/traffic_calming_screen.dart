@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -17,8 +18,8 @@ class _TrafficCalmingScreenState extends State<TrafficCalmingScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<TrafficCalmingNotifier>(context, listen: false);
+      provider.loadTrafficCalming("","Animals_on_the_road");
     });
     super.initState();
   }
@@ -26,7 +27,7 @@ class _TrafficCalmingScreenState extends State<TrafficCalmingScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-        title: "Alertness",
+        title: "traffic calming",
         leadingIcon: Icons.arrow_back,
         onLeadingIconPressed: () {},
       ),

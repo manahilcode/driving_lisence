@@ -1,35 +1,39 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../incident/viewmodel/think_about.dart';
+import '../viewmodel/think_about.dart';
+import 'discuss_with_trainer_screen.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenSafety extends StatefulWidget {
+  const ThinkAboutScreenSafety({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenSafety> createState() => _ThinkAboutScreenSafetyState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenSafetyState extends State<ThinkAboutScreenSafety> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<ThinkAboutNotifierSafety>(context, listen: false);
+      provider.fetchData();
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "think about", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
-      body: Consumer<ThinkAboutNotifier>(
+      body: Consumer<ThinkAboutNotifierSafety>(
           builder: (context,provider,child) {
-            final data = provider.thinkAbout;
+            final data = provider.data;
             if(data == null)
             {
               return LoadingScreen();
@@ -40,16 +44,17 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
+                Gap(10),
                 Center(
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DiscussWithTrainerScreenSafety(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

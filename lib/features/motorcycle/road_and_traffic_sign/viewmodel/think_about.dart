@@ -3,9 +3,9 @@ import '../model/think_about.dart';
 import '../repo/think_About.dart';
 import 'think_about.dart';
 
-class ThinkAboutNotifier extends ChangeNotifier {
+class ThinkAboutNotifierSign extends ChangeNotifier {
   final ThinkAboutRepository _repository;
-  ThinkAboutNotifier(this._repository);
+  ThinkAboutNotifierSign(this._repository);
   // State variables
   ThinkAboutSign? _thinkAbout;
   bool _isLoading = false;

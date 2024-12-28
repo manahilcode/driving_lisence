@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -17,8 +18,8 @@ class _SideCarScreenState extends State<SideCarScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<PillionPasSideCarsengerNotifier>(context, listen: false);
+      provider.loadPillionPassenger("Animals_on_the_road");
     });
     super.initState();
   }
@@ -26,7 +27,7 @@ class _SideCarScreenState extends State<SideCarScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Side Car",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 

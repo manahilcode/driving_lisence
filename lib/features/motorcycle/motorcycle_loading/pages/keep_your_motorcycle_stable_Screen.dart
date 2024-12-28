@@ -1,5 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -19,8 +20,8 @@ class _KeepYourMotorcycleStableScreenState
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<MotorcycleStabilityNotifier>(context, listen: false);
+      provider.loadMotorcycleStability("Animals_on_the_road");
     });
     super.initState();
   }
@@ -28,7 +29,7 @@ class _KeepYourMotorcycleStableScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Keep your motorcycle stable",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
       body: Consumer<MotorcycleStabilityNotifier>(

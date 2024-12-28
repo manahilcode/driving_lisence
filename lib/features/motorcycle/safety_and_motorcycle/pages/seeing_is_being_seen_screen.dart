@@ -1,10 +1,13 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/seeing_is_being_seen_provider.dart';
+import 'cloth_screen.dart';
 
 class SeeingIsBeingSeenScreen extends StatefulWidget {
   const SeeingIsBeingSeenScreen({super.key});
@@ -17,15 +20,15 @@ class _SeeingIsBeingSeenScreenState extends State<SeeingIsBeingSeenScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<BreakdownProvider>(context, listen: false);
-      provider.fetchBreakdown("Animals_on_the_road");
+      final provider = Provider.of<SeeingAndBeingSeenNotifier>(context, listen: false);
+      provider.fetchData();
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "seeing is being seen", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
       body: Consumer<SeeingAndBeingSeenNotifier>(
           builder: (context,provider,child) {
@@ -34,55 +37,61 @@ class _SeeingIsBeingSeenScreenState extends State<SeeingIsBeingSeenScreen> {
             {
               return LoadingScreen();
             }
-            return Column(
-              children: [
-                createHeadingText(data.title),
-                createAutoSizeText(data.subtitle),
-                buildImage(data.image),
-                createAutoSizeText(data.subtitle1),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
-                    },
-                    child: Container(
-                      width: 300,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 15.0,
-                        horizontal: 30.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 3),
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    createHeadingText(data.title),
+                    createAutoSizeText(data.subtitle),
+                    buildImage(data.image),
+                    createAutoSizeText(data.subtitle1),
+                    Gap(10),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigate to the next screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ClothScreen(), // Replace with your next screen
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 300,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15.0,
+                            horizontal: 30.0,
                           ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Next",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             );
           }
       ),

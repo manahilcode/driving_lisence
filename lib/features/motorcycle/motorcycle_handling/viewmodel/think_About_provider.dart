@@ -3,7 +3,7 @@ import '../model/think_about.dart';
 import '../repo/think_about_repo.dart';
 
 
-class ThinkAboutNotifier extends ChangeNotifier {
+class ThinkAboutNotifierMotorHandling extends ChangeNotifier {
   ThinkAboutHandling? _data;
   bool _isLoading = false;
 

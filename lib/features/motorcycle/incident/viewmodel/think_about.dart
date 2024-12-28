@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/think_about.dart';
 import '../repo/think_about.dart';
 
-class ThinkAboutNotifier extends ChangeNotifier {
+class ThinkAboutNotifierIncidentMotorcycle extends ChangeNotifier {
   final ThinkAboutRepositoryIncident repository;
 
   ThinkAboutModelIncident? _thinkAbout;
@@ -14,7 +14,7 @@ class ThinkAboutNotifier extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  ThinkAboutNotifier({required this.repository});
+  ThinkAboutNotifierIncidentMotorcycle({required this.repository});
 
   Future<void> loadThinkAbout(String documentId) async {
     _isLoading = true;

@@ -8,7 +8,7 @@ class SeeingAndBeingSeenRepository {
   // Fetch Seeing and Being Seen data from Firestore
   Future<SeeingAndBeingSeen> getSeeingAndBeingSeenData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('seeing_and_being_seen').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Safety_and_your_motorcycle').doc('Seeing_and_being_seen').get();
 
       if (doc.exists) {
         return SeeingAndBeingSeen.fromJson(doc.data() as Map<String, dynamic>);

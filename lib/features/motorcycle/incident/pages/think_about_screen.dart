@@ -1,10 +1,12 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../motorcycle_handling/viewmodel/think_About_provider.dart';
+import '../viewmodel/think_about.dart';
 
 class ThinkAboutScreen extends StatefulWidget {
   const ThinkAboutScreen({super.key});
@@ -17,8 +19,8 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<MotorcycleHazardProvider>(context, listen: false);
-      provider.fetchMotorcycleHazard("motorcycle_attitude", "Animals_on_the_road");
+      final provider = Provider.of<ThinkAboutNotifierIncidentMotorcycle>(context, listen: false);
+      provider.loadThinkAbout("Animals_on_the_road");
     });
     super.initState();
   }
@@ -30,9 +32,9 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
         leadingIcon: Icons.arrow_back,
         onLeadingIconPressed: () {},
       ),
-        body: Consumer<ThinkAboutNotifier>(
+        body: Consumer<ThinkAboutNotifierIncidentMotorcycle>(
             builder: (context,provider ,child) {
-              final data = provider.data;
+              final data = provider.thinkAbout;
               if (data == null) {
                 return const Center(
                   child: LoadingScreen(),

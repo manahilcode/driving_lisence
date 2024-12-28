@@ -23,83 +23,82 @@ class _BreakDownScreenState extends State<BreakDownScreen> {
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(
-        title: "Alertness",
+        title: "Incident",
         leadingIcon: Icons.arrow_back,
         onLeadingIconPressed: () {},
       ),
-
-      body: Consumer<BreakdownProvider>(
-        builder: (context,provider ,child) {
-          final data = provider.data;
-          if (data == null) {
-            return const Center(
-              child: LoadingScreen(),
-            );
-          }
-          return Column(
-            children: [
-              createHeadingText(data.title),
-              createAutoSizeText(data.subtitle),
-              buildImage(data.image),
-              buildTipWidget(data.tip),
-              createAutoSizeText(data.subtitle1),
-              buildTipWidget(data.tip1),
-              createAutoSizeText(data.tip2),
-              buildTipWidget(data.tip2),
-              Column(
-                children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
-              ),
-              Center(
-                child: GestureDetector(
-                  onTap: () {
-                    // Navigate to the next screen
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => Othertype6(), // Replace with your next screen
-                    //   ),
-                    // );
-                  },
-                  child: Container(
-                    width: 300,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 15.0,
-                      horizontal: 30.0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Next",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+      body: Consumer<BreakdownProvider>(builder: (context, provider, child) {
+        final data = provider.data;
+        if (data == null) {
+          return const Center(
+            child: LoadingScreen(),
+          );
+        }
+        return Column(
+          children: [
+            createHeadingText(data.title),
+            createAutoSizeText(data.subtitle),
+            buildImage(data.image),
+            buildTipWidget(data.tip),
+            createAutoSizeText(data.subtitle1),
+            buildTipWidget(data.tip1),
+            createAutoSizeText(data.tip2),
+            buildTipWidget(data.tip2),
+            Column(
+              children: data.points
+                  .map((e) => buildBulletText(e.toString()))
+                  .toList(),
+            ),
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  // Navigate to the next screen
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => Othertype6(), // Replace with your next screen
+                  //   ),
+                  // );
+                },
+                child: Container(
+                  width: 300,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 15.0,
+                    horizontal: 30.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Next",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
               ),
-            ],
-          );
-        }
-      ),
-
+            ),
+          ],
+        );
+      }),
     );
   }
 }

@@ -9,7 +9,7 @@ class ParkingSafelyRepository {
   Future<ParkingSafely> getParkingSafelyData() async {
     try {
       // Fetch data from the Firestore collection 'parking_safely' and document 'parking_safely_data'
-      DocumentSnapshot doc = await _firestore.collection('parking_safely').doc('parking_safely_data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Safety_and_your_motorcycle').doc('Parking_safely').get();
 
       if (doc.exists) {
         // Convert Firestore document data to ParkingSafely model

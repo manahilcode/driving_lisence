@@ -8,7 +8,7 @@ class ClothRepository {
   // Fetch Cloth data from Firestore
   Future<Cloth> getClothData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('cloth').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Safety_and_your_motorcycle').doc('cloth').get();
 
       if (doc.exists) {
         return Cloth.fromJson(doc.data() as Map<String, dynamic>);

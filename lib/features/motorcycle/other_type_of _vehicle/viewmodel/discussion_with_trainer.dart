@@ -4,7 +4,7 @@ import '../repo/discusstion_with_trainer_Repo.dart';
 import '../repo/meeting_standar_repo.dart';
 
 
-class DiscussionPracticeInfoNotifier extends ChangeNotifier {
+class DiscussionPracticeInfoNotifierType extends ChangeNotifier {
   DiscussionPracticeInfoOtherVehicle? _info;
   bool _isLoading = false;
 

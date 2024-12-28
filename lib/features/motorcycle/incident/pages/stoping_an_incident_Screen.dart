@@ -1,10 +1,12 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/incident_accident_emergency.dart';
+import '../viewmodel/stoping_an_incident.dart';
 
 class StopingAnIncidentScreen extends StatefulWidget {
   const StopingAnIncidentScreen({super.key});
@@ -17,8 +19,8 @@ class _StopingAnIncidentScreenState extends State<StopingAnIncidentScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<MotorcycleHazardProvider>(context, listen: false);
-      provider.fetchMotorcycleHazard("motorcycle_attitude", "Animals_on_the_road");
+      final provider = Provider.of<IncidentStopNotifier>(context, listen: false);
+      provider.loadIncident("Animals_on_the_road");
     });
     super.initState();
   }
@@ -26,11 +28,11 @@ class _StopingAnIncidentScreenState extends State<StopingAnIncidentScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-        title: "Alertness",
+        title: "Stop an Incident",
         leadingIcon: Icons.arrow_back,
         onLeadingIconPressed: () {},
       ),
-        body: Consumer<IncidentNotifier>(
+        body: Consumer<IncidentStopNotifier>(
             builder: (context,provider ,child) {
               final data = provider.incident;
               if (data == null) {
