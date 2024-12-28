@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driving_lisence/features/allertness/viewmodel/controller.dart';
 import 'package:driving_lisence/features/attitude/viewmodel/attitude_provider.dart';
 import 'package:driving_lisence/features/choose_ride/choose_ride.dart';
@@ -30,6 +31,23 @@ import 'features/Quiz/vulnerable_road_user_quiz/viewmodel/controller.dart';
 import 'features/auth/viewmodel/controller.dart';
 import 'features/auth/viewmodel/user_provider.dart';
 import 'features/incident/viewmodel/controller.dart';
+import 'features/motorcycle/Rule_of_road/repo/discuss_with_trainer.dart';
+import 'features/motorcycle/Rule_of_road/repo/meeting_standard_repo.dart';
+import 'features/motorcycle/Rule_of_road/repo/over_taking_crossing.dart';
+import 'features/motorcycle/Rule_of_road/repo/rule_of_road.dart';
+import 'features/motorcycle/Rule_of_road/repo/speed_limit.dart';
+import 'features/motorcycle/Rule_of_road/repo/stop_parking.dart';
+import 'features/motorcycle/Rule_of_road/repo/think_about_repo.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/crossroad.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/discuss_with_trainer.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/lane_and_junction.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/level_crossing_repo.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/meeting_standard.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/overtaking_crossing.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/rule_of_road.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/speed_limit.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/stop_parking_provider.dart';
+import 'features/motorcycle/Rule_of_road/viewmodel/think_rule.dart';
 import 'features/motorcycle/allertness/repo/allertness_repo.dart';
 import 'features/motorcycle/allertness/repo/anticipation_repo.dart';
 import 'features/motorcycle/allertness/repo/observation_awareness_repo.dart';
@@ -55,6 +73,19 @@ import 'features/motorcycle/attitude/viewmodel/meeting_standard_repo.dart';
 import 'features/motorcycle/attitude/viewmodel/pedestrain_crossing_provider.dart';
 import 'features/motorcycle/attitude/viewmodel/priority_for_bus_provider.dart';
 import 'features/motorcycle/attitude/viewmodel/think_about_provider.dart';
+import 'features/motorcycle/essential_document/repo/essentail_document1.dart';
+import 'features/motorcycle/essential_document/repo/essential_document.dart';
+import 'features/motorcycle/essential_document/repo/insurance.dart';
+import 'features/motorcycle/essential_document/repo/mot_test.dart';
+import 'features/motorcycle/essential_document/viewmodel/essentail_document.dart';
+import 'features/motorcycle/essential_document/viewmodel/essentail_document1.dart';
+import 'features/motorcycle/essential_document/viewmodel/insurance.dart';
+import 'features/motorcycle/essential_document/viewmodel/meeting_standard.dart';
+import 'features/motorcycle/essential_document/viewmodel/mot_test.dart';
+import 'features/motorcycle/essential_document/viewmodel/motor_cycle_licence.dart';
+import 'features/motorcycle/essential_document/viewmodel/registor_owning.dart';
+import 'features/motorcycle/essential_document/viewmodel/thing_discuss.dart';
+import 'features/motorcycle/essential_document/viewmodel/think_about.dart';
 import 'features/motorcycle/hazard/viewmodel/clue_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/factor_effecting_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/hazard_provider.dart';
@@ -88,6 +119,59 @@ import 'features/motorcycle/hazardAwareness/viewmodel/static_hazard_repo.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/things_discuss_trainer.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/think_about_provider.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/yourself_provider.dart';
+import 'features/motorcycle/incident/repo/incident_accident_emergency.dart';
+import 'features/motorcycle/incident/repo/meeting_standard.dart';
+import 'features/motorcycle/incident/repo/reporting_an_incident.dart';
+import 'features/motorcycle/incident/repo/safety_in_tunnel.dart';
+import 'features/motorcycle/incident/repo/stoping_an_incident.dart';
+import 'features/motorcycle/incident/repo/things_discuss.dart';
+import 'features/motorcycle/incident/repo/think_about.dart';
+import 'features/motorcycle/incident/repo/warning_other.dart';
+import 'features/motorcycle/incident/viewmodel/break_down.dart';
+import 'features/motorcycle/incident/viewmodel/helping_other_first_aid.dart';
+import 'features/motorcycle/incident/viewmodel/incident_accident_emergency.dart';
+import 'features/motorcycle/incident/viewmodel/meeting_standard.dart';
+import 'features/motorcycle/incident/viewmodel/reporting_an_incident.dart';
+import 'features/motorcycle/incident/viewmodel/safety_in_tunnel.dart';
+import 'features/motorcycle/incident/viewmodel/stoping_an_incident.dart';
+import 'features/motorcycle/incident/viewmodel/things_discuss.dart';
+import 'features/motorcycle/incident/viewmodel/think_about.dart';
+import 'features/motorcycle/incident/viewmodel/warning_other.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/bad_weather.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/discuss_with_trainer.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/fog_info.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/keep_control_motorcycle.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/meeting_standard.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/motor_cycle_handling.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/riding_at_night.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/think_About_provider.dart';
+import 'features/motorcycle/motorcycle_handling/viewmodel/traffic_calming_provider.dart';
+import 'features/motorcycle/motorcycle_loading/repo/keep_your_motorcycle_stable.dart';
+import 'features/motorcycle/motorcycle_loading/repo/meeting_standard.dart';
+import 'features/motorcycle/motorcycle_loading/repo/motorcycle_loading.dart';
+import 'features/motorcycle/motorcycle_loading/repo/side_car.dart';
+import 'features/motorcycle/motorcycle_loading/repo/things_discuss.dart';
+import 'features/motorcycle/motorcycle_loading/repo/think_About.dart';
+import 'features/motorcycle/motorcycle_loading/repo/towing_trailer.dart';
+import 'features/motorcycle/motorcycle_loading/viewmodel/keep_your_motorcycle_stable.dart';
+import 'features/motorcycle/motorcycle_loading/viewmodel/meeting_standard.dart';
+import 'features/motorcycle/motorcycle_loading/viewmodel/motorcycle_loading.dart';
+import 'features/motorcycle/motorcycle_loading/viewmodel/side_car.dart';
+import 'features/motorcycle/motorcycle_loading/viewmodel/things_discuss.dart';
+import 'features/motorcycle/motorcycle_loading/viewmodel/think_About.dart';
+import 'features/motorcycle/motorcycle_loading/viewmodel/towing_trailer.dart';
+import 'features/motorcycle/motorway_Riding/repo/lane_marking_repo.dart';
+import 'features/motorcycle/motorway_Riding/repo/meeting_standard.dart';
+import 'features/motorcycle/motorway_Riding/repo/motorway_Riding_repo.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/dicuss_with_trainer.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/lane_marking.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/meeting_standard.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/motorway_riding_provider.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/reducing_congestion.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/riding_on_motorway.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/speed_limit.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/stopping_breakdown.dart';
+import 'features/motorcycle/motorway_Riding/viewmodel/think_about_provider.dart';
 import 'features/motorcycle/other_type_of _vehicle/repo/bus_repo.dart';
 import 'features/motorcycle/other_type_of _vehicle/viewmodel/bus_provider.dart';
 import 'features/motorcycle/other_type_of _vehicle/viewmodel/discussion_with_trainer.dart';
@@ -97,6 +181,22 @@ import 'features/motorcycle/other_type_of _vehicle/viewmodel/motorcycle_info_pro
 import 'features/motorcycle/other_type_of _vehicle/viewmodel/other_type_vehicle_provider.dart';
 import 'features/motorcycle/other_type_of _vehicle/viewmodel/power_vehicle_provider.dart';
 import 'features/motorcycle/other_type_of _vehicle/viewmodel/think_about.dart';
+import 'features/motorcycle/road_and_traffic_sign/repo/meeting_standard.dart';
+import 'features/motorcycle/road_and_traffic_sign/repo/raod_lane.dart';
+import 'features/motorcycle/road_and_traffic_sign/repo/road_traffic_sign.dart';
+import 'features/motorcycle/road_and_traffic_sign/repo/signal_given_by_driver.dart';
+import 'features/motorcycle/road_and_traffic_sign/repo/things_discuss.dart';
+import 'features/motorcycle/road_and_traffic_sign/repo/think_About.dart';
+import 'features/motorcycle/road_and_traffic_sign/repo/traffic_ligths_warning.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/meeting_standard.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/road_lane.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/road_marking.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/road_traffic_sign.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/signal_given_by_driver.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/sing.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/things_discuss.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/think_about.dart';
+import 'features/motorcycle/road_and_traffic_sign/viewmodel/traffic_light_warning.dart';
 import 'features/motorcycle/safety_and_motorcycle/repo/avoiding_congession_repo.dart';
 import 'features/motorcycle/safety_and_motorcycle/viewmodel/avoid_congession_provider.dart';
 import 'features/motorcycle/safety_and_motorcycle/viewmodel/being_aware_of_enviroment_provider.dart';
@@ -177,6 +277,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<Attitude>(create: (_) => Attitude()),
@@ -369,6 +470,91 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => OtherVehicleNotifier()),
         ChangeNotifierProvider(create: (_) => PoweredVehicleInfoNotifier()),
         ChangeNotifierProvider(create: (_) => ThinkAboutInfoNotifierType()),
+
+        // m motorcycle handling
+
+        ChangeNotifierProvider(create: (_) => WeatherConditionsNotifier()),
+        ChangeNotifierProvider(create: (_) => TrainerDiscussionPracticeNotifier()),
+        ChangeNotifierProvider(create: (_) => FogInfoNotifier()),
+        ChangeNotifierProvider(create: (_) => MotorcycleControlInfoNotifier()),
+        ChangeNotifierProvider(create: (_) => MeetingStandardsInfoNotifier()),
+        ChangeNotifierProvider(create: (_) => MotorcycleHandlingNotifier()),
+        ChangeNotifierProvider(create: (_) => RidingAtNightNotifier()),
+        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierMotorHandling()),
+        ChangeNotifierProvider(create: (_) => TrafficCalmingNotifier()),
+
+        // m motorway riding
+        ChangeNotifierProvider(create: (_) => TrainerPracticeProviderRiding()),
+        ChangeNotifierProvider(create: (_) => LaneMarkingNotifier(LaneMarkingRepository())),
+        ChangeNotifierProvider(create: (_) => MotorwaySafetyNotifier(MotorwaySafetyRepositoryRiding())),
+        ChangeNotifierProvider(create: (_) => MotorwayRidingNotifier(MotorwayRidingRepository())),
+        ChangeNotifierProvider(create: (_) => TrafficManagementProvider()),
+        ChangeNotifierProvider(create: (_) => MotorwayRidingProvider()),
+        ChangeNotifierProvider(create: (_) => SpeedLimitQuestionProvider()),
+        ChangeNotifierProvider(create: (_) => EmergencyTelephonePositioningProvider()),
+        ChangeNotifierProvider(create: (_) => ThinkAboutProvider()),
+
+        // r rule of road
+        ChangeNotifierProvider(create: (_) => RidingGuideProvider()),
+        ChangeNotifierProvider(create: (_) => SpeedLimitNotifierRule(DiscussWithTrainerRuleRepo())),
+        ChangeNotifierProvider(create: (_) => LaneAndJunctionProvider()),
+        ChangeNotifierProvider(create: (_) => LevelCrossingProvider()),
+        ChangeNotifierProvider(create: (_) => MeetingStandardsNotifierRule( repository: MeetingStandardsRepository())),
+        ChangeNotifierProvider(create: (_) => OvertakingCrossingsNotifier(OvertakingCrossingsRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => RulesOfTheRoadNotifier(RulesOfTheRoadRepository())),
+        ChangeNotifierProvider(create: (_) => SpeedLimitsNotifier(repository: SpeedLimitsRepository(firestore: _firestore))),
+        ChangeNotifierProvider(create: (_) => StoppingAndParkingNotifier(repository: StoppingAndParkingRepository(firestore: _firestore))),
+        ChangeNotifierProvider(create: (_) => ThinkRule(ThinkAboutRepoRule())),
+
+
+        // r road and traffic sign
+        ChangeNotifierProvider(create: (_) => StandardsProviderRoadTraffic(repository: StandardsRepositorySign(firestore: _firestore))),
+        ChangeNotifierProvider(create: (_) => RoadLanesProvider(repository: RoadLanesRepository(firestore: _firestore))),
+        ChangeNotifierProvider(create: (_) => RoadMarkingsNotifier()),
+        ChangeNotifierProvider(create: (_) => RoadSignsProviderRoadTraffic(repository: RoadSignsRepositorySing(firestore: _firestore))),
+        ChangeNotifierProvider(create: (_) => SignalInfoProvider(repository: SignalInfoRepository(firestore: _firestore))),
+        ChangeNotifierProvider(create: (_) => SignSignProvider()),
+        ChangeNotifierProvider(create: (_) => TrainerPractiseProvider(TrainerPractiseRepository())),
+        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierSign(ThinkAboutRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => TrafficLightsWarningNotifier(TrafficLightsWarningRepository(_firestore))),
+
+        // E essential document
+        ChangeNotifierProvider(create: (_) => EssentialDocumentsNotifier(EssentialDocumentsRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => EssentialDocumentsDetailsNotifier(EssentialDocumentsDetailsRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => InsuranceDetailsNotifier(InsuranceDetailsRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => MeetingStandardDocument()),
+        ChangeNotifierProvider(create: (_) => MotTestDetailsNotifier(MotTestDetailsRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => MotorcycleLicenceProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleInfoProvider()),
+        ChangeNotifierProvider(create: (_) => ThingDiscussProviderDocument()),
+        ChangeNotifierProvider(create: (_) => ThinkAboutMotorcycleInfoProvider()),
+
+
+        // i m incident
+        ChangeNotifierProvider(create: (_) => BreakdownProvider()),
+        ChangeNotifierProvider(create: (_) => FirstAidProvider()),
+        ChangeNotifierProvider(create: (_) => IncidentNotifier(repository:IncidentRepository(_firestore) )),
+        ChangeNotifierProvider(create: (_) => StandardsNotifier(repository:StandardsRepositoryIncident(_firestore) )),
+        ChangeNotifierProvider(create: (_) => IncidentReportNotifier(repository: IncidentReportRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => TunnelSafetyNotifier(repository: TunnelSafetyRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => IncidentStopNotifier(repository: IncidentRepository1(_firestore))),
+        ChangeNotifierProvider(create: (_) => TrainerPracticeNotifierIncident(repository: TrainerPracticeRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierIncidentMotorcycle(repository: ThinkAboutRepositoryIncident(_firestore))),
+        ChangeNotifierProvider(create: (_) => WarningIncidentNotifier(repository: WarningIncidentRepository(_firestore))),
+
+
+        // m motorcycle loading
+
+        ChangeNotifierProvider(create: (_) => MotorcycleStabilityNotifier(repository: MotorcycleStabilityRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => MotorcyclePassengerNotifier(repository: MotorcyclePassengerRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => MotorcycleLoadingNotifier(repository: MotorcycleLoadingRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => PillionPasSideCarsengerNotifier(repository: PillionPassengerRepository(_firestore))),
+        ChangeNotifierProvider(create: (_) => TrainerDiscussionNotifierLoading(repository: TrainerDiscussionRepositoryLoading(_firestore))),
+        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierLoading(repository:ThinkAboutRepositoryLoading(_firestore) )),
+        ChangeNotifierProvider(create: (_) => TowingTrailerNotifier(repository: TowingTrailerRepository(_firestore))),
+
+
+
 
 
 

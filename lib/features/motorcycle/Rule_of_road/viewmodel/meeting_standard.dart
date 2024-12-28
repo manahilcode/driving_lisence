@@ -22,7 +22,7 @@ class MeetingStandardsNotifierRule extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _data = await repository.fetchMeetingStandards(collection, document);
+      _data = await repository!.fetchMeetingStandards(collection, document);
     } catch (e) {
       _error = e.toString();
     } finally {
