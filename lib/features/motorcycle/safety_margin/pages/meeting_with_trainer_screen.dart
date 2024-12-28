@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/safety_margin/pages/think_about_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -7,14 +8,14 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/meeting_with_standard_provider.dart';
 
-class MeetingWithTrainerScreen extends StatefulWidget {
-  const MeetingWithTrainerScreen({super.key});
+class MeetingWithTrainerScreensafetymargin extends StatefulWidget {
+  const MeetingWithTrainerScreensafetymargin({super.key});
 
   @override
-  State<MeetingWithTrainerScreen> createState() => _MeetingWithTrainerScreenState();
+  State<MeetingWithTrainerScreensafetymargin> createState() => _MeetingWithTrainerScreensafetymarginState();
 }
 
-class _MeetingWithTrainerScreenState extends State<MeetingWithTrainerScreen> {
+class _MeetingWithTrainerScreensafetymarginState extends State<MeetingWithTrainerScreensafetymargin> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -26,7 +27,7 @@ class _MeetingWithTrainerScreenState extends State<MeetingWithTrainerScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Meeting with standard", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<MeetingTheStandardsNotifierSafety>(
           builder: (context,provider,child) {
             final data = provider.data;
@@ -50,12 +51,12 @@ class _MeetingWithTrainerScreenState extends State<MeetingWithTrainerScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ThinkAboutScreenSaftyMargin(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

@@ -8,7 +8,7 @@ class VulnerableRoadUserRepository {
   // Fetch data from Firestore
   Future<VulnerableRoadUser12> fetchVulnerableRoadUserData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('vulnerable_road_users').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return VulnerableRoadUser12.fromFirestore(doc);
       } else {

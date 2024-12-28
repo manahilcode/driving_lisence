@@ -8,7 +8,7 @@ class AwarenessHazardRepository {
   // Fetch data from Firestore
   Future<AwarenessHazardYourself> fetchAwarenessHazardData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('awareness_hazards').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Hazard_awareness').doc(documentId).get();
       if (doc.exists) {
         return AwarenessHazardYourself.fromFirestore(doc);
       } else {

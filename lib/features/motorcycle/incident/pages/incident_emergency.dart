@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/incident_accident_emergency.dart';
+import 'break_down_Screen.dart';
 
 class IncidentEmergencyScreen extends StatefulWidget {
   const IncidentEmergencyScreen({super.key});
@@ -19,7 +20,7 @@ class _IncidentEmergencyScreenState extends State<IncidentEmergencyScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<IncidentNotifier>(context, listen: false);
-      provider.loadIncident("Animals_on_the_road");
+      provider.loadIncident("Incidents_accidents_and_emergencies");
     });
     super.initState();
   }
@@ -47,12 +48,12 @@ class _IncidentEmergencyScreenState extends State<IncidentEmergencyScreen> {
                     child: GestureDetector(
                       onTap: () {
                         // Navigate to the next screen
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Othertype6(), // Replace with your next screen
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BreakDownScreen(), // Replace with your next screen
+                          ),
+                        );
                       },
                       child: Container(
                         width: 300,

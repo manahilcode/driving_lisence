@@ -8,7 +8,7 @@ class TrainerPracticeRepositoryRiding {
   // Fetch training data from Firestore
   Future<TrainerPracticeModelRiding> getTrainerPracticeData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('motorcycle_Motorway_training').doc('Discuss_and_practice_with_trainer').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Motorway_riding').doc('Things_to_discuss_and_practise_with_your_traine').get();
       if (doc.exists) {
         return TrainerPracticeModelRiding.fromMap(doc.data() as Map<String, dynamic>);
       } else {

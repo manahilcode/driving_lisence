@@ -8,7 +8,7 @@ class IncidentRepository {
 
   Future<IncidentModel> fetchIncident(String documentId) async {
     try {
-      final doc = await _firestore.collection('incidents').doc(documentId).get();
+      final doc = await _firestore.collection('motorcycle_Incidents_accidents_and_emergencies').doc(documentId).get();
       if (doc.exists) {
         return IncidentModel.fromMap(doc.data()!);
       } else {

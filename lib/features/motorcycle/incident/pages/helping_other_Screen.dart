@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/incident/pages/reporting_an_incident.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _HelpingOtherScreenState extends State<HelpingOtherScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<FirstAidProvider>(context, listen: false);
-      provider.loadFirstAidData("Animals_on_the_road");
+      provider.loadFirstAidData("Helping_others_and_giving_first_aid");
     });
     super.initState();
   }
@@ -94,12 +95,12 @@ class _HelpingOtherScreenState extends State<HelpingOtherScreen> {
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ReportingAnIncidentScreen(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

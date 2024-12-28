@@ -7,7 +7,7 @@ class BreakdownRepository {
 
   Future<BreakdownModel> fetchBreakdownData(String documentId) async {
     final snapshot = await _firestore
-        .collection('motorcycle')
+        .collection('motorcycle_Incidents_accidents_and_emergencies')
         .doc(documentId)
         .get();
 

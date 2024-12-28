@@ -8,7 +8,7 @@ class MeetingTheStandardsRepositorySafetyMargin {
 
   Future<MeetingTheStandards_Safety_Margin> getMeetingTheStandardsData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('meeting_the_standards').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_ Safety_margins').doc('Meeting_the_standards').get();
 
       if (doc.exists) {
         return MeetingTheStandards_Safety_Margin.fromJson(doc.data() as Map<String, dynamic>);

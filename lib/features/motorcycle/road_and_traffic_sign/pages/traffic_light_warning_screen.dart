@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/road_and_traffic_sign/pages/signal_given_by_driver_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _TrafficLightWarningScreenState extends State<TrafficLightWarningScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<TrafficLightsWarningNotifier>(context, listen: false);
-      provider.fetchTrafficLightsWarning("","Animals_on_the_road");
+      provider.fetchTrafficLightsWarning("motorcycle_Road_and_traffic_signs","Traffic_lights_and_warning_lights");
     });
     super.initState();
   }
@@ -72,12 +73,12 @@ class _TrafficLightWarningScreenState extends State<TrafficLightWarningScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignalGivenByDriverScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

@@ -10,7 +10,7 @@ class TrainerDiscussionRepositoryLoading {
 
   Future<TrainerDiscussionModelLoading> fetchTrainerDiscussion(String documentId) async {
     try {
-      final doc = await _firestore.collection('trainer_discussion').doc(documentId).get();
+      final doc = await _firestore.collection('motorcycle_Motorcycle_loading').doc(documentId).get();
       if (doc.exists) {
         return TrainerDiscussionModelLoading.fromMap(doc.data()!);
       } else {

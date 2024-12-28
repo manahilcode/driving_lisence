@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/older_disabled_provider.dart';
+import 'cyclist_screen.dart';
 
 class OlderDisabledScreen extends StatefulWidget {
   const OlderDisabledScreen({super.key});
@@ -20,7 +21,7 @@ class _OlderDisabledScreenState extends State<OlderDisabledScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<OlderAndDisabledPedestriansProvider>(context, listen: false);
-      provider.fetchOlderAndDisabledPedestriansData("Animals_on_the_road");
+      provider.fetchOlderAndDisabledPedestriansData("Older_and_disabled_pedestrians");
     });
     super.initState();
   }
@@ -103,12 +104,12 @@ class _OlderDisabledScreenState extends State<OlderDisabledScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CyclistScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

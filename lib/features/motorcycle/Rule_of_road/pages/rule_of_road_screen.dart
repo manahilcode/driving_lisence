@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/Rule_of_road/pages/speed_limit_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _RuleOfRoadScreenState extends State<RuleOfRoadScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<RulesOfTheRoadNotifier>(context, listen: false);
-      provider.loadRulesOfTheRoad("Animals_on_the_road");
+      provider.loadRulesOfTheRoad("Rules of the road");
     });
     super.initState();
   }
@@ -47,12 +48,12 @@ class _RuleOfRoadScreenState extends State<RuleOfRoadScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SpeedLimitScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

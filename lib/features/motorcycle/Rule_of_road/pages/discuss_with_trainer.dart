@@ -7,14 +7,14 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/discuss_with_trainer.dart';
 
-class DiscussWithTrainer extends StatefulWidget {
-  const DiscussWithTrainer({super.key});
+class DiscussWithTrainerRuleOfRoad extends StatefulWidget {
+  const DiscussWithTrainerRuleOfRoad({super.key});
 
   @override
-  State<DiscussWithTrainer> createState() => _DiscussWithTrainerState();
+  State<DiscussWithTrainerRuleOfRoad> createState() => _DiscussWithTrainerRuleOfRoadState();
 }
 
-class _DiscussWithTrainerState extends State<DiscussWithTrainer> {
+class _DiscussWithTrainerRuleOfRoadState extends State<DiscussWithTrainerRuleOfRoad> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

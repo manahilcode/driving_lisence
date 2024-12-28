@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/motor_cycle_licence.dart';
+import 'insurance_screen.dart';
 
 class MotorcycleLicenceScreen extends StatefulWidget {
   const MotorcycleLicenceScreen({super.key});
@@ -27,7 +28,7 @@ class _MotorcycleLicenceScreenState extends State<MotorcycleLicenceScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "MotorCycle Licence",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 
@@ -53,12 +54,12 @@ class _MotorcycleLicenceScreenState extends State<MotorcycleLicenceScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InsuranceScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

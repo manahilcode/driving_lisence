@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/stop_parking_provider.dart';
+import 'meeting_standard_screen.dart';
 
 class StopParkingScreen extends StatefulWidget {
   const StopParkingScreen({super.key});
@@ -19,7 +20,7 @@ class _StopParkingScreenState extends State<StopParkingScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<StoppingAndParkingNotifier>(context, listen: false);
-      provider.loadStoppingAndParking("","Animals_on_the_road");
+      provider.loadStoppingAndParking("motorcycle_Rules_of_the_road","Stopping_and_parking");
     });
     super.initState();
   }
@@ -52,12 +53,12 @@ class _StopParkingScreenState extends State<StopParkingScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MeetingStandardScreenRule_of_road(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

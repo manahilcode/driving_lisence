@@ -10,7 +10,7 @@ class OvertakingCrossingsRepository {
 
   Future<OvertakingCrossings> fetchOvertakingCrossings(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('yourCollection').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Rules_of_the_road').doc(documentId).get();
 
       if (doc.exists && doc.data() != null) {
         return OvertakingCrossings.fromMap(doc.data() as Map<String, dynamic>);

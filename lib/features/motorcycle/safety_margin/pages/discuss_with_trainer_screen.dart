@@ -7,26 +7,26 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/discuss_with_trainer.dart';
 
-class DiscussWithTrainerScreen extends StatefulWidget {
-  const DiscussWithTrainerScreen({super.key});
+class DiscussWithTrainerScreenSafetMargin extends StatefulWidget {
+  const DiscussWithTrainerScreenSafetMargin({super.key});
 
   @override
-  State<DiscussWithTrainerScreen> createState() => _DiscussWithTrainerScreenState();
+  State<DiscussWithTrainerScreenSafetMargin> createState() => _DiscussWithTrainerScreenSafetMarginState();
 }
 
-class _DiscussWithTrainerScreenState extends State<DiscussWithTrainerScreen> {
+class _DiscussWithTrainerScreenSafetMarginState extends State<DiscussWithTrainerScreenSafetMargin> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<SafetyMarginDiscussNotifier>(context, listen: false);
-      provider.loadSafetyMarginData("","Animals_on_the_road");
+      provider.loadSafetyMarginData("motorcycle_ Safety_margins","Things_to_discuss_and_practise_with_your_trainer");
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Things to discuss and practice with trainer", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<SafetyMarginDiscussNotifier>(
           builder: (context,provider,child) {
             final data = provider.data;

@@ -7,6 +7,7 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/essentail_document.dart';
 import '../viewmodel/essentail_document1.dart';
+import 'essentail_document1_screen.dart';
 
 class EssentailDocumentScreen extends StatefulWidget {
   const EssentailDocumentScreen({super.key});
@@ -20,7 +21,7 @@ class _EssentailDocumentScreenState extends State<EssentailDocumentScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<EssentialDocumentsNotifier>(context, listen: false);
-      provider.fetchEssentialDocuments("motorcycle_attitude", "Animals_on_the_road");
+      provider.fetchEssentialDocuments("motorcycle_Essential_documents", "Essential documents");
     });
     super.initState();
   }
@@ -51,12 +52,12 @@ class _EssentailDocumentScreenState extends State<EssentailDocumentScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EssentailDocument1Screen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

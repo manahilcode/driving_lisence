@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/bus_provider.dart';
+import 'motorcycle_info_Screen.dart';
 
 class BusScreen extends StatefulWidget {
   const BusScreen({super.key});
@@ -19,7 +20,7 @@ class _BusScreenState extends State<BusScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<BusAndTramInfoProvider>(context, listen: false);
-      provider.fetchBusAndTramInfo("Animals_on_the_road");
+      provider.fetchBusAndTramInfo("Buses");
     });
     super.initState();
   }
@@ -47,12 +48,12 @@ class _BusScreenState extends State<BusScreen> {
                 child: GestureDetector(
                   onTap: () {
                     // Navigate to the next screen
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => Othertype6(), // Replace with your next screen
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MotorcycleInfoScreen(), // Replace with your next screen
+                      ),
+                    );
                   },
                   child: Container(
                     width: 300,

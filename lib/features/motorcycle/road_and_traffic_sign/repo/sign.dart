@@ -7,7 +7,7 @@ class SignSignRepository {
     try {
       // Assume Firebase Firestore is already set up in your project
       final doc = await FirebaseFirestore.instance
-          .collection('signSignCollection')
+          .collection('motorcycle_Road_and_traffic_signs')
           .doc(documentId)
           .get();
       if (doc.exists) {

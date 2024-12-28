@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/towing_trailer.dart';
+import 'meeting_standard_screen.dart';
 
 class TowingTrailerScreen extends StatefulWidget {
   const TowingTrailerScreen({super.key});
@@ -19,7 +20,7 @@ class _TowingTrailerScreenState extends State<TowingTrailerScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<TowingTrailerNotifier>(context, listen: false);
-      provider.loadTowingTrailer("Animals_on_the_road");
+      provider.loadTowingTrailer("Towing_a_trailer");
     });
     super.initState();
   }
@@ -103,6 +104,49 @@ class _TowingTrailerScreenState extends State<TowingTrailerScreen> {
               }).toList(),
             ),
             createAutoSizeText(data.info),
+            //MeetingStandardScreenLoading
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  // Navigate to the next screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MeetingStandardScreenLoading(), // Replace with your next screen
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 300,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 15.0,
+                    horizontal: 30.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Next",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         );
       }),

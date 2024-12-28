@@ -7,14 +7,14 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/meeting_standard.dart';
 
-class MeetingStandardScreen extends StatefulWidget {
-  const MeetingStandardScreen({super.key});
+class MeetingStandardScreenRiding extends StatefulWidget {
+  const MeetingStandardScreenRiding({super.key});
 
   @override
-  State<MeetingStandardScreen> createState() => _MeetingStandardScreenState();
+  State<MeetingStandardScreenRiding> createState() => _MeetingStandardScreenRidingState();
 }
 
-class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
+class _MeetingStandardScreenRidingState extends State<MeetingStandardScreenRiding> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

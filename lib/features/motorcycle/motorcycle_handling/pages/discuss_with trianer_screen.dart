@@ -7,19 +7,19 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/discuss_with_trainer.dart';
 
-class DiscussWithTrainer extends StatefulWidget {
-  const DiscussWithTrainer({super.key});
+class DiscussWithTrainerHandling extends StatefulWidget {
+  const DiscussWithTrainerHandling({super.key});
 
   @override
-  State<DiscussWithTrainer> createState() => _DiscussWithTrainerState();
+  State<DiscussWithTrainerHandling> createState() => _DiscussWithTrainerHandlingState();
 }
 
-class _DiscussWithTrainerState extends State<DiscussWithTrainer> {
+class _DiscussWithTrainerHandlingState extends State<DiscussWithTrainerHandling> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<TrainerDiscussionPracticeNotifier>(context, listen: false);
-      provider.loadTrainerDiscussionPractice("","Animals_on_the_road");
+      provider.loadTrainerDiscussionPractice("motorcycle_Motorcycle_handling","Things_to_discuss_and_practise_with_your_trainer");
     });
     super.initState();
   }

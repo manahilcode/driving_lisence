@@ -7,14 +7,14 @@ import 'package:provider/provider.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/dicuss_with_trainer.dart';
 
-class DiscussWithTrainerScreen extends StatefulWidget {
-  const DiscussWithTrainerScreen({super.key});
+class DiscussWithTrainerScreenRiding extends StatefulWidget {
+  const DiscussWithTrainerScreenRiding({super.key});
 
   @override
-  State<DiscussWithTrainerScreen> createState() => _DiscussWithTrainerScreenState();
+  State<DiscussWithTrainerScreenRiding> createState() => _DiscussWithTrainerScreenRidingState();
 }
 
-class _DiscussWithTrainerScreenState extends State<DiscussWithTrainerScreen> {
+class _DiscussWithTrainerScreenRidingState extends State<DiscussWithTrainerScreenRiding> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

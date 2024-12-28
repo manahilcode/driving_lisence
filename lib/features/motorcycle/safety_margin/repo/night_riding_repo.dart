@@ -7,7 +7,7 @@ class NightRidingRepository {
 
   Future<NightRiding> getNightRidingData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('night_riding').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_ Safety_margins').doc('At_night').get();
 
       if (doc.exists) {
         return NightRiding.fromJson(doc.data() as Map<String, dynamic>);

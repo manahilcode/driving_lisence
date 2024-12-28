@@ -8,7 +8,7 @@ class HazardousLoadRepository {
   // Fetch data from Firestore
   Future<HazardousLoad> fetchHazardousLoadData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('hazardous_loads').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Hazard_awareness').doc(documentId).get();
       if (doc.exists) {
         return HazardousLoad.fromFirestore(doc);
       } else {

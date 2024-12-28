@@ -7,20 +7,21 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../incident/viewmodel/think_about.dart';
 import '../viewmodel/think_About_provider.dart';
+import 'discuss_with trianer_screen.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenHandling extends StatefulWidget {
+  const ThinkAboutScreenHandling({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenHandling> createState() => _ThinkAboutScreenHandlingState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenHandlingState extends State<ThinkAboutScreenHandling> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<ThinkAboutNotifierMotorHandling>(context, listen: false);
-      provider.loadThinkAbout("","Animals_on_the_road");
+      provider.loadThinkAbout("motorcycle_Motorcycle_handling","Think_about");
     });
     super.initState();
   }
@@ -50,12 +51,12 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DiscussWithTrainerHandling(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

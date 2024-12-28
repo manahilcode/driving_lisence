@@ -8,7 +8,7 @@ class PedestrianRepositoryVal {
   // Fetch data from Firestore
   Future<PedestrianVal> fetchPedestrianData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('pedestrian').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return PedestrianVal.fromFirestore(doc);
       } else {

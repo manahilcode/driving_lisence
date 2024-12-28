@@ -9,7 +9,7 @@ class WarningIncidentRepository {
 
   Future<WarningIncidentModel> fetchWarningIncident(String documentId) async {
     try {
-      final doc = await _firestore.collection('warning_incidents').doc(documentId).get();
+      final doc = await _firestore.collection('motorcycle_Incidents_accidents_and_emergencies').doc(documentId).get();
       if (doc.exists) {
         return WarningIncidentModel.fromMap(doc.data()!);
       } else {

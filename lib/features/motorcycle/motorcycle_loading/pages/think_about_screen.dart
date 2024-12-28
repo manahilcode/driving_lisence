@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/motorcycle_loading/pages/things_discuss_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -8,19 +9,19 @@ import '../../../../core/loader.dart';
 import '../../incident/viewmodel/think_about.dart';
 import '../viewmodel/think_About.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenLoading extends StatefulWidget {
+  const ThinkAboutScreenLoading({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenLoading> createState() => _ThinkAboutScreenLoadingState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenLoadingState extends State<ThinkAboutScreenLoading> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<ThinkAboutNotifierLoading>(context, listen: false);
-      provider.loadThinkAbout("Animals_on_the_road");
+      provider.loadThinkAbout("Think_about");
     });
     super.initState();
   }
@@ -50,12 +51,12 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ThingsDiscussScreenLoad(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

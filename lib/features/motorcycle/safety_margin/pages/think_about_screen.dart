@@ -7,15 +7,16 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/safety_margin_provider.dart';
 import '../viewmodel/think_About_provider.dart';
+import 'discuss_with_trainer_screen.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenSaftyMargin extends StatefulWidget {
+  const ThinkAboutScreenSaftyMargin({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenSaftyMargin> createState() => _ThinkAboutScreenSaftyMarginState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenSaftyMarginState extends State<ThinkAboutScreenSaftyMargin> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -27,7 +28,7 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "think about", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<ThinkAboutProviderMargin>(
           builder: (context,provider,child) {
             final data = provider.safetyMarginData;
@@ -45,12 +46,12 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DiscussWithTrainerScreenSafetMargin(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

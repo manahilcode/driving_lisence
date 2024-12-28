@@ -1,5 +1,5 @@
 class MotorcycleMotorcycleHazard {
-  final String id; // Document ID
+
   final String title; // Title field
   final String subtitle; // Subtitle field
   final String image; // Main image URL
@@ -12,7 +12,7 @@ class MotorcycleMotorcycleHazard {
   final String text3; // Additional text description 3
 
   MotorcycleMotorcycleHazard({
-    required this.id,
+
     required this.title,
     required this.subtitle,
     required this.image,
@@ -26,9 +26,8 @@ class MotorcycleMotorcycleHazard {
   });
 
   // Factory method to create a model from Firestore data
-  factory MotorcycleMotorcycleHazard.fromFirestore(String id, Map<String, dynamic> data) {
+  factory MotorcycleMotorcycleHazard.fromFirestore(Map<String, dynamic> data) {
     return MotorcycleMotorcycleHazard(
-      id: id,
       title: data['title'] ?? '',
       subtitle: data['subtitle'] ?? '',
       image: data['image'] ?? '',

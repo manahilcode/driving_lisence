@@ -3,12 +3,12 @@ import '../model/static_hazard_model.dart';
 
 class StaticHazardRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String collectionPath = 'static_hazards';
+  final String collectionPath = 'motorcycle_Hazard_awareness';
 
   // Fetch static hazard data from Firestore
   Future<StaticHazard> fetchStaticHazard() async {
     try {
-      final snapshot = await _firestore.collection(collectionPath).doc('static_hazard_data').get();
+      final snapshot = await _firestore.collection(collectionPath).doc('Static_hazards').get();
       if (snapshot.exists) {
         return StaticHazard.fromFirestore(snapshot.data() as Map<String, dynamic>);
       } else {

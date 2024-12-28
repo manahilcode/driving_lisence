@@ -8,7 +8,7 @@ class MotorcycleLoadingRepository {
 
   Future<MotorcycleLoadingModel> fetchMotorcycleLoading(String documentId) async {
     try {
-      final doc = await _firestore.collection('motorcycle_loading').doc(documentId).get();
+      final doc = await _firestore.collection('motorcycle_Motorcycle_loading').doc(documentId).get();
       if (doc.exists) {
         return MotorcycleLoadingModel.fromMap(doc.data()!);
       } else {

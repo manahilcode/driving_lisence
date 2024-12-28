@@ -10,7 +10,7 @@ class TowingTrailerRepository {
 
   Future<TowingTrailerModel> fetchTowingTrailer(String documentId) async {
     try {
-      final doc = await _firestore.collection('towing_trailer').doc(documentId).get();
+      final doc = await _firestore.collection('motorcycle_Motorcycle_loading').doc(documentId).get();
       if (doc.exists) {
         return TowingTrailerModel.fromMap(doc.data()!);
       } else {

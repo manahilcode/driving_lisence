@@ -6,20 +6,21 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/think_about_provider.dart';
+import 'discussion_practice_trainer_screen.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenVulnerable extends StatefulWidget {
+  const ThinkAboutScreenVulnerable({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenVulnerable> createState() => _ThinkAboutScreenVulnerableState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenVulnerableState extends State<ThinkAboutScreenVulnerable> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<ThinkAboutProviderVal>(context, listen: false);
-      provider.fetchDiscussionQuestionsData("Animals_on_the_road");
+      provider.fetchDiscussionQuestionsData("Think_about");
     });
     super.initState();
   }
@@ -45,12 +46,12 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DiscussionPracticeTrainerScreenVulnerable(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

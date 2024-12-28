@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/skidding_info_provider.dart';
+import 'contraflow_system_Screen.dart';
 
 class SkiddingInfoScreen extends StatefulWidget {
   const SkiddingInfoScreen({super.key});
@@ -29,7 +30,7 @@ class _SkiddingInfoScreenState extends State<SkiddingInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Skidding", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<SkiddingInfoNotifier>(
           builder: (context,provider,child) {
             final data = provider.data;
@@ -107,12 +108,12 @@ class _SkiddingInfoScreenState extends State<SkiddingInfoScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ContraflowSystemScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

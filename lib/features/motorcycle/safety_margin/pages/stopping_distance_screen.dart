@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/safety_margin/pages/weather_condition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _StoppingDistanceScreenState extends State<StoppingDistanceScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Stopping distance", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<StoppingDistanceNotifier>(
           builder: (context,provider,child) {
             final data = provider.stoppingDistanceData;
@@ -50,12 +51,12 @@ class _StoppingDistanceScreenState extends State<StoppingDistanceScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WeatherConditionScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

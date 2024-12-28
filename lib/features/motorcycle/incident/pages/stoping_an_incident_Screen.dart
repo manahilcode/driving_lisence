@@ -7,6 +7,7 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/incident_accident_emergency.dart';
 import '../viewmodel/stoping_an_incident.dart';
+import 'helping_other_Screen.dart';
 
 class StopingAnIncidentScreen extends StatefulWidget {
   const StopingAnIncidentScreen({super.key});
@@ -20,7 +21,7 @@ class _StopingAnIncidentScreenState extends State<StopingAnIncidentScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<IncidentStopNotifier>(context, listen: false);
-      provider.loadIncident("Animals_on_the_road");
+      provider.loadIncident("Stopping_at_an_incident");
     });
     super.initState();
   }
@@ -51,12 +52,12 @@ class _StopingAnIncidentScreenState extends State<StopingAnIncidentScreen> {
                     child: GestureDetector(
                       onTap: () {
                         // Navigate to the next screen
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Othertype6(), // Replace with your next screen
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HelpingOtherScreen(), // Replace with your next screen
+                          ),
+                        );
                       },
                       child: Container(
                         width: 300,

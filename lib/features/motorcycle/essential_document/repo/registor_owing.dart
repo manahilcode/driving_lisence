@@ -7,7 +7,7 @@ class MotorcycleInfoRepository {
 
   Future<RegistorOwing> fetchMotorcycleInfo() async {
     try {
-      DocumentSnapshot snapshot = await _firebaseFirestore.collection('motorcycleInfo').doc('your_doc_id').get();
+      DocumentSnapshot snapshot = await _firebaseFirestore.collection('motorcycle_Essential_documents').doc('Registering_and_owning_a_motorcycle_Continue').get();
 
       if (snapshot.exists) {
         return RegistorOwing.fromMap(snapshot.data() as Map<String, dynamic>);

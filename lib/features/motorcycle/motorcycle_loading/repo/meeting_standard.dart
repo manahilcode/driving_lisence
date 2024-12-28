@@ -9,7 +9,7 @@ class MotorcyclePassengerRepository {
 
   Future<MeetingStandardModel11> fetchMotorcyclePassenger(String documentId) async {
     try {
-      final doc = await _firestore.collection('motorcycle_passenger').doc(documentId).get();
+      final doc = await _firestore.collection('motorcycle_Motorcycle_loading').doc(documentId).get();
       if (doc.exists) {
         return MeetingStandardModel11.fromMap(doc.data()!);
       } else {

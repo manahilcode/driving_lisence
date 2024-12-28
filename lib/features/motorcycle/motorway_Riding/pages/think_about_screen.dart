@@ -8,14 +8,14 @@ import '../../../../core/loader.dart';
 import '../../allertness/viewmodel/think_about_provider.dart';
 import '../viewmodel/think_about_provider.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenRiding extends StatefulWidget {
+  const ThinkAboutScreenRiding({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenRiding> createState() => _ThinkAboutScreenRidingState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenRidingState extends State<ThinkAboutScreenRiding> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

@@ -7,7 +7,7 @@ class SafetyMarginRepository {
 
   Future<SafetyMargin> getSafetyMarginData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('safety_margin').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_ Safety_margins').doc('Safety margins').get();
 
       if (doc.exists) {
         return SafetyMargin.fromJson(doc.data() as Map<String, dynamic>);

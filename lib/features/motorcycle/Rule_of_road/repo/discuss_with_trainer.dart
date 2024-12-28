@@ -7,7 +7,7 @@ class DiscussWithTrainerRuleRepo {
 
   Future<DiscussWithTrainerRule> fetchSpeedLimitData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('speed_limits').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Rules_of_the_road').doc('Things_to_discuss_and_practise_with_your_trainer').get();
 
       if (doc.exists) {
         return DiscussWithTrainerRule.fromMap(doc.data() as Map<String, dynamic>);

@@ -7,19 +7,19 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/things_discuss.dart';
 
-class ThingsDiscussScreen extends StatefulWidget {
-  const ThingsDiscussScreen({super.key});
+class ThingsDiscussScreenRoadTrafficSign extends StatefulWidget {
+  const ThingsDiscussScreenRoadTrafficSign({super.key});
 
   @override
-  State<ThingsDiscussScreen> createState() => _ThingsDiscussScreenState();
+  State<ThingsDiscussScreenRoadTrafficSign> createState() => _ThingsDiscussScreenRoadTrafficSignState();
 }
 
-class _ThingsDiscussScreenState extends State<ThingsDiscussScreen> {
+class _ThingsDiscussScreenRoadTrafficSignState extends State<ThingsDiscussScreenRoadTrafficSign> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<TrainerPractiseProvider>(context, listen: false);
-      provider.loadTrainerPractise("","Animals_on_the_road");
+      provider.loadTrainerPractise("motorcycle_Road_and_traffic_signs","Things_to_discuss_and_practise_with_your_trainer");
     });
     super.initState();
   }

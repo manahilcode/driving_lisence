@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/safety_margin/pages/stopping_distance_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _SafetyMargin1ScreenState extends State<SafetyMargin1Screen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Safety margin 1", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<SafetyMargin1Notifier>(
           builder: (context,provider,child) {
             final data = provider.data;
@@ -46,12 +47,12 @@ class _SafetyMargin1ScreenState extends State<SafetyMargin1Screen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StoppingDistanceScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

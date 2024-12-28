@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/vulnurable_road_user/pages/pedestrain_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class _VulnerableRoadUserScreenState extends State<VulnerableRoadUserScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<VulnerableRoadUserProvider>(context, listen: false);
-      provider.fetchVulnerableRoadUserData("Animals_on_the_road");
+      provider.fetchVulnerableRoadUserData("Vulnerable_road_users1");
     });
     super.initState();
   }
@@ -48,12 +49,12 @@ class _VulnerableRoadUserScreenState extends State<VulnerableRoadUserScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PedestrainScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

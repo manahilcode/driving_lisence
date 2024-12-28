@@ -1,4 +1,6 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/road_and_traffic_sign/pages/sign_screen.dart';
+import 'package:driving_lisence/features/motorcycle/road_and_traffic_sign/viewmodel/road_traffic_sign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -18,8 +20,8 @@ class _RoadTrafficSignScreenState extends State<RoadTrafficSignScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<RoadSignsProvider>(context, listen: false);
-      provider.loadRoadSigns();
+      final provider = Provider.of<RoadSignsProviderRoadTraffic>(context, listen: false);
+      provider.loadRoadSignsData("motorcycle_Road_and_traffic_signs", "Road and traffic signs");
     });
     super.initState();
   }
@@ -27,9 +29,9 @@ class _RoadTrafficSignScreenState extends State<RoadTrafficSignScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: "Road Traffic Sign", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
-      body: Consumer<RoadSignsProvider>(
+      body: Consumer<RoadSignsProviderRoadTraffic>(
           builder: (context,provider,child) {
-            final data = provider!.items;
+            final data = provider!.roadSignsData;
             if (data == null) {
               return const Center(
                 child: LoadingScreen(),
@@ -38,13 +40,7 @@ class _RoadTrafficSignScreenState extends State<RoadTrafficSignScreen> {
             return Column(
               children: [
                  createHeadingText(data.title),
-                createAutoSizeText(data.subtitle),
                 buildImage(data.image),
-                createHeadingText(data.title1),
-                createAutoSizeText(data.subtitle1),
-                buildImage(data.image1),
-                createHeadingText(data.title3),
-                createAutoSizeText(data.subtitle3),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
@@ -52,12 +48,12 @@ class _RoadTrafficSignScreenState extends State<RoadTrafficSignScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

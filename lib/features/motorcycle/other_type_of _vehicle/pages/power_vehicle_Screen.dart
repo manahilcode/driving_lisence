@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/power_vehicle_provider.dart';
+import 'bus_Screen.dart';
 
 class PowerVehicleScreen extends StatefulWidget {
   const PowerVehicleScreen({super.key});
@@ -19,7 +20,7 @@ class _PowerVehicleScreenState extends State<PowerVehicleScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<PoweredVehicleInfoNotifier>(context, listen: false);
-      provider.loadPoweredVehicleInfo("","Animals_on_the_road");
+      provider.loadPoweredVehicleInfo("motorcycle_Other_types_of_vehicle","Powered_vehicles_used_by_disabled_people");
     });
     super.initState();
   }
@@ -43,12 +44,12 @@ class _PowerVehicleScreenState extends State<PowerVehicleScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BusScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

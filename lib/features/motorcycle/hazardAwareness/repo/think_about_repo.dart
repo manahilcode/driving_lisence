@@ -4,12 +4,12 @@ import '../model/think_about_model.dart';
 
 class HazardAwarenessThinkAboutRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String collectionPath = 'hazard_awareness_think_about';
+  final String collectionPath = 'motorcycle_Hazard_awareness';
 
   // Fetch hazard awareness "Think About" data from Firestore
   Future<HazardAwarenessThinkAbout> fetchHazardAwarenessThinkAbout() async {
     try {
-      final snapshot = await _firestore.collection(collectionPath).doc('hazard_awareness_think_about_data').get();
+      final snapshot = await _firestore.collection(collectionPath).doc('Think_about').get();
       if (snapshot.exists) {
         return HazardAwarenessThinkAbout.fromFirestore(snapshot.data() as Map<String, dynamic>);
       } else {

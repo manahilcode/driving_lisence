@@ -1,11 +1,13 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/lane_and_junction.dart';
+import 'crossroad_screen.dart';
 
 class LaneAndJunctionScreen extends StatefulWidget {
   const LaneAndJunctionScreen({super.key});
@@ -19,7 +21,7 @@ class _LaneAndJunctionScreenState extends State<LaneAndJunctionScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<LaneAndJunctionProvider>(context, listen: false);
-      provider.loadQuestions("","Animals_on_the_road");
+      provider.loadQuestions("motorcycle_Rules_of_the_road","Lanes_and_junctions");
     });
     super.initState();
   }
@@ -104,16 +106,17 @@ class _LaneAndJunctionScreenState extends State<LaneAndJunctionScreen> {
                   }).toList(),
                 ),
          createAutoSizeText(data.info),
+                Gap(10),
                 Center(
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CrossroadScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

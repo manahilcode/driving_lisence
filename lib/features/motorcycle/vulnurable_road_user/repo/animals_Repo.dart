@@ -8,7 +8,7 @@ class AnimalVulnerableUserRepository {
   // Fetch data from Firestore
   Future<AnimalVulnerableUser> fetchAnimalVulnerableUserData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('animal_vulnerable_users').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return AnimalVulnerableUser.fromFirestore(doc);
       } else {

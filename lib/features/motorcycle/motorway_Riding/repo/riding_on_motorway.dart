@@ -8,7 +8,7 @@ class MotorwayRidingRepositoryRiding {
   // Method to get the data from Firestore
   Future<MotorwayRidingModelRiding> getMotorwayRidingData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('motorway_riding').doc('riding_on_motorway').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Motorway_riding').doc('Riding_on_the_motorway').get();
       if (doc.exists) {
         return MotorwayRidingModelRiding.fromMap(doc.data() as Map<String, dynamic>);
       } else {

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/speed_limit.dart';
+import 'lane_and_junction_screen.dart';
 
 class SpeedLimitScreen extends StatefulWidget {
   const SpeedLimitScreen({super.key});
@@ -19,7 +20,7 @@ class _SpeedLimitScreenState extends State<SpeedLimitScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<SpeedLimitsNotifier>(context, listen: false);
-      provider.loadSpeedLimits("","Animals_on_the_road");
+      provider.loadSpeedLimits("motorcycle_Rules_of_the_road","Speed_limits");
     });
     super.initState();
   }
@@ -131,12 +132,12 @@ class _SpeedLimitScreenState extends State<SpeedLimitScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LaneAndJunctionScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

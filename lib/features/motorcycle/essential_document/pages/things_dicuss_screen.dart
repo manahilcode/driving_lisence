@@ -7,14 +7,14 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/thing_discuss.dart';
 
-class ThingsDicussScreen extends StatefulWidget {
-  const ThingsDicussScreen({super.key});
+class ThingsDicussScreenEssentailDoc extends StatefulWidget {
+  const ThingsDicussScreenEssentailDoc({super.key});
 
   @override
-  State<ThingsDicussScreen> createState() => _ThingsDicussScreenState();
+  State<ThingsDicussScreenEssentailDoc> createState() => _ThingsDicussScreenEssentailDocState();
 }
 
-class _ThingsDicussScreenState extends State<ThingsDicussScreen> {
+class _ThingsDicussScreenEssentailDocState extends State<ThingsDicussScreenEssentailDoc> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

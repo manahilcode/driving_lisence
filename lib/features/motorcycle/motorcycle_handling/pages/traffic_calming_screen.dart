@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/traffic_calming_provider.dart';
+import 'meeting_standard_Screen.dart';
 
 class TrafficCalmingScreen extends StatefulWidget {
   const TrafficCalmingScreen({super.key});
@@ -19,7 +20,7 @@ class _TrafficCalmingScreenState extends State<TrafficCalmingScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<TrafficCalmingNotifier>(context, listen: false);
-      provider.loadTrafficCalming("","Animals_on_the_road");
+      provider.loadTrafficCalming("motorcycle_Motorcycle_handling","Traffic_calming_and_road_surfaces");
     });
     super.initState();
   }
@@ -51,12 +52,12 @@ class _TrafficCalmingScreenState extends State<TrafficCalmingScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MeetingStandardScreenHandling(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

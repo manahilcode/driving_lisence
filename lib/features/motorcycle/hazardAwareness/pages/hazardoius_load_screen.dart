@@ -19,7 +19,7 @@ class _HazardoiusLoadScreenState extends State<HazardoiusLoadScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<HazardousLoadProvider>(context, listen: false);
-      provider.fetchHazardousLoadData("Animals_on_the_road");
+      provider.fetchHazardousLoadData("hazardous_loads");
     });
     super.initState();
   }

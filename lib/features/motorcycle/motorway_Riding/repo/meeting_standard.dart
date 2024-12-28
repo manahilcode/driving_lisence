@@ -9,8 +9,8 @@ class MotorwaySafetyRepositoryRiding {
   Future<MeetingStandardRiding> getMotorwaySafety() async {
     try {
       DocumentSnapshot doc = await _firestore
-          .collection('motorway_safety') // Collection name in Firestore
-          .doc('motorway_safety_doc') // Document ID
+          .collection('motorcycle_Motorway_riding') // Collection name in Firestore
+          .doc('Meeting_the_standards') // Document ID
           .get();
 
       if (doc.exists) {

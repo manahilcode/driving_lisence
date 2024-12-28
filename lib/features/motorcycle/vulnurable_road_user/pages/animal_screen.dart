@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/animals_provider.dart';
+import 'driver_screen.dart';
 
 class AnimalScreen extends StatefulWidget {
   const AnimalScreen({super.key});
@@ -19,7 +20,7 @@ class _AnimalScreenState extends State<AnimalScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<AnimalVulnerableUserProvider>(context, listen: false);
-      provider.fetchAnimalVulnerableUserData("Animals_on_the_road");
+      provider.fetchAnimalVulnerableUserData("Animals");
     });
     super.initState();
   }
@@ -47,12 +48,12 @@ class _AnimalScreenState extends State<AnimalScreen> {
                 child: GestureDetector(
                   onTap: () {
                     // Navigate to the next screen
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => Othertype6(), // Replace with your next screen
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DriverScreen(), // Replace with your next screen
+                      ),
+                    );
                   },
                   child: Container(
                     width: 300,

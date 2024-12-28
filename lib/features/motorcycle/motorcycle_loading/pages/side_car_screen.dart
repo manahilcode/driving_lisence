@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/motorcycle_loading/pages/towing_trailer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _SideCarScreenState extends State<SideCarScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<PillionPasSideCarsengerNotifier>(context, listen: false);
-      provider.loadPillionPassenger("Animals_on_the_road");
+      provider.loadPillionPassenger("Sidecars");
     });
     super.initState();
   }
@@ -52,12 +53,12 @@ class _SideCarScreenState extends State<SideCarScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TowingTrailerScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

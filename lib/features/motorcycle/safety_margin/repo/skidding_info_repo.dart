@@ -7,7 +7,7 @@ class SkiddingInfoRepository {
 
   Future<SkiddingInfo> getSkiddingInfoData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('skidding_info').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_ Safety_margins').doc('Skidding').get();
 
       if (doc.exists) {
         return SkiddingInfo.fromJson(doc.data() as Map<String, dynamic>);

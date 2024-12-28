@@ -7,7 +7,7 @@ class DrivingInfoRepositoryEss {
 
   Future<MeetingTheStandardDocument> fetchDrivingInfo() async {
     try {
-      DocumentSnapshot snapshot = await _firebaseFirestore.collection('drivingInfo').doc('your_doc_id').get();
+      DocumentSnapshot snapshot = await _firebaseFirestore.collection('motorcycle_Essential_documents').doc('Meeting_the_standards').get();
 
       if (snapshot.exists) {
         return MeetingTheStandardDocument.fromMap(snapshot.data() as Map<String, dynamic>);

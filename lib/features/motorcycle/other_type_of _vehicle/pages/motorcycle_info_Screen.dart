@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/motorcycle_info_provider.dart';
+import 'meeting_standard_Screen.dart';
 
 class MotorcycleInfoScreen extends StatefulWidget {
   const MotorcycleInfoScreen({super.key});
@@ -19,7 +20,7 @@ class _MotorcycleInfoScreenState extends State<MotorcycleInfoScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<MotorcycleInfoNotifier>(context, listen: false);
-      provider.loadMotorcycleInfo("","Animals_on_the_road");
+      provider.loadMotorcycleInfo("motorcycle_Other_types_of_vehicle","Other_motorcycles");
     });
     super.initState();
   }
@@ -47,13 +48,13 @@ class _MotorcycleInfoScreenState extends State<MotorcycleInfoScreen> {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                   //   Navigate to the next screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MeetingStandardScreenOtherType(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

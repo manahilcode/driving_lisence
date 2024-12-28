@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/motorwat_dual_caariage_provider.dart';
+import 'moving_hazard_screen.dart';
 
 class MotorwayDualCarriageScreen extends StatefulWidget {
   const MotorwayDualCarriageScreen({super.key});
@@ -51,12 +52,12 @@ class _MotorwayDualCarriageScreenState
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MovingHazardScreen(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

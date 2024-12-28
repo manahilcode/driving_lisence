@@ -9,8 +9,8 @@ class LaneMarkingRepository {
   Future<LaneMarkingRiding> getLaneMarking() async {
     try {
       DocumentSnapshot doc = await _firestore
-          .collection('lane_markings') // Collection name in Firestore
-          .doc('lane_marking_doc') // Document ID
+          .collection('motorcycle_Motorway_riding') // Collection name in Firestore
+          .doc('Lane_markings') // Document ID
           .get();
 
       if (doc.exists) {

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/motorcycle_loading.dart';
+import 'keep_your_motorcycle_stable_Screen.dart';
 
 class MotorcycleLoadingScreen extends StatefulWidget {
   const MotorcycleLoadingScreen({super.key});
@@ -19,7 +20,7 @@ class _MotorcycleLoadingScreenState extends State<MotorcycleLoadingScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<MotorcycleLoadingNotifier>(context, listen: false);
-      provider.loadMotorcycleLoading("Animals_on_the_road");
+      provider.loadMotorcycleLoading("Motorcycle_loading");
     });
     super.initState();
   }
@@ -50,12 +51,12 @@ class _MotorcycleLoadingScreenState extends State<MotorcycleLoadingScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => KeepYourMotorcycleStableScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

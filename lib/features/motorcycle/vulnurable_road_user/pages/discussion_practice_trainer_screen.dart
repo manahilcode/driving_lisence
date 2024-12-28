@@ -1,3 +1,4 @@
+import 'package:driving_lisence/category1.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -7,19 +8,19 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/discusstion_practice_provider.dart';
 
-class DiscussionPracticeTrainerScreen extends StatefulWidget {
-  const DiscussionPracticeTrainerScreen({super.key});
+class DiscussionPracticeTrainerScreenVulnerable extends StatefulWidget {
+  const DiscussionPracticeTrainerScreenVulnerable({super.key});
 
   @override
-  State<DiscussionPracticeTrainerScreen> createState() => _DiscussionPracticeTrainerScreenState();
+  State<DiscussionPracticeTrainerScreenVulnerable> createState() => _DiscussionPracticeTrainerScreenVulnerableState();
 }
 
-class _DiscussionPracticeTrainerScreenState extends State<DiscussionPracticeTrainerScreen> {
+class _DiscussionPracticeTrainerScreenVulnerableState extends State<DiscussionPracticeTrainerScreenVulnerable> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<DiscussionPracticeProviderVulnerable>(context, listen: false);
-      provider.fetchDiscussionPracticeData("Animals_on_the_road");
+      provider.fetchDiscussionPracticeData("Things_to_discuss_and_practise_with_your_trainer");
     });
     super.initState();
   }
@@ -51,12 +52,12 @@ class _DiscussionPracticeTrainerScreenState extends State<DiscussionPracticeTrai
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Category1(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

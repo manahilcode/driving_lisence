@@ -9,7 +9,7 @@ class RulesOfTheRoadRepository {
   Future<RulesOfTheRoadModel> fetchRulesOfTheRoadData(String documentId) async {
     try {
       DocumentSnapshot snapshot =
-      await _firestore.collection('yourCollection').doc(documentId).get();
+      await _firestore.collection('motorcycle_Rules_of_the_road').doc(documentId).get();
       if (snapshot.exists) {
         return RulesOfTheRoadModel.fromMap(snapshot.data() as Map<String, dynamic>);
       } else {

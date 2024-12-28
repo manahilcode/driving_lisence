@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/large_vehicle_provider.dart';
+import 'bus_Screen.dart';
 
 class LargeVehicleScreen extends StatefulWidget {
   const LargeVehicleScreen({super.key});
@@ -19,7 +20,7 @@ class _LargeVehicleScreenState extends State<LargeVehicleScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<LargeVehicleNotifier>(context, listen: false);
-      provider.loadLargeVehicleInfo("","Animals_on_the_road");
+      provider.loadLargeVehicleInfo("motorcycle_Other_types_of_vehicle","Large_vehicles");
     });
     super.initState();
   }
@@ -111,12 +112,12 @@ class _LargeVehicleScreenState extends State<LargeVehicleScreen> {
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BusScreen(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

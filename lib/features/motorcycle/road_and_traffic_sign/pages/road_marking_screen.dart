@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/road_and_traffic_sign/pages/traffic_light_warning_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _RoadMarkingScreenState extends State<RoadMarkingScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<RoadMarkingsNotifier>(context, listen: false);
-      provider.fetchRoadMarkingsData();
+      provider.fetchRoadMarkingsData("motorcycle_Road_and_traffic_signs","Road_markings");
     });
     super.initState();
   }
@@ -76,12 +77,12 @@ class _RoadMarkingScreenState extends State<RoadMarkingScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TrafficLightWarningScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

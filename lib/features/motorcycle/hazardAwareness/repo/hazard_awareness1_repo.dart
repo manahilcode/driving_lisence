@@ -5,14 +5,14 @@ import '../model/hazard_awareness1.dart';
 
 class MotorcycleHazardawarenessRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String collectionPath = 'motorcycle_hazards';
+  final String collectionPath = 'motorcycle_Hazard_awareness';
 
-  Future<List<MotorcycleMotorcycleHazard>> fetchMotorcycleHazards() async {
+  Future<MotorcycleMotorcycleHazard> fetchMotorcycleHazards() async {
     try {
-      final snapshot = await _firestore.collection(collectionPath).get();
-      return snapshot.docs.map((doc) {
-        return MotorcycleMotorcycleHazard.fromFirestore(doc.id, doc.data() as Map<String, dynamic>);
-      }).toList();
+      final snapshot = await _firestore.collection(collectionPath).doc("Hazard_awareness1").get();
+      final data  = snapshot.data() as Map<String, dynamic>;
+      final model  = MotorcycleMotorcycleHazard.fromFirestore(data);
+      return model;
     } catch (e) {
       throw Exception('Error fetching motorcycle hazards: $e');
     }

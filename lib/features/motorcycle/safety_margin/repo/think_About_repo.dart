@@ -10,7 +10,7 @@ class SafetyMarginThinkAboutRepository {
   Future<SafetyMarginThinkAboutModel> fetchSafetyMarginData() async {
     try {
       // Assuming you have a 'safety_margin' collection with a document, e.g., 'safety_margin_data'
-      DocumentSnapshot snapshot = await _firestore.collection('safety_margin').doc('safety_margin_data').get();
+      DocumentSnapshot snapshot = await _firestore.collection('motorcycle_ Safety_margins').doc('Think_about').get();
 
       if (snapshot.exists) {
         return SafetyMarginThinkAboutModel.fromJson(snapshot.data() as Map<String, dynamic>);

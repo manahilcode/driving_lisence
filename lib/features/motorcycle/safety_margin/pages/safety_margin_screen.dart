@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/safety_margin/pages/safety_margin1_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _SafetyMarginScreenState extends State<SafetyMarginScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Safety margin", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<SafetyMarginNotifier>(
           builder: (context,provider,child) {
             final data = provider.data;
@@ -45,12 +46,12 @@ class _SafetyMarginScreenState extends State<SafetyMarginScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SafetyMargin1Screen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

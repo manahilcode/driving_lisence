@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/hazardAwareness/viewmodel/road_sign_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../../road_and_traffic_sign/viewmodel/road_traffic_sign.dart';
+import 'motorway_dual_carriage_screen.dart';
 
 class RoadSignScreen extends StatefulWidget {
   const RoadSignScreen({super.key});
@@ -19,7 +21,7 @@ class _RoadSignScreenState extends State<RoadSignScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<RoadSignsProvider>(context, listen: false);
-      provider.loadRoadSignsData("motorcycle_attitude", "Animals_on_the_road");
+      provider.loadRoadSigns();
     });
     super.initState();
   }
@@ -33,7 +35,7 @@ class _RoadSignScreenState extends State<RoadSignScreen> {
 
       body: Consumer<RoadSignsProvider>(
           builder: (context,provider,child) {
-            final data = provider.roadSignsData;
+            final data = provider.items;
             if (data == null) {
               return const Center(
                 child: LoadingScreen(),
@@ -51,12 +53,12 @@ class _RoadSignScreenState extends State<RoadSignScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MotorwayDualCarriageScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

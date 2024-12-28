@@ -8,8 +8,8 @@ class RidingGuideRepository {
   Future<CrossroadRule> getRidingGuideData() async {
     try {
       DocumentSnapshot doc = await _firestore
-          .collection('motorcycle_riding')
-          .doc('Crossroads_and_Roundabouts')
+          .collection('motorcycle_Rules_of_the_road')
+          .doc('Crossroads')
           .get();
       if (doc.exists) {
         return CrossroadRule.fromMap(doc.data() as Map<String, dynamic>);

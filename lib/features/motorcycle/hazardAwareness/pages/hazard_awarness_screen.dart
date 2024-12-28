@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/hazardAwareness/viewmodel/hazard_awarness1_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/hazard_awareness_provider.dart';
+import 'hazard_awarness1_screen.dart';
 
 class HazardAwarnessScreen extends StatefulWidget {
   const HazardAwarnessScreen({super.key});
@@ -18,8 +20,8 @@ class _HazardAwarnessScreenState extends State<HazardAwarnessScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<HazardAwarenessProvider>(context, listen: false);
-      provider.loadHazards();
+      final provider = Provider.of<MotorcycleHazardProviderAwareness>(context, listen: false);
+      provider.loadMotorcycleHazards();
     });
     super.initState();
   }
@@ -27,11 +29,11 @@ class _HazardAwarnessScreenState extends State<HazardAwarnessScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Hazard Awareness",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 
-      body: Consumer<HazardAwarenessProvider>(
+      body: Consumer<MotorcycleHazardProviderAwareness>(
           builder: (context,provider,child) {
             final data = provider.hazards;
             if (data == null) {
@@ -42,20 +44,26 @@ class _HazardAwarnessScreenState extends State<HazardAwarnessScreen> {
             return Column(
               children: [
                 createHeadingText(data.title),
-                createAutoSizeText(data.imageUrl),
-                Column(
-                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
-                ),
+                createAutoSizeText(data.subtitle),
+                buildImage(data.image),
+                createHeadingText(data.text1),
+                buildImage(data.image1),
+                createHeadingText(data.text2),
+                buildImage(data.image2),
+                createHeadingText(data.text3),
+                buildImage(data.image3),
+                createHeadingText(data.text),
+
                 Center(
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HazardAwarness1Screen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

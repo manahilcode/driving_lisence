@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/insurance.dart';
+import 'mot_test_screen.dart';
 
 class InsuranceScreen extends StatefulWidget {
   const InsuranceScreen({super.key});
@@ -19,7 +20,7 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<InsuranceDetailsNotifier>(context, listen: false);
-      provider.fetchInsuranceDetails("motorcycle_attitude", "Animals_on_the_road");
+      provider.fetchInsuranceDetails("motorcycle_Essential_documents", "Insurance");
     });
     super.initState();
   }
@@ -52,12 +53,12 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MotTestScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

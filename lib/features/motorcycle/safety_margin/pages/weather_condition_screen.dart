@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/loader.dart';
 import '../viewmodel/weather_condition_provider.dart';
+import 'night_riding_screen.dart';
 
 class WeatherConditionScreen extends StatefulWidget {
   const WeatherConditionScreen({super.key});
@@ -27,7 +28,7 @@ class _WeatherConditionScreenState extends State<WeatherConditionScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Weather condition", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<WeatherConditionNotifier>(
           builder: (context,provider,child) {
             final data = provider.weatherConditionData;
@@ -89,12 +90,12 @@ class _WeatherConditionScreenState extends State<WeatherConditionScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NightRidingScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

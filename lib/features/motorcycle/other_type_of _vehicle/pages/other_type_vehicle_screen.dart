@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/other_type_of%20_vehicle/pages/large_vehicle_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,14 +20,14 @@ class _OtherTypeVehicleScreenState extends State<OtherTypeVehicleScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<OtherVehicleNotifier>(context, listen: false);
-      provider.loadOtherVehicleInfo("","Animals_on_the_road");
+      provider.loadOtherVehicleInfo("motorcycle_Other_types_of_vehicle","Other types of vehicle");
     });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Other type of vehicle", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<OtherVehicleNotifier>(
           builder: (context,provider,child) {
             final data = provider.info;
@@ -46,12 +47,12 @@ class _OtherTypeVehicleScreenState extends State<OtherTypeVehicleScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LargeVehicleScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

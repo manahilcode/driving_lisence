@@ -8,7 +8,7 @@ class PedestrianCrossingRepository {
   // Fetch data from Firestore
   Future<PedestrianCrossingVul> fetchPedestrianCrossingData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('pedestrian_crossing').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return PedestrianCrossingVul.fromFirestore(doc);
       } else {

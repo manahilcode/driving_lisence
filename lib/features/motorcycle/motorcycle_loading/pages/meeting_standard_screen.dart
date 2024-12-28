@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/motorcycle_loading/pages/think_about_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -7,19 +8,19 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/meeting_standard.dart';
 
-class MeetingStandardScreen extends StatefulWidget {
-  const MeetingStandardScreen({super.key});
+class MeetingStandardScreenLoading extends StatefulWidget {
+  const MeetingStandardScreenLoading({super.key});
 
   @override
-  State<MeetingStandardScreen> createState() => _MeetingStandardScreenState();
+  State<MeetingStandardScreenLoading> createState() => _MeetingStandardScreenLoadingState();
 }
 
-class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
+class _MeetingStandardScreenLoadingState extends State<MeetingStandardScreenLoading> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<MotorcyclePassengerNotifier>(context, listen: false);
-      provider.loadMotorcyclePassenger("Animals_on_the_road");
+      provider.loadMotorcyclePassenger("Meeting_the_standards");
     });
     super.initState();
   }
@@ -57,12 +58,12 @@ class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ThinkAboutScreenLoading(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

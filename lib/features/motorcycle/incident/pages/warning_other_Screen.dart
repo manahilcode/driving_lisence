@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/incident/pages/safety_in_tunnel_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _WarningOtherScreenState extends State<WarningOtherScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<WarningIncidentNotifier>(context, listen: false);
-      provider.loadWarningIncident("Animals_on_the_road");
+      provider.loadWarningIncident("Warning_others_of_a_breakdown_or_incident");
     });
     super.initState();
   }
@@ -52,12 +53,12 @@ class _WarningOtherScreenState extends State<WarningOtherScreen> {
                     child: GestureDetector(
                       onTap: () {
                         // Navigate to the next screen
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Othertype6(), // Replace with your next screen
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SafetyInTunnelScreen(), // Replace with your next screen
+                          ),
+                        );
                       },
                       child: Container(
                         width: 300,

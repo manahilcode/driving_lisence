@@ -28,7 +28,11 @@ import 'features/essential_document/pages/introduction.dart';
 import 'features/incident/pages/incident_accident_and_emergency.dart';
 import 'features/motor_way_Driving/pages/introduction.dart';
 import 'features/motorcycle/attitude/pages/attitude_screen.dart';
+import 'features/motorcycle/hazardAwareness/pages/hazard_awarness_screen.dart';
+import 'features/motorcycle/other_type_of _vehicle/pages/other_type_vehicle_screen.dart';
 import 'features/motorcycle/safety_and_motorcycle/pages/safety_your_motorcycle_screen.dart';
+import 'features/motorcycle/safety_margin/pages/safety_margin_screen.dart';
+import 'features/motorcycle/vulnurable_road_user/pages/vulnerable_user_screen.dart';
 import 'features/road_and_traffic_sign/pages/introduction.dart';
 import 'features/rule_of_road/pages/introduction.dart';
 import 'features/vehicle_handling/pages/introduction.dart';
@@ -213,109 +217,101 @@ class _Category1State extends State<Category1>
                     );
                   }),
             //       //SafetyMarginQuizScreens
-            //       Consumer<ResultController>(builder: (context, value, child) {
-            //         final data = value.safetyMargin;
-            //         final answered =
-            //         int.tryParse(data?["correctQuestion"] ?? "");
-            //         final total = int.tryParse(data?["totalQuestion"] ?? "");
-            //         final category = data?["category"] ?? "";
-            //         double progress = 0.0;
-            //
-            //         if (answered != null && total != null && total > 0) {
-            //           progress = (answered / total) * 100;
-            //         }
-            //         return CategoryItem(
-            //           icon: Icons.traffic,
-            //           title: 'Safety margins',
-            //           progress: progress.toInt() ?? 0,
-            //           answered: 0,
-            //           correct: answered ?? 0,
-            //           total: total ?? 0,
-            //           isSelected: _selectedCategories[4],
-            //           onTap: () => _toggleSelection(4),
-            //           categoryScreen: widget.label == "PracticeQuiz"
-            //               ? const SafetyMarginQuizScreens()
-            //               : safety_margin1(),
-            //         );
-            //       }),
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.safetyMargin;
+                    final answered =
+                    int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
+
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
+                    return CategoryItem(
+                      icon: Icons.traffic,
+                      title: 'Safety margins',
+                      progress: progress.toInt() ?? 0,
+                      answered: 0,
+                      correct: answered ?? 0,
+                      total: total ?? 0,
+                      isSelected: _selectedCategories[4],
+                      onTap: () => _toggleSelection(4),
+                      categoryScreen: SafetyMarginScreen()
+                    );
+                  }),
             //       //HazardAwarenessQuizScreens
-            //       Consumer<ResultController>(builder: (context, value, child) {
-            //         final data = value.hazardAwareness;
-            //         final answered =
-            //         int.tryParse(data?["correctQuestion"] ?? "");
-            //         final total = int.tryParse(data?["totalQuestion"] ?? "");
-            //         final category = data?["category"] ?? "";
-            //         double progress = 0.0;
-            //
-            //         if (answered != null && total != null && total > 0) {
-            //           progress = (answered / total) * 100;
-            //         }
-            //         return CategoryItem(
-            //           icon: Icons.visibility,
-            //           title: 'Hazard awareness',
-            //           progress: progress.toInt() ?? 0,
-            //           answered: 0,
-            //           correct: answered ?? 0,
-            //           total: total ?? 0,
-            //           isSelected: _selectedCategories[5],
-            //           onTap: () => _toggleSelection(5),
-            //           categoryScreen: widget.label == "PracticeQuiz"
-            //               ? const HazardAwarenessQuizScreens()
-            //               : hazard1(),
-            //         );
-            //       }),
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.hazardAwareness;
+                    final answered =
+                    int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
+
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
+                    return CategoryItem(
+                      icon: Icons.visibility,
+                      title: 'Hazard awareness',
+                      progress: progress.toInt() ?? 0,
+                      answered: 0,
+                      correct: answered ?? 0,
+                      total: total ?? 0,
+                      isSelected: _selectedCategories[5],
+                      onTap: () => _toggleSelection(5),
+                      categoryScreen: HazardAwarnessScreen()
+                    );
+                  }),
             //       //SafetyMarginQuizScreens
-            //       Consumer<ResultController>(builder: (context, value, child) {
-            //         final data = value.vulnerableRoadUser;
-            //         final answered =
-            //         int.tryParse(data?["correctQuestion"] ?? "");
-            //         final total = int.tryParse(data?["totalQuestion"] ?? "");
-            //         final category = data?["category"] ?? "";
-            //         double progress = 0.0;
-            //
-            //         if (answered != null && total != null && total > 0) {
-            //           progress = (answered / total) * 100;
-            //         }
-            //         return CategoryItem(
-            //           icon: Icons.local_hospital,
-            //           title: 'Vulnerable road users',
-            //           progress: progress.toInt() ?? 0,
-            //           answered: 0,
-            //           correct: answered ?? 0,
-            //           total: total ?? 0,
-            //           isSelected: _selectedCategories[6],
-            //           onTap: () => _toggleSelection(6),
-            //           categoryScreen: widget.label == "PracticeQuiz"
-            //               ? const VulnerableRoadUserQuizScreens()
-            //               : const Introduction(),
-            //         );
-            //       }),
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.vulnerableRoadUser;
+                    final answered =
+                    int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
+
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
+                    return CategoryItem(
+                      icon: Icons.local_hospital,
+                      title: 'Vulnerable road users',
+                      progress: progress.toInt() ?? 0,
+                      answered: 0,
+                      correct: answered ?? 0,
+                      total: total ?? 0,
+                      isSelected: _selectedCategories[6],
+                      onTap: () => _toggleSelection(6),
+                      categoryScreen: VulnerableUserScreen(),
+                    );
+                  }),
             //       //OtherTypeVehicleQuizScreen
-            //       Consumer<ResultController>(builder: (context, value, child) {
-            //         final data = value.otherTypeVehicle;
-            //         final answered =
-            //         int.tryParse(data?["correctQuestion"] ?? "");
-            //         final total = int.tryParse(data?["totalQuestion"] ?? "");
-            //         final category = data?["category"] ?? "";
-            //         double progress = 0.0;
-            //
-            //         if (answered != null && total != null && total > 0) {
-            //           progress = (answered / total) * 100;
-            //         }
-            //         return CategoryItem(
-            //           icon: Icons.navigation,
-            //           title: 'Other types of vehicle',
-            //           progress: progress.toInt() ?? 0,
-            //           answered: 0,
-            //           correct: answered ?? 0,
-            //           total: total ?? 0,
-            //           isSelected: _selectedCategories[7],
-            //           onTap: () => _toggleSelection(7),
-            //           categoryScreen: widget.label == "PracticeQuiz"
-            //               ? const OtherTypeVehicleQuizScreen()
-            //               : PracticeRevisionDialog(),
-            //         );
-            //       }),
+                  Consumer<ResultController>(builder: (context, value, child) {
+                    final data = value.otherTypeVehicle;
+                    final answered =
+                    int.tryParse(data?["correctQuestion"] ?? "");
+                    final total = int.tryParse(data?["totalQuestion"] ?? "");
+                    final category = data?["category"] ?? "";
+                    double progress = 0.0;
+
+                    if (answered != null && total != null && total > 0) {
+                      progress = (answered / total) * 100;
+                    }
+                    return CategoryItem(
+                      icon: Icons.navigation,
+                      title: 'Other types of vehicle',
+                      progress: progress.toInt() ?? 0,
+                      answered: 0,
+                      correct: answered ?? 0,
+                      total: total ?? 0,
+                      isSelected: _selectedCategories[7],
+                      onTap: () => _toggleSelection(7),
+                      categoryScreen: OtherTypeVehicleScreen()
+                    );
+                  }),
             //       //MotowayDriverQuizScreens
             //       Consumer<ResultController>(builder: (context, value, child) {
             //         final data = value.motorWayDriving;
@@ -574,19 +570,19 @@ class _Category1State extends State<Category1>
       case 4:
         return widget.label == "PracticeQuiz"
             ? const SafetyMarginQuizScreens()
-            : safety_margin1();
+            : SafetyMarginScreen();
       case 5:
         return widget.label == "PracticeQuiz"
             ? const HazardAwarenessQuizScreens()
-            : hazard1();
+            : HazardAwarnessScreen();
       case 6:
         return widget.label == "PracticeQuiz"
             ? const VulnerableRoadUserQuizScreens()
-            : const Introduction();
+            : const VulnerableUserScreen();
       case 7:
         return widget.label == "PracticeQuiz"
             ? const OtherTypeVehicleQuizScreen()
-            : PracticeRevisionDialog();
+            : OtherTypeVehicleScreen();
       case 8:
         return widget.label == "PracticeQuiz"
             ? const MotowayDriverQuizScreens()

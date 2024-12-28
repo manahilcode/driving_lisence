@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/yourself_provider.dart';
+import 'meeting_awarness_hazard_Screen.dart';
 
 class YourselfScreen extends StatefulWidget {
   const YourselfScreen({super.key});
@@ -19,7 +20,7 @@ class _YourselfScreenState extends State<YourselfScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<YourselfProvider>(context, listen: false);
-      provider.fetchAwarenessHazardData("Animals_on_the_road");
+      provider.fetchAwarenessHazardData("Yourself");
     });
     super.initState();
   }
@@ -66,12 +67,12 @@ class _YourselfScreenState extends State<YourselfScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MeetingAwarnessHazardScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

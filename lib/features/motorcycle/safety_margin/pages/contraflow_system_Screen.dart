@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/contraflow_system_provider.dart';
+import 'meeting_with_trainer_screen.dart';
 
 class ContraflowSystemScreen extends StatefulWidget {
   const ContraflowSystemScreen({super.key});
@@ -26,7 +27,7 @@ class _ContraflowSystemScreenState extends State<ContraflowSystemScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Contraflow system", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<ContraflowSystemNotifier>(
           builder: (context,provider,child) {
             final data = provider.data;
@@ -47,12 +48,12 @@ class _ContraflowSystemScreenState extends State<ContraflowSystemScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MeetingWithTrainerScreensafetymargin(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

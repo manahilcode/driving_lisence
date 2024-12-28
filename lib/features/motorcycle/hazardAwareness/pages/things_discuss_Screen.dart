@@ -1,3 +1,4 @@
+import 'package:driving_lisence/category1.dart';
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -7,14 +8,14 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/things_discuss_trainer.dart';
 
-class ThingsDiscussScreen extends StatefulWidget {
-  const ThingsDiscussScreen({super.key});
+class ThingsDiscussScreenAwarness extends StatefulWidget {
+  const ThingsDiscussScreenAwarness({super.key});
 
   @override
-  State<ThingsDiscussScreen> createState() => _ThingsDiscussScreenState();
+  State<ThingsDiscussScreenAwarness> createState() => _ThingsDiscussScreenAwarnessState();
 }
 
-class _ThingsDiscussScreenState extends State<ThingsDiscussScreen> {
+class _ThingsDiscussScreenAwarnessState extends State<ThingsDiscussScreenAwarness> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -55,12 +56,12 @@ class _ThingsDiscussScreenState extends State<ThingsDiscussScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Category1(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

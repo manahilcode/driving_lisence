@@ -9,7 +9,7 @@ class PillionPassengerRepository {
 
   Future<PillionPassengerModel> fetchPillionPassenger(String documentId) async {
     try {
-      final doc = await _firestore.collection('pillion_passenger').doc(documentId).get();
+      final doc = await _firestore.collection('motorcycle_Motorcycle_loading').doc(documentId).get();
       if (doc.exists) {
         return PillionPassengerModel.fromMap(doc.data()!);
       } else {

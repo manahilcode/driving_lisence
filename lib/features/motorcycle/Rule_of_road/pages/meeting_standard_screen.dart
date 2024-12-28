@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/Rule_of_road/pages/think_about_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -9,19 +10,19 @@ import '../../other_type_of _vehicle/viewmodel/meeting_standard_provider.dart';
 import '../repo/meeting_standard_repo.dart';
 import '../viewmodel/meeting_standard.dart';
 
-class MeetingStandardScreen extends StatefulWidget {
-  const MeetingStandardScreen({super.key});
+class MeetingStandardScreenRule_of_road extends StatefulWidget {
+  const MeetingStandardScreenRule_of_road({super.key});
 
   @override
-  State<MeetingStandardScreen> createState() => _MeetingStandardScreenState();
+  State<MeetingStandardScreenRule_of_road> createState() => _MeetingStandardScreenRule_of_roadState();
 }
 
-class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
+class _MeetingStandardScreenRule_of_roadState extends State<MeetingStandardScreenRule_of_road> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<MeetingStandardsNotifierRule>(context, listen: false);
-      provider.loadMeetingStandards("","Animals_on_the_road");
+      provider.loadMeetingStandards("motorcycle_Rules_of_the_road","Meeting_the_standards");
     });
     super.initState();
   }
@@ -54,12 +55,12 @@ class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ThinkAboutScreenRuleOfRoad(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

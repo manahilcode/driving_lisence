@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/riding_at_night.dart';
+import 'keep_control_motorcycle_screen.dart';
 
 class RidingAtNightScreen extends StatefulWidget {
   const RidingAtNightScreen({super.key});
@@ -19,7 +20,7 @@ class _RidingAtNightScreenState extends State<RidingAtNightScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<RidingAtNightNotifier>(context, listen: false);
-      provider.loadRidingAtNight("","Animals_on_the_road");
+      provider.loadRidingAtNight("motorcycle_Motorcycle_handling","Riding_at_night");
     });
     super.initState();
   }
@@ -112,12 +113,12 @@ class _RidingAtNightScreenState extends State<RidingAtNightScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => KeepControlMotorcycleScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

@@ -7,7 +7,7 @@ class AntiLockBrakingSystemRepository {
 
   Future<AntiLockBrakingSystem> getAntiLockBrakingSystemData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('anti_lock_braking_system').doc('data').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_ Safety_margins').doc('Anti-lock_braking_systems').get();
 
       if (doc.exists) {
         return AntiLockBrakingSystem.fromJson(doc.data() as Map<String, dynamic>);

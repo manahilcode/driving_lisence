@@ -9,7 +9,7 @@ class StandardsRepositoryIncident {
 
   Future<StandardsModelIncident> fetchStandards(String documentId) async {
     try {
-      final doc = await _firestore.collection('standards').doc(documentId).get();
+      final doc = await _firestore.collection('motorcycle_Incidents_accidents_and_emergencies').doc(documentId).get();
       if (doc.exists) {
         return StandardsModelIncident.fromMap(doc.data()!);
       } else {

@@ -4,11 +4,11 @@ import '../model/hazard_awareness_model.dart';
 
 class MotorCycleHazardAwarenessRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String collectionPath = 'hazard_awareness';
+  final String collectionPath = 'motorcycle_Hazard_awareness';
 
   Future<MotorcycleHazardAwareness> fetchHazards() async {
     try {
-      final snapshot = await _firestore.collection(collectionPath).doc().get();
+      final snapshot = await _firestore.collection(collectionPath).doc("Hazard_awareness").get();
       final data = snapshot.data() as Map<String, dynamic>;
       final motorcycle  = MotorcycleHazardAwareness.fromFirestore(data);
       return motorcycle;

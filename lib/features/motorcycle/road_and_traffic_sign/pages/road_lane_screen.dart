@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/road_lane.dart';
+import 'meeting_standard_screen.dart';
 
 class RoadLaneScreen extends StatefulWidget {
   const RoadLaneScreen({super.key});
@@ -19,7 +20,7 @@ class _RoadLaneScreenState extends State<RoadLaneScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<RoadLanesProvider>(context, listen: false);
-      provider.loadRoadLanesData("","Animals_on_the_road");
+      provider.loadRoadLanesData("motorcycle_Road_and_traffic_signs","Road_lanes");
     });
     super.initState();
   }
@@ -48,12 +49,12 @@ class _RoadLaneScreenState extends State<RoadLaneScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MeetingStandardScreenRoadTrafficSign(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

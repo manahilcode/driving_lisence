@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import '../model/road_trafic_sing.dart';
 import '../repo/road_traffic_sign.dart';
 
-class RoadSignsProvider with ChangeNotifier {
+class RoadSignsProviderRoadTraffic with ChangeNotifier {
   final RoadSignsRepositorySing repository;
 
-  RoadSignsProvider({required this.repository});
+  RoadSignsProviderRoadTraffic({required this.repository});
 
   RoadSignsDataSign? _roadSignsData;
   RoadSignsDataSign? get roadSignsData => _roadSignsData;

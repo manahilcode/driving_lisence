@@ -7,7 +7,7 @@ class SpeedLimitQuestionRepository {
   // Fetch speed limit question data from Firestore
   Future<SpeedLimitModel> getSpeedLimitQuestionData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('motorcycle_Motorway_riding').doc('Speed_limits_question').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Motorway_riding').doc('Speed_limits').get();
       if (doc.exists) {
         return SpeedLimitModel.fromMap(doc.data() as Map<String, dynamic>);
       } else {

@@ -10,8 +10,8 @@ class WeatherConditionRepository {
     try {
       // Assuming the collection is 'weather_conditions' and the document is 'condition_info'
       DocumentSnapshot snapshot = await _firestore
-          .collection('weather_conditions')
-          .doc('condition_info')
+          .collection('motorcycle_ Safety_margins')
+          .doc('Weather_conditions')
           .get();
 
       if (snapshot.exists) {

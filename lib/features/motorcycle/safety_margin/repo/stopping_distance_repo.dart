@@ -11,8 +11,8 @@ class StoppingDistanceRepository {
     try {
       // Assuming the collection is 'stopping_distance' and the document is 'distance_info'
       DocumentSnapshot snapshot = await _firestore
-          .collection('stopping_distance')
-          .doc('distance_info')
+          .collection('motorcycle_ Safety_margins')
+          .doc('Typical_stopping_distances')
           .get();
 
       if (snapshot.exists) {

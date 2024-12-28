@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/safety_margin/pages/weather_condition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _MotorcycleHandlingScreenState extends State<MotorcycleHandlingScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<MotorcycleHandlingNotifier>(context, listen: false);
-      provider.loadMotorcycleHandling("","Animals_on_the_road");
+      provider.loadMotorcycleHandling("motorcycle_Motorcycle_handling","Motorcycle handling");
     });
     super.initState();
   }
@@ -50,12 +51,12 @@ class _MotorcycleHandlingScreenState extends State<MotorcycleHandlingScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WeatherConditionScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

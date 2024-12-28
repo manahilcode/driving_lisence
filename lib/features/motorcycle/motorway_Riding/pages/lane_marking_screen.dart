@@ -26,7 +26,7 @@ class _LaneMarkingScreenState extends State<LaneMarkingScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
+      appBar: CustomAppBar(title: "Lane Marking", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<LaneMarkingNotifier>(
           builder: (context,provider,child) {
             final data = provider.laneMarking;

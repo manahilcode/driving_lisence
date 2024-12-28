@@ -7,6 +7,7 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../repo/over_taking_crossing.dart';
 import '../viewmodel/overtaking_crossing.dart';
+import 'level_crossing_screen.dart';
 
 class OvertakingCrossingScreen extends StatefulWidget {
   const OvertakingCrossingScreen({super.key});
@@ -20,7 +21,7 @@ class _OvertakingCrossingScreenState extends State<OvertakingCrossingScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<OvertakingCrossingsNotifier>(context, listen: false);
-      provider.loadOvertakingCrossings("Animals_on_the_road");
+      provider.loadOvertakingCrossings("Overtaking");
     });
     super.initState();
   }
@@ -52,12 +53,12 @@ class _OvertakingCrossingScreenState extends State<OvertakingCrossingScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LevelCrossingScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

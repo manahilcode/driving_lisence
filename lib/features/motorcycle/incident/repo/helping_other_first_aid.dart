@@ -7,7 +7,7 @@ class FirstAidRepository {
   Future<FirstAidData> fetchFirstAidData(String documentId) async {
     try {
       DocumentSnapshot snapshot =
-      await _firestore.collection('motorcycle').doc(documentId).get();
+      await _firestore.collection('motorcycle_Incidents_accidents_and_emergencies').doc(documentId).get();
 
       if (snapshot.exists && snapshot.data() != null) {
         return FirstAidData.fromMap(snapshot.data() as Map<String, dynamic>);

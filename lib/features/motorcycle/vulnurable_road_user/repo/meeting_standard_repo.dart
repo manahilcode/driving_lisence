@@ -8,7 +8,7 @@ class MeetingStandardsRepositoryVulnurable {
   // Fetch data from Firestore
   Future<MeetingStandardsVulnurable> fetchMeetingStandardsData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('meeting_standards').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return MeetingStandardsVulnurable.fromFirestore(doc);
       } else {

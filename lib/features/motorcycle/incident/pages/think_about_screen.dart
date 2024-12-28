@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/incident/pages/things_discuss_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -8,19 +9,19 @@ import '../../../../core/loader.dart';
 import '../../motorcycle_handling/viewmodel/think_About_provider.dart';
 import '../viewmodel/think_about.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenIncident extends StatefulWidget {
+  const ThinkAboutScreenIncident({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenIncident> createState() => _ThinkAboutScreenIncidentState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenIncidentState extends State<ThinkAboutScreenIncident> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<ThinkAboutNotifierIncidentMotorcycle>(context, listen: false);
-      provider.loadThinkAbout("Animals_on_the_road");
+      provider.loadThinkAbout("Think_about");
     });
     super.initState();
   }
@@ -50,12 +51,12 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
                     child: GestureDetector(
                       onTap: () {
                         // Navigate to the next screen
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Othertype6(), // Replace with your next screen
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ThingsDiscussScreenIncident(), // Replace with your next screen
+                          ),
+                        );
                       },
                       child: Container(
                         width: 300,

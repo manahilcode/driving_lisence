@@ -8,7 +8,7 @@ class DiscussionQuestionsRepositoryVal {
   // Fetch data from Firestore
   Future<DiscussionQuestionsval> fetchDiscussionQuestionsData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('discussion_questions').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return DiscussionQuestionsval.fromFirestore(doc);
       } else {

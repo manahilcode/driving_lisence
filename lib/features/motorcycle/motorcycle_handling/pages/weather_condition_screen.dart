@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/bad_weather.dart';
+import 'fog_info_screen.dart';
 
 class WeatherConditionScreen extends StatefulWidget {
   const WeatherConditionScreen({super.key});
@@ -19,7 +20,7 @@ class _WeatherConditionScreenState extends State<WeatherConditionScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<WeatherConditionsNotifier>(context, listen: false);
-      provider.loadWeatherConditions("","Animals_on_the_road");
+      provider.loadWeatherConditions("motorcycle_Motorcycle_handling","Weather_conditions");
     });
     super.initState();
   }
@@ -61,12 +62,12 @@ class _WeatherConditionScreenState extends State<WeatherConditionScreen> {
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FogInfoScreen(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

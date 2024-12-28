@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/mot_test.dart';
+import 'meeting_standard_screen.dart';
 
 class MotTestScreen extends StatefulWidget {
   const MotTestScreen({super.key});
@@ -15,11 +16,12 @@ class MotTestScreen extends StatefulWidget {
 }
 
 class _MotTestScreenState extends State<MotTestScreen> {
+  //bbb
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<MotTestDetailsNotifier>(context, listen: false);
-      provider.fetchMotTestDetails("motorcycle_attitude", "Animals_on_the_road");
+      provider.fetchMotTestDetails("motorcycle_Essential_documents", "MOT_test");
     });
     super.initState();
   }
@@ -51,12 +53,12 @@ class _MotTestScreenState extends State<MotTestScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MeetingStandardScreenEssential(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

@@ -7,7 +7,7 @@ class BusAndTramInfoRepository {
 
   Future<BusAndTramInfo> fetchBusAndTramInfo(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('your-collection-name').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Other_types_of_vehicle').doc(documentId).get();
       if (doc.exists) {
         return BusAndTramInfo.fromFirestore(doc);
       } else {

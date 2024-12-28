@@ -3,6 +3,7 @@ import 'package:driving_lisence/features/attitude/viewmodel/attitude_provider.da
 import 'package:driving_lisence/features/choose_ride/choose_ride.dart';
 import 'package:driving_lisence/features/essential_document/viewmodel/controller.dart';
 import 'package:driving_lisence/features/motor_way_Driving/viewmodel/controller.dart';
+import 'package:driving_lisence/features/motorcycle/hazardAwareness/viewmodel/hazard_awarness1_provider.dart';
 import 'package:driving_lisence/features/vehicle_handling/viewmodel/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -66,6 +67,36 @@ import 'features/motorcycle/hazard/viewmodel/static_hazard_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/understanding_hazard_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/what_if_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/your_provider.dart';
+import 'features/motorcycle/hazardAwareness/repo/hazard_awareness1_repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/hazard_awareness_repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/hazardoius_load.dart';
+import 'features/motorcycle/hazardAwareness/repo/meeting_awareness_hazard_repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/moving_hazard_repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/road_condition_hazard_Awareness.dart';
+import 'features/motorcycle/hazardAwareness/repo/road_sign_repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/static_hazard_Repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/things_discuss_trainer_repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/think_about_repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/yourself_Repo.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/hazard_awareness_provider.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/hazardoius_load_provider.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/meeting_awareness_meeting_hazard_provider.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/moving_hazard_provider.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/road_condition_provider.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/road_sign_provider.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/static_hazard_repo.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/things_discuss_trainer.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/think_about_provider.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/yourself_provider.dart';
+import 'features/motorcycle/other_type_of _vehicle/repo/bus_repo.dart';
+import 'features/motorcycle/other_type_of _vehicle/viewmodel/bus_provider.dart';
+import 'features/motorcycle/other_type_of _vehicle/viewmodel/discussion_with_trainer.dart';
+import 'features/motorcycle/other_type_of _vehicle/viewmodel/large_vehicle_provider.dart';
+import 'features/motorcycle/other_type_of _vehicle/viewmodel/meeting_standard_provider.dart';
+import 'features/motorcycle/other_type_of _vehicle/viewmodel/motorcycle_info_provider.dart';
+import 'features/motorcycle/other_type_of _vehicle/viewmodel/other_type_vehicle_provider.dart';
+import 'features/motorcycle/other_type_of _vehicle/viewmodel/power_vehicle_provider.dart';
+import 'features/motorcycle/other_type_of _vehicle/viewmodel/think_about.dart';
 import 'features/motorcycle/safety_and_motorcycle/repo/avoiding_congession_repo.dart';
 import 'features/motorcycle/safety_and_motorcycle/viewmodel/avoid_congession_provider.dart';
 import 'features/motorcycle/safety_and_motorcycle/viewmodel/being_aware_of_enviroment_provider.dart';
@@ -81,6 +112,45 @@ import 'features/motorcycle/safety_and_motorcycle/viewmodel/safetly_your_motorcy
 import 'features/motorcycle/safety_and_motorcycle/viewmodel/security_provider.dart';
 import 'features/motorcycle/safety_and_motorcycle/viewmodel/seeing_is_being_seen_provider.dart';
 import 'features/motorcycle/safety_and_motorcycle/viewmodel/think_about.dart';
+import 'features/motorcycle/safety_margin/repo/discuss_with_trainer_repo.dart';
+import 'features/motorcycle/safety_margin/repo/stopping_distance_repo.dart';
+import 'features/motorcycle/safety_margin/repo/think_About_repo.dart';
+import 'features/motorcycle/safety_margin/repo/weather_condition_repo.dart';
+import 'features/motorcycle/safety_margin/viewmodel/break_system_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/contraflow_system_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/discuss_with_trainer.dart';
+import 'features/motorcycle/safety_margin/viewmodel/meeting_with_standard_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/night_riding_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/safety_margin_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/safetymargin1_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/skidding_info_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/stopping_distance_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/think_About_provider.dart';
+import 'features/motorcycle/safety_margin/viewmodel/weather_condition_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/animals_Repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/cyclist_repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/discuss_practice_repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/driver_repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/meeting_standard_repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/older_disable_repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/other_motorcylist_repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/pedestrain_crossing_repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/pedestrain_repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/think_about.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/vulnurable_road_user_Repo.dart';
+import 'features/motorcycle/vulnurable_road_user/repo/vulnurable_user.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/animals_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/cyclist_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/discusstion_practice_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/driver_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/meeting_standard_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/older_disabled_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/other_motorcyclist_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/pedestrain_crossing_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/pedestrain_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/think_about_provider.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/vulnerable_user.dart';
+import 'features/motorcycle/vulnurable_road_user/viewmodel/vulnurable_road_user_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/Trams_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/bus_provider.dart';
 import 'features/othertypepfvehilcle/viewmodel/disabled_people_provider.dart';
@@ -250,8 +320,55 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SeeingAndBeingSeenNotifier()),
         ChangeNotifierProvider(create: (_) => ThinkAboutNotifierSafety()),
 
-        //
+        // s safety margin
+        ChangeNotifierProvider(create: (_) => AntiLockBrakingSystemNotifier()),
+        ChangeNotifierProvider(create: (_) => ContraflowSystemNotifier()),
+        ChangeNotifierProvider(create: (_) => SafetyMarginDiscussNotifier(SafetyMarginDiscussRepository())),
+        ChangeNotifierProvider(create: (_) => MeetingTheStandardsNotifierSafety()),
+        ChangeNotifierProvider(create: (_) => NightRidingNotifier()),
+        ChangeNotifierProvider(create: (_) => SafetyMarginNotifier()),
+        ChangeNotifierProvider(create: (_) => SafetyMargin1Notifier()),
+        ChangeNotifierProvider(create: (_) => SkiddingInfoNotifier()),
+        ChangeNotifierProvider(create: (_) => StoppingDistanceNotifier(StoppingDistanceRepository())),
+        ChangeNotifierProvider(create: (_) => ThinkAboutProviderMargin(SafetyMarginThinkAboutRepository())),
+        ChangeNotifierProvider(create: (_) => WeatherConditionNotifier(WeatherConditionRepository())),
 
+        // h hazrad awarness
+        ChangeNotifierProvider(create: (_) => HazardAwarenessProvider11(MotorCycleHazardAwarenessRepository())),
+        ChangeNotifierProvider(create: (_) => MotorcycleHazardProviderAwareness(MotorcycleHazardawarenessRepository())),
+        ChangeNotifierProvider(create: (_) => HazardousLoadProvider(HazardousLoadRepository())),
+        ChangeNotifierProvider(create: (_) => HazardAwarenessMeetingStandardProvider(HazardAwarenessMeetingStandardRepository())),
+        ChangeNotifierProvider(create: (_) => MovingHazardsProvider(MovingHazardsRepository())),
+        ChangeNotifierProvider(create: (_) => RoadConditionProvider(RoadConditionRepository())),
+        ChangeNotifierProvider(create: (_) => RoadSignsProvider(RoadSignsRepository())),
+        ChangeNotifierProvider(create: (_) => StaticHazardProvider(StaticHazardRepository())),
+        ChangeNotifierProvider(create: (_) => HazardAwarenessDiscussProvider(HazardAwarenessThingsDiscussRepository())),
+        ChangeNotifierProvider(create: (_) => HazardAwarenessThinkAboutProvider(HazardAwarenessThinkAboutRepository())),
+        ChangeNotifierProvider(create: (_) => YourselfProvider(AwarenessHazardRepository())),
+
+        // v vulnerable
+        ChangeNotifierProvider(create: (_) => AnimalVulnerableUserProvider(AnimalVulnerableUserRepository())),
+        ChangeNotifierProvider(create: (_) => CyclistProvider(CyclistRepository())),
+        ChangeNotifierProvider(create: (_) => DiscussionPracticeProviderVulnerable(DiscussionPracticeRepositoryVal())),
+        ChangeNotifierProvider(create: (_) => DriverProvider(DriverRepository())),
+        ChangeNotifierProvider(create: (_) => MeetingStandardsProviderVulnerable(MeetingStandardsRepositoryVulnurable())),
+        ChangeNotifierProvider(create: (_) => OlderAndDisabledPedestriansProvider(OlderAndDisabledPedestriansRepository())),
+        ChangeNotifierProvider(create: (_) => OtherMotorcyclistsProvider(OtherMotorcyclistsRepository())),
+        ChangeNotifierProvider(create: (_) => PedestrianCrossingProvider(PedestrianCrossingRepository())),
+        ChangeNotifierProvider(create: (_) => PedestrianProvider(PedestrianRepositoryVal())),
+        ChangeNotifierProvider(create: (_) => ThinkAboutProviderVal(DiscussionQuestionsRepositoryVal())),
+        ChangeNotifierProvider(create: (_) => VulnerableRoadUsersProvider1(VulnerableRoadUsersRepositoryval())),
+        ChangeNotifierProvider(create: (_) => VulnerableRoadUserProvider(VulnerableRoadUserRepository())),
+
+        // o other type vehicle
+        ChangeNotifierProvider(create: (_) => BusAndTramInfoProvider(BusAndTramInfoRepository())),
+        ChangeNotifierProvider(create: (_) => DiscussionPracticeInfoNotifierType()),
+        ChangeNotifierProvider(create: (_) => LargeVehicleNotifier()),
+        ChangeNotifierProvider(create: (_) => MeetingStandardsNotifierType()),
+        ChangeNotifierProvider(create: (_) => MotorcycleInfoNotifier()),
+        ChangeNotifierProvider(create: (_) => OtherVehicleNotifier()),
+        ChangeNotifierProvider(create: (_) => PoweredVehicleInfoNotifier()),
+        ChangeNotifierProvider(create: (_) => ThinkAboutInfoNotifierType()),
 
 
 

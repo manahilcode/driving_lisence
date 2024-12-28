@@ -10,11 +10,11 @@ class RoadMarkingsNotifier extends ChangeNotifier {
   RoadMarkingsData? get roadMarkingsData => _roadMarkingsData;
 
   // Fetch the data from the repository and notify listeners
-  Future<void> fetchRoadMarkingsData() async {
+  Future<void> fetchRoadMarkingsData(String col , String doc) async {
     try {
       // Optionally, you could call an API or load data from local storage
       var repository = RoadMarkingsRepository();
-      _roadMarkingsData = await repository.fetchRoadMarkingsData();
+      _roadMarkingsData = await repository.fetchRoadMarkingsData(col,doc);
 
       // Notify listeners about the change
       notifyListeners();

@@ -1,3 +1,4 @@
+import 'package:driving_lisence/features/motorcycle/incident/pages/stoping_an_incident_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _SafetyInTunnelScreenState extends State<SafetyInTunnelScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<TunnelSafetyNotifier>(context, listen: false);
-      provider.loadTunnelSafety("Animals_on_the_road");
+      provider.loadTunnelSafety("Safety_in_tunnels");
     });
     super.initState();
   }
@@ -114,12 +115,12 @@ class _SafetyInTunnelScreenState extends State<SafetyInTunnelScreen> {
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StopingAnIncidentScreen(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

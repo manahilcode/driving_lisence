@@ -6,7 +6,7 @@ class DriverInfoRepositoryDocument {
 
   Future<ThingsDiscussDocument> fetchDriverInfo() async {
     try {
-      DocumentSnapshot snapshot = await _firebaseFirestore.collection('driverInfo').doc('your_doc_id').get();
+      DocumentSnapshot snapshot = await _firebaseFirestore.collection('motorcycle_Essential_documents').doc('Things_to_discuss_and_practise_with_your_trainer').get();
 
       if (snapshot.exists) {
         return ThingsDiscussDocument.fromMap(snapshot.data() as Map<String, dynamic>);

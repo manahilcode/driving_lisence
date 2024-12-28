@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/essential_document/pages/registor_owning_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _EssentailDocument1ScreenState extends State<EssentailDocument1Screen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<EssentialDocumentsDetailsNotifier>(context, listen: false);
-      provider.fetchEssentialDocumentsDetails("motorcycle_attitude", "Animals_on_the_road");
+      provider.fetchEssentialDocumentsDetails("motorcycle_Essential_documents", "Essential_documents1");
     });
     super.initState();
   }
@@ -108,12 +109,12 @@ class _EssentailDocument1ScreenState extends State<EssentailDocument1Screen> {
                 child: GestureDetector(
                   onTap: () {
                     // Navigate to the next screen
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => Othertype6(), // Replace with your next screen
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RegistorOwningScreen(), // Replace with your next screen
+                      ),
+                    );
                   },
                   child: Container(
                     width: 300,

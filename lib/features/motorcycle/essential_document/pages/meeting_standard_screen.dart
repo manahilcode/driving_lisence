@@ -1,4 +1,5 @@
 import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:driving_lisence/features/motorcycle/essential_document/pages/think_about_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -7,14 +8,14 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/meeting_standard.dart';
 
-class MeetingStandardScreen extends StatefulWidget {
-  const MeetingStandardScreen({super.key});
+class MeetingStandardScreenEssential extends StatefulWidget {
+  const MeetingStandardScreenEssential({super.key});
 
   @override
-  State<MeetingStandardScreen> createState() => _MeetingStandardScreenState();
+  State<MeetingStandardScreenEssential> createState() => _MeetingStandardScreenEssentialState();
 }
 
-class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
+class _MeetingStandardScreenEssentialState extends State<MeetingStandardScreenEssential> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -55,12 +56,12 @@ class _MeetingStandardScreenState extends State<MeetingStandardScreen> {
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ThinkAboutScreenEssential(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/crossroad.dart';
+import 'overtaking_crossing_screen.dart';
 
 class CrossroadScreen extends StatefulWidget {
   const CrossroadScreen({super.key});
@@ -51,12 +52,12 @@ class _CrossroadScreenState extends State<CrossroadScreen> {
                 child: GestureDetector(
                   onTap: () {
                     // Navigate to the next screen
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => Othertype6(), // Replace with your next screen
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OvertakingCrossingScreen(), // Replace with your next screen
+                      ),
+                    );
                   },
                   child: Container(
                     width: 300,

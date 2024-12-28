@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/pedestrain_crossing_provider.dart';
+import 'older_disabled_screen.dart';
 
 class PedestrainCrossingScreen extends StatefulWidget {
   const PedestrainCrossingScreen({super.key});
@@ -19,7 +20,7 @@ class _PedestrainCrossingScreenState extends State<PedestrainCrossingScreen> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<PedestrianCrossingProvider>(context, listen: false);
-      provider.fetchPedestrianCrossingData("Animals_on_the_road");
+      provider.fetchPedestrianCrossingData("Pedestrian_crossings");
     });
     super.initState();
   }
@@ -67,12 +68,12 @@ createHeadingText(data.title),
                   child: GestureDetector(
                     onTap: () {
                       // Navigate to the next screen
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Othertype6(), // Replace with your next screen
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OlderDisabledScreen(), // Replace with your next screen
+                        ),
+                      );
                     },
                     child: Container(
                       width: 300,

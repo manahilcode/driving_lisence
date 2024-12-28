@@ -7,7 +7,7 @@ class TrafficManagementRepository {
   // Method to get the data from Firestore
   Future<TrafficManagementModel> getTrafficManagementData() async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('traffic_management').doc('active_traffic').get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Motorway_riding').doc('Reducing_congestion').get();
       if (doc.exists) {
         return TrafficManagementModel.fromMap(doc.data() as Map<String, dynamic>);
       } else {

@@ -8,7 +8,7 @@ class OlderAndDisabledPedestriansRepository {
   // Fetch data from Firestore
   Future<OlderAndDisabledPedestrians> fetchOlderAndDisabledPedestriansData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('older_and_disabled_pedestrians').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return OlderAndDisabledPedestrians.fromFirestore(doc);
       } else {

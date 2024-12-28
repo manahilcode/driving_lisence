@@ -8,7 +8,7 @@ class DriverRepository {
   // Fetch data from Firestore
   Future<Driver> fetchDriverData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('drivers').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return Driver.fromFirestore(doc);
       } else {

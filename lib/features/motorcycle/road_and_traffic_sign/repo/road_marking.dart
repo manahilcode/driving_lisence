@@ -3,36 +3,39 @@ import 'package:flutter/services.dart';  // For loading local JSON if needed
 import 'package:http/http.dart' as http;
 
 import '../model/road_marking.dart';  // For API calls
+//RoadMarkingsRepository
+
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RoadMarkingsRepository {
-  final String apiUrl = "https://your-api-url.com/roadmarkings"; // Replace with your API URL
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Method to fetch data from an API
-  Future<RoadMarkingsData> fetchRoadMarkingsData() async {
+  Future<RoadMarkingsData> fetchRoadMarkingsData(String collection, String document) async {
     try {
-      final response = await http.get(Uri.parse(apiUrl));
+      // Fetch document snapshot from Firestore
+      final docSnapshot = await _firestore.collection(collection).doc(document).get();
 
-      if (response.statusCode == 200) {
-        // If the server returns a 200 OK response, parse the data
-        Map<String, dynamic> data = json.decode(response.body);
-        return RoadMarkingsData.fromJson(data);
-      } else {
-        // If the response is not OK, throw an exception
-        throw Exception('Failed to load road markings data');
+      if (!docSnapshot.exists) {
+        throw Exception("Document does not exist in Firestore.");
       }
-    } catch (e) {
-      throw Exception('Error fetching data: $e');
-    }
-  }
 
-  // If you want to load local JSON (for testing or fallback purposes)
-  Future<RoadMarkingsData> fetchRoadMarkingsDataFromLocal() async {
-    try {
-      final String response = await rootBundle.loadString('assets/road_markings.json');
-      final data = json.decode(response);
-      return RoadMarkingsData.fromJson(data);
+      // Retrieve data as a map
+      final data = docSnapshot.data() as Map<String, dynamic>;
+
+      // Log the data for debugging purposes
+      log("Fetched data: $data");
+
+      // Convert the map into a RoadMarkingsData object
+      final roadMarkingsData = RoadMarkingsData.fromJson(data);
+
+      // Log the object for verification
+      log("RoadMarkingsData object: ${roadMarkingsData.toString()}");
+
+      return roadMarkingsData;
     } catch (e) {
-      throw Exception('Error loading local data: $e');
+      log("Error fetching Road Markings data: $e");
+      throw Exception("Failed to fetch Road Markings data: $e");
     }
   }
 }

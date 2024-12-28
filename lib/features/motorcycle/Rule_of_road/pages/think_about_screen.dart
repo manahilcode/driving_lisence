@@ -6,15 +6,16 @@ import 'package:provider/provider.dart';
 import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/think_rule.dart';
+import 'discuss_with_trainer.dart';
 
-class ThinkAboutScreen extends StatefulWidget {
-  const ThinkAboutScreen({super.key});
+class ThinkAboutScreenRuleOfRoad extends StatefulWidget {
+  const ThinkAboutScreenRuleOfRoad({super.key});
 
   @override
-  State<ThinkAboutScreen> createState() => _ThinkAboutScreenState();
+  State<ThinkAboutScreenRuleOfRoad> createState() => _ThinkAboutScreenRuleOfRoadState();
 }
 
-class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
+class _ThinkAboutScreenRuleOfRoadState extends State<ThinkAboutScreenRuleOfRoad> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -50,12 +51,12 @@ class _ThinkAboutScreenState extends State<ThinkAboutScreen> {
               child: GestureDetector(
                 onTap: () {
                   // Navigate to the next screen
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Othertype6(), // Replace with your next screen
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DiscussWithTrainerRuleOfRoad(), // Replace with your next screen
+                    ),
+                  );
                 },
                 child: Container(
                   width: 300,

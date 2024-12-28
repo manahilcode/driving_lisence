@@ -8,7 +8,7 @@ class OtherMotorcyclistsRepository {
   // Fetch data from Firestore
   Future<OtherMotorcyclists> fetchOtherMotorcyclistsData(String documentId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('other_motorcyclists').doc(documentId).get();
+      DocumentSnapshot doc = await _firestore.collection('motorcycle_Vulnerable_road_users').doc(documentId).get();
       if (doc.exists) {
         return OtherMotorcyclists.fromFirestore(doc);
       } else {
