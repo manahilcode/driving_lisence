@@ -36,104 +36,109 @@ class _SignScreenState extends State<SignScreen> {
                 child: LoadingScreen(),
               );
             }
-            return Column(
-              children: [
-                  createHeadingText(data.title),
-                createAutoSizeText(data.subtitle),
-                Column(
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   children: [
-                    createAutoSizeText(data.image[0]),
-                    buildImage(data.image[1]),
-                  ],
-                ),
+                      createHeadingText(data.title),
+                    createAutoSizeText(data.subtitle),
+                    Column(
+                      children: [
+                        createAutoSizeText(data.image[0]),
+                        buildImage(data.image[1]),
+                      ],
+                    ),
 
-                Column(
-                  children: [
-                    createAutoSizeText(data.image1[0]),
-                    buildImage(data.image1[1]),
-                  ],
-                ),
+                    Column(
+                      children: [
+                        createAutoSizeText(data.image1[0]),
+                        buildImage(data.image1[1]),
+                      ],
+                    ),
 
-                Column(
-                  children: [
-                    createAutoSizeText(data.image2[0]),
-                    buildImage(data.image2[1]),
-                  ],
-                ),
-                Column(
-                  children: [
-                    createAutoSizeText(data.image3[0]),
-                    buildImage(data.image3[1]),
-                  ],
-                ),
-                Column(
-                  children: [
-                    createAutoSizeText(data.image4[0]),
-                    buildImage(data.image4[1]),
-                  ],
-                ),
-                Column(
-                  children: [
-                    createAutoSizeText(data.image5[0]),
-                    buildImage(data.image5[1]),
-                  ],
-                ),
-                Column(
-                  children: [
-                    createAutoSizeText(data.image6[0]),
-                    buildImage(data.image6[1]),
-                  ],
-                ),
-                Column(
-                  children: [
-                    createAutoSizeText(data.image[0]),
-                    buildImage(data.image[1]),
-                    buildImage(data.image[2]),
-                  ],
-                ),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Navigate to the next screen
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RoadMarkingScreen(), // Replace with your next screen
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 300,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 15.0,
-                        horizontal: 30.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 3),
+                    Column(
+                      children: [
+                        createAutoSizeText(data.image2[0]),
+                        buildImage(data.image2[1]),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        createAutoSizeText(data.image3[0]),
+                        buildImage(data.image3[1]),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        createAutoSizeText(data.image4[0]),
+                        buildImage(data.image4[1]),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        createAutoSizeText(data.image5[0]),
+                        buildImage(data.image5[1]),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        createAutoSizeText(data.image6[0]),
+                        buildImage(data.image6[1]),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        createAutoSizeText(data.image[0]),
+                        buildImage(data.image[1]),
+                        buildImage(data.image[2]),
+                      ],
+                    ),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigate to the next screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RoadMarkingScreen(), // Replace with your next screen
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 300,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15.0,
+                            horizontal: 30.0,
                           ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Next",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             );
           }
       ),

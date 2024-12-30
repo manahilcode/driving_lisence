@@ -19,18 +19,15 @@ class SafetyMarginScreen extends StatefulWidget {
 class _SafetyMarginScreenState extends State<SafetyMarginScreen> {
   @override
   void initState() {
-    // SchedulerBinding.instance.addPostFrameCallback((_) {
-    //   final provider = Provider.of<SafetyMarginNotifier>(context, listen: false);
-    //   provider.fetchSafetyMarginData();
-    // });
-    super.initState();
-  }
-  @override
-  Widget build(BuildContext context) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<SafetyMarginNotifier>(context, listen: false);
       provider.fetchSafetyMarginData();
     });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+
     return  Scaffold(
       appBar: CustomAppBar(title: "Safety margin", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
       body: Consumer<SafetyMarginNotifier>(

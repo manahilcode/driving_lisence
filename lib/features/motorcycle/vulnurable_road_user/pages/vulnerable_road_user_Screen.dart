@@ -21,18 +21,15 @@ class VulnerableRoadUserScreen extends StatefulWidget {
 class _VulnerableRoadUserScreenState extends State<VulnerableRoadUserScreen> {
   @override
   void initState() {
-    // SchedulerBinding.instance.addPostFrameCallback((_) {
-    //   final provider = Provider.of<VulnerableRoadUserProvider>(context, listen: false);
-    //   provider.fetchVulnerableRoadUserData("Vulnerable_road_users1");
-    // });
-    super.initState();
-  }
-  @override
-  Widget build(BuildContext context) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<VulnerableRoadUserProvider>(context, listen: false);
       provider.fetchVulnerableRoadUserData("Vulnerable_road_users1");
     });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+   
     return  Scaffold(
       appBar: CustomAppBar(title: "Vulnerable road user 1", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
@@ -43,59 +40,64 @@ class _VulnerableRoadUserScreenState extends State<VulnerableRoadUserScreen> {
             {
               return LoadingScreen();
             }
-            return Column(
-              children: [
-                   createHeadingText(data.title ?? "").animate(),
-                createAutoSizeText(data.subtitle ??"").animate(),
-                createAutoSizeText(data.subtitle1 ??"").animate(),
-                Column(
-                  children: data.points?.map((e)=>buildBulletText(e.toString())).toList() ??[],
-                ),
-                Gap(20),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Navigate to the next screen
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PedestrainScreen(), // Replace with your next screen
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 300,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 15.0,
-                        horizontal: 30.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 3),
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                       createHeadingText(data.title ?? "").animate(),
+                    createAutoSizeText(data.subtitle ??"").animate(),
+                    createAutoSizeText(data.subtitle1 ??"").animate(),
+                    Column(
+                      children: data.points?.map((e)=>buildBulletText(e.toString())).toList() ??[],
+                    ),
+                    Gap(20),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigate to the next screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PedestrainScreen(), // Replace with your next screen
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 300,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15.0,
+                            horizontal: 30.0,
                           ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Next",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                
+                  ],
                 ),
-
-              ],
+              ),
             );
           }
       ),

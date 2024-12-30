@@ -21,7 +21,8 @@ class _VideoPageViewState extends State<VideoPageView> {
     super.initState();
     // Fetch all videos when the screen is initialized
     final provider = Provider.of<VideoProvider>(context, listen: false);
-    provider.fetchAllVideos('your_collection_name'); // Replace with your actual collection name
+    provider.fetchAllVideos(
+        'motorcycle_response_clip'); // Replace with your actual collection name
   }
 
   @override
@@ -29,28 +30,36 @@ class _VideoPageViewState extends State<VideoPageView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Video Player'),
-        leading: IconButton(onPressed: (){
-          Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+        leading: IconButton(
+            onPressed: () {
+              Route newRoute = MaterialPageRoute(
+                  builder: (context) =>
+                      const MotorcycleHazardPerceptionScreen());
 
-          Navigator.pushAndRemoveUntil(
-            context,
-            newRoute,
+              Navigator.pushAndRemoveUntil(
+                context,
+                newRoute,
                 (Route<dynamic> route) => false, // Removes all previous routes
-          );
-        }, icon: Icon(Icons.arrow_back)),
+              );
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: Consumer<VideoProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
-            return Center(child: CircularProgressIndicator()); // Show loading indicator
+            return Center(
+                child: CircularProgressIndicator()); // Show loading indicator
           }
 
           if (provider.errorMessage.isNotEmpty) {
-            return Center(child: Text(provider.errorMessage)); // Show error message
+            return Center(
+                child: Text(provider.errorMessage)); // Show error message
           }
 
           if (provider.videos.isEmpty) {
-            return Center(child: Text('No videos available.')); // Show message if no videos
+            return Center(
+                child:
+                    Text('No videos available.')); // Show message if no videos
           }
 
           return PageView.builder(
@@ -99,7 +108,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         ElevatedButton(
           onPressed: () {
             setState(() {
-              _controller.value.isPlaying ? _controller.pause() : _controller.play();
+              _controller.value.isPlaying
+                  ? _controller.pause()
+                  : _controller.play();
             });
           },
           child: Icon(
@@ -116,7 +127,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   void dispose() {
-    _controller.dispose(); // Dispose of the controller when the widget is removed
+    _controller
+        .dispose(); // Dispose of the controller when the widget is removed
     super.dispose();
   }
 }

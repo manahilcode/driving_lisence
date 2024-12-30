@@ -21,7 +21,8 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
     super.initState();
     // Fetch all quizzes when the screen is initialized
     final provider = Provider.of<HazardQuizProvider>(context, listen: false);
-    provider.fetchAllQuizzes('your_collection_name'); // Replace with your actual collection name
+    provider.fetchAllQuizzes(
+        'motorcycle_hazard_quiz'); // Replace with your actual collection name
   }
 
   @override
@@ -29,15 +30,19 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Hazard Quiz'),
-        leading: IconButton(onPressed: (){
-          Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+        leading: IconButton(
+            onPressed: () {
+              Route newRoute = MaterialPageRoute(
+                  builder: (context) =>
+                      const MotorcycleHazardPerceptionScreen());
 
-          Navigator.pushAndRemoveUntil(
-            context,
-            newRoute,
+              Navigator.pushAndRemoveUntil(
+                context,
+                newRoute,
                 (Route<dynamic> route) => false, // Removes all previous routes
-          );
-        }, icon: Icon(Icons.arrow_back)),
+              );
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: Consumer<HazardQuizProvider>(
         builder: (context, provider, child) {
@@ -46,11 +51,14 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
           }
 
           if (provider.errorMessage.isNotEmpty) {
-            return Center(child: Text(provider.errorMessage)); // Show error message
+            return Center(
+                child: Text(provider.errorMessage)); // Show error message
           }
 
           if (provider.quizzes.isEmpty) {
-            return Center(child: Text('No quizzes available.')); // Show message if no quizzes
+            return Center(
+                child: Text(
+                    'No quizzes available.')); // Show message if no quizzes
           }
 
           return Column(
@@ -73,17 +81,25 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
                         children: [
                           Text(
                             quiz.question,
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 16),
-                          Text('Answers:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text('Answers:',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
                           ...quiz.answer.map((ans) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
-                            child: Text('- $ans'),
-                          )),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4.0),
+                                child: Text('- $ans'),
+                              )),
                           SizedBox(height: 16),
-                          Text('Additional Info:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          Text(quiz.info.isNotEmpty ? quiz.info : 'No additional information available.'),
+                          Text('Additional Info:',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text(quiz.info.isNotEmpty
+                              ? quiz.info
+                              : 'No additional information available.'),
                         ],
                       ),
                     );
@@ -95,11 +111,11 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
                 child: ElevatedButton(
                   onPressed: _currentIndex < provider.quizzes.length - 1
                       ? () {
-                    _pageController.nextPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeIn,
-                    );
-                  }
+                          _pageController.nextPage(
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        }
                       : null, // Disable button if on the last question
                   child: Text('Next'),
                 ),

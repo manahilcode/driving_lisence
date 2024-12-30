@@ -11,6 +11,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
+import 'features/Motorcycle_quiz/Alerness_quiz/viewmodel/alernes_provider.dart';
+import 'features/Motorcycle_quiz/attitude_quiz/viewmodel/attitude_repo.dart';
+import 'features/Motorcycle_quiz/essential_document_quiz/viewmodel/essential_provider.dart';
+import 'features/Motorcycle_quiz/hazard_awarness_quiz/viewmodel/hazard_awarness_provider.dart';
+import 'features/Motorcycle_quiz/incident_quiz/viewmodel/incident_provider.dart';
+import 'features/Motorcycle_quiz/motorcycle_handling_quiz/viewmodel/motorcycle_handling_provider.dart';
+import 'features/Motorcycle_quiz/motorway_driving_quiz/viewmodel/motorway_driving_provider.dart';
+import 'features/Motorcycle_quiz/other_type_of_vehicle_quiz/viewmodel/othertype_motorcyle_provider.dart';
+import 'features/Motorcycle_quiz/road_and_traffic_sign_quiz/viewmodel/road_traffic_Sign_provider.dart';
+import 'features/Motorcycle_quiz/rule_of_road_quiz/viewmodel/rule_of_road_provider.dart';
+import 'features/Motorcycle_quiz/safety_and_motorcycle_quiz/viewmodel/safety_motorrcyle_provider.dart';
+import 'features/Motorcycle_quiz/safety_margin_quiz/viewmodel/safety_margin_provider.dart';
+import 'features/Motorcycle_quiz/vehicle_loading_quiz/viewmodel/motorcycle_loading_provider.dart';
+import 'features/Motorcycle_quiz/vulnerble_road_user_quiz/viewmodel/vulnerable_road_provider.dart';
 import 'features/Quiz/Incident_quiz/viewmodel/controller.dart';
 import 'features/Quiz/Rule_of_the_road/viewmodel/controller.dart';
 import 'features/Quiz/alertness_quiz/viewmodel/controller.dart';
@@ -556,6 +570,23 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => TrainerDiscussionNotifierLoading(repository: TrainerDiscussionRepositoryLoading(_firestore))),
         ChangeNotifierProvider(create: (_) => ThinkAboutNotifierLoading(repository:ThinkAboutRepositoryLoading(_firestore) )),
         ChangeNotifierProvider(create: (_) => TowingTrailerNotifier(repository: TowingTrailerRepository(_firestore))),
+
+
+        // motorcycle quiz
+        ChangeNotifierProvider(create: (_) => MotorcycleVulnerableQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleVehicleLoadingQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleSafetyMarginQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleSafetyMotorcycleQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleRuleOfRoadQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleRoadTrafficQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleOtherTypeQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleMotorcycleDrivingQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleMotorcycleHandlingQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleIncidentQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleHazardAwarenessQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleEssentialQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleAttitudeQuizProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleAllertQuizProvider()),
 
 
 

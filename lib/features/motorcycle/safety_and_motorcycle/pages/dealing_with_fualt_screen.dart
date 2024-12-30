@@ -19,18 +19,15 @@ class DealingWithFualtScreen extends StatefulWidget {
 class _DealingWithFualtScreenState extends State<DealingWithFualtScreen> {
   @override
   void initState() {
-    // SchedulerBinding.instance.addPostFrameCallback((_) {
-    //   final provider = Provider.of<WheelBalancingProvider>(context, listen: false);
-    //   provider.fetchWheelBalancingInfo("motorcycle_Safety_and_your_motorcycle","Dealing_with_faults");
-    // });
-    super.initState();
-  }
-  @override
-  Widget build(BuildContext context) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<WheelBalancingProvider>(context, listen: false);
       provider.fetchWheelBalancingInfo("motorcycle_Safety_and_your_motorcycle"," Dealing_with_faults");
     });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+
     return  Scaffold(
       appBar: CustomAppBar(title: "dealing with fault", leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){}),
 
