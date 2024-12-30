@@ -8,7 +8,7 @@ class HazardAwarenessThingsDiscussRepository {
   // Fetch hazard awareness data from Firestore
   Future<HazardAwarenessThingsDiscuss> fetchHazardAwareness() async {
     try {
-      final snapshot = await _firestore.collection(collectionPath).doc('Things_to_discuss_and_practise_with_your_trainer_Continue').get();
+      final snapshot = await _firestore.collection(collectionPath).doc('Things_to_discuss_and_practise_with_your_trainer_Continue ').get();
       if (snapshot.exists) {
         return HazardAwarenessThingsDiscuss.fromFirestore(snapshot.data() as Map<String, dynamic>);
       } else {

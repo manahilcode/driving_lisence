@@ -36,57 +36,65 @@ class _ContraflowSystemScreenState extends State<ContraflowSystemScreen> {
               return LoadingScreen();
             }
 
-            return Column(
-              children: [
-                createHeadingText(data.title),
-                buildTipWidget(data.tip),
-                buildImage(data.image),
-                Column(
-                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
-                ),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Navigate to the next screen
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MeetingWithTrainerScreensafetymargin(), // Replace with your next screen
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 300,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 15.0,
-                        horizontal: 30.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 3),
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    createHeadingText(data.title),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildTipWidget(data.tip),
+                    ),
+                    buildImage(data.image),
+                    Column(
+                      children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
+                    ),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigate to the next screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MeetingWithTrainerScreensafetymargin(), // Replace with your next screen
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 300,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15.0,
+                            horizontal: 30.0,
                           ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Next",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             );
           }
       ),

@@ -10,7 +10,7 @@ class HazardAwarenessMeetingStandardProvider extends ChangeNotifier {
 
   HazardAwarenessMeetingStandardProvider(this.repository);
 
-  HazardAwarenessMeetingStandard get standards => _standards!;
+  HazardAwarenessMeetingStandard? get standards => _standards!;
   bool get isLoading => _isLoading;
 
   Future<void> loadHazardAwarenessMeetingStandard() async {

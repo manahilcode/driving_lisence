@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class VulnerableRoadUser12 {
-  final List<String> points;
-  final String subtitle;
-  final String subtitle1;
-  final String title;
+  final List<String>? points;
+  final String? subtitle;
+  final String? subtitle1;
+  final String? title;
 
   VulnerableRoadUser12({
     required this.points,

@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 import '../model/motorway_dual_carriageway.dart';
 import '../repo/motorway_dual_carriageway_repo.dart';
 
-class MotorwaysAndDualCarriagewaysProvider extends ChangeNotifier {
+class MotorwaysAndDualCarriagewaysProvider11 extends ChangeNotifier {
   final MotorwaysAndDualCarriagewaysRepository repository;
    MotorwaysAndDualCarriageways? _items;
   bool _isLoading = false;
 
-  MotorwaysAndDualCarriagewaysProvider(this.repository);
+  MotorwaysAndDualCarriagewaysProvider11(this.repository);
 
-  MotorwaysAndDualCarriageways get items => _items!;
+  MotorwaysAndDualCarriageways? get items => _items!;
   bool get isLoading => _isLoading;
 
   Future<void> loadMotorwaysAndDualCarriageways() async {

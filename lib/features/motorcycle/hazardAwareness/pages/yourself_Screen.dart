@@ -1,6 +1,7 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -24,25 +25,27 @@ class _YourselfScreenState extends State<YourselfScreen> {
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(
           title: "Alertness",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-
-      body: Consumer<YourselfProvider>(
-          builder: (context,provider,child) {
-            final data = provider.data;
-            if (data == null) {
-              return const Center(
-                child: LoadingScreen(),
-              );
-            }
-            return Column(
+      body: Consumer<YourselfProvider>(builder: (context, provider, child) {
+        final data = provider.data;
+        if (data == null) {
+          return const Center(
+            child: LoadingScreen(),
+          );
+        }
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
               children: [
- createHeadingText(data.title),
+                createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
                 createHeadingText(data.title1),
                 createAutoSizeText(data.subtitle1),
@@ -57,12 +60,16 @@ class _YourselfScreenState extends State<YourselfScreen> {
                 createHeadingText(data.title6),
                 createAutoSizeText(data.subtitle6),
                 Column(
-                  children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
+                  children: data.points
+                      .map((e) => buildBulletText(e.toString()))
+                      .toList(),
                 ),
                 Column(
-                  children: data.points1.map((e)=>buildBulletText(e.toString())).toList(),
+                  children: data.points1
+                      .map((e) => buildBulletText(e.toString()))
+                      .toList(),
                 ),
-
+                Gap(20),
                 Center(
                   child: GestureDetector(
                     onTap: () {
@@ -70,7 +77,8 @@ class _YourselfScreenState extends State<YourselfScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MeetingAwarnessHazardScreen(), // Replace with your next screen
+                          builder: (context) =>
+                              MeetingAwarnessHazardScreen(), // Replace with your next screen
                         ),
                       );
                     },
@@ -105,11 +113,11 @@ class _YourselfScreenState extends State<YourselfScreen> {
                     ),
                   ),
                 ),
-
               ],
-            );
-          }
-      ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

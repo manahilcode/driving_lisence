@@ -2,6 +2,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/motorcycle/hazardAwareness/pages/things_discuss_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -28,7 +29,7 @@ class _ThinkAboutScreenAwarenessState extends State<ThinkAboutScreenAwareness> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Think About",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 
@@ -46,6 +47,7 @@ class _ThinkAboutScreenAwarenessState extends State<ThinkAboutScreenAwareness> {
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
+                Gap(20),
                 Center(
                   child: GestureDetector(
                     onTap: () {

@@ -10,7 +10,7 @@ class MovingHazardsProvider extends ChangeNotifier {
 
   MovingHazardsProvider(this.repository);
 
-  MovingHazards get items => _items!;
+  MovingHazards? get items => _items!;
   bool get isLoading => _isLoading;
 
   Future<void> loadMovingHazards() async {

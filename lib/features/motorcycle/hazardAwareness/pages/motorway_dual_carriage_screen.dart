@@ -21,7 +21,7 @@ class _MotorwayDualCarriageScreenState
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<MotorwaysAndDualCarriagewaysProvider>(context, listen: false);
+      final provider = Provider.of<MotorwaysAndDualCarriagewaysProvider11>(context, listen: false);
       provider.loadMotorwaysAndDualCarriageways();
     });
     super.initState();
@@ -30,10 +30,10 @@ class _MotorwayDualCarriageScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Motorway dual carriage",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-      body: Consumer<MotorwaysAndDualCarriagewaysProvider>(
+      body: Consumer<MotorwaysAndDualCarriagewaysProvider11>(
           builder: (context, provider, child) {
         final data = provider.items;
         if (data == null) {

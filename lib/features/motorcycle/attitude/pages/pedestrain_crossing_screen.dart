@@ -58,7 +58,7 @@ class _PedestrainCrossingScreenAttudState extends State<PedestrainCrossingScreen
                 
                     Column(
                       children: [
-                        createAutoSizeText(data.points[0]),
+                        createHeadingText(data.points[0]),
                         createAutoSizeText(data.points[1]),
                         createAutoSizeText(data.points[2]),
                         createAutoSizeText(data.points[3]),
@@ -70,7 +70,7 @@ class _PedestrainCrossingScreenAttudState extends State<PedestrainCrossingScreen
 
                     Column(
                      children: [
-                       createAutoSizeText(data.points1[0]),
+                       createHeadingText(data.points1[0]),
                        createAutoSizeText(data.points1[1]),
                        createAutoSizeText(data.points1[2]),
                        createAutoSizeText(data.points1[3]),
@@ -79,14 +79,14 @@ class _PedestrainCrossingScreenAttudState extends State<PedestrainCrossingScreen
                     ),
                     Column(
                       children: [
-                        createAutoSizeText(data.points2[0]),
+                        createHeadingText(data.points2[0]),
                         createAutoSizeText(data.points2[1]),
                         buildImage(data.points2[2]),
                       ],
                     ),
                     Column(
                       children: [
-                        createAutoSizeText(data.points3[0]),
+                        createHeadingText(data.points3[0]),
                         createAutoSizeText(data.points3[1]),
                         buildImage(data.points3[2]),
                       ],

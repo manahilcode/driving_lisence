@@ -8,14 +8,14 @@ import '../../../../core/appbar.dart';
 import '../../../../core/loader.dart';
 import '../viewmodel/rule_of_road.dart';
 
-class RuleOfRoadScreen extends StatefulWidget {
-  const RuleOfRoadScreen({super.key});
+class MotorcycleRuleOfRoadScreen extends StatefulWidget {
+  const MotorcycleRuleOfRoadScreen({super.key});
 
   @override
-  State<RuleOfRoadScreen> createState() => _RuleOfRoadScreenState();
+  State<MotorcycleRuleOfRoadScreen> createState() => _MotorcycleRuleOfRoadScreenState();
 }
 
-class _RuleOfRoadScreenState extends State<RuleOfRoadScreen> {
+class _MotorcycleRuleOfRoadScreenState extends State<MotorcycleRuleOfRoadScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {

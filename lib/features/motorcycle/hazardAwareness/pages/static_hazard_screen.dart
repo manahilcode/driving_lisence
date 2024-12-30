@@ -2,6 +2,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/motorcycle/hazardAwareness/pages/road_Sign_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -28,7 +29,7 @@ class _StaticHazardScreenState extends State<StaticHazardScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Static Hazard ",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
 
@@ -44,10 +45,14 @@ class _StaticHazardScreenState extends State<StaticHazardScreen> {
               children: [
                createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
-                buildTipWidget(data.tip),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: buildTipWidget(data.tip),
+                ),
                 Column(
                   children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
                 ),
+                Gap(20),
                 Center(
                   child: GestureDetector(
                     onTap: () {

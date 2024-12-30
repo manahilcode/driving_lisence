@@ -52,6 +52,7 @@ dependencies:
   connectivity_plus: ^6.1.0
   shared_preferences: ^2.3.3
   carousel_slider: ^5.0.0
+  flutter_animate: ^4.5.2
   
 
 dev_dependencies:

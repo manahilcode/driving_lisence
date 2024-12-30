@@ -45,8 +45,8 @@ class _GoodMannerRoadscreenState extends State<GoodMannerRoadscreen> {
               );
             }
 
-            final ans = data?.answer;
-            final correctAnswer = data?.correct;
+            final ans = data.answer;
+            final correctAnswer = data.correct;
 
             return SingleChildScrollView(
               child: Padding(

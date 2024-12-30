@@ -108,7 +108,7 @@ Widget buildBulletText(String text) {
           child: Text(
             text,
             style:
-                GoogleFonts.roboto(fontSize: 15.0, fontWeight: FontWeight.bold),
+                GoogleFonts.inter(fontSize: 16.0, fontWeight: FontWeight.w500),
             textAlign: TextAlign.start,
           ),
         ),
@@ -123,50 +123,68 @@ Widget buildImage(String imagePath, {double width = 100, double height = 100}) {
     padding: const EdgeInsets.all(8.0),
     child: Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-
-
+        borderRadius: BorderRadius.circular(15), // Increased radius for smoother corners
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(2, 4), // Slight shadow for depth
+          ),
+        ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: Image.network(
-          imagePath,
-          height: 200,
-          width: double.infinity,
-          fit: BoxFit.cover, // Adjust how the image fits in the box
-          loadingBuilder: (BuildContext context, Widget child,
-              ImageChunkEvent? loadingProgress) {
-            if (loadingProgress == null) {
-              return child;
-            } else {
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15), // Ensure the image has rounded corners
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: Image.network(
+            imagePath,
+            height: 200,
+            width: double.infinity,
+            fit: BoxFit.cover, // Adjust how the image fits in the box
+            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              } else {
+                return Container(
+                  width: width,
+                  height: height,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.grey.shade300, Colors.grey.shade400],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(15), // Matching border radius
+                  ),
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue), // Custom loading indicator color
+                    ),
+                  ),
+                );
+              }
+            },
+            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
               return Container(
                 width: width,
                 height: height,
-                color: Colors.grey.shade200, // Placeholder background color
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade500, // Solid color for error state
+                  borderRadius: BorderRadius.circular(15), // Matching border radius
+                ),
                 child: const Center(
-                  child:
-                      LoadingScreen(), // Loading indicator while fetching the image
+                  child: Icon(
+                    Icons.error_outline,
+                    color: Colors.white,
+                    size: 30, // Custom error icon
+                  ),
                 ),
               );
-            }
-          },
-          errorBuilder:
-              (BuildContext context, Object error, StackTrace? stackTrace) {
-            return Container(
-              width: width,
-              height: height,
-              color: Colors.grey, // Placeholder color in case of an error
-              child: const Center(
-                child: Text(
-                  'Image not found',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            );
-          },
+            },
+          ),
         ),
       ),
     ),
   );
 }
+

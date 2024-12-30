@@ -102,6 +102,7 @@ import 'features/motorcycle/hazardAwareness/repo/hazard_awareness1_repo.dart';
 import 'features/motorcycle/hazardAwareness/repo/hazard_awareness_repo.dart';
 import 'features/motorcycle/hazardAwareness/repo/hazardoius_load.dart';
 import 'features/motorcycle/hazardAwareness/repo/meeting_awareness_hazard_repo.dart';
+import 'features/motorcycle/hazardAwareness/repo/motorway_dual_carriageway_repo.dart';
 import 'features/motorcycle/hazardAwareness/repo/moving_hazard_repo.dart';
 import 'features/motorcycle/hazardAwareness/repo/road_condition_hazard_Awareness.dart';
 import 'features/motorcycle/hazardAwareness/repo/road_sign_repo.dart';
@@ -112,6 +113,7 @@ import 'features/motorcycle/hazardAwareness/repo/yourself_Repo.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/hazard_awareness_provider.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/hazardoius_load_provider.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/meeting_awareness_meeting_hazard_provider.dart';
+import 'features/motorcycle/hazardAwareness/viewmodel/motorwat_dual_caariage_provider.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/moving_hazard_provider.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/road_condition_provider.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/road_sign_provider.dart';
@@ -435,7 +437,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => WeatherConditionNotifier(WeatherConditionRepository())),
 
         // h hazrad awarness
+        //MotorwaysAndDualCarriagewaysProvider11
         ChangeNotifierProvider(create: (_) => HazardAwarenessProvider11(MotorCycleHazardAwarenessRepository())),
+        ChangeNotifierProvider(create: (_) => MotorwaysAndDualCarriagewaysProvider11(MotorwaysAndDualCarriagewaysRepository())),
         ChangeNotifierProvider(create: (_) => MotorcycleHazardProviderAwareness(MotorcycleHazardawarenessRepository())),
         ChangeNotifierProvider(create: (_) => HazardousLoadProvider(HazardousLoadRepository())),
         ChangeNotifierProvider(create: (_) => HazardAwarenessMeetingStandardProvider(HazardAwarenessMeetingStandardRepository())),

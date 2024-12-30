@@ -3,6 +3,7 @@ import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/motorcycle/hazardAwareness/pages/yourself_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -20,61 +21,61 @@ class _RoadConditionScreenState extends State<RoadConditionScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final provider = Provider.of<RoadConditionProvider>(context, listen: false);
+      final provider =
+          Provider.of<RoadConditionProvider>(context, listen: false);
       provider.loadRoadConditions();
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(
-          title: "Alertness",
+          title: "Road and Weather Condition",
           leadingIcon: Icons.arrow_back,
           onLeadingIconPressed: () {}),
-
-      body: Consumer<RoadConditionProvider>(
-          builder: (context,provider,child) {
-            final data = provider.items;
-            if (data == null) {
-              return const Center(
-                child: LoadingScreen(),
-              );
-            }
-            return Column(
+      body:
+          Consumer<RoadConditionProvider>(builder: (context, provider, child) {
+        final data = provider.items;
+        if (data == null) {
+          return const Center(
+            child: LoadingScreen(),
+          );
+        }
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
               children: [
-               createHeadingText(data.title),
+                createHeadingText(data.title),
                 createAutoSizeText(data.subtitle),
                 Column(
                   children: [
-                    ImageWithTextCard(imageUrl: data.image.imageUrl, subtitle: data.image.text)
-
+                    ImageWithTextCard(
+                        imageUrl: data.image.imageUrl, subtitle: data.image.text)
                   ],
                 ),
-
-
                 createAutoSizeText(data.subtitle2),
                 Column(
                   children: [
-                    ImageWithTextCard(imageUrl: data.image1.imageUrl, subtitle: data.image1.text)
-
+                    ImageWithTextCard(
+                        imageUrl: data.image1.imageUrl, subtitle: data.image1.text)
                   ],
                 ),
-
                 Column(
                   children: [
-                    ImageWithTextCard(imageUrl: data.image2.imageUrl, subtitle: data.image2.text)
-
+                    ImageWithTextCard(
+                        imageUrl: data.image2.imageUrl, subtitle: data.image2.text)
                   ],
                 ),
-
                 Column(
                   children: [
-                    ImageWithTextCard(imageUrl: data.image3.imageUrl, subtitle: data.image3.text)
-
+                    ImageWithTextCard(
+                        imageUrl: data.image3.imageUrl, subtitle: data.image3.text)
                   ],
                 ),
-
+                Gap(20),
                 Center(
                   child: GestureDetector(
                     onTap: () {
@@ -82,7 +83,8 @@ class _RoadConditionScreenState extends State<RoadConditionScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => YourselfScreen(), // Replace with your next screen
+                          builder: (context) =>
+                              YourselfScreen(), // Replace with your next screen
                         ),
                       );
                     },
@@ -118,9 +120,10 @@ class _RoadConditionScreenState extends State<RoadConditionScreen> {
                   ),
                 ),
               ],
-            );
-          }
-      ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -9,16 +9,17 @@ class RoadSignsProvider extends ChangeNotifier {
 
   RoadSignsProvider(this.repository);
 
-  RoadSigns get items => _items!;
+  RoadSigns? get items => _items!;
   bool get isLoading => _isLoading;
 
   // Method to load data from the repository
   Future<void> loadRoadSigns() async {
     try {
       _isLoading = true;
-      notifyListeners();  // Notify listeners about the loading state
+
       final fetchedItems = await repository.fetchRoadSigns();
       _items = fetchedItems;
+      notifyListeners();  // Notify listeners about the loading state
     } catch (e) {
       // Handle error
       print("Error loading road signs: $e");
