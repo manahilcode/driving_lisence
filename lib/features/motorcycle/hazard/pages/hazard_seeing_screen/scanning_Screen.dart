@@ -31,7 +31,7 @@ class _ScanningScreenState extends State<ScanningScreen> {
           context,
           listen: false);
       controller.fetchScanningModel(
-          "motorcycle_seeing_hazard", "Scanning");
+          "motorcycle_seeing_hazard", " Scanning");
 
       final url1 = controller.scanningModel?.video;
       final url2 = controller.scanningModel?.video2;
@@ -85,8 +85,12 @@ class _ScanningScreenState extends State<ScanningScreen> {
         return Column(
           children: [
             createHeadingText(data.title),
+            Gap(10),
+            
             createAutoSizeText(data.subtitle),
+            Gap(10),
             createHeadingText(data.subtitle1),
+            Gap(10),
             createAutoSizeText(data.subtitle2),
             Gap(10),
             Padding(
@@ -220,6 +224,49 @@ class _ScanningScreenState extends State<ScanningScreen> {
                 ],
               ),
 
+            GestureDetector(
+              onTap: () {
+                Route newRoute = MaterialPageRoute(
+                    builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  newRoute,
+                      (Route<dynamic> route) =>
+                  false, // Removes all previous routes
+                );
+              },
+              child: Center(
+                child: Container(
+                  width: 300,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 15.0, horizontal: 30.0),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Next",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
           ],
         );
       },
@@ -227,3 +274,4 @@ class _ScanningScreenState extends State<ScanningScreen> {
     );
   }
 }
+

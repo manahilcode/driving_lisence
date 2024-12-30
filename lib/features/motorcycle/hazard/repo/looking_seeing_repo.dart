@@ -17,7 +17,8 @@ class LookingButNotSeeingRepository {
       if (docSnapshot.exists) {
         // Map the document data to LookingButNotSeeingModel
         Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
-        return LookingButNotSeeingModel.fromJson(data);
+        final model = LookingButNotSeeingModel.fromJson(data);
+        return model;
       } else {
         print('Document not found in collection $collectionName with id $docName.');
         return null;

@@ -1,6 +1,7 @@
 import 'package:driving_lisence/core/sharedUi.dart';
 import 'package:driving_lisence/features/motorcycle/hazard/pages/static_hazard_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/appbar.dart';
@@ -57,12 +58,15 @@ class _MotorCycleHazardScreenState extends State<MotorCycleHazardScreen> {
             child: Column(
               children: [
                 createHeadingText(provider.motorcycleHazard?.title ?? ""),
+                //use gap after every widget
+                Gap(10),
                 createAutoSizeText(provider.motorcycleHazard?.subtitle ?? ""),
+                Gap(10),
                 buildImage(provider.motorcycleHazard?.image ?? ""),
-                Spacer(),
+                Gap(10),
                 GestureDetector(
                   onTap: () {
-                    Route newRoute = MaterialPageRoute(builder: (context) => const StaticHazardScreen());
+                    Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
 
                     Navigator.pushAndRemoveUntil(
                       context,

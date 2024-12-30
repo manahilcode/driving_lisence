@@ -47,6 +47,19 @@ class AuthController extends ChangeNotifier {
     }
   }
 
+  /// import sign in method from repo here
+  Future<void> SignInWithEmailAndPassword(context, String email, String password) async {
+    final auth = await _authRepository.signInWithEmail(email: email, password: password);
+    if (auth != null) {
+      Route newRoute = MaterialPageRoute(builder: (context) => const MenuScreen());
+      Navigator.pushAndRemoveUntil(
+        context,
+        newRoute,
+        (Route<dynamic> route) => false, // Removes all previous routes
+      );
+    }
+  }
+
   /// sign in as a google
    Future<void> SignInWithGoogle(context) async
    {

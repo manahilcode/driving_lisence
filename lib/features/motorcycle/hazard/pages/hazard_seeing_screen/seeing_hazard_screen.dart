@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/loader.dart';
+import '../../../../motorcycle_hazard_perception_screen.dart';
 import '../../viewmodel/seeing_hazard_provider.dart';
 import '../yourself_screen.dart';
 import 'factor_effecting.dart';
@@ -32,7 +33,7 @@ class _SeeingHazardScreenState extends State<SeeingHazardScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBar(title:"Seeing Hazard" , leadingIcon: Icons.arrow_back, onLeadingIconPressed:(){
-        Route newRoute = MaterialPageRoute(builder: (context) => const YourselfScreen());
+        Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
         Navigator.push(context, newRoute);
       }),
       body: Consumer<SeeingHazardProvider>(
@@ -61,7 +62,7 @@ class _SeeingHazardScreenState extends State<SeeingHazardScreen> {
 
                   GestureDetector(
                     onTap: () {
-                      Route newRoute = MaterialPageRoute(builder: (context) => const FactorEffecting());
+                      Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
 
                       Navigator.pushAndRemoveUntil(
                         context,

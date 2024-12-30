@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'motorcycle/hazard/pages/hazard_screen.dart';
+import 'motorcycle/hazard/pages/hazard_seeing_screen/factor_effecting.dart';
+import 'motorcycle/hazard/pages/hazard_seeing_screen/learning_to_see_screen.dart';
+import 'motorcycle/hazard/pages/hazard_seeing_screen/looking_but_no_seeing_screen.dart';
+import 'motorcycle/hazard/pages/hazard_seeing_screen/scanning_Screen.dart';
+import 'motorcycle/hazard/pages/hazard_seeing_screen/seeing_hazard_screen.dart';
+import 'motorcycle/hazard/pages/respond_hazard_screen/hazard_managment.dart';
+import 'motorcycle/hazard/pages/respond_hazard_screen/responding_to_hazard.dart';
+import 'motorcycle/hazard/pages/respond_hazard_screen/reviewing_your_hazard.dart';
+import 'motorcycle/hazard/pages/road_weather_condition_screen.dart';
 import 'motorcycle/hazard/pages/static_hazard_screen.dart';
+import 'motorcycle/hazard/pages/understanding_hazard_screen/clue_screen.dart';
+import 'motorcycle/hazard/pages/understanding_hazard_screen/understanding_hazard_screen.dart';
+import 'motorcycle/hazard/pages/understanding_hazard_screen/what_if_screen.dart';
+import 'motorcycle/hazard/pages/yourself_screen.dart';
+import 'motorcycle/hazard_quiz/pages/hazard_question.dart';
+import 'motorcycle/hazard_response_clip/pages/hazard_response_clip.dart';
 
 class MotorcycleHazardPerceptionScreen extends StatefulWidget {
   const MotorcycleHazardPerceptionScreen({super.key});
@@ -18,431 +32,225 @@ class _MotorcycleHazardPerceptionScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.green.shade700, // Darker green for contrast
         title: Text(
-          "Hazard Perception MotorCycle",
-          style: GoogleFonts.roboto(),
+          "Hazard Perception Motorcycle",
+          style:
+              GoogleFonts.montserrat(fontWeight: FontWeight.w600, fontSize: 20),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0), // Increased padding for spacing
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green), // Added icon
-                title: Text(
-                  "Introduction",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ), // Bold text
-                onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return MotorCycleHazardScreen();
-                  }));
-                },
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-              ),
+            buildListTile(
+              title: "Introduction",
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MotorCycleHazardScreen()),
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("static_hazard",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                onTap: () {
-                  //StaticHazardScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-              ),
+            buildListTile(
+              title: "Static Hazard",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const StaticHazardScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("Road_and_weather_conditions",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-
-                onTap: () {
-                  //RoadWeatherConditionScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Road and Weather Conditions",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RoadWeatherConditionScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("Yourself",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //YourselfScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Yourself",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const YourselfScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("Factor-Effecting",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //FactorEffecting
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Factor Affecting",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FactorEffecting()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("Learning-to-see-screen",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //LearningToSeeHazard
-                },
-              ),
+            buildListTile(
+              title: "Learning to See",
+              onTap: () {
+                //LearningToSeeHazard
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LearningToSeeHazard()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("Looking-but-no-seeing",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //  LookingButNoSeeingScreenLookingButNoSeeingScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Looking but Not Seeing",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LookingButNoSeeingScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("scanning",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  // ScanningScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Scanning",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ScanningScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("Seeing-hazard",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  // SeeingHazardScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Seeing Hazard",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SeeingHazardScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("hazard-management",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //HazardManagment
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Hazard Management",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HazardManagment()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("responding-to-hazard",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //RespondingToHazard
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Responding to Hazard",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RespondingToHazard()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("reviewing-your-hazard",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //ReviewingYourHazard
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Reviewing Your Hazard",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ReviewingYourHazard()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            /////
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title:
-                    Text("Clue", style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //ClueScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Clue",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ClueScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("UnderStand Hazard",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //UnderstandingHazardScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Understand Hazard",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const UnderstandingHazardScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("what If",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  //WhatIfScreen
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "What If",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const WhatIfScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            ////
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("Hazard-quiz",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Hazard Quiz",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HazardQuizPageView()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Icon(Icons.info, color: Colors.green),
-                title: Text("Hazard-Response-clip",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                tileColor: Colors.grey[200], // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                ),
-                contentPadding: EdgeInsets.all(10),
-                onTap: () {
-                  Route newRoute = MaterialPageRoute(
-                      builder: (context) => const StaticHazardScreen());
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    newRoute,
-                    (Route<dynamic> route) =>
-                        false, // Removes all previous routes
-                  );
-                },
-              ),
+            buildListTile(
+              title: "Hazard Response Clip",
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const VideoPageView()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildListTile({required String title, required VoidCallback onTap}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: ListTile(
+        leading: Icon(Icons.info, color: Colors.green.shade700),
+        title: Text(
+          title,
+          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 16),
+        ),
+        tileColor: Colors.white, // White background for contrast
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(12), // Rounded corners for all items
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        onTap: onTap,
+        trailing: Icon(Icons.arrow_forward_ios, color: Colors.green.shade700),
       ),
     );
   }

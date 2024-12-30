@@ -65,16 +65,16 @@ class _YourselfScreenState extends State<YourselfScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                createHeadingText(provider.motorcycleAnswers.title),
-                createAutoSizeText(provider.motorcycleAnswers.subtitle),
+                createHeadingText(provider.motorcycleAnswers?.title ??""),
+                createAutoSizeText(provider.motorcycleAnswers?.subtitle ??""),
                 Gap(10),
-                createHeadingText(provider.motorcycleAnswers.title1),
-                createAutoSizeText(provider.motorcycleAnswers.subtitle1),
+                createHeadingText(provider.motorcycleAnswers?.title1 ?? ""),
+                createAutoSizeText(provider.motorcycleAnswers?.subtitle1 ??""),
                 Gap(10),
-                createHeadingText(provider.motorcycleAnswers.title2),
+                createHeadingText(provider.motorcycleAnswers?.title2 ?? ""),
                 Gap(02),
                 Column(
-                  children: provider.motorcycleAnswers.subtitle2!
+                  children: provider.motorcycleAnswers?.subtitle2
                       .map(
                         (stringItem) => Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -84,12 +84,12 @@ class _YourselfScreenState extends State<YourselfScreen> {
                           ),
                         ),
                       )
-                      .toList(), // Convert the iterable to a List<Widget>
+                      .toList() ?? [], // Convert the iterable to a List<Widget>
                 ),
                 Gap(10),
-                createHeadingText(provider.motorcycleAnswers.title3),
+                createHeadingText(provider.motorcycleAnswers?.title3 ?? ""),
                 Column(
-                  children: provider.motorcycleAnswers.subtitle3
+                  children: provider.motorcycleAnswers?.subtitle3
                       .map(
                         (stringItem) => Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -99,13 +99,13 @@ class _YourselfScreenState extends State<YourselfScreen> {
                           ),
                         ),
                       )
-                      .toList(), // Convert the iterable to a List<Widget>
+                      .toList() ?? [], // Convert the iterable to a List<Widget>
                 ),
                 Gap(10),
-                buildTipWidget(provider.motorcycleAnswers.tip[0]),
+                buildTipWidget(provider.motorcycleAnswers?.tip[0] ?? ""),
                 Gap(10),
                 createAutoSizeText("Question :"),
-                createAutoSizeText(provider.motorcycleAnswers.question),
+                createAutoSizeText(provider.motorcycleAnswers?.question ??""),
                 Gap(10),
                 createAutoSizeText("Options :"),
                 Column(
@@ -163,11 +163,11 @@ class _YourselfScreenState extends State<YourselfScreen> {
                 createAutoSizeText("Info"),
                 createAutoSizeText(data.info),
                 Gap(10),
-                createHeadingText(provider.motorcycleAnswers.title4),
-                createAutoSizeText(provider.motorcycleAnswers.subtitle4),
+                createHeadingText(provider.motorcycleAnswers?.title4 ??""),
+                createAutoSizeText(provider.motorcycleAnswers?.subtitle4 ??""),
                 Gap(10),
                 createAutoSizeText("Question :"),
-                createAutoSizeText(provider.motorcycleAnswers.question2),
+                createAutoSizeText(provider.motorcycleAnswers?.question2 ??""),
                 Gap(10),
                 createAutoSizeText("Options :"),
                 Column(
@@ -237,20 +237,20 @@ class _YourselfScreenState extends State<YourselfScreen> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: provider.motorcycleAnswers.points
+                      children: provider.motorcycleAnswers?.points
                           .map((point) => buildBulletText(point))
-                          .toList(), // Convert to List<Widget>
+                          .toList() ??[], // Convert to List<Widget>
                     ),
                   ),
                 ),
                 Gap(10),
-                createHeadingText(provider.motorcycleAnswers.title5),
-                createAutoSizeText(provider.motorcycleAnswers.subtitle5),
+                createHeadingText(provider.motorcycleAnswers?.title5 ?? ""),
+                createAutoSizeText(provider.motorcycleAnswers?.subtitle5 ??""),
                 Gap(10),
                 GestureDetector(
                   onTap: () {
                     Route newRoute = MaterialPageRoute(
-                        builder: (context) => const SeeingHazardScreen());
+                        builder: (context) => const MotorcycleHazardPerceptionScreen());
 
                     Navigator.pushAndRemoveUntil(
                       context,

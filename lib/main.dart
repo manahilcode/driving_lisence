@@ -102,9 +102,12 @@ import 'features/motorcycle/essential_document/viewmodel/thing_discuss.dart';
 import 'features/motorcycle/essential_document/viewmodel/think_about.dart';
 import 'features/motorcycle/hazard/viewmodel/clue_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/factor_effecting_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/hazard_managment_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/hazard_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/learning_see_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/looking_seeing_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/responding_hazard_provider.dart';
+import 'features/motorcycle/hazard/viewmodel/reviewing_driver_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/road_weather_condition_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/scanning_provider.dart';
 import 'features/motorcycle/hazard/viewmodel/seeing_hazard_provider.dart';
@@ -135,6 +138,7 @@ import 'features/motorcycle/hazardAwareness/viewmodel/static_hazard_repo.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/things_discuss_trainer.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/think_about_provider.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/yourself_provider.dart';
+import 'features/motorcycle/hazard_quiz/viewmodel/hazard_question_provider.dart';
 import 'features/motorcycle/incident/repo/incident_accident_emergency.dart';
 import 'features/motorcycle/incident/repo/meeting_standard.dart';
 import 'features/motorcycle/incident/repo/reporting_an_incident.dart';
@@ -395,6 +399,29 @@ class MyApp extends StatelessWidget {
             create: (_) => AlertnessNotifier(
                 AlertnessRepository()
             )),
+
+        ChangeNotifierProvider<HazardManagementProvider>(
+            create: (_) => HazardManagementProvider(
+            )),
+
+        ChangeNotifierProvider<RespondingToHazardsProvider>(
+            create: (_) => RespondingToHazardsProvider(
+
+            )),
+
+        //ReviewingYourDrivingProvider
+        ChangeNotifierProvider<ReviewingYourDrivingProvider>(
+            create: (_) => ReviewingYourDrivingProvider(
+            )),
+
+        //HazardQuizProvider
+        ChangeNotifierProvider<HazardQuizProvider>(
+            create: (_) => HazardQuizProvider(
+            )),
+
+
+
+
         // m allert
         ChangeNotifierProvider<AnticipationProvider>(create: (_) => AnticipationProvider(RoadAwarenessRepository())),
         ChangeNotifierProvider(create: (_) => AvoidingTirednessProvider()),

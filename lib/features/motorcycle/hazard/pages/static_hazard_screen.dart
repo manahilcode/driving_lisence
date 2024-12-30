@@ -74,50 +74,59 @@ class _StaticHazardScreenState extends State<StaticHazardScreen> {
             child: Column(
               children: [
                 createHeadingText(provider.motorcycleStaticHazard?.title ?? ""),
+                Gap(10),
                 createAutoSizeText(
                     provider.motorcycleStaticHazard?.subtitle ?? ""),
+                Gap(10),
                 ImageWithTextCard(
                   imageUrl:
                       '${provider.motorcycleStaticHazard?.images[0].image}',
                   subtitle:
                       '${provider.motorcycleStaticHazard?.images[0].name}',
                 ),
+                Gap(10),
                 ImageWithTextCard(
                   imageUrl:
                       '${provider.motorcycleStaticHazard?.images[1].image}',
                   subtitle:
                       '${provider.motorcycleStaticHazard?.images[1].name}',
                 ),
+                Gap(10),
                 ImageWithTextCard(
                   imageUrl:
                       '${provider.motorcycleStaticHazard?.images[2].image}',
                   subtitle:
                       '${provider.motorcycleStaticHazard?.images[2].name}',
                 ),
+                Gap(10),
                 ImageWithTextCard(
                   imageUrl:
                       '${provider.motorcycleStaticHazard?.images[3].image}',
                   subtitle:
                       '${provider.motorcycleStaticHazard?.images[3].name}',
                 ),
+                Gap(10),
                 ImageWithTextCard(
                   imageUrl:
                       '${provider.motorcycleStaticHazard?.images[4].image}',
                   subtitle:
                       '${provider.motorcycleStaticHazard?.images[4].name}',
                 ),
+                Gap(10),
                 ImageWithTextCard(
                   imageUrl:
                       '${provider.motorcycleStaticHazard?.images[5].image}',
                   subtitle:
                       '${provider.motorcycleStaticHazard?.images[5].name}',
                 ),
+                Gap(10),
                 ImageWithTextCard(
                   imageUrl:
                       '${provider.motorcycleStaticHazard?.images[6].image}',
                   subtitle:
                       '${provider.motorcycleStaticHazard?.images[6].name}',
                 ),
+                Gap(10),
                 ImageWithTextCard(
                   imageUrl:
                       '${provider.motorcycleStaticHazard?.images[7].image}',
@@ -126,12 +135,15 @@ class _StaticHazardScreenState extends State<StaticHazardScreen> {
                 ),
                 Gap(10),
                 createAutoSizeText("Question :"),
+                Gap(10),
                 createAutoSizeText(
                     provider.motorcycleStaticHazard?.question1.text ?? ""),
+                Gap(10),
                 buildImage(
                     provider.motorcycleStaticHazard?.question1.image ?? ""),
                 Gap(10),
                 createAutoSizeText("Options :"),
+                Gap(10),
                 Column(
                   children: ans1.asMap().entries.map((entry) {
                     int answerIndex = entry.key; // Index of the current answer
@@ -184,16 +196,20 @@ class _StaticHazardScreenState extends State<StaticHazardScreen> {
                 ),
                 Gap(10),
                 createAutoSizeText("Info :"),
+                Gap(10),
                 createAutoSizeText(
                     provider.motorcycleStaticHazard?.info1 ?? ""),
                 Gap(10),
                 createAutoSizeText("Question :"),
+                Gap(10),
                 createAutoSizeText(
                     provider.motorcycleStaticHazard?.question2.text ?? ""),
+                Gap(10),
                 buildImage(
                     provider.motorcycleStaticHazard?.question2.image ?? ""),
                 Gap(10),
                 createAutoSizeText("Options :"),
+                Gap(10),
                 Column(
                   children: ans1.asMap().entries.map((entry) {
                     int answerIndex = entry.key; // Index of the current answer
@@ -246,13 +262,15 @@ class _StaticHazardScreenState extends State<StaticHazardScreen> {
                     );
                   }).toList(),
                 ),
+                Gap(10),
                 createAutoSizeText("Info :"),
+                Gap(10),
                 createAutoSizeText(
                     provider.motorcycleStaticHazard?.info2 ?? ""),
                 Gap(10),
                 GestureDetector(
                   onTap: () {
-                    Route newRoute = MaterialPageRoute(builder: (context) => const RoadWeatherConditionScreen());
+                    Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
 
                     Navigator.pushAndRemoveUntil(
                       context,

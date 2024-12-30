@@ -8,7 +8,7 @@ class MotorcycleYourProvider with ChangeNotifier {
   MotorcycleAnswerModel? _motorcycleAnswers;
   bool _isLoading = false;
 
-  MotorcycleAnswerModel get motorcycleAnswers => _motorcycleAnswers!;
+  MotorcycleAnswerModel? get motorcycleAnswers => _motorcycleAnswers;
   bool get isLoading => _isLoading;
 
   /// Fetch a single `MotorcycleAnswerModel` by document ID.

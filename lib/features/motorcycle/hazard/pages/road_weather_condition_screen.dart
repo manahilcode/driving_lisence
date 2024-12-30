@@ -68,17 +68,22 @@ class _RoadWeatherConditionScreenState
             child: Column(
               children: [
                 createHeadingText(provider.roadWeatherConditions?.title ?? ""),
+                Gap(10),
                 createAutoSizeText(
                     provider.roadWeatherConditions?.subtitle ?? ""),
+                Gap(10),
                 ImageWithTextCard(
                     imageUrl: "${provider.roadWeatherConditions?.points[1]}",
                     subtitle: "${provider.roadWeatherConditions?.points[0]}"),
+                Gap(10),
                 ImageWithTextCard(
                     imageUrl: "${provider.roadWeatherConditions?.points1[1]}",
                     subtitle: "${provider.roadWeatherConditions?.points1[0]}"),
+                Gap(10),
                 ImageWithTextCard(
                     imageUrl: "${provider.roadWeatherConditions?.points2[1]}",
                     subtitle: "${provider.roadWeatherConditions?.points2[0]}"),
+                Gap(10),
                 ImageWithTextCard(
                     imageUrl: "${provider.roadWeatherConditions?.points3[1]}",
                     subtitle: "${provider.roadWeatherConditions?.points3[0]}"),
@@ -87,12 +92,15 @@ class _RoadWeatherConditionScreenState
                     provider.roadWeatherConditions?.subtitle1 ?? ""),
                 Gap(10),
                 createAutoSizeText("Question :"),
+                Gap(10),
                 createAutoSizeText(
                     provider.roadWeatherConditions?.question.text ?? ""),
+                Gap(10),
                 buildImage(
                     provider.roadWeatherConditions?.question.image ?? ""),
                 Gap(10),
                 createAutoSizeText("Options :"),
+                Gap(10),
                 Column(
                   children: ans!.asMap().entries.map((entry) {
                     int answerIndex = entry.key; // Index of the current answer
@@ -144,13 +152,15 @@ class _RoadWeatherConditionScreenState
                     );
                   }).toList(),
                 ),
+                Gap(10),
                 createAutoSizeText("Info :"),
+                Gap(10),
                 createAutoSizeText(provider.roadWeatherConditions!.info),
                 Gap(10),
                 GestureDetector(
                   onTap: () {
                     Route newRoute = MaterialPageRoute(
-                        builder: (context) => const YourselfScreen());
+                        builder: (context) => const MotorcycleHazardPerceptionScreen());
 
                     Navigator.pushAndRemoveUntil(
                       context,
@@ -197,3 +207,4 @@ class _RoadWeatherConditionScreenState
     );
   }
 }
+

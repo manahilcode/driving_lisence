@@ -49,25 +49,75 @@ class _HazardManagmentState extends State<HazardManagment> {
             );
           }
 
-          return Column(
-
-            children: [
-              createHeadingText(data.title),
-              createAutoSizeText(data.subtitle),
-              Gap(10),
-             Container(
-               decoration: BoxDecoration(
-
-               ),
-               child: Column(
-                 children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
-               ),
-
-             ),
-
-              buildTipWidget(data.tip),
-
-            ],
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+              
+                children: [
+                  createHeadingText(data.title),
+                  createAutoSizeText(data.subtitle),
+                  Gap(10),
+                 Container(
+                   decoration: BoxDecoration(
+              
+                   ),
+                   child: Column(
+                     children: data.points.map((e)=>buildBulletText(e.toString())).toList(),
+                   ),
+              
+                 ),
+              
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildTipWidget(data.tip),
+                  ),
+                  Gap(20),
+                  GestureDetector(
+                    onTap: () {
+                      Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+              
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        newRoute,
+                            (Route<dynamic> route) => false, // Removes all previous routes
+                      );
+              
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 300,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15.0, horizontal: 30.0),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Next",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              
+                ],
+              ),
+            ),
           );
         }
       ),

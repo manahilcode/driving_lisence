@@ -11,7 +11,7 @@ class LearningSeeProvider with ChangeNotifier {
   LearningHazardModel? _hazardModels;
 
   //List<LearningHazardModel> get LhazardModels => _hazardModels;
- LearningHazardModel get hazardModels => _hazardModels!;
+ LearningHazardModel? get hazardModels => _hazardModels;
   bool get isLoading => _isLoading;
 
   // Fetch a single `HazardModel` by document ID

@@ -6,11 +6,11 @@ import '../repo/looking_seeing_repo.dart';
 class LookingButNotSeeingProvider with ChangeNotifier {
   final LookingButNotSeeingRepository _repository = LookingButNotSeeingRepository();
 
-  List<LookingButNotSeeingModel> _lookingModels = [];
+  LookingButNotSeeingModel? _lookingModels;
   bool _isLoading = false;
   String _errorMessage = '';
 
-  List<LookingButNotSeeingModel> get lookingModels => _lookingModels;
+  LookingButNotSeeingModel? get lookingModels => _lookingModels;
   bool get isLoading => _isLoading;
   String get errorMessage => _errorMessage;
 
@@ -23,9 +23,9 @@ class LookingButNotSeeingProvider with ChangeNotifier {
     try {
       final model = await _repository.fetchLookingButNotSeeing(collectionName, docName);
       if (model != null) {
-        _lookingModels = [model];  // Update with the single model
+        _lookingModels = model;  // Update with the single model
       } else {
-        _lookingModels = [];  // Clear if not found
+        _lookingModels = model;  // Clear if not found
         _errorMessage = 'Document not found';
       }
     } catch (e) {

@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../motorcycle_hazard_perception_screen.dart';
 import '../../viewmodel/what_if_provider.dart';
 
 class WhatIfScreen extends StatefulWidget {
@@ -99,6 +100,48 @@ class _WhatIfScreenState extends State<WhatIfScreen> {
                 const Center(child: CircularProgressIndicator()),
               Gap(10),
               createAutoSizeText(data[0].subtitle2),
+
+              GestureDetector(
+                onTap: () {
+                  Route newRoute = MaterialPageRoute(builder: (context) => const MotorcycleHazardPerceptionScreen());
+
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    newRoute,
+                        (Route<dynamic> route) => false, // Removes all previous routes
+                  );
+
+                },
+                child: Center(
+                  child: Container(
+                    width: 300,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15.0, horizontal: 30.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Next",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               
             ],
           );
