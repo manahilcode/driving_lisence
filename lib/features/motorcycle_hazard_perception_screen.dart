@@ -223,7 +223,7 @@ class _MotorcycleHazardPerceptionScreenState
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const VideoPageView()),
+                      builder: (context) => const VideoShowPageView()),
                   (Route<dynamic> route) => false,
                 );
               },

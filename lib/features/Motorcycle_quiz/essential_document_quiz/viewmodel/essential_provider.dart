@@ -46,4 +46,65 @@ class MotorcycleEssentialQuizProvider with ChangeNotifier {
     _categoryQuestionIndices[category] = index;
     notifyListeners();
   }
+// get list of correct answer to shared preferences
+  Future <List<String>> getCorrectAnswer() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('essentialcorrectAnswers') ?? [];
+  }
+
+//get list of wrong answer to shared preferences
+  Future <List<String>> getWrongAnswer() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('essentialwrongAnswers') ?? [];
+  }
+// get category type to shared preferences
+   Future <String> getCategory() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('essentialcategory') ?? '';
+   }
+
+// get total question  index to shared preferences
+  Future <int> getTotalQuestionIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('essentialTotalQuestionIndex') ?? 0;
+  }
+
+// get currentQuestionIndex to shared preferences
+   Future <int> getCurrentQuestionIndex1() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('essentialCurrentQuestionIndex') ?? 0;
+   }
+
+// add currentQuestionIndex to shared preferences
+   Future<void> saveCurrentQuestionIndex(int currentQuestionIndex) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('essentialCurrentQuestionIndex', currentQuestionIndex);
+   }
+
+
+// add total question  index to shared preferences
+   Future<void> saveCurrentQuestionIndex1(int currentQuestionIndex) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('essentialCurrentQuestionIndex', currentQuestionIndex);
+
+   }
+
+// add category type to shared preferences
+   Future <void> saveCategory(String category) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('essentialcategory', category);
+   }
+
+//add list of wrong answer to shared preferences
+   Future <void> saveWrongAnswers( List<String> wrongAnswers) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('essentialwrongAnswers', wrongAnswers);
+   }
+
+// add list of correct answer to shared preferences
+ Future <void> saveCorrectAnswers( List<String> correctAnswers) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('essentialcorrectAnswers', correctAnswers);
+
+ }
 }

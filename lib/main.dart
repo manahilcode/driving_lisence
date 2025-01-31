@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'features/Motorcycle_quiz/Alerness_quiz/viewmodel/alernes_provider.dart';
-import 'features/Motorcycle_quiz/attitude_quiz/viewmodel/attitude_repo.dart';
+import 'features/Motorcycle_quiz/attitude_quiz/viewmodel/attitude_provider.dart';
 import 'features/Motorcycle_quiz/essential_document_quiz/viewmodel/essential_provider.dart';
 import 'features/Motorcycle_quiz/hazard_awarness_quiz/viewmodel/hazard_awarness_provider.dart';
 import 'features/Motorcycle_quiz/incident_quiz/viewmodel/incident_provider.dart';
@@ -139,6 +139,7 @@ import 'features/motorcycle/hazardAwareness/viewmodel/things_discuss_trainer.dar
 import 'features/motorcycle/hazardAwareness/viewmodel/think_about_provider.dart';
 import 'features/motorcycle/hazardAwareness/viewmodel/yourself_provider.dart';
 import 'features/motorcycle/hazard_quiz/viewmodel/hazard_question_provider.dart';
+import 'features/motorcycle/hazard_response_clip/viewmodel/video_clip_provider.dart';
 import 'features/motorcycle/incident/repo/incident_accident_emergency.dart';
 import 'features/motorcycle/incident/repo/meeting_standard.dart';
 import 'features/motorcycle/incident/repo/reporting_an_incident.dart';
@@ -285,6 +286,172 @@ import 'features/road_and_traffic_sign/viewmodel/controller.dart';
 import 'features/rule_of_road/viewmodel/controller.dart';
 import 'features/vehicle_loading/viewmodel/controller.dart';
 import 'features/vulnerable_road_user/viewmodel/controller.dart';
+import 'highwaycode/animal_being_herded/repo/crossing_the_road_repo.dart';
+import 'highwaycode/animal_being_herded/repo/junctions_repo.dart';
+import 'highwaycode/animal_being_herded/repo/overview_repo.dart';
+import 'highwaycode/animal_being_herded/repo/road_junction_repo.dart';
+import 'highwaycode/animal_being_herded/repo/roundabouts_repo.dart';
+import 'highwaycode/animal_being_herded/viewmodel/crossing_the_road_controller.dart';
+import 'highwaycode/animal_being_herded/viewmodel/junctions_controller.dart';
+import 'highwaycode/animal_being_herded/viewmodel/overview_controller.dart';
+import 'highwaycode/animal_being_herded/viewmodel/road_junction_controller.dart';
+import 'highwaycode/animal_being_herded/viewmodel/roundabouts_controller.dart';
+import 'highwaycode/breakdown_and_incident/repo/additional_rules_for_motorways_repo.dart';
+import 'highwaycode/breakdown_and_incident/viewmodel/additional_rules_for_motorways_controller.dart';
+import 'highwaycode/breakdown_and_incident/viewmodel/breakdown_controller.dart';
+import 'highwaycode/breakdown_and_incident/viewmodel/documentation_controller.dart';
+import 'highwaycode/breakdown_and_incident/viewmodel/incident_involving_dangrous_goods_controller.dart';
+import 'highwaycode/breakdown_and_incident/viewmodel/incidents_controller.dart';
+import 'highwaycode/breakdown_and_incident/viewmodel/obstructions_controller.dart';
+import 'highwaycode/breakdown_and_incident/viewmodel/place_of_relative_afety_controller.dart';
+import 'highwaycode/direction_sign_on_road_and_motorways/viewmodel/information_signs_controller.dart';
+import 'highwaycode/direction_sign_on_road_and_motorways/viewmodel/you_and_your_bicycle_controller.dart';
+import 'highwaycode/driving_in_adverse_weather_condition/viewmodel/fog_controller.dart';
+import 'highwaycode/driving_in_adverse_weather_condition/viewmodel/hot_weather_controller.dart';
+import 'highwaycode/driving_in_adverse_weather_condition/viewmodel/icy_and_snowy_waether_controller.dart';
+import 'highwaycode/driving_in_adverse_weather_condition/viewmodel/parking_at_controller.dart';
+import 'highwaycode/driving_in_adverse_weather_condition/viewmodel/parking_controller.dart';
+import 'highwaycode/driving_in_adverse_weather_condition/viewmodel/weating_and_parking_controller.dart';
+import 'highwaycode/driving_in_adverse_weather_condition/viewmodel/wet_weather_controller.dart';
+import 'highwaycode/driving_in_adverse_weather_condition/viewmodel/windy_weather_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/repo/vehicle_prohibited_using_road_pavement_repo.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/control_the_vehicle_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/country_road_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/driving_in_built_up_areas_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/dual_carriageways_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/flashing_headlight_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/junction_controlled_by_traffic_lights_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/lighting_requirement_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/line_lane_marketing_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/mobile_phone_vehicle_technology_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/multi_lane_carriageway_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/other_stopping_procedure_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/overtaking_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/overview_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/reversing_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/road_junction_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/roundabout_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/signal_carriageway_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/signal_controll_crossing_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/signal_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/speed_limit_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/the_driver_and_enviroment_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/the_road_user_law_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/turning_left_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/turning_right_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/using_the_road_controller.dart';
+import 'highwaycode/general_rule_techniques_and_advice_for_all_driver_riders/viewmodel/vehicle_prohibited_using_road_pavement_controller.dart';
+import 'highwaycode/introduction/repo/hierarchy_of_road_users_repo.dart';
+import 'highwaycode/introduction/viewmodel/hierarchy_of_road_users_controller.dart';
+import 'highwaycode/introduction/viewmodel/knowing_and_applying_rules_controller.dart';
+import 'highwaycode/introduction/viewmodel/self_driving_vehicle_controller.dart';
+import 'highwaycode/introduction/viewmodel/wording_of_highway_code_controller.dart';
+import 'highwaycode/motorways/viewmodel/general_controller.dart';
+import 'highwaycode/motorways/viewmodel/joining_the_motorway_controller.dart';
+import 'highwaycode/motorways/viewmodel/lane_discipline_controller.dart';
+import 'highwaycode/motorways/viewmodel/leaving_the_motorway_controller.dart';
+import 'highwaycode/motorways/viewmodel/motorway_signal_controller.dart';
+import 'highwaycode/motorways/viewmodel/on_the_motorway_controller.dart';
+import 'highwaycode/motorways/viewmodel/overtaking_controller.dart';
+import 'highwaycode/motorways/viewmodel/stopping_controller.dart';
+import 'highwaycode/panelties/viewmodel/new_driver_controller.dart';
+import 'highwaycode/panelties/viewmodel/other_consequence_of_offending_controller.dart';
+import 'highwaycode/panelties/viewmodel/panalties_and_highway_code_controller.dart';
+import 'highwaycode/panelties/viewmodel/panalty_points_disqualification_controller.dart';
+import 'highwaycode/road_users_requiring_extra/viewmodel/motorcyclist_cyclist_controller.dart';
+import 'highwaycode/road_users_requiring_extra/viewmodel/other_road_user_controller.dart';
+import 'highwaycode/road_users_requiring_extra/viewmodel/other_vehicle_controller.dart';
+import 'highwaycode/road_users_requiring_extra/viewmodel/overview_controller.dart';
+import 'highwaycode/road_users_requiring_extra/viewmodel/padestrian_controller.dart';
+import 'highwaycode/road_work_level_crossing_and_tramways/viewmodel/additional_rule_high_speed_road_controller.dart';
+import 'highwaycode/road_work_level_crossing_and_tramways/viewmodel/level_crossing_controller.dart';
+import 'highwaycode/road_work_level_crossing_and_tramways/viewmodel/overhead_electric_line_controller.dart';
+import 'highwaycode/road_work_level_crossing_and_tramways/viewmodel/road_works_controller.dart';
+import 'highwaycode/road_work_level_crossing_and_tramways/viewmodel/tramways_controller.dart';
+import 'highwaycode/rule_about_animals/viewmodel/horse_drawn_vehicle_controller.dart';
+import 'highwaycode/rule_about_animals/viewmodel/horse_rider_controller.dart';
+import 'highwaycode/rule_about_animals/viewmodel/other_animal_controller.dart';
+import 'highwaycode/rule_about_animals/viewmodel/riding_controller.dart';
+import 'highwaycode/rule_for_driver_and_motorcyclist/viewmodel/alcohal_drugs_controller.dart';
+import 'highwaycode/rule_for_driver_and_motorcyclist/viewmodel/before_setting_off_controller.dart';
+import 'highwaycode/rule_for_driver_and_motorcyclist/viewmodel/fitness_to_drive_controller.dart';
+import 'highwaycode/rule_for_driver_and_motorcyclist/viewmodel/moped_licence_requirement_controller.dart';
+import 'highwaycode/rule_for_driver_and_motorcyclist/viewmodel/motorcycle_licence_requirement_controller.dart';
+import 'highwaycode/rule_for_driver_and_motorcyclist/viewmodel/seat_belts_and_child_restraints_controller.dart';
+import 'highwaycode/rule_for_driver_and_motorcyclist/viewmodel/vehicle_towing_and_loading_controller.dart';
+import 'highwaycode/rule_for_motorcyclist/viewmodel/documents_controller.dart';
+import 'highwaycode/rule_for_motorcyclist/viewmodel/general_guidance_controller.dart';
+import 'highwaycode/rule_for_motorcyclist/viewmodel/learner_drivers_controller.dart';
+import 'highwaycode/rule_for_motorcyclist/viewmodel/moped_licence_requirement1_controller.dart';
+import 'highwaycode/rule_for_motorcyclist/viewmodel/moped_licence_requirement_controller.dart';
+import 'highwaycode/rule_for_motorcyclist/viewmodel/motorcycle_licence_requirement1_controller.dart';
+import 'highwaycode/rule_for_motorcyclist/viewmodel/motorcycle_licence_requirement_controller.dart';
+import 'highwaycode/rule_for_pedestrain/viewmodel/crossing_controller.dart';
+import 'highwaycode/rule_for_pedestrain/viewmodel/crossing_the_road_controller.dart';
+import 'highwaycode/rule_for_pedestrain/viewmodel/general_guidance_controller.dart';
+import 'highwaycode/rule_for_pedestrain/viewmodel/situation_needing_extra_care_controller.dart';
+import 'highwaycode/rule_for_user_wheel_chair_scooter/viewmodel/on_pavements_controller.dart';
+import 'highwaycode/rule_for_user_wheel_chair_scooter/viewmodel/on_the_road_controller.dart';
+import 'highwaycode/rule_for_user_wheel_chair_scooter/viewmodel/powered_wheelchair_mobility_scooter_controller.dart';
+import 'highwaycode/using_road/viewmodel/act_regulation_prior_controller.dart';
+import 'highwaycode/using_road/viewmodel/the_road_user_and_law_controller.dart';
+import 'highwaycode/vehicle_documentation_learner_driving_requirement/viewmodel/document_controller.dart';
+import 'highwaycode/vehicle_documentation_learner_driving_requirement/viewmodel/learner_driver_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/be_prepared_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/bleeding_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/burn_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/deal_with_danger_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/first_aid_on_road_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/get_help_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/help_those_involved_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/provide_emergency_care_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/safety_code_for_driver_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/vehicle_maintaince_controller.dart';
+import 'highwaycode/vehicle_maintenance_safety_security/viewmodel/vehicle_security_controller.dart';
+import 'lorry/accident_handling_screen/repo/question_repo.dart';
+import 'lorry/accident_handling_screen/viewmodel/question_controller.dart';
+import 'lorry/braking_system_screen/repo/question_repo.dart';
+import 'lorry/braking_system_screen/viewmodel/question_controller.dart';
+import 'lorry/carrying_passenger_Screen/repo/question_repo.dart';
+import 'lorry/carrying_passenger_Screen/viewmodel/question_controller.dart';
+import 'lorry/document_screen/repo/question_repo.dart';
+import 'lorry/document_screen/viewmodel/question_controller.dart';
+import 'lorry/driver_hours_rest_peroid_screen/repo/question_repo.dart';
+import 'lorry/driver_hours_rest_peroid_screen/viewmodel/question_controller.dart';
+import 'lorry/enviromental_issue_screen/repo/question_repo.dart';
+import 'lorry/enviromental_issue_screen/viewmodel/question_controller.dart';
+import 'lorry/getting_start_Screen/repo/about_theory_repo.dart';
+import 'lorry/getting_start_Screen/repo/apply_licence_repo.dart';
+import 'lorry/getting_start_Screen/repo/driver_certification_repo.dart';
+import 'lorry/getting_start_Screen/repo/medical_requirement_repo.dart';
+import 'lorry/getting_start_Screen/repo/on_the_road_repo.dart';
+import 'lorry/getting_start_Screen/repo/other_study_repo.dart';
+import 'lorry/getting_start_Screen/repo/preparing_for_test_repo.dart';
+import 'lorry/getting_start_Screen/viewmodel/about_theory_controller.dart';
+import 'lorry/getting_start_Screen/viewmodel/apply_licence.dart';
+import 'lorry/getting_start_Screen/viewmodel/driver_certification_controller.dart';
+import 'lorry/getting_start_Screen/viewmodel/medical_requirement_controller.dart';
+import 'lorry/getting_start_Screen/viewmodel/on_the_road_controller.dart';
+import 'lorry/getting_start_Screen/viewmodel/other_study_controller.dart';
+import 'lorry/getting_start_Screen/viewmodel/preparing_for_test_controller.dart';
+import 'lorry/leaving_vehicle/repo/question_repo.dart';
+import 'lorry/leaving_vehicle/viewmodel/question_coontroller.dart';
+import 'lorry/other_road_users_Screen/repo/question_repo.dart';
+import 'lorry/other_road_users_Screen/viewmodel/question_controller.dart';
+import 'lorry/restricted_view/repo/question_repo.dart';
+import 'lorry/restricted_view/viewmodel/question_controller.dart';
+import 'lorry/the_driver_system/repo/question_repo.dart';
+import 'lorry/the_driver_system/viewmodel/question_controller.dart';
+import 'lorry/the_road_Screen/repo/question_repo.dart';
+import 'lorry/the_road_Screen/viewmodel/question_controller.dart';
+import 'lorry/traffic_sign_screen/repo/question_repo.dart';
+import 'lorry/traffic_sign_screen/viewmodel/question_controller.dart';
+import 'lorry/vehicle_condition_screen/repo/question_repo.dart';
+import 'lorry/vehicle_condition_screen/viewmodel/question_controller.dart';
+import 'lorry/vehicle_loading_Screen/repo/question_repo.dart';
+import 'lorry/vehicle_loading_Screen/viewmodel/question_controller.dart';
+import 'lorry/vehicle_weight_dimension_screen/repo/question_repo.dart';
+import 'lorry/vehicle_weight_dimension_screen/viewmodel/question_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -396,65 +563,69 @@ class MyApp extends StatelessWidget {
             create: (_) => FactorEffectingProvider()),
         //add
         ChangeNotifierProvider<AlertnessNotifier>(
-            create: (_) => AlertnessNotifier(
-                AlertnessRepository()
-            )),
+            create: (_) => AlertnessNotifier(AlertnessRepository())),
 
         ChangeNotifierProvider<HazardManagementProvider>(
-            create: (_) => HazardManagementProvider(
-            )),
+            create: (_) => HazardManagementProvider()),
 
         ChangeNotifierProvider<RespondingToHazardsProvider>(
-            create: (_) => RespondingToHazardsProvider(
-
-            )),
+            create: (_) => RespondingToHazardsProvider()),
 
         //ReviewingYourDrivingProvider
         ChangeNotifierProvider<ReviewingYourDrivingProvider>(
-            create: (_) => ReviewingYourDrivingProvider(
-            )),
+            create: (_) => ReviewingYourDrivingProvider()),
 
         //HazardQuizProvider
         ChangeNotifierProvider<HazardQuizProvider>(
-            create: (_) => HazardQuizProvider(
-            )),
-
-
-
+            create: (_) => HazardQuizProvider()),
 
         // m allert
-        ChangeNotifierProvider<AnticipationProvider>(create: (_) => AnticipationProvider(RoadAwarenessRepository())),
+        ChangeNotifierProvider<AnticipationProvider>(
+            create: (_) => AnticipationProvider(RoadAwarenessRepository())),
         ChangeNotifierProvider(create: (_) => AvoidingTirednessProvider()),
         ChangeNotifierProvider(create: (_) => BeingSeenProvider()),
         ChangeNotifierProvider(create: (_) => DistractionProvider()),
         ChangeNotifierProvider(create: (_) => KeepingWarmProvider()),
-        ChangeNotifierProvider(create: (_) => MeetingTheStandardsProviderMotorcycleAllert()),
-        ChangeNotifierProvider(create: (_) => ObservationAwarenessNotifier(ObservationAwarenessRepository())),
+        ChangeNotifierProvider(
+            create: (_) => MeetingTheStandardsProviderMotorcycleAllert()),
+        ChangeNotifierProvider(
+            create: (_) =>
+                ObservationAwarenessNotifier(ObservationAwarenessRepository())),
         ChangeNotifierProvider(create: (_) => StayFocusProvider()),
         ChangeNotifierProvider(create: (_) => ThingsToDiscussProviderAllert()),
         ChangeNotifierProvider(create: (_) => ThinkAboutProviderAllert()),
 
         // m attitude
 
-        ChangeNotifierProvider(create: (_) => AnimalsOnTheRoadProviderAttitude()),
+        ChangeNotifierProvider(
+            create: (_) => AnimalsOnTheRoadProviderAttitude()),
         ChangeNotifierProvider(create: (_) => AttitudeProviderAttitude()),
-        ChangeNotifierProvider(create: (_) => TrainerDiscussionProviderAttitude()),
-        ChangeNotifierProvider(create: (_) => FollowingSafelyProviderAttitude()),
-        ChangeNotifierProvider(create: (_) => GivingPriorityToOthersProviderAttitude()),
+        ChangeNotifierProvider(
+            create: (_) => TrainerDiscussionProviderAttitude()),
+        ChangeNotifierProvider(
+            create: (_) => FollowingSafelyProviderAttitude()),
+        ChangeNotifierProvider(
+            create: (_) => GivingPriorityToOthersProviderAttitude()),
         ChangeNotifierProvider(create: (_) => GoodMannersProviderAttitude()),
         ChangeNotifierProvider(create: (_) => DazzleProviderAttitude()),
         ChangeNotifierProvider(create: (_) => StandardsProviderAttitude()),
-        ChangeNotifierProvider<CrossingProviderAttitudeMotorcycle>(create: (_) => CrossingProviderAttitudeMotorcycle()),
+        ChangeNotifierProvider<CrossingProviderAttitudeMotorcycle>(
+            create: (_) => CrossingProviderAttitudeMotorcycle()),
         ChangeNotifierProvider(create: (_) => CrossingInfoProviderAttitude()),
         ChangeNotifierProvider(create: (_) => ThinkAboutProviderAttitude()),
 
         // s safety
-        ChangeNotifierProvider(create: (_) => AvoidingCongestionNotifier(AvoidingCongestionRepository())),
-        ChangeNotifierProvider(create: (_) => BeingAwareOfTheEnvironmentProvider()),
-        ChangeNotifierProvider(create: (_) => CarryingPassengersAndLoadsProvider()),
+        ChangeNotifierProvider(
+            create: (_) =>
+                AvoidingCongestionNotifier(AvoidingCongestionRepository())),
+        ChangeNotifierProvider(
+            create: (_) => BeingAwareOfTheEnvironmentProvider()),
+        ChangeNotifierProvider(
+            create: (_) => CarryingPassengersAndLoadsProvider()),
         ChangeNotifierProvider(create: (_) => ClothNotifier()),
         ChangeNotifierProvider(create: (_) => WheelBalancingProvider()),
-        ChangeNotifierProvider(create: (_) => TrainerDiscussionNotifierSafety()),
+        ChangeNotifierProvider(
+            create: (_) => TrainerDiscussionNotifierSafety()),
         ChangeNotifierProvider(create: (_) => NoisePollutionProvider()),
         ChangeNotifierProvider(create: (_) => MotorcycleMaintenanceNotifier()),
         ChangeNotifierProvider(create: (_) => MotorcycleSafetyNotifierSafety()),
@@ -467,48 +638,98 @@ class MyApp extends StatelessWidget {
         // s safety margin
         ChangeNotifierProvider(create: (_) => AntiLockBrakingSystemNotifier()),
         ChangeNotifierProvider(create: (_) => ContraflowSystemNotifier()),
-        ChangeNotifierProvider(create: (_) => SafetyMarginDiscussNotifier(SafetyMarginDiscussRepository())),
-        ChangeNotifierProvider(create: (_) => MeetingTheStandardsNotifierSafety()),
+        ChangeNotifierProvider(
+            create: (_) =>
+                SafetyMarginDiscussNotifier(SafetyMarginDiscussRepository())),
+        ChangeNotifierProvider(
+            create: (_) => MeetingTheStandardsNotifierSafety()),
         ChangeNotifierProvider(create: (_) => NightRidingNotifier()),
         ChangeNotifierProvider(create: (_) => SafetyMarginNotifier()),
         ChangeNotifierProvider(create: (_) => SafetyMargin1Notifier()),
         ChangeNotifierProvider(create: (_) => SkiddingInfoNotifier()),
-        ChangeNotifierProvider(create: (_) => StoppingDistanceNotifier(StoppingDistanceRepository())),
-        ChangeNotifierProvider(create: (_) => ThinkAboutProviderMargin(SafetyMarginThinkAboutRepository())),
-        ChangeNotifierProvider(create: (_) => WeatherConditionNotifier(WeatherConditionRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                StoppingDistanceNotifier(StoppingDistanceRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                ThinkAboutProviderMargin(SafetyMarginThinkAboutRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                WeatherConditionNotifier(WeatherConditionRepository())),
 
         // h hazrad awarness
         //MotorwaysAndDualCarriagewaysProvider11
-        ChangeNotifierProvider(create: (_) => HazardAwarenessProvider11(MotorCycleHazardAwarenessRepository())),
-        ChangeNotifierProvider(create: (_) => MotorwaysAndDualCarriagewaysProvider11(MotorwaysAndDualCarriagewaysRepository())),
-        ChangeNotifierProvider(create: (_) => MotorcycleHazardProviderAwareness(MotorcycleHazardawarenessRepository())),
-        ChangeNotifierProvider(create: (_) => HazardousLoadProvider(HazardousLoadRepository())),
-        ChangeNotifierProvider(create: (_) => HazardAwarenessMeetingStandardProvider(HazardAwarenessMeetingStandardRepository())),
-        ChangeNotifierProvider(create: (_) => MovingHazardsProvider(MovingHazardsRepository())),
-        ChangeNotifierProvider(create: (_) => RoadConditionProvider(RoadConditionRepository())),
-        ChangeNotifierProvider(create: (_) => RoadSignsProvider(RoadSignsRepository())),
-        ChangeNotifierProvider(create: (_) => StaticHazardProvider(StaticHazardRepository())),
-        ChangeNotifierProvider(create: (_) => HazardAwarenessDiscussProvider(HazardAwarenessThingsDiscussRepository())),
-        ChangeNotifierProvider(create: (_) => HazardAwarenessThinkAboutProvider(HazardAwarenessThinkAboutRepository())),
-        ChangeNotifierProvider(create: (_) => YourselfProvider(AwarenessHazardRepository())),
+        ChangeNotifierProvider(
+            create: (_) => HazardAwarenessProvider11(
+                MotorCycleHazardAwarenessRepository())),
+        ChangeNotifierProvider(
+            create: (_) => MotorwaysAndDualCarriagewaysProvider11(
+                MotorwaysAndDualCarriagewaysRepository())),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleHazardProviderAwareness(
+                MotorcycleHazardawarenessRepository())),
+        ChangeNotifierProvider(
+            create: (_) => HazardousLoadProvider(HazardousLoadRepository())),
+        ChangeNotifierProvider(
+            create: (_) => HazardAwarenessMeetingStandardProvider(
+                HazardAwarenessMeetingStandardRepository())),
+        ChangeNotifierProvider(
+            create: (_) => MovingHazardsProvider(MovingHazardsRepository())),
+        ChangeNotifierProvider(
+            create: (_) => RoadConditionProvider(RoadConditionRepository())),
+        ChangeNotifierProvider(
+            create: (_) => RoadSignsProvider(RoadSignsRepository())),
+        ChangeNotifierProvider(
+            create: (_) => StaticHazardProvider(StaticHazardRepository())),
+        ChangeNotifierProvider(
+            create: (_) => HazardAwarenessDiscussProvider(
+                HazardAwarenessThingsDiscussRepository())),
+        ChangeNotifierProvider(
+            create: (_) => HazardAwarenessThinkAboutProvider(
+                HazardAwarenessThinkAboutRepository())),
+        ChangeNotifierProvider(
+            create: (_) => YourselfProvider(AwarenessHazardRepository())),
 
         // v vulnerable
-        ChangeNotifierProvider(create: (_) => AnimalVulnerableUserProvider(AnimalVulnerableUserRepository())),
-        ChangeNotifierProvider(create: (_) => CyclistProvider(CyclistRepository())),
-        ChangeNotifierProvider(create: (_) => DiscussionPracticeProviderVulnerable(DiscussionPracticeRepositoryVal())),
-        ChangeNotifierProvider(create: (_) => DriverProvider(DriverRepository())),
-        ChangeNotifierProvider(create: (_) => MeetingStandardsProviderVulnerable(MeetingStandardsRepositoryVulnurable())),
-        ChangeNotifierProvider(create: (_) => OlderAndDisabledPedestriansProvider(OlderAndDisabledPedestriansRepository())),
-        ChangeNotifierProvider(create: (_) => OtherMotorcyclistsProvider(OtherMotorcyclistsRepository())),
-        ChangeNotifierProvider(create: (_) => PedestrianCrossingProvider(PedestrianCrossingRepository())),
-        ChangeNotifierProvider(create: (_) => PedestrianProvider(PedestrianRepositoryVal())),
-        ChangeNotifierProvider(create: (_) => ThinkAboutProviderVal(DiscussionQuestionsRepositoryVal())),
-        ChangeNotifierProvider(create: (_) => VulnerableRoadUsersProvider1(VulnerableRoadUsersRepositoryval())),
-        ChangeNotifierProvider(create: (_) => VulnerableRoadUserProvider(VulnerableRoadUserRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                AnimalVulnerableUserProvider(AnimalVulnerableUserRepository())),
+        ChangeNotifierProvider(
+            create: (_) => CyclistProvider(CyclistRepository())),
+        ChangeNotifierProvider(
+            create: (_) => DiscussionPracticeProviderVulnerable(
+                DiscussionPracticeRepositoryVal())),
+        ChangeNotifierProvider(
+            create: (_) => DriverProvider(DriverRepository())),
+        ChangeNotifierProvider(
+            create: (_) => MeetingStandardsProviderVulnerable(
+                MeetingStandardsRepositoryVulnurable())),
+        ChangeNotifierProvider(
+            create: (_) => OlderAndDisabledPedestriansProvider(
+                OlderAndDisabledPedestriansRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                OtherMotorcyclistsProvider(OtherMotorcyclistsRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                PedestrianCrossingProvider(PedestrianCrossingRepository())),
+        ChangeNotifierProvider(
+            create: (_) => PedestrianProvider(PedestrianRepositoryVal())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                ThinkAboutProviderVal(DiscussionQuestionsRepositoryVal())),
+        ChangeNotifierProvider(
+            create: (_) => VulnerableRoadUsersProvider1(
+                VulnerableRoadUsersRepositoryval())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                VulnerableRoadUserProvider(VulnerableRoadUserRepository())),
 
         // o other type vehicle
-        ChangeNotifierProvider(create: (_) => BusAndTramInfoProvider(BusAndTramInfoRepository())),
-        ChangeNotifierProvider(create: (_) => DiscussionPracticeInfoNotifierType()),
+        ChangeNotifierProvider(
+            create: (_) => BusAndTramInfoProvider(BusAndTramInfoRepository())),
+        ChangeNotifierProvider(
+            create: (_) => DiscussionPracticeInfoNotifierType()),
         ChangeNotifierProvider(create: (_) => LargeVehicleNotifier()),
         ChangeNotifierProvider(create: (_) => MeetingStandardsNotifierType()),
         ChangeNotifierProvider(create: (_) => MotorcycleInfoNotifier()),
@@ -519,106 +740,414 @@ class MyApp extends StatelessWidget {
         // m motorcycle handling
 
         ChangeNotifierProvider(create: (_) => WeatherConditionsNotifier()),
-        ChangeNotifierProvider(create: (_) => TrainerDiscussionPracticeNotifier()),
+        ChangeNotifierProvider(
+            create: (_) => TrainerDiscussionPracticeNotifier()),
         ChangeNotifierProvider(create: (_) => FogInfoNotifier()),
         ChangeNotifierProvider(create: (_) => MotorcycleControlInfoNotifier()),
         ChangeNotifierProvider(create: (_) => MeetingStandardsInfoNotifier()),
         ChangeNotifierProvider(create: (_) => MotorcycleHandlingNotifier()),
         ChangeNotifierProvider(create: (_) => RidingAtNightNotifier()),
-        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierMotorHandling()),
+        ChangeNotifierProvider(
+            create: (_) => ThinkAboutNotifierMotorHandling()),
         ChangeNotifierProvider(create: (_) => TrafficCalmingNotifier()),
 
         // m motorway riding
         ChangeNotifierProvider(create: (_) => TrainerPracticeProviderRiding()),
-        ChangeNotifierProvider(create: (_) => LaneMarkingNotifier(LaneMarkingRepository())),
-        ChangeNotifierProvider(create: (_) => MotorwaySafetyNotifier(MotorwaySafetyRepositoryRiding())),
-        ChangeNotifierProvider(create: (_) => MotorwayRidingNotifier(MotorwayRidingRepository())),
+        ChangeNotifierProvider(
+            create: (_) => LaneMarkingNotifier(LaneMarkingRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                MotorwaySafetyNotifier(MotorwaySafetyRepositoryRiding())),
+        ChangeNotifierProvider(
+            create: (_) => MotorwayRidingNotifier(MotorwayRidingRepository())),
         ChangeNotifierProvider(create: (_) => TrafficManagementProvider()),
         ChangeNotifierProvider(create: (_) => MotorwayRidingProvider()),
         ChangeNotifierProvider(create: (_) => SpeedLimitQuestionProvider()),
-        ChangeNotifierProvider(create: (_) => EmergencyTelephonePositioningProvider()),
+        ChangeNotifierProvider(
+            create: (_) => EmergencyTelephonePositioningProvider()),
         ChangeNotifierProvider(create: (_) => ThinkAboutProvider()),
 
         // r rule of road
         ChangeNotifierProvider(create: (_) => RidingGuideProvider()),
-        ChangeNotifierProvider(create: (_) => SpeedLimitNotifierRule(DiscussWithTrainerRuleRepo())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                SpeedLimitNotifierRule(DiscussWithTrainerRuleRepo())),
         ChangeNotifierProvider(create: (_) => LaneAndJunctionProvider()),
         ChangeNotifierProvider(create: (_) => LevelCrossingProvider()),
-        ChangeNotifierProvider(create: (_) => MeetingStandardsNotifierRule( repository: MeetingStandardsRepository())),
-        ChangeNotifierProvider(create: (_) => OvertakingCrossingsNotifier(OvertakingCrossingsRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => RulesOfTheRoadNotifier(RulesOfTheRoadRepository())),
-        ChangeNotifierProvider(create: (_) => SpeedLimitsNotifier(repository: SpeedLimitsRepository(firestore: _firestore))),
-        ChangeNotifierProvider(create: (_) => StoppingAndParkingNotifier(repository: StoppingAndParkingRepository(firestore: _firestore))),
+        ChangeNotifierProvider(
+            create: (_) => MeetingStandardsNotifierRule(
+                repository: MeetingStandardsRepository())),
+        ChangeNotifierProvider(
+            create: (_) => OvertakingCrossingsNotifier(
+                OvertakingCrossingsRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => RulesOfTheRoadNotifier(RulesOfTheRoadRepository())),
+        ChangeNotifierProvider(
+            create: (_) => SpeedLimitsNotifier(
+                repository: SpeedLimitsRepository(firestore: _firestore))),
+        ChangeNotifierProvider(
+            create: (_) => StoppingAndParkingNotifier(
+                repository:
+                    StoppingAndParkingRepository(firestore: _firestore))),
         ChangeNotifierProvider(create: (_) => ThinkRule(ThinkAboutRepoRule())),
 
-
         // r road and traffic sign
-        ChangeNotifierProvider(create: (_) => StandardsProviderRoadTraffic(repository: StandardsRepositorySign(firestore: _firestore))),
-        ChangeNotifierProvider(create: (_) => RoadLanesProvider(repository: RoadLanesRepository(firestore: _firestore))),
+        ChangeNotifierProvider(
+            create: (_) => StandardsProviderRoadTraffic(
+                repository: StandardsRepositorySign(firestore: _firestore))),
+        ChangeNotifierProvider(
+            create: (_) => RoadLanesProvider(
+                repository: RoadLanesRepository(firestore: _firestore))),
         ChangeNotifierProvider(create: (_) => RoadMarkingsNotifier()),
-        ChangeNotifierProvider(create: (_) => RoadSignsProviderRoadTraffic(repository: RoadSignsRepositorySing(firestore: _firestore))),
-        ChangeNotifierProvider(create: (_) => SignalInfoProvider(repository: SignalInfoRepository(firestore: _firestore))),
+        ChangeNotifierProvider(
+            create: (_) => RoadSignsProviderRoadTraffic(
+                repository: RoadSignsRepositorySing(firestore: _firestore))),
+        ChangeNotifierProvider(
+            create: (_) => SignalInfoProvider(
+                repository: SignalInfoRepository(firestore: _firestore))),
         ChangeNotifierProvider(create: (_) => SignSignProvider()),
-        ChangeNotifierProvider(create: (_) => TrainerPractiseProvider(TrainerPractiseRepository())),
-        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierSign(ThinkAboutRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => TrafficLightsWarningNotifier(TrafficLightsWarningRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) =>
+                TrainerPractiseProvider(TrainerPractiseRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                ThinkAboutNotifierSign(ThinkAboutRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => TrafficLightsWarningNotifier(
+                TrafficLightsWarningRepository(_firestore))),
 
         // E essential document
-        ChangeNotifierProvider(create: (_) => EssentialDocumentsNotifier(EssentialDocumentsRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => EssentialDocumentsDetailsNotifier(EssentialDocumentsDetailsRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => InsuranceDetailsNotifier(InsuranceDetailsRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => EssentialDocumentsNotifier(
+                EssentialDocumentsRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => EssentialDocumentsDetailsNotifier(
+                EssentialDocumentsDetailsRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => InsuranceDetailsNotifier(
+                InsuranceDetailsRepository(_firestore))),
         ChangeNotifierProvider(create: (_) => MeetingStandardDocument()),
-        ChangeNotifierProvider(create: (_) => MotTestDetailsNotifier(MotTestDetailsRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) =>
+                MotTestDetailsNotifier(MotTestDetailsRepository(_firestore))),
         ChangeNotifierProvider(create: (_) => MotorcycleLicenceProvider()),
         ChangeNotifierProvider(create: (_) => MotorcycleInfoProvider()),
         ChangeNotifierProvider(create: (_) => ThingDiscussProviderDocument()),
-        ChangeNotifierProvider(create: (_) => ThinkAboutMotorcycleInfoProvider()),
-
+        ChangeNotifierProvider(
+            create: (_) => ThinkAboutMotorcycleInfoProvider()),
 
         // i m incident
         ChangeNotifierProvider(create: (_) => BreakdownProvider()),
         ChangeNotifierProvider(create: (_) => FirstAidProvider()),
-        ChangeNotifierProvider(create: (_) => IncidentNotifier(repository:IncidentRepository(_firestore) )),
-        ChangeNotifierProvider(create: (_) => StandardsNotifier(repository:StandardsRepositoryIncident(_firestore) )),
-        ChangeNotifierProvider(create: (_) => IncidentReportNotifier(repository: IncidentReportRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => TunnelSafetyNotifier(repository: TunnelSafetyRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => IncidentStopNotifier(repository: IncidentRepository1(_firestore))),
-        ChangeNotifierProvider(create: (_) => TrainerPracticeNotifierIncident(repository: TrainerPracticeRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierIncidentMotorcycle(repository: ThinkAboutRepositoryIncident(_firestore))),
-        ChangeNotifierProvider(create: (_) => WarningIncidentNotifier(repository: WarningIncidentRepository(_firestore))),
-
+        ChangeNotifierProvider(
+            create: (_) =>
+                IncidentNotifier(repository: IncidentRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => StandardsNotifier(
+                repository: StandardsRepositoryIncident(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => IncidentReportNotifier(
+                repository: IncidentReportRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => TunnelSafetyNotifier(
+                repository: TunnelSafetyRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => IncidentStopNotifier(
+                repository: IncidentRepository1(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => TrainerPracticeNotifierIncident(
+                repository: TrainerPracticeRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => ThinkAboutNotifierIncidentMotorcycle(
+                repository: ThinkAboutRepositoryIncident(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => WarningIncidentNotifier(
+                repository: WarningIncidentRepository(_firestore))),
 
         // m motorcycle loading
 
-        ChangeNotifierProvider(create: (_) => MotorcycleStabilityNotifier(repository: MotorcycleStabilityRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => MotorcyclePassengerNotifier(repository: MotorcyclePassengerRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => MotorcycleLoadingNotifier(repository: MotorcycleLoadingRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => PillionPasSideCarsengerNotifier(repository: PillionPassengerRepository(_firestore))),
-        ChangeNotifierProvider(create: (_) => TrainerDiscussionNotifierLoading(repository: TrainerDiscussionRepositoryLoading(_firestore))),
-        ChangeNotifierProvider(create: (_) => ThinkAboutNotifierLoading(repository:ThinkAboutRepositoryLoading(_firestore) )),
-        ChangeNotifierProvider(create: (_) => TowingTrailerNotifier(repository: TowingTrailerRepository(_firestore))),
-
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleStabilityNotifier(
+                repository: MotorcycleStabilityRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => MotorcyclePassengerNotifier(
+                repository: MotorcyclePassengerRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleLoadingNotifier(
+                repository: MotorcycleLoadingRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => PillionPasSideCarsengerNotifier(
+                repository: PillionPassengerRepository(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => TrainerDiscussionNotifierLoading(
+                repository: TrainerDiscussionRepositoryLoading(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => ThinkAboutNotifierLoading(
+                repository: ThinkAboutRepositoryLoading(_firestore))),
+        ChangeNotifierProvider(
+            create: (_) => TowingTrailerNotifier(
+                repository: TowingTrailerRepository(_firestore))),
 
         // motorcycle quiz
-        ChangeNotifierProvider(create: (_) => MotorcycleVulnerableQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleVehicleLoadingQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleSafetyMarginQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleSafetyMotorcycleQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleRuleOfRoadQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleRoadTrafficQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleOtherTypeQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleMotorcycleDrivingQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleMotorcycleHandlingQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleVulnerableQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleVehicleLoadingQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleSafetyMarginQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleSafetyMotorcycleQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleRuleOfRoadQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleRoadTrafficQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleOtherTypeQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleMotorcycleDrivingQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleMotorcycleHandlingQuizProvider()),
         ChangeNotifierProvider(create: (_) => MotorcycleIncidentQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleHazardAwarenessQuizProvider()),
-        ChangeNotifierProvider(create: (_) => MotorcycleEssentialQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleHazardAwarenessQuizProvider()),
+        ChangeNotifierProvider(
+            create: (_) => MotorcycleEssentialQuizProvider()),
         ChangeNotifierProvider(create: (_) => MotorcycleAttitudeQuizProvider()),
         ChangeNotifierProvider(create: (_) => MotorcycleAllertQuizProvider()),
 
+        /// video player provider
+        ChangeNotifierProvider(create: (_) => VideoProvider()),
 
+        // lorry
+        ChangeNotifierProvider(
+          create: (_) => LorryAccidentHandlingProvider(
+            repository: LorryAccidentHandlingRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryBrakingSystemProvider(
+            repository: LorryBrakingSystemRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryCarryingPassengerProvider(
+            repository: LorryCarryingPassengerRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryDocumentProvider(
+            repository: LorryDocumentRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryDriverHoursRestProvider(
+            repository:
+                LorryDriverHourRestPeroidRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryEnviromentalIssueProvider(
+            repository: LorryEnviromentalIssueRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryLeavingVehicleProvider(
+            repository: LorryLeavingVehicleRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryOtherRoadUsersProvider(
+            repository: LorryOtherRoadUserRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryRestrictedProvider(
+            repository: LorryRestricedViewRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryTheDriverSystemProvider(
+            repository: LorryTheDriverSystemRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryTheRoadScreenProvider(
+            repository: LorryTheRoadScreenRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryTrafficSignProvider(
+            repository: LorryTrafficSignRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryVehicleConditionProvider(
+            repository: LorryVehicleConditionRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryVehicleLoadingProvider(
+            repository: LorryVehicleLooadingRepository(firestore: _firestore),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LorryVehicleWeightDimensionProvider(
+            repository:
+                LorryVehicleWeightDimensionRepository(firestore: _firestore),
+          ),
+        ),
 
+        ChangeNotifierProvider(
+            create: (_) => GettingInfoProvider(GettingInfoRepository())),
+        ChangeNotifierProvider(
+            create: (_) => ApplyLicenceProvider(ApplyLicenceRepository())),
+        ChangeNotifierProvider(
+            create: (_) => DriverCertificationControllerProvider(
+                driverCertificationRepository())),
+        ChangeNotifierProvider(
+            create: (_) => MedicalRequirementControllerProvider(
+                MedicalRequirementRepository())),
+        ChangeNotifierProvider(
+            create: (_) => OnTheRoadControllerProvider(OnTheRoadRepository())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                OtherStudyControllerProvider(OtherStudyRepository())),
+        ChangeNotifierProvider(
+            create: (_) => PreparingForTestControllerProvider(
+                PreparingForTestRepository())),
 
+        //  highway code
+        ChangeNotifierProvider(create: (_) => PointsProvider(
+            CrossingTheRoadRepo()
+        )),
+        ChangeNotifierProvider(create: (_) => JunctionProvider(
+            JunctionRepository()
+        )),
+        ChangeNotifierProvider(create: (_) => OverviewControllerProvider(
+            OverviewRepository()
+        )),
+        ChangeNotifierProvider(create: (_) => PointsProvider11(
+            RoadJunctionRepository()
+        )),
+        ChangeNotifierProvider(create: (_) => JunctionTextProvider(
+            RoundaboutsRepository()
+        )),
+        ChangeNotifierProvider(create: (_) => MotorwayGuideProvider(
+            AdditionalRulesForMotorwaysRepository()
+        )),
+        ChangeNotifierProvider(create: (_) => BreakdownPointsProvider()),
+        ChangeNotifierProvider(create: (_) => DocumentationProvider()),
+        ChangeNotifierProvider(create: (_) => IncidentAdviceProvider()),
+        ChangeNotifierProvider(create: (_) => IncidentAdviceProvider11()),
+        ChangeNotifierProvider(create: (_) => ObstructionsNotifier()),
+        ChangeNotifierProvider(create: (_) => PlaceOfRelativeSafetyProvider()),
+        ChangeNotifierProvider(create: (_) => InformationSignProvider()),
+        ChangeNotifierProvider(create: (_) => YouAndYourBicycleProvider()),
+        ChangeNotifierProvider(create: (_) => FogProvider()),
+        ChangeNotifierProvider(create: (_) => HotWeatherProvider()),
+        ChangeNotifierProvider(create: (_) => IcySnowyWeatherProvider()),
+        ChangeNotifierProvider(create: (_) => ParkingAtNightProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayParkingProvider()),
+        ChangeNotifierProvider(create: (_) => WaitingAndParkingProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayWetWeatherProvider()),
+        ChangeNotifierProvider(create: (_) => WindyWeatherProvider()),
+        ChangeNotifierProvider(create: (_) => ControlOfTheVehicleProvider()),
+        ChangeNotifierProvider(create: (_) => CountryRoadsProvider()),
+        ChangeNotifierProvider(create: (_) => DrivingInBuiltUpAreaProvider()),
+        ChangeNotifierProvider(create: (_) => DualCarriagewaysProvider()),
+        ChangeNotifierProvider(create: (_) => FlashingHeadlightsProvider()),
+        ChangeNotifierProvider(create: (_) => JunctionsControlledByTrafficLightsProvider()),
+        ChangeNotifierProvider(create: (_) => LightingRequirementProvider()),
+        ChangeNotifierProvider(create: (_) => LinesAndLaneMarkingsProvider()),
+        ChangeNotifierProvider(create: (_) => MobilePhonesProvider()),
+        ChangeNotifierProvider(create: (_) => MultiLaneCarriagewaysProvider()),
+        ChangeNotifierProvider(create: (_) => OtherStoppingProceduresProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayOvertakingProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayOverviewProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayReversingProvider()),
+        ChangeNotifierProvider(create: (_) => RoadJunctionsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayRoundaboutsProvider()),
+        ChangeNotifierProvider(create: (_) => SignalCarriagewayProvider()),
+        ChangeNotifierProvider(create: (_) => SignalControlledCrossingsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwaySignalsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwaySpeedLimitsProvider()),
+        ChangeNotifierProvider(create: (_) => TheDriverAndEnvironmentProvider()),
+        ChangeNotifierProvider(create: (_) => TheRoadUserAndTheLawProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayTurningLeftProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayTurningRightProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayUsingRoadProvider()),
+        ChangeNotifierProvider(create: (_) => ProhibitedVehicleProvider(
+            ProhibitedVehicleRepository()
+        )),
 
+        ChangeNotifierProvider(create: (_) => HierarchyProvider(
+            HierarchyRepository()
+        )),
+        ChangeNotifierProvider(create: (_) => KnowingAndApplyingRulesController()),
+        ChangeNotifierProvider(create: (_) => SelfDrivingProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeProvider123()),
+        ChangeNotifierProvider(create: (_) => HighwayGeneralProvider()),
+        ChangeNotifierProvider(create: (_) => JoiningMotorwayProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayLaneDisciplineProvider()),
+        ChangeNotifierProvider(create: (_) => LeavingMotorwayProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayMotorwaySignalsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayMotorwayProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayOvertakingProvider11()),
+        ChangeNotifierProvider(create: (_) => HighwayStoppingProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayNewDriversProvider()),
+        ChangeNotifierProvider(create: (_) => OtherConsequencesOfOffendingProvider()),
+        ChangeNotifierProvider(create: (_) => PenaltiesAndHighwayCodeProvider()),
+        ChangeNotifierProvider(create: (_) => PenaltyPointsAndDisqualificationProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcyclistsAndCyclistsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayOtherRoadUsersProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayOtherVehiclesProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeOverviewProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayPedestriansProvider()),
+        ChangeNotifierProvider(create: (_) => AdditionalRulesHighSpeedRoadsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayLevelCrossingsProvider()),
+        ChangeNotifierProvider(create: (_) => OverheadElectricLinesProvider()),
+        ChangeNotifierProvider(create: (_) => HighwaycodeRoadWorksProvider()),
+        ChangeNotifierProvider(create: (_) => HighwaycodeTramwaysProvider()),
+        ChangeNotifierProvider(create: (_) => HorseDrawnVehiclesProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayHorseRidersProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeOtherAnimalsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeRidingProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeAlcoholDrugsProvider()),
+        ChangeNotifierProvider(create: (_) => BeforeSettingOffProvider()),
+        ChangeNotifierProvider(create: (_) => FitnessToDriveProvider()),
+        ChangeNotifierProvider(create: (_) => MopedLicenceRequirementsProvider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleLicenceRequirementsProvider()),
+        ChangeNotifierProvider(create: (_) => SeatBeltsAndChildRestraintsProvider()),
+        ChangeNotifierProvider(create: (_) => VehicleTowingAndLoadingProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayDocumentProvider11()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeGeneralGuidanceProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeLearnerDriversProvider()),
+        ChangeNotifierProvider(create: (_) => MopedLicenseRequirementsProvider()),
+        ChangeNotifierProvider(create: (_) => MopedLicenceRequirements11Provider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleLicenceRequirements22Provider()),
+        ChangeNotifierProvider(create: (_) => MotorcycleLicenceRequirements33Provider()),
+        ChangeNotifierProvider(create: (_) => HighwayCrossingProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCrossingRoadProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeProvider1245()),
+        ChangeNotifierProvider(create: (_) => SituationsNeedingExtraCareProvider()),
+        ChangeNotifierProvider(create: (_) => OnPavementsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCode11Provider()),
+        ChangeNotifierProvider(create: (_) => PoweredWheelchairsAndMobilityScootersProvider()),
+        ChangeNotifierProvider(create: (_) => ActsAndRegulationsPriorTo1988Provider()),
+        ChangeNotifierProvider(create: (_) => RoadUserAndTheLawProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeProvider2211()),
+        ChangeNotifierProvider(create: (_) => HighwayLearnerDriverProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayBePreparedProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayBleedingProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayBurnsProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeDealWithDangerProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayFirstAidOnTheRoadProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayGetHelpProvider()),
+        ChangeNotifierProvider(create: (_) => HighwayCodeHelpInvolvedProvider()),
+        ChangeNotifierProvider(create: (_) => ProvideEmergencyCareProvider()),
+        ChangeNotifierProvider(create: (_) => SafetyCodeProvider()),
+        ChangeNotifierProvider(create: (_) => VehicleMaintenanceProvider()),
+        ChangeNotifierProvider(create: (_) => VehicleSecurityProvider()),
 
 
 

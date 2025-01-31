@@ -1,0 +1,64 @@
+import 'package:driving_lisence/core/sharedUi.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/appbar.dart';
+import '../../../core/loader.dart';
+import '../viewmodel/other_stopping_procedure_controller.dart';
+
+class OtherStoppingProcedureScreenHighway extends StatefulWidget {
+  const OtherStoppingProcedureScreenHighway({super.key});
+
+  @override
+  State<OtherStoppingProcedureScreenHighway> createState() => _OtherStoppingProcedureScreenHighwayState();
+}
+
+class _OtherStoppingProcedureScreenHighwayState extends State<OtherStoppingProcedureScreenHighway> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback(
+            (_) {
+          final provider = Provider.of<OtherStoppingProceduresProvider>(context, listen: false);
+          provider.fetchData();
+        }
+
+
+    );
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      appBar: CustomAppBar(title: "Other Stopping Procedures", leadingIcon: Icons.arrow_back, onLeadingIconPressed: (){}),
+      body: Consumer<OtherStoppingProceduresProvider>(
+          builder: (context,provider,child) {
+            final data = provider.otherStoppingProceduresData;
+            if(data == null)
+            {
+              return LoadingScreen();
+            }
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Column(
+                      children: data.text.map((e)=>buildBulletText(e.toString())).toList(),
+                    ),
+                    Gap(10),
+
+                    Column(
+                      children: data.text1.map((e)=>buildBulletText(e.toString())).toList(),
+                    ),
+
+                  ],
+                ),
+              ),
+            );
+          }
+      ),
+    );
+  }
+}

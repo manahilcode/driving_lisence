@@ -46,4 +46,64 @@ class MotorcycleMotorcycleHandlingQuizProvider with ChangeNotifier {
     _categoryQuestionIndices[category] = index;
     notifyListeners();
   }
+
+// get list of correct answer to shared preferences
+  Future<List<String>> getCorrectAnswers() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getStringList('MotorcycleMotorcycleHandlingCorrectAnswer') ?? [];
+  }
+
+//get list of wrong answer to shared preferences
+  Future<List<String>> getWrongAnswers() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getStringList('MotorcycleMotorcycleHandlingWrongAnswer') ?? [];
+  }
+
+// get category type to shared preferences
+   Future <String> getCategoryType() async {
+     SharedPreferences preferences = await SharedPreferences.getInstance();
+     return preferences.getString('MotorcycleMotorcycleHandlingCategoryType') ?? '';
+   }
+
+// get total question  index to shared preferences
+  Future <int> getTotalQuestionIndex() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getInt('MotorcycleMotorcycleHandlingTotalQuestionIndex') ?? 0;
+  }
+
+// get currentQuestionIndex to shared preferences
+  Future<int> getCurrentQuestionIndex1(String category) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getInt('MotorcycleMotorcycleHandlingCurrentQuestionIndex') ?? 0;
+  }
+
+// add currentQuestionIndex to shared preferences
+   Future<void> saveCurrentQuestionIndex(int currentQuestionIndex) async {
+     SharedPreferences preferences = await SharedPreferences.getInstance();
+     await preferences.setInt('MotorcycleMotorcycleHandlingCurrentQuestionIndex', currentQuestionIndex);
+   }
+
+// add total question  index to shared preferences
+   Future<void> saveTotalQuestionIndex(int totalQuestionIndex) async {
+     SharedPreferences preferences = await SharedPreferences.getInstance();
+     await preferences.setInt('MotorcycleMotorcycleHandlingTotalQuestionIndex', totalQuestionIndex);
+   }
+
+// add category type to shared preferences
+   Future <void> saveCategoryType(String categoryType) async {
+     SharedPreferences preferences = await SharedPreferences.getInstance();
+     await preferences.setString('MotorcycleMotorcycleHandlingCategoryType', categoryType);
+   }
+
+//add list of wrong answer to shared preferences
+   Future<void> saveWrongAnswers(List<String> wrongAnswers) async {
+     SharedPreferences preferences = await SharedPreferences.getInstance();
+     await preferences.setStringList('MotorcycleMotorcycleHandlingWrongAnswer', wrongAnswers);
+   }
+
+// add list of correct answer to shared preferences
+ Future<void> saveCorrectAnswers(List<String> correctAnswers) async {
+   SharedPreferences preferences = await SharedPreferences.getInstance();
+   await preferences.setStringList('MotorcycleMotorcycleHandlingCorrectAnswer', correctAnswers);
+ }
 }

@@ -1,134 +1,137 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../motorcycle_hazard_perception_screen.dart';
 import '../model/video_clip_model.dart';
-import '../viewmodel/video_clip_provider.dart'; // Import video player package
+import '../viewmodel/video_clip_provider.dart';
 
-class VideoPageView extends StatefulWidget {
-  const VideoPageView({super.key});
+class VideoShowPageView extends StatefulWidget {
+  const VideoShowPageView({super.key});
 
   @override
-  _VideoPageViewState createState() => _VideoPageViewState();
+  _VideoShowPageViewState createState() => _VideoShowPageViewState();
 }
 
-class _VideoPageViewState extends State<VideoPageView> {
+class _VideoShowPageViewState extends State<VideoShowPageView> {
   final PageController _pageController = PageController();
+  VideoPlayerController? _controller;  // Make this nullable to handle the case when no video is initialized yet
+  Future<void>? _initializeVideoPlayerFuture;
+  int _currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    // Fetch all videos when the screen is initialized
-    final provider = Provider.of<VideoProvider>(context, listen: false);
-    provider.fetchAllVideos(
-        'motorcycle_response_clip'); // Replace with your actual collection name
+    // Fetch videos after the widget is built
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<VideoProvider>(context, listen: false);
+      provider.fetchAllVideos('motorcycle_response_clip');
+    });
+  }
+
+  // This method initializes the video player for the selected index
+  void _initializeVideoForIndex(int index, VideoProvider provider) {
+    final videos = provider.videos;
+    if (videos != null && videos.isNotEmpty) {
+      final video = videos[index];
+      _controller = VideoPlayerController.network(video.url);
+      _initializeVideoPlayerFuture = _controller?.initialize().then((_) {
+        setState(() {
+          _controller?.play(); // Start the video when initialized
+        });
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Video Player'),
-        leading: IconButton(
-            onPressed: () {
-              Route newRoute = MaterialPageRoute(
-                  builder: (context) =>
-                      const MotorcycleHazardPerceptionScreen());
+        title: Text('Response clip'),
 
-              Navigator.pushAndRemoveUntil(
-                context,
-                newRoute,
-                (Route<dynamic> route) => false, // Removes all previous routes
-              );
-            },
-            icon: Icon(Icons.arrow_back)),
+        leading: IconButton(
+          onPressed: () {
+            Route newRoute = MaterialPageRoute(
+                builder: (context) =>
+                const MotorcycleHazardPerceptionScreen());
+
+            Navigator.pushAndRemoveUntil(
+              context,
+              newRoute,
+                  (Route<dynamic> route) => false, // Removes all previous routes
+            );
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
       body: Consumer<VideoProvider>(
         builder: (context, provider, child) {
+          final data = provider.videos;
+
+          // Show loading spinner if data is still loading
           if (provider.isLoading) {
-            return Center(
-                child: CircularProgressIndicator()); // Show loading indicator
+            return Center(child: CircularProgressIndicator());
           }
 
+          // Show error message if there's an error
           if (provider.errorMessage.isNotEmpty) {
-            return Center(
-                child: Text(provider.errorMessage)); // Show error message
+            return Center(child: Text(provider.errorMessage));
           }
 
-          if (provider.videos.isEmpty) {
-            return Center(
-                child:
-                    Text('No videos available.')); // Show message if no videos
+          // If no videos are available, show a message
+          if (data == null || data.isEmpty) {
+            return Center(child: Text('No videos available.'));
           }
 
-          return PageView.builder(
-            controller: _pageController,
-            itemCount: provider.videos.length,
-            itemBuilder: (context, index) {
-              Video video = provider.videos[index];
-              return VideoPlayerWidget(video: video);
-            },
+          // Initialize the video player when data is available
+          if (_controller == null) {
+            _initializeVideoForIndex(_currentIndex, provider);
+          }
+
+          return Column(
+            children: [
+              // Video player widget that displays the video
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: FutureBuilder(
+                  future: _initializeVideoPlayerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return VideoPlayer(_controller!);
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Go to the next video if possible
+                  if (_currentIndex < data.length - 1) {
+                    setState(() {
+                      _currentIndex++;
+                      _controller?.dispose();  // Dispose of the old controller
+                      _initializeVideoForIndex(_currentIndex, provider);  // Initialize the next video
+                    });
+                    _pageController.nextPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                    );
+                  }
+                },
+                child: Text('Next'),
+              ),
+            ],
           );
         },
       ),
     );
   }
-}
-
-class VideoPlayerWidget extends StatefulWidget {
-  final Video video;
-
-  const VideoPlayerWidget({Key? key, required this.video}) : super(key: key);
-
-  @override
-  _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
-}
-
-class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  late VideoPlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.network(widget.video.url)
-      ..initialize().then((_) {
-        setState(() {}); // Update the UI when the video is initialized
-      });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AspectRatio(
-          aspectRatio: 16 / 9,
-          child: VideoPlayer(_controller),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            setState(() {
-              _controller.value.isPlaying
-                  ? _controller.pause()
-                  : _controller.play();
-            });
-          },
-          child: Icon(
-            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-          ),
-        ),
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Text(widget.video.info), // Display additional info
-        // ),
-      ],
-    );
-  }
 
   @override
   void dispose() {
-    _controller
-        .dispose(); // Dispose of the controller when the widget is removed
+    _controller?.dispose();  // Ensure the controller is properly disposed
     super.dispose();
   }
 }

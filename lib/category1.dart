@@ -1,7 +1,4 @@
 import 'package:driving_lisence/features/Quiz/result/viewmodel/resultController.dart';
-import 'package:driving_lisence/features/hazard/pages/hazard1.dart';
-import 'package:driving_lisence/features/safety_margin/pages/safety_margin1.dart';
-import 'package:driving_lisence/features/vulnerable_road_user/pages/introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:driving_lisence/practice_revision_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,10 +20,6 @@ import 'features/Quiz/vehicle_handling_quiz/pages/vehicle_handling.dart';
 import 'features/Quiz/vehicle_loading_quiz/pages/vehicle_loading_quiz.dart';
 import 'features/Quiz/vulnerable_road_user_quiz/pages/vulnerable_road_user.dart';
 import 'features/allertness/pages/introduction.dart';
-import 'features/attitude/pages/attitude.dart';
-import 'features/essential_document/pages/introduction.dart';
-import 'features/incident/pages/incident_accident_and_emergency.dart';
-import 'features/motor_way_Driving/pages/introduction.dart';
 import 'features/motorcycle/Rule_of_road/pages/rule_of_road_screen.dart';
 import 'features/motorcycle/attitude/pages/attitude_screen.dart';
 import 'features/motorcycle/essential_document/pages/essentail_document_screen.dart';
@@ -40,14 +33,9 @@ import 'features/motorcycle/road_and_traffic_sign/pages/road_traffic_sign_screen
 import 'features/motorcycle/safety_and_motorcycle/pages/safety_your_motorcycle_screen.dart';
 import 'features/motorcycle/safety_margin/pages/safety_margin_screen.dart';
 import 'features/motorcycle/vulnurable_road_user/pages/vulnerable_user_screen.dart';
-import 'features/road_and_traffic_sign/pages/introduction.dart';
-import 'features/rule_of_road/pages/introduction.dart';
-import 'features/vehicle_handling/pages/introduction.dart';
 import 'features/vehicle_loading/pages/introduction.dart';
-import 'features/vehicle_safety/pages/vehicle_safety_1.dart';
 import 'menu_screen.dart';
 import 'package:flutter/foundation.dart';
-import 'features/auth/viewmodel/user_provider.dart';
 import 'features/motorcycle/allertness/pages/allertness.dart'; // Add this line
 
 // ignore: must_be_immutable
@@ -641,7 +629,7 @@ class CategoryItem extends StatelessWidget {
   final Widget categoryScreen; // Add the category screen widget as a parameter
 
   const CategoryItem({
-    Key? key,
+    super.key,
     required this.icon,
     required this.title,
     required this.progress,
@@ -651,7 +639,7 @@ class CategoryItem extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
     required this.categoryScreen, // Pass the screen widget
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

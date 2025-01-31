@@ -46,4 +46,70 @@ class MotorcycleRoadTrafficQuizProvider with ChangeNotifier {
     _categoryQuestionIndices[category] = index;
     notifyListeners();
   }
+// get list of correct answer to shared preferences
+
+  Future <List<String>> getCorrectAnswers() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('roadTrafficcorrectAnswers') ?? [];
+  }
+
+//get list of wrong answer to shared preferences
+
+  Future <List<String>> getWrongAnswers() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('roadTrafficwrongAnswers') ?? [];
+  }
+
+// get category type to shared preferences
+
+  Future <String> getCategory() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('roadTrafficcategory') ?? '';
+  }
+
+// get total question  index to shared preferences
+  Future <int> getTotalQuestionIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('roadTrafficTotalQuestionIndex') ?? 0;
+  }
+
+// get currentQuestionIndex to shared preferences
+
+  Future <int> getCurrentQuestionIndex1() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('roadTrafficCurrentQuestionIndex') ?? 0;
+  }
+
+// add currentQuestionIndex to shared preferences
+
+  Future <void> saveCurrentQuestionIndex(int currentQuestionIndex) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('roadTrafficCurrentQuestionIndex', currentQuestionIndex);
+  }
+
+// add total question  index to shared preferences
+   Future <void> saveTotalQuestionIndex(int totalQuestionIndex) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('roadTrafficTotalQuestionIndex', totalQuestionIndex);
+
+   }
+
+// add category type to shared preferences
+
+  Future<void> saveCategory(String category) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('roadTrafficcategory', category);
+  }
+
+//add list of wrong answer to shared preferences
+  Future <void> saveWrongAnswers(List<String> wrongAnswers) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('roadTrafficwrongAnswers', wrongAnswers);
+  }
+
+// add list of correct answer to shared preferences
+ Future <void> saveCorrectAnswers(List<String> correctAnswers) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('roadTrafficcorrectAnswers', correctAnswers);
+ }
 }

@@ -1,5 +1,6 @@
 import 'package:driving_lisence/features/auth/viewmodel/controller.dart';
 import 'package:driving_lisence/features/book_theory/booked_theory_test.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -35,9 +36,13 @@ class _chooserideState extends State<chooseride> {
             );
           }
 
-          print('User is signed in: ${user.uid}');
+          if (kDebugMode) {
+            print('User is signed in: ${user.uid}');
+          }
         } else {
-          print('User is not signed in');
+          if (kDebugMode) {
+            print('User is not signed in');
+          }
         }
       });
     });
@@ -121,7 +126,7 @@ class _chooserideState extends State<chooseride> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -145,22 +150,32 @@ class _chooserideState extends State<chooseride> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => YourTheoryTestScreen(
-                          selectedCategory: selectedCategory ,
-                        )),
+                              selectedCategory: selectedCategory,
+                            )),
                   );
-                }else if(selectedCategory ==  "Motorcycle")
-                  {
-                    final auth =
-                    Provider.of<AuthController>(context, listen: false);
-                    auth.setUsrData(selectedCategory);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => YourTheoryTestScreen(
-                            selectedCategory: selectedCategory ,
-                          )),
-                    );
-                  }
+                } else if (selectedCategory == "Motorcycle") {
+                  final auth =
+                      Provider.of<AuthController>(context, listen: false);
+                  auth.setUsrData(selectedCategory);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => YourTheoryTestScreen(
+                              selectedCategory: selectedCategory,
+                            )),
+                  );
+                } else if (selectedCategory == "LGV (Lorry)") {
+                  final auth =
+                      Provider.of<AuthController>(context, listen: false);
+                  auth.setUsrData(selectedCategory);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => YourTheoryTestScreen(
+                              selectedCategory: selectedCategory,
+                            )),
+                  );
+                }
               },
             ),
           ],

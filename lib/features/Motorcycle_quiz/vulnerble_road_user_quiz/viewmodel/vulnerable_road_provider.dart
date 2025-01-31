@@ -46,4 +46,66 @@ class MotorcycleVulnerableQuizProvider with ChangeNotifier {
     _categoryQuestionIndices[category] = index;
     notifyListeners();
   }
-}
+// get list of correct answer to shared preferences
+  Future <List<String>?> getCorrectAnswer() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('vulnerablecorrectAnswer');
+  }
+
+
+//get list of wrong answer to shared preferences
+  Future <List<String>?> getWrongAnswer() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('vulnerablewrongAnswer');
+  }
+
+// get category type to shared preferences
+  Future<String?> getCategoryType() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('vulnerablecategoryType');
+  }
+
+// get total question  index to shared preferences
+  Future <int?> getTotalQuestionIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('vulnerableTotalQuestionIndex');
+  }
+
+// get currentQuestionIndex to shared preferences
+   Future <int?> getCurrentQuestionIndex1() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('vulnerableCurrentQuestionIndex');
+   }
+
+// add currentQuestionIndex to shared preferences
+  Future <void> saveCurrentQuestionIndex(int currentQuestionIndex) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('vulnerableCurrentQuestionIndex', currentQuestionIndex);
+  }
+
+// add total question  index to shared preferences
+  Future <void> saveTotalQuestionIndex(int totalQuestionIndex) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('vulnerableTotalQuestionIndex', totalQuestionIndex);
+  }
+
+// add category type to shared preferences
+  Future<void> saveCategoryType(String category) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('vulnerablecategoryType', category);
+  }
+
+//add list of wrong answer to shared preferences
+  Future <void> saveWrongAnswer(List<String> wrongAnswer) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('vulnerablewrongAnswer', wrongAnswer);
+
+  }
+
+// add list of correct answer to shared preferences
+ Future <void> saveCorrectAnswer(List<String> correctAnswer) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('vulnerablecorrectAnswer', correctAnswer);
+  }
+ }
+

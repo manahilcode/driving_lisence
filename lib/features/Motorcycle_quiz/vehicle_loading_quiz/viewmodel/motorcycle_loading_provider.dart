@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,4 +48,64 @@ class MotorcycleVehicleLoadingQuizProvider with ChangeNotifier {
     _categoryQuestionIndices[category] = index;
     notifyListeners();
   }
+
+// get list of correct answer to shared preferences
+  Future <List<String>> getCorrectAnswer() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getStringList('vehicleLoadingcorrectAnswer') ?? [];
+  }
+
+//get list of wrong answer to shared preferences
+  Future <List<String>> getWrongAnswer() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getStringList('vehicleLoadingwrongAnswer') ?? [];
+  }
+
+// get category type to shared preferences
+  Future<String> getCategoryType() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString('vehicleLoadingcategoryType') ?? '';
+  }
+
+// get total question  index to shared preferences
+  Future <int> getTotalQuestionIndex() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getInt('vehicleLoadingTotalQuestionIndex') ?? 0;
+  }
+
+
+// get currentQuestionIndex to shared preferences
+  Future<String> getCurrentQuestionIndex1() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString('vehicleLoadingcategory') ?? '';
+  }
+
+// add currentQuestionIndex to shared preferences
+  Future<void> saveCurrentQuestionIndex(String category) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setString('vehicleLoadingcategory','$category');
+  }
+// add total question  index to shared preferences
+  Future <void> saveTotalQuestionIndex(int totalQuestionIndex) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setInt('vehicleLoadingTotalQuestionIndex', totalQuestionIndex);
+  }
+
+// add category type to shared preferences
+  Future<void> saveCategoryType(String categoryType) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setString('vehicleLoadingcategoryType', categoryType);
+  }
+
+//add list of wrong answer to shared preferences
+  Future<void> saveWrongAnswer(List<String> wrongAnswer) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setStringList('vehicleLoadingwrongAnswer', wrongAnswer);
+  }
+
+// add list of correct answer to shared preferences
+ Future<void> saveCorrectAnswer(List<String> correctAnswer) async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  await preferences.setStringList('vehicleLoadingcorrectAnswer', correctAnswer);
+ }
 }

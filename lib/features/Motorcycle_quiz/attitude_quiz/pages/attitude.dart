@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Alerness_quiz/model/alernessmodel.dart';
-import '../viewmodel/attitude_repo.dart';
+import '../viewmodel/attitude_provider.dart';
 
 class AttitudeQuizScreen extends StatefulWidget {
   const AttitudeQuizScreen({super.key});

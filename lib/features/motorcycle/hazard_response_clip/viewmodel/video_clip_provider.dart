@@ -1,5 +1,7 @@
 // video_provider.dart
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../model/video_clip_model.dart';
@@ -22,7 +24,9 @@ class VideoProvider extends ChangeNotifier {
 
     try {
       _videos = await _repository.fetchAllVideos(collectionName);
+      log(_videos.length.toString());
       _errorMessage = '';
+      notifyListeners();
     } catch (e) {
       _errorMessage = 'Failed to fetch videos: $e';
     } finally {
