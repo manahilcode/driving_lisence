@@ -69,6 +69,7 @@ class _DrivingInBuiltUpAreasScreenHighwayState extends State<DrivingInBuiltUpAre
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
+
                           //   Navigate to the next tip or page
                           Navigator.pushAndRemoveUntil(
                             context,
