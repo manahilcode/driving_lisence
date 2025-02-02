@@ -22,7 +22,7 @@ class _OverviewScreenHighwayState extends State<OverviewScreenHighway> {
     SchedulerBinding.instance.addPostFrameCallback(
             (_) {
           final provider = Provider.of<OverviewControllerProvider>(context, listen: false);
-          provider.fetchJunction("Overview");
+          provider.fetchJunction("Overview ");
         }
 
 
@@ -32,7 +32,16 @@ class _OverviewScreenHighwayState extends State<OverviewScreenHighway> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "Overview", leadingIcon: Icons.arrow_back, onLeadingIconPressed: (){}),
+      appBar: CustomAppBar(title: "Overview", leadingIcon: Icons.arrow_back, onLeadingIconPressed: (){
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HighwaycodeCategories(),
+          ),
+              (Route<dynamic> route) =>
+          false, // Removes all previous routes
+        );
+      }),
       body: Consumer<OverviewControllerProvider>(
           builder: (context,provider,child) {
             final data = provider.junction;

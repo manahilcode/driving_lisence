@@ -6,16 +6,17 @@ import 'package:provider/provider.dart';
 
 import '../../../core/appbar.dart';
 import '../../../core/loader.dart';
+import '../../../highwaycode_categories.dart';
 import '../viewmodel/signal_controller.dart';
 
-class SignalScreenHighway extends StatefulWidget {
-  const SignalScreenHighway({super.key});
+class SignalScreenHighway11 extends StatefulWidget {
+  const SignalScreenHighway11({super.key});
 
   @override
-  State<SignalScreenHighway> createState() => _SignalScreenHighwayState();
+  State<SignalScreenHighway11> createState() => _SignalScreenHighway11State();
 }
 
-class _SignalScreenHighwayState extends State<SignalScreenHighway> {
+class _SignalScreenHighway11State extends State<SignalScreenHighway11> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback(
@@ -54,6 +55,53 @@ class _SignalScreenHighwayState extends State<SignalScreenHighway> {
                       children: data.text2.map((e)=>buildBulletText(e.toString())).toList(),
                     ),
                     Gap(10),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          //   Navigate to the next tip or page
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HighwaycodeCategories(),
+                            ),
+                                (Route<dynamic> route) =>
+                            false, // Removes all previous routes
+                          );
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 300,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15.0,
+                              horizontal: 30.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "Next",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
 
                   ],
                 ),

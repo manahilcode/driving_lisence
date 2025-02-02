@@ -133,14 +133,14 @@ class _HomescreenState extends State<Homescreen> {
                                 navigateTo: TheoryTest(), // Define your screen here
                               ),
                               SizedBox(height: 10),
-                              buildMenuButton(
-                                context: context,
-                                label: 'Learn to Drive',
-                                color: Colors.purple,
-                                icon: Icons.directions_car,
-                                badge: 'FREE TRIAL',
-                                navigateTo: TheoryTest(), // Define your screen here
-                              ),
+                              // buildMenuButton(
+                              //   context: context,
+                              //   label: 'Learn to Drive',
+                              //   color: Colors.purple,
+                              //   icon: Icons.directions_car,
+                              //   badge: 'FREE TRIAL',
+                              //   navigateTo: TheoryTest(), // Define your screen here
+                              // ),
                             ],
                           ),
                         );

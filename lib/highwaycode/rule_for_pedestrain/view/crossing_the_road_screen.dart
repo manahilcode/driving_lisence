@@ -6,17 +6,18 @@ import 'package:provider/provider.dart';
 
 import '../../../core/appbar.dart';
 import '../../../core/loader.dart';
+import '../../../highwaycode_categories.dart';
 import '../viewmodel/crossing_controller.dart';
 import '../viewmodel/crossing_the_road_controller.dart';
 
-class CrossingTheRoadScreenHighway extends StatefulWidget {
-  const CrossingTheRoadScreenHighway({super.key});
+class CrossingTheRoadScreenHighway123 extends StatefulWidget {
+  const CrossingTheRoadScreenHighway123({super.key});
 
   @override
-  State<CrossingTheRoadScreenHighway> createState() => _CrossingTheRoadScreenHighwayState();
+  State<CrossingTheRoadScreenHighway123> createState() => _CrossingTheRoadScreenHighway123State();
 }
 
-class _CrossingTheRoadScreenHighwayState extends State<CrossingTheRoadScreenHighway> {
+class _CrossingTheRoadScreenHighway123State extends State<CrossingTheRoadScreenHighway123> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback(
@@ -99,6 +100,53 @@ class _CrossingTheRoadScreenHighwayState extends State<CrossingTheRoadScreenHigh
                       children: data.text13.map((e)=> createAutoSizeText(e.toString() ?? "")).toList() ?? [],
                     ),
                     Gap(10),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          //   Navigate to the next tip or page
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HighwaycodeCategories(),
+                            ),
+                                (Route<dynamic> route) =>
+                            false, // Removes all previous routes
+                          );
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 300,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15.0,
+                              horizontal: 30.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "Next",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
 
 
 

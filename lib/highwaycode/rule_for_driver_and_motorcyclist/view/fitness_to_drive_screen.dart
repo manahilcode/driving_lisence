@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/appbar.dart';
 import '../../../core/loader.dart';
+import '../../../highwaycode_categories.dart';
 import '../viewmodel/fitness_to_drive_controller.dart';
 
 class FitnessToDriveScreenHighway extends StatefulWidget {
@@ -54,6 +55,53 @@ class _FitnessToDriveScreenHighwayState extends State<FitnessToDriveScreenHighwa
                       children: data.text3.map((e) => buildBulletText(e.toString())).toList(),
                     ),
                     Gap(10),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          //   Navigate to the next tip or page
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HighwaycodeCategories(),
+                            ),
+                                (Route<dynamic> route) =>
+                            false, // Removes all previous routes
+                          );
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 300,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15.0,
+                              horizontal: 30.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "Next",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
