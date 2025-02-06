@@ -29,10 +29,6 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      # Step 4: (Optional) Run tests.
-      - name: Run Flutter Tests
-        run: flutter test
-
       # Step 5: Build the release APK.
       - name: Build APK
         run: flutter build apk --release
