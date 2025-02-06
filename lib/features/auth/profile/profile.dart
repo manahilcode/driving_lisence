@@ -3,8 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:provider/provider.dart';
 
+import '../pages/widget/signup.dart';
+import '../viewmodel/controller.dart';
 import '../viewmodel/user_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -201,6 +204,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
 
+                    Gap(30),
+                    /// Logout button
+                    Align(
+                      alignment: Alignment.center,
+                      child: ListTile(
+                        leading: const Icon(Icons.logout, color: Colors.red),
+                        title: const Text('Log out', style: TextStyle(color: Colors.red)),
+                        onTap: () {
+                          PanaraConfirmDialog.show(
+                            context,
+                            title: "Logout",
+                            message: "Are You Sure Logout",
+                            confirmButtonText: "Confirm",
+                            cancelButtonText: "Cancel",
+                            onTapCancel: () {
+                              Navigator.pop(context);
+                            },
+                            onTapConfirm: () async{
+                              final auth = Provider.of<AuthController>(context, listen: false);
+                              await auth.signOut();
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const RegistorScreen()), (route) => false);
+
+                            },
+                            panaraDialogType: PanaraDialogType.warning,
+                            barrierDismissible: false, // optional parameter (default is true)
+                          );
+                        }),
+                    ),
+
                   ],
                 ),
               ),
@@ -210,3 +242,5 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
+

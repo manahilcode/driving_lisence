@@ -47,7 +47,7 @@ class _RoadJunctionScreenHighwayState extends State<RoadJunctionScreenHighway> {
                 child: Column(
                   children: [
                     Column(
-                      children: data.points.map((e) => buildBulletText(e.toString())).toList(),
+                      children: data.points.map((e) => createAutoSizeText(e.toString())).toList(),
 
                     ),
                     Gap(10),

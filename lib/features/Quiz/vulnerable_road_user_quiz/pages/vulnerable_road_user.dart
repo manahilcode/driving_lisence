@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../category.dart';
+import '../../../../core/facebook_ads.dart';
 import '../../../../core/loader.dart';
 import '../../result/pages/result.dart';
 import '../model/model.dart';
@@ -26,6 +27,8 @@ class _VulnerableRoadUserQuizScreensState extends State<VulnerableRoadUserQuizSc
   List<String> correctQuestions = []; // Store correct questions
   List<String> wrongQuestions = []; // Store wrong questions
   final String? category = "Vulnerable_Road_User_Quiz";
+  FacebookAdsProvider? _facebookAdsProvider;
+
 
   @override
   void initState() {
@@ -34,7 +37,9 @@ class _VulnerableRoadUserQuizScreensState extends State<VulnerableRoadUserQuizSc
     WidgetsBinding.instance.addPostFrameCallback((_) async{
       quizProvider =
           Provider.of<VulnerableRoadUserQuizProvider>(context, listen: false);
-     await quizProvider.fetchQuizzes();
+      _facebookAdsProvider =await Provider.of<FacebookAdsProvider>(context,listen: false);
+
+      await quizProvider.fetchQuizzes();
       await quizProvider.loadLastQuestionIndex(category!);
       final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
       if (currentIndex > 0) {
@@ -157,6 +162,9 @@ class _VulnerableRoadUserQuizScreensState extends State<VulnerableRoadUserQuizSc
             ],
           );
         },
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.showBannerAd(),
       ),
     );
   }

@@ -32,7 +32,16 @@ class _BreakdownScreenHighwayState extends State<BreakdownScreenHighway> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: CustomAppBar(title: "Breakdown", leadingIcon: Icons.arrow_back, onLeadingIconPressed: (){}),
+      appBar: CustomAppBar(title: "Breakdown", leadingIcon: Icons.arrow_back, onLeadingIconPressed: (){
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HighwaycodeCategories(),
+          ),
+              (Route<dynamic> route) =>
+          false, // Removes all previous routes
+        );
+      }),
       body: Consumer<BreakdownPointsProvider>(
           builder: (context,provider,child) {
             final data = provider.guidelines;

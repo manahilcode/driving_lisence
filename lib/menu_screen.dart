@@ -12,6 +12,7 @@ import 'ShareScreen/shareScreen.dart';
 import 'YourOffersScreen/offerScreen.dart';
 import 'category1.dart';
 import 'category2.dart';
+import 'core/facebook_ads.dart';
 import 'features/auth/profile/profile.dart';
 import 'features/auth/repo/auth_repo.dart';
 import 'features/auth/viewmodel/controller.dart';
@@ -31,14 +32,18 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   int _currentIndex = 0;
 
+  FacebookAdsProvider? _facebookAdsProvider;
+
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((time) async {
       final user = Provider.of<UserProvider>(context, listen: false);
       final auth = Provider.of<AuthController>(context, listen: false);
+      _facebookAdsProvider =await  Provider.of<FacebookAdsProvider>(context,listen: false);
       final uid = FirebaseAuth.instance.currentUser?.uid;
       await user.fetchUserData(uid!);
       await auth.fetchAndDisplayUserProfile();
+      _facebookAdsProvider?.initializeAds();
     });
     super.initState();
   }

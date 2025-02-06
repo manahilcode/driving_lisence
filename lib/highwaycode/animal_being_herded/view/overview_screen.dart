@@ -22,7 +22,7 @@ class _OverviewScreenHighwayState extends State<OverviewScreenHighway> {
     SchedulerBinding.instance.addPostFrameCallback(
             (_) {
           final provider = Provider.of<OverviewControllerProvider>(context, listen: false);
-          provider.fetchJunction("Overview ");
+          provider.fetchJunction("Overview");
         }
 
 
@@ -54,58 +54,59 @@ class _OverviewScreenHighwayState extends State<OverviewScreenHighway> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    createAutoSizeText(data.text[0]),
+                    createAutoSizeText(data.text!),
                     Gap(10),
                     Column(
-                      children: data.points
+                      children: data.points!
                           .map((e) => buildBulletText(e.toString()))
                           .toList(),
                     ),
                     Gap(10),
                     Column(
-                      children: data.text1
+                      children: [
+                        createAutoSizeText(data.text1![0]),
+                        buildImage(data.text1![1]),
+                      ]
+                    ),
+                    Gap(10),
+                    Column(
+                      children: data.text2!
                           .map((e) => buildBulletText(e.toString()))
                           .toList(),
                     ),
                     Gap(10),
                     Column(
-                      children: data.text2
+                      children: data.text3!
                           .map((e) => buildBulletText(e.toString()))
                           .toList(),
                     ),
                     Gap(10),
                     Column(
-                      children: data.text3
+                      children: data.text4!
                           .map((e) => buildBulletText(e.toString()))
                           .toList(),
                     ),
                     Gap(10),
                     Column(
-                      children: data.text4
+                      children: data.text5!
                           .map((e) => buildBulletText(e.toString()))
                           .toList(),
                     ),
                     Gap(10),
                     Column(
-                      children: data.text5
+                      children: data.text6!
                           .map((e) => buildBulletText(e.toString()))
                           .toList(),
                     ),
                     Gap(10),
                     Column(
-                      children: data.text6
+                      children: data.points1!
                           .map((e) => buildBulletText(e.toString()))
                           .toList(),
                     ),
                     Gap(10),
                     Column(
-                      children: data.points1
-                          .map((e) => buildBulletText(e.toString()))
-                          .toList(),
-                    ),
-                    Gap(10),
-                    Column(
-                      children: data.points3
+                      children: data.points3!
                           .map((e) => buildBulletText(e.toString()))
                           .toList(),
                     ),

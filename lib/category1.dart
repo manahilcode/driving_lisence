@@ -552,7 +552,7 @@ class _Category1State extends State<Category1>
       case 0:
         return widget.label == "PracticeQuiz"
             ? const AllCategoriesQuizScreen()
-            : PracticeRevisionDialog();
+            : Container();
       case 1:
         return widget.label == "PracticeQuiz"
             ? const QuizScreen()

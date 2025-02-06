@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../category.dart';
+import '../../../../core/facebook_ads.dart';
 import '../../../../core/loader.dart';
 import '../../result/pages/result.dart';
 import '../model/model.dart';
@@ -26,6 +27,8 @@ class _RuleOfRoadQuizScreensState extends State<RuleOfRoadQuizScreens> {
   int correctAnswersCount = 0; // To keep track of correct answers
   List<String> correctQuestions = []; // Store correct questions
   List<String> wrongQuestions = []; // Store wrong questions
+  FacebookAdsProvider? _facebookAdsProvider;
+
 
   @override
   void initState() {
@@ -33,6 +36,8 @@ class _RuleOfRoadQuizScreensState extends State<RuleOfRoadQuizScreens> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
       quizProvider = Provider.of<RuleOfRoadQuizProvider>(context, listen: false);
+      _facebookAdsProvider =await Provider.of<FacebookAdsProvider>(context,listen: false);
+
       quizProvider.fetchQuizzes();
       await quizProvider.loadLastQuestionIndex(category!);
       final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
@@ -157,6 +162,9 @@ class _RuleOfRoadQuizScreensState extends State<RuleOfRoadQuizScreens> {
             ],
           );
         },
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.showBannerAd(),
       ),
     );
   }

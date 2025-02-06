@@ -10,18 +10,16 @@ class BreakdownPointsRepository {
     try {
       // Replace "collection_name" with the name of your Firestore collection
       // Replace "document_id" with the ID of the document containing the breakdown data
-      DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
+      DocumentSnapshot snapshot = await _firestore
           .collection("highwaycode_Breakdowns_and_incidents")
           .doc("Breakdowns")
           .get();
 
       if (snapshot.exists) {
         final data = snapshot.data();
-
         if (data != null) {
-         final breakdownPointModel = BreakdownPointModel.fromJson(data);
+          final breakdownPointModel = BreakdownPointModel.fromJson(data as Map<String, dynamic>);
           return breakdownPointModel;
-
         }
       }
       throw Exception("No data found");

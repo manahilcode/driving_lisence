@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Theory_test.dart';
@@ -8,9 +9,11 @@ import '../../../category.dart';
 import '../../../category1.dart';
 import '../../../category2.dart';
 import '../../../highwaycode_categories.dart';
+import '../../../traffic_Sign_screen.dart';
 import '../../auth/viewmodel/controller.dart';
 import '../../auth/viewmodel/user_provider.dart';
 import '../../car_hazard_perception_screen.dart';
+import '../../hazard/pages/hazard1.dart';
 import '../../motorcycle_hazard_perception_screen.dart';
 
 class Homescreen extends StatefulWidget {
@@ -112,7 +115,7 @@ class _HomescreenState extends State<Homescreen> {
                                       label: 'Hazard Perception',
                                       color: Colors.red,
                                       icon: Icons.warning,
-                                      navigateTo:users?.category == "Car" ? CarHazardPerceptionScreen():MotorcycleHazardPerceptionScreen(), // Define your screen here
+                                      navigateTo:users?.category == "Car" ? hazard1():MotorcycleHazardPerceptionScreen(), // Define your screen here
                                     );
                                   }
                               ),
@@ -130,17 +133,17 @@ class _HomescreenState extends State<Homescreen> {
                                 label: 'Road Signs',
                                 color: Colors.orange,
                                 icon: Icons.traffic,
-                                navigateTo: TheoryTest(), // Define your screen here
+                                navigateTo: TrafficSignScreenMain(), // Define your screen here
                               ),
                               SizedBox(height: 10),
-                              // buildMenuButton(
-                              //   context: context,
-                              //   label: 'Learn to Drive',
-                              //   color: Colors.purple,
-                              //   icon: Icons.directions_car,
-                              //   badge: 'FREE TRIAL',
-                              //   navigateTo: TheoryTest(), // Define your screen here
-                              // ),
+                              buildMenuButton(
+                                context: context,
+                                label: 'Learn to Drive',
+                                color: Colors.purple,
+                                icon: Icons.directions_car,
+                                badge: 'FREE TRIAL',
+                                navigateTo:null, // Define your screen here
+                              ),
                             ],
                           ),
                         );
@@ -153,19 +156,22 @@ class _HomescreenState extends State<Homescreen> {
       ),
     );
   }
+
+
+
   Widget buildMenuButton({
     required BuildContext context,
     required String label,
     required Color color,
     required IconData icon,
     String? badge,
-    required Widget navigateTo, // Add this parameter for navigation
+    required Widget? navigateTo, // Add this parameter for navigation
   }) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => navigateTo),
+          MaterialPageRoute(builder: (context) => navigateTo ?? SizedBox.shrink()),
         );
       },
       child: Container(
@@ -196,5 +202,53 @@ class _HomescreenState extends State<Homescreen> {
       ),
     );
   }
+}
+showFutureWorkDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Future Work',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              Gap(10),
+              // pop up button
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Close'),
+                  ),
+                ],
+              ),
+
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }
 

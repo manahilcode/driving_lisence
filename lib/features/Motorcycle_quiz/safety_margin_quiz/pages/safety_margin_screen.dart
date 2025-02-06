@@ -6,7 +6,9 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/facebook_ads.dart';
 import '../../Alerness_quiz/model/alernessmodel.dart';
+import '../../result/motorcycle_quiz.dart';
 import '../viewmodel/safety_margin_provider.dart';
 
 class SafetyMarginQuizScreen extends StatefulWidget {
@@ -23,6 +25,8 @@ class _SafetyMarginQuizScreenState extends State<SafetyMarginQuizScreen> {
   List<String> correctQuestions = []; // Store correct questions
   List<String> wrongQuestions = []; // Store wrong questions
   final String? category = "Alertness_Quiz";
+  FacebookAdsProvider? _facebookAdsProvider;
+
 
   @override
   void initState() {
@@ -30,6 +34,8 @@ class _SafetyMarginQuizScreenState extends State<SafetyMarginQuizScreen> {
     _pageController = PageController();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       quizProvider = await Provider.of<MotorcycleSafetyMarginQuizProvider>(context, listen: false);
+      _facebookAdsProvider =await Provider.of<FacebookAdsProvider>(context,listen: false);
+
       await quizProvider.fetchQuizzes();
       await quizProvider.loadLastQuestionIndex(category!);
       final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
@@ -155,6 +161,9 @@ class _SafetyMarginQuizScreenState extends State<SafetyMarginQuizScreen> {
             ],
           );
         },
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.showBannerAd(),
       ),
     );
   }
@@ -335,25 +344,25 @@ class _QuizItemState extends State<QuizItem> {
                     );
                   } else {
                     // Navigate to results screen
-                    // Route newRoute = MaterialPageRoute(
-                    //     builder: (context) => ResultScreen(
-                    //       correctAnswer:
-                    //       widget.correctAnswersCount.toString(),
-                    //       wrongAnswers: widget
-                    //           .wrongQuestions, // Pass the list of wrong questions
-                    //       correctQuestions: widget.correctQuestions,
-                    //       catType: widget.category,
-                    //       totalQuestion:
-                    //       widget.totalQuestions.toString(),
-                    //       currentQuestionIndex: widget.currentIndex,
-                    //     ));
-                    //
-                    // Navigator.pushAndRemoveUntil(
-                    //   context,
-                    //   newRoute,
-                    //       (Route<dynamic> route) =>
-                    //   false, // Removes all previous routes
-                    // );
+                    Route newRoute = MaterialPageRoute(
+                        builder: (context) => MotorcycleResultScreen(
+                          correctAnswer:
+                          widget.correctAnswersCount.toString(),
+                          wrongAnswers: widget
+                              .wrongQuestions, // Pass the list of wrong questions
+                          correctQuestions: widget.correctQuestions,
+                          catType: widget.category,
+                          totalQuestion:
+                          widget.totalQuestions.toString(),
+                          currentQuestionIndex: widget.currentIndex,
+                        ));
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      newRoute,
+                          (Route<dynamic> route) =>
+                      false, // Removes all previous routes
+                    );
                   }
                 }
                     : null,

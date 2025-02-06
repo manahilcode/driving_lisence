@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../core/facebook_ads.dart';
 import 'c_and_w_question.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -40,6 +42,19 @@ class _ResultScreenState extends State<ResultScreen> {
 
     // Calculate percentage of correct answers
     return (correct / total) * 100;
+  }
+
+  late FacebookAdsProvider _facebookAdsProvider;
+  @override
+  void initState() {
+
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _facebookAdsProvider = Provider.of<FacebookAdsProvider>(context,listen: false);
+    super.didChangeDependencies();
   }
 
   @override
@@ -312,6 +327,9 @@ class _ResultScreenState extends State<ResultScreen> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.showBannerAd(),
       ),
     );
   }

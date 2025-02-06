@@ -105,9 +105,9 @@ class _CategoryState extends State<Category>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: const Text('Category'),
+        title:  Text('Category',style: GoogleFonts.roboto(color: Colors.white),),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back,color: Colors.white,),
           onPressed: () {
             Navigator.push(
               context,
@@ -154,10 +154,11 @@ class _CategoryState extends State<Category>
                       categoryScreen: widget.label == "PracticeQuiz"
                           ? const AllCategoriesQuizScreen()
                           : const IntroductionAlertness()),
+                  //
                   Consumer<ResultController>(builder: (context, value, child) {
                     final data = value.alertness;
                     final answered =
-                        int.tryParse(data?["correctQuestion"] ?? "");
+                    int.tryParse(data?["correctQuestion"] ?? "");
                     final total = int.tryParse(data?["totalQuestion"] ?? "");
                     //   final category = data?["category"] ?? "";
                     // Calculate progress as a percentage of answered vs total
@@ -335,7 +336,7 @@ class _CategoryState extends State<Category>
                       onTap: () => _toggleSelection(7),
                       categoryScreen: widget.label == "PracticeQuiz"
                           ? const OtherTypeVehicleQuizScreen()
-                          : PracticeRevisionDialog(),
+                          : Container(),
                     );
                   }),
                   //MotowayDriverQuizScreens
@@ -577,7 +578,7 @@ class _CategoryState extends State<Category>
       case 0:
         return widget.label == "PracticeQuiz"
             ? const AllCategoriesQuizScreen()
-            : PracticeRevisionDialog();
+            : Container();
       case 1:
         return widget.label == "PracticeQuiz"
             ? const QuizScreen()
@@ -605,7 +606,7 @@ class _CategoryState extends State<Category>
       case 7:
         return widget.label == "PracticeQuiz"
             ? const OtherTypeVehicleQuizScreen()
-            : PracticeRevisionDialog();
+            : Container();
       case 8:
         return widget.label == "PracticeQuiz"
             ? const MotowayDriverQuizScreens()

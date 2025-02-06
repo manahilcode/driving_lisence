@@ -116,6 +116,7 @@ import 'highwaycode/vehicle_maintenance_safety_security/view/provide_emergency_c
 import 'highwaycode/vehicle_maintenance_safety_security/view/safety_code_for_driver_screen.dart';
 import 'highwaycode/vehicle_maintenance_safety_security/view/vehicle_maintaince_screen.dart';
 import 'highwaycode/vehicle_maintenance_safety_security/view/vehicle_security_screen.dart';
+import 'menu_screen.dart';
 
 class HighwaycodeCategories extends StatefulWidget {
   const HighwaycodeCategories({super.key});
@@ -133,7 +134,11 @@ class _HighwaycodeCategoriesState extends State<HighwaycodeCategories> {
       appBar: CustomAppBar(
         title: "Highway code",
         leadingIcon: Icons.arrow_back,
-        onLeadingIconPressed: () => Navigator.pop(context),
+        onLeadingIconPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+            return MenuScreen();
+          }));
+        },
       ),
       body: ListView.builder(
         itemCount: topics.length,

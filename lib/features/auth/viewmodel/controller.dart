@@ -89,4 +89,9 @@ class AuthController extends ChangeNotifier {
       print("Error fetching user profile: $e");
     }
   }
+
+  /// sign out
+  Future<void> signOut() async {
+    await _authRepository.signOut();
+  }
 }

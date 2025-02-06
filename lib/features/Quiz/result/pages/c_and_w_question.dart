@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../../../../category.dart' as cat;
+import '../../../../core/facebook_ads.dart';
 import '../../../../menu_screen.dart';
 
 class CorrectWrongQuestion extends StatefulWidget {
@@ -23,12 +25,20 @@ class CorrectWrongQuestion extends StatefulWidget {
 class _CorrectWrongQuestionState extends State<CorrectWrongQuestion>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  FacebookAdsProvider? _facebookAdsProvider;
 
   @override
   void initState() {
     super.initState();
     // Initialize TabController with 2 tabs (Correct and Wrong)
     _tabController = TabController(length: 2, vsync: this);
+
+  }
+
+  @override
+  void didChangeDependencies() {
+    _facebookAdsProvider = Provider.of<FacebookAdsProvider>(context,listen: false);
+    super.didChangeDependencies();
   }
 
   @override
@@ -168,6 +178,9 @@ class _CorrectWrongQuestionState extends State<CorrectWrongQuestion>
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.showBannerAd(),
       ),
     );
   }

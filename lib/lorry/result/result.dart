@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
+import '../../core/facebook_ads.dart';
 import '../../features/Quiz/result/pages/c_and_w_question.dart';
 
 
@@ -41,6 +43,13 @@ class _LorryResultScreenState extends State<LorryResultScreen> {
 
     // Calculate percentage of correct answers
     return (correct / total) * 100;
+  }
+  FacebookAdsProvider? _facebookAdsProvider;
+
+   @override
+  void didChangeDependencies() {
+     _facebookAdsProvider = Provider.of<FacebookAdsProvider>(context,listen: false);
+    super.didChangeDependencies();
   }
 
   @override
@@ -314,6 +323,10 @@ class _LorryResultScreenState extends State<LorryResultScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.showBannerAd(),
+      ),
+
     );
   }
 }

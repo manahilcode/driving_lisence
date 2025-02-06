@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/facebook_ads.dart';
 import '../../result/pages/result.dart';
 import '../model/model.dart';
 import '../viewmodel/controller.dart';
@@ -26,12 +27,15 @@ class _QuizScreenState extends State<QuizScreen> {
   List<String> wrongQuestions = []; // Store wrong questions
   final String? category = "Alertness_Quiz";
 
+   FacebookAdsProvider? _facebookAdsProvider;
+
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       quizProvider = await Provider.of<QuizProvider>(context, listen: false);
+      _facebookAdsProvider =await  Provider.of<FacebookAdsProvider>(context,listen: false);
       await quizProvider.fetchQuizzes();
       await quizProvider.loadLastQuestionIndex(category!);
       final currentIndex = quizProvider.getCurrentQuestionIndex(category!);
@@ -39,6 +43,8 @@ class _QuizScreenState extends State<QuizScreen> {
         _showResumeDialog();
       }
     });
+
+
   }
 
   void _showResumeDialog() {
@@ -158,7 +164,11 @@ class _QuizScreenState extends State<QuizScreen> {
           );
         },
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.showBannerAd(),
+      ),
     );
+
   }
 }
 
@@ -365,6 +375,8 @@ class _QuizItemState extends State<QuizItem> {
           ),
         ),
       ),
+
     );
+
   }
 }

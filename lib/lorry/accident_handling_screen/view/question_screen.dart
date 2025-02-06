@@ -7,6 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/facebook_ads.dart';
 import '../../../core/loader.dart';
 import '../model/model.dart';
 import '../viewmodel/question_controller.dart';
@@ -22,11 +23,15 @@ class _LorryAccidentHandlingState extends State<LorryAccidentHandling> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   int _selectedAnswerIndex = -1; // Index of the selected answer
+  FacebookAdsProvider? _facebookAdsProvider;
+
 
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<LorryAccidentHandlingProvider>(context, listen: false);
+      _facebookAdsProvider = Provider.of<FacebookAdsProvider>(context,listen: false);
+
       provider.loadLorryData();
     });
     super.initState();
@@ -287,6 +292,9 @@ class _LorryAccidentHandlingState extends State<LorryAccidentHandling> {
     },
     ),
     ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.showBannerAd(),
+      ),
     );
   }
 }
