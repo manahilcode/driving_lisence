@@ -585,6 +585,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<AlertnessNotifier>(
             create: (_) => AlertnessNotifier(AlertnessRepository())),
 
+
         ChangeNotifierProvider<HazardManagementProvider>(
             create: (_) => HazardManagementProvider()),
 
@@ -1035,7 +1036,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => PreparingForTestControllerProvider(
                 PreparingForTestRepository())),
-
         //  highway code
         ChangeNotifierProvider(
             create: (_) => PointsProvider(CrossingTheRoadRepo())),
@@ -1219,13 +1219,17 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        ChangeNotifierProvider(create: (_)=>SignWarningSignProvider(repository:SignWarningSignRepository(firestore: _firestore
-          
-        ) )),
+        ChangeNotifierProvider(
+            create: (_) => SignWarningSignProvider(
+                repository: SignWarningSignRepository(firestore: _firestore))),
 
-        ChangeNotifierProvider(create: (_)=> TrafficSignInfoProvider(repository:TrafficSignInfoRepository(firestore: _firestore) )),
-        ChangeNotifierProvider(create: (_)=> RoadWorkSignProvider(repository: RoadWorkSignRepository(firestore: _firestore))),
-        ChangeNotifierProvider(create: (_)=> FacebookAdsProvider()),
+        ChangeNotifierProvider(
+            create: (_) => TrafficSignInfoProvider(
+                repository: TrafficSignInfoRepository(firestore: _firestore))),
+        ChangeNotifierProvider(
+            create: (_) => RoadWorkSignProvider(
+                repository: RoadWorkSignRepository(firestore: _firestore))),
+        ChangeNotifierProvider(create: (_) => FacebookAdsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
