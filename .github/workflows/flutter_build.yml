@@ -1,6 +1,5 @@
 name: Flutter Build APK for Testing and Client
 
-# Trigger on push and pull request events on the main branch.
 on:
   push:
     branches:
@@ -15,28 +14,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository.
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Updated to latest version
 
-      # Step 2: Set up Flutter environment.
+      # Add Java setup FIRST before Flutter installation
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.3'  # Replace with your desired Flutter version
+          flutter-version: '3.27.4'
+          cache: true  # Enable caching for faster builds
 
-      # Step 3: Install project dependencies.
       - name: Install Dependencies
         run: flutter pub get
 
-      # Step 5: Build the release APK.
       - name: Build APK
         run: flutter build apk --release
 
-      # Step 6: Upload the generated APK as an artifact.
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
-
