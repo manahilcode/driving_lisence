@@ -43,7 +43,7 @@ class _MenuScreenState extends State<MenuScreen> {
       final uid = FirebaseAuth.instance.currentUser?.uid;
       await user.fetchUserData(uid!);
       await auth.fetchAndDisplayUserProfile();
-      _facebookAdsProvider?.initializeAds();
+      _facebookAdsProvider?.showBannerAd();
     });
     super.initState();
   }

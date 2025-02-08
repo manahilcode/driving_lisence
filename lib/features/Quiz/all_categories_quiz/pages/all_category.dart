@@ -167,7 +167,7 @@ class _AllCategoriesQuizScreenState extends State<AllCategoriesQuizScreen> {
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+        child: _facebookAdsProvider?.currentAd,
       ),
 
     );

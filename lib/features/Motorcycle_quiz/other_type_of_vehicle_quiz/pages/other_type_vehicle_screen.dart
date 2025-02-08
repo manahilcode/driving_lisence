@@ -163,9 +163,10 @@ class _OtherTypeVehicleQuizScreenState extends State<OtherTypeVehicleQuizScreen>
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: EasyBannerAd(
+      //       adNetwork: AdNetwork.facebook, adSize: AdSize.mediumRectangle),
+      // ),
     );
   }
 }

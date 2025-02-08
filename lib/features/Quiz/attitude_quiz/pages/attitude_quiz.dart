@@ -162,7 +162,7 @@ class _AttitudeQuizScreensState extends State<AttitudeQuizScreens> {
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+        child: _facebookAdsProvider?.currentAd,
       ),
     );
   }

@@ -16,10 +16,12 @@ class EssentialDocumentQuizScreen extends StatefulWidget {
   const EssentialDocumentQuizScreen({super.key});
 
   @override
-  _EssentialDocumentQuizScreenState createState() => _EssentialDocumentQuizScreenState();
+  _EssentialDocumentQuizScreenState createState() =>
+      _EssentialDocumentQuizScreenState();
 }
 
-class _EssentialDocumentQuizScreenState extends State<EssentialDocumentQuizScreen> {
+class _EssentialDocumentQuizScreenState
+    extends State<EssentialDocumentQuizScreen> {
   late MotorcycleEssentialQuizProvider quizProvider;
   late PageController _pageController;
   int correctAnswersCount = 0; // To keep track of correct answers
@@ -28,14 +30,15 @@ class _EssentialDocumentQuizScreenState extends State<EssentialDocumentQuizScree
   final String? category = "Alertness_Quiz";
   FacebookAdsProvider? _facebookAdsProvider;
 
-
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      quizProvider = await Provider.of<MotorcycleEssentialQuizProvider>(context, listen: false);
-      _facebookAdsProvider =await Provider.of<FacebookAdsProvider>(context,listen: false);
+      quizProvider = await Provider.of<MotorcycleEssentialQuizProvider>(context,
+          listen: false);
+      _facebookAdsProvider =
+          await Provider.of<FacebookAdsProvider>(context, listen: false);
 
       await quizProvider.fetchQuizzes();
       await quizProvider.loadLastQuestionIndex(category!);
@@ -163,10 +166,10 @@ class _EssentialDocumentQuizScreenState extends State<EssentialDocumentQuizScree
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
-
+      // bottomNavigationBar: BottomAppBar(
+      //   child: EasyBannerAd(
+      //       adNetwork: AdNetwork.facebook, adSize: AdSize.mediumRectangle),
+      // ),
     );
   }
 }
@@ -337,36 +340,36 @@ class _QuizItemState extends State<QuizItem> {
               ElevatedButton(
                 onPressed: selectedAnswer != null
                     ? () {
-                  // Navigate to the next question
-                  if (widget.pageController.page!.toInt() <
-                      widget.totalQuestions - 1) {
-                    widget.pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeIn,
-                    );
-                  } else {
-                    // Navigate to results screen
-                    Route newRoute = MaterialPageRoute(
-                        builder: (context) => MotorcycleResultScreen(
-                          correctAnswer:
-                          widget.correctAnswersCount.toString(),
-                          wrongAnswers: widget
-                              .wrongQuestions, // Pass the list of wrong questions
-                          correctQuestions: widget.correctQuestions,
-                          catType: widget.category,
-                          totalQuestion:
-                          widget.totalQuestions.toString(),
-                          currentQuestionIndex: widget.currentIndex,
-                        ));
+                        // Navigate to the next question
+                        if (widget.pageController.page!.toInt() <
+                            widget.totalQuestions - 1) {
+                          widget.pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        } else {
+                          // Navigate to results screen
+                          Route newRoute = MaterialPageRoute(
+                              builder: (context) => MotorcycleResultScreen(
+                                    correctAnswer:
+                                        widget.correctAnswersCount.toString(),
+                                    wrongAnswers: widget
+                                        .wrongQuestions, // Pass the list of wrong questions
+                                    correctQuestions: widget.correctQuestions,
+                                    catType: widget.category,
+                                    totalQuestion:
+                                        widget.totalQuestions.toString(),
+                                    currentQuestionIndex: widget.currentIndex,
+                                  ));
 
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      newRoute,
-                          (Route<dynamic> route) =>
-                      false, // Removes all previous routes
-                    );
-                  }
-                }
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            newRoute,
+                            (Route<dynamic> route) =>
+                                false, // Removes all previous routes
+                          );
+                        }
+                      }
                     : null,
                 child: const Text('Next'),
               ),

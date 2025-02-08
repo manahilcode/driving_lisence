@@ -164,9 +164,9 @@ class _QuizScreenState extends State<QuizScreen> {
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+        child: _facebookAdsProvider?.currentAd,
       ),
-    );
+     );
   }
 }
 

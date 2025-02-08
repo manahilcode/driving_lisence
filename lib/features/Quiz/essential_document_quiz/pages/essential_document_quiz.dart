@@ -171,7 +171,7 @@ class _EssentialDocumentQuizScreensState
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+        child: _facebookAdsProvider?.currentAd,
       ),
     );
   }

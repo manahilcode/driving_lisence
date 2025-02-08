@@ -311,7 +311,7 @@ class _RestrictedViewScreenState extends State<RestrictedViewScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+
       ),
     );
   }

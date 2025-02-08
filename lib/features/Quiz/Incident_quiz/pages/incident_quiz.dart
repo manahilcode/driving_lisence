@@ -164,7 +164,7 @@ class _IncidentQuizScreensState extends State<IncidentQuizScreens> {
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+        child: _facebookAdsProvider?.currentAd,
       ),
 
     );

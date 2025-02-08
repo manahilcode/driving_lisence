@@ -162,9 +162,10 @@ class _RuleOfRoadQuizScreenState extends State<RuleOfRoadQuizScreen> {
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: EasyBannerAd(
+      //       adNetwork: AdNetwork.facebook, adSize: AdSize.mediumRectangle),
+      // ),
     );
   }
 }

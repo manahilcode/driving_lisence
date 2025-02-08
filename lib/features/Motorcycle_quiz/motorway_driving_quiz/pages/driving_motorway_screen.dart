@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:driving_lisence/category.dart';
 import 'package:driving_lisence/core/loader.dart';
+// import 'package:easy_ads_flutter/easy_ads_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -163,9 +164,10 @@ class _MotorWayDrivingQuizScreenState extends State<MotorWayDrivingQuizScreen> {
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: EasyBannerAd(
+      //       adNetwork: AdNetwork.facebook, adSize: AdSize.mediumRectangle),
+      // ),
     );
   }
 }

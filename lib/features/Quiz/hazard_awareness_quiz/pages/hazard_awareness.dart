@@ -168,7 +168,7 @@ class _HazardAwarenessQuizScreensState extends State<HazardAwarenessQuizScreens>
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+        child: _facebookAdsProvider?.currentAd,
       ),
 
     );

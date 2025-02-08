@@ -160,7 +160,7 @@ class _OtherTypeVehicleQuizScreenState extends State<OtherTypeVehicleQuizScreen>
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+        child: _facebookAdsProvider?.currentAd,
       ),
 
     );

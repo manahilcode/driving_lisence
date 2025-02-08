@@ -328,9 +328,9 @@ class _ResultScreenState extends State<ResultScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: EasyBannerAd(
+      // adNetwork: Container      ),
     );
   }
 }

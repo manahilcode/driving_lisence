@@ -323,9 +323,7 @@ class _LorryResultScreenState extends State<LorryResultScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
+
 
     );
   }

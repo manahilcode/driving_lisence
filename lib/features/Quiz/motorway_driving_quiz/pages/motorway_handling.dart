@@ -165,7 +165,7 @@ class _MotowayDriverQuizScreensState extends State<MotowayDriverQuizScreens> {
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
+        child: _facebookAdsProvider?.currentAd,
       ),
     );
   }

@@ -165,9 +165,9 @@ class _SafetyMarginQuizScreensState extends State<SafetyMarginQuizScreens> {
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: EasyBannerAd(
+      // adNetwork: Container      ),
     );
   }
 }

@@ -283,9 +283,7 @@ class _TheRoadScreenState extends State<TheRoadScreen> {
     },
     ),
     ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
+
     );
   }
 }

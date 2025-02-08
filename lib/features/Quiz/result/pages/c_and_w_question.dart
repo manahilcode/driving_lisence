@@ -179,9 +179,9 @@ class _CorrectWrongQuestionState extends State<CorrectWrongQuestion>
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: _facebookAdsProvider?.showBannerAd(),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: EasyBannerAd(
+      // adNetwork: Container      ),
     );
   }
 }
