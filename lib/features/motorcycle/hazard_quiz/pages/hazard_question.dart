@@ -8,10 +8,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/facebook_ads.dart';
 import '../../../motorcycle_hazard_perception_screen.dart';
 import '../model/hazard_quiz.dart'; // Adjust the import based on your file structure
 import '../../../../../core/loader.dart';
-import '../viewmodel/hazard_question_provider.dart'; // Adjust the import based on your file structure
+import '../viewmodel/hazard_question_provider.dart';
+// Adjust the import based on your file structure
 
 class HazardQuizPageView extends StatefulWidget {
   const HazardQuizPageView({super.key});
@@ -24,6 +26,8 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   int _selectedAnswerIndex = -1; // Index of the selected answer
+  FacebookAdsProvider? _facebookAdsProvider;
+
 
   @override
   void initState() {
@@ -34,7 +38,9 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
       provider.fetchAllQuizzes(
           'motorcycle_hazard_quiz'); // Replace with your actual collection name
     });
+    _facebookAdsProvider = Provider.of<FacebookAdsProvider>(context,listen: false);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -229,6 +235,10 @@ class _HazardQuizPageViewState extends State<HazardQuizPageView> {
             );
           },
         ),
+
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
       ),
     );
   }

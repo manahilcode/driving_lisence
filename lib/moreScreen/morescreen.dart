@@ -17,7 +17,7 @@ class _MorescreenState extends State<Morescreen> {
           title: Text("More"),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.all(20.0),
           child: ListView(
             children: [
               Padding(

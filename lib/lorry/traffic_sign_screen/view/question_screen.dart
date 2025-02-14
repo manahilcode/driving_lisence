@@ -285,10 +285,9 @@ class _TrafficSignScreenState extends State<TrafficSignScreen> {
     },
     ),
     ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: EasyBannerAd(
-      //       adNetwork: AdNetwork.facebook, adSize: AdSize.mediumRectangle),
-      // ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
+      ),
 
 
     );

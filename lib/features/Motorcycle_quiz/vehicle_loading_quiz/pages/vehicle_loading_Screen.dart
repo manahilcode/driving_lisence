@@ -162,10 +162,9 @@ class _VehicleLoadingQuizScreenState extends State<VehicleLoadingQuizScreen> {
           );
         },
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: EasyBannerAd(
-      //       adNetwork: AdNetwork.facebook, adSize: AdSize.mediumRectangle),
-      // ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
+      ),
     );
   }
 }

@@ -311,7 +311,9 @@ class _TheDriverSystemScreenState extends State<TheDriverSystemScreen> {
           },
         ),
       ),
-
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
+      ),
     );
   }
 }

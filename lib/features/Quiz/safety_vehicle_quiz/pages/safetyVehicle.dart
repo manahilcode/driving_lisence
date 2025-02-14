@@ -163,9 +163,9 @@ class _SafetyVehicleQuizScreensState extends State<SafetyVehicleQuizScreens> {
           );
         },
       ),
-    //   bottomNavigationBar: BottomAppBar(
-    //     child: EasyBannerAd(
-    //   adNetwork: Container      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
+      ),
      );
   }
 }

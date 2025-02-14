@@ -166,9 +166,9 @@ class _VehicleHandlingQuizScreensState
           );
         },
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: EasyBannerAd(
-      // adNetwork: Container      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
+      ),
     );
   }
 }

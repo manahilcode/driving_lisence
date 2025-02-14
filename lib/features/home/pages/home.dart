@@ -142,7 +142,7 @@ class _HomescreenState extends State<Homescreen> {
                                 color: Colors.purple,
                                 icon: Icons.directions_car,
                                 badge: 'FREE TRIAL',
-                                navigateTo:null, // Define your screen here
+                                navigateTo: showFutureWorkDialog(context), // Return dialog when clicked
                               ),
                             ],
                           ),
@@ -203,52 +203,23 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 }
-showFutureWorkDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        child: Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Future Work',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-              Gap(10),
-              // pop up button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Close'),
-                  ),
-                ],
-              ),
-
-            ],
-          ),
-        ),
-      );
-    },
+Widget showFutureWorkDialog(BuildContext context) {
+  return AlertDialog(
+    title: Text(
+      'Future Work',
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    content: Text('This feature is not yet implemented'),
+    actions: [
+      ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Close'),
+      ),
+    ],
   );
 }
-

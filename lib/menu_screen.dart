@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:driving_lisence/Theory_test.dart';
 import 'package:driving_lisence/category.dart';
@@ -6,6 +7,7 @@ import 'package:driving_lisence/features/pass_gaurantee/pages/pass_gaurantee1.da
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import 'ShareScreen/shareScreen.dart';
@@ -39,11 +41,12 @@ class _MenuScreenState extends State<MenuScreen> {
     SchedulerBinding.instance.addPostFrameCallback((time) async {
       final user = Provider.of<UserProvider>(context, listen: false);
       final auth = Provider.of<AuthController>(context, listen: false);
-      _facebookAdsProvider =await  Provider.of<FacebookAdsProvider>(context,listen: false);
+      _facebookAdsProvider = await Provider.of<FacebookAdsProvider>(context, listen: false);
       final uid = FirebaseAuth.instance.currentUser?.uid;
       await user.fetchUserData(uid!);
       await auth.fetchAndDisplayUserProfile();
       _facebookAdsProvider?.showBannerAd();
+
     });
     super.initState();
   }
@@ -55,12 +58,45 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   final List<Widget> _pages = [
-    // Add your screens here
     Homescreen(),
     Offerscreen(),
     ProfileScreen(),
     Morescreen(),
   ];
+
+  Future<bool> _onWillPop() async {
+    _facebookAdsProvider?.showNativeAd();
+    return (await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Exit App'),
+        content: Column(
+           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: _facebookAdsProvider?.currentAd,
+            ),
+            Gap(10),
+            Text('Do you want to exit the app?'),
+          ],
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+              exit(0);
+            },
+            child: Text('Yes'),
+          ),
+        ],
+      ),
+    )) ?? false;
+  }
 
   @override
   void didChangeDependencies() {
@@ -69,43 +105,45 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        toolbarHeight: 0, // No app bar height
-      ),
-      body: _pages[_currentIndex],
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
 
-      // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard),
-            label: 'Your Offers',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz),
-            label: 'More',
-          ),
-        ],
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          toolbarHeight: 0, // No app bar height
+        ),
+        body: _pages[_currentIndex],
+
+        // Bottom Navigation Bar
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: _onItemTapped,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.card_giftcard),
+              label: 'Your Offers',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.more_horiz),
+              label: 'More',
+            ),
+          ],
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          type: BottomNavigationBarType.fixed,
+        ),
       ),
     );
   }
 }
-
-

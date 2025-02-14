@@ -163,9 +163,9 @@ class _VulnerableRoadUserQuizScreensState extends State<VulnerableRoadUserQuizSc
           );
         },
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: EasyBannerAd(
-      // adNetwork: Container      ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
+      ),
     );
   }
 }

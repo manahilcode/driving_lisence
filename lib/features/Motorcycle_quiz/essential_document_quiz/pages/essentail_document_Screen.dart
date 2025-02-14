@@ -166,10 +166,9 @@ class _EssentialDocumentQuizScreenState
           );
         },
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: EasyBannerAd(
-      //       adNetwork: AdNetwork.facebook, adSize: AdSize.mediumRectangle),
-      // ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
+      ),
     );
   }
 }

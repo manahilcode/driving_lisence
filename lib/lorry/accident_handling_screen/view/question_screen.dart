@@ -292,10 +292,9 @@ class _LorryAccidentHandlingState extends State<LorryAccidentHandling> {
     },
     ),
     ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: EasyBannerAd(
-      //       adNetwork: AdNetwork.facebook, adSize: AdSize.mediumRectangle),
-      // ),
+      bottomNavigationBar: BottomAppBar(
+        child: _facebookAdsProvider?.currentAd,
+      ),
     );
   }
 }
