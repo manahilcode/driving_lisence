@@ -229,8 +229,6 @@ export 'features/motorcycle/safety_and_motorcycle/viewmodel/discuss_with_trainer
 export 'features/motorcycle/safety_and_motorcycle/viewmodel/fuel_efficient_riding_provider.dart';
 export 'features/motorcycle/safety_and_motorcycle/viewmodel/looking_after_motorcycle_provider.dart';
 export 'features/motorcycle/safety_and_motorcycle/viewmodel/meeting_standard_provider.dart';
-export 'features/motorcycle/safety_and_motorcycle/viewmodel/parking_at_night_provider.dart';
-export 'features/motorcycle/safety_and_motorcycle/viewmodel/parking_safetly_provider.dart';
 export 'features/motorcycle/safety_and_motorcycle/viewmodel/safetly_your_motorcycle_provider.dart';
 export 'features/motorcycle/safety_and_motorcycle/viewmodel/security_provider.dart';
 export 'features/motorcycle/safety_and_motorcycle/viewmodel/seeing_is_being_seen_provider.dart';

@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'core/facebook_ads.dart';
+import 'features/Motorcycle_quiz/other_type_of_vehicle_quiz/viewmodel/othertype_motorcyle_provider.dart';
+import 'utils/offline_bootstrap.dart';
 import 'features/Motorcycle_quiz/Alerness_quiz/viewmodel/alernes_provider.dart';
 import 'features/Motorcycle_quiz/attitude_quiz/viewmodel/attitude_provider.dart';
 import 'features/Motorcycle_quiz/essential_document_quiz/viewmodel/essential_provider.dart';
@@ -19,7 +21,6 @@ import 'features/Motorcycle_quiz/hazard_awarness_quiz/viewmodel/hazard_awarness_
 import 'features/Motorcycle_quiz/incident_quiz/viewmodel/incident_provider.dart';
 import 'features/Motorcycle_quiz/motorcycle_handling_quiz/viewmodel/motorcycle_handling_provider.dart';
 import 'features/Motorcycle_quiz/motorway_driving_quiz/viewmodel/motorway_driving_provider.dart';
-import 'features/Motorcycle_quiz/other_type_of_vehicle_quiz/viewmodel/othertype_motorcyle_provider.dart';
 import 'features/Motorcycle_quiz/road_and_traffic_sign_quiz/viewmodel/road_traffic_Sign_provider.dart';
 import 'features/Motorcycle_quiz/rule_of_road_quiz/viewmodel/rule_of_road_provider.dart';
 import 'features/Motorcycle_quiz/safety_and_motorcycle_quiz/viewmodel/safety_motorrcyle_provider.dart';
@@ -35,7 +36,6 @@ import 'features/Quiz/essential_document_quiz/viewmodel/controller.dart';
 import 'features/Quiz/hazard_awareness_quiz/viewmodel/controller.dart';
 import 'features/Quiz/motorway_driving_quiz/viewmodel/controller.dart';
 import 'features/Quiz/other_type_vehicle_quiz/viewmodel/controller.dart';
-import 'features/Quiz/result/pages/result.dart';
 import 'features/Quiz/result/viewmodel/resultController.dart';
 import 'features/Quiz/road_traffic_sign_quiz/viewmodel/controller.dart';
 import 'features/Quiz/safety_margin_quiz/viewmodel/controller.dart';
@@ -294,7 +294,6 @@ import 'features/trafficsign/keep_up_to_date/viewmodel/keep_up_date_provider.dar
 import 'features/trafficsign/responsibility_traffic_sign/repo/responsibilty_sign_repo.dart';
 import 'features/trafficsign/responsibility_traffic_sign/viewmodel/responsibilty_sign_provider.dart';
 import 'features/trafficsign/road_works_sign/repo/road_work_repo.dart';
-import 'features/trafficsign/road_works_sign/view/road_work_screen.dart';
 import 'features/trafficsign/road_works_sign/viewmodel/road_work_provider.dart';
 import 'features/trafficsign/sign_giving_order/repo/giving_order_repo.dart';
 import 'features/trafficsign/sign_giving_order/viewmodel/giving_order_provider.dart';
@@ -476,7 +475,13 @@ import 'lorry/vehicle_weight_dimension_screen/viewmodel/question_controller.dart
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // Make Firestore read/write through local cache when possible.
+  FirebaseFirestore.instance.settings =
+      const Settings(persistenceEnabled: true);
+
   runApp(const MyApp());
+  // Warm the local cache once on first run (best-effort, offline-safe).
+  OfflineBootstrap.prefetchCollectionsInBackground();
 }
 
 class MyApp extends StatelessWidget {
@@ -584,7 +589,6 @@ class MyApp extends StatelessWidget {
         //add
         ChangeNotifierProvider<AlertnessNotifier>(
             create: (_) => AlertnessNotifier(AlertnessRepository())),
-
 
         ChangeNotifierProvider<HazardManagementProvider>(
             create: (_) => HazardManagementProvider()),
